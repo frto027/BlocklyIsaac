@@ -1,0 +1,427 @@
+# MIT License
+
+# Copyright (c) 2020 frto027
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+
+from bs4 import BeautifulSoup
+from bs4 import element
+from glob import glob
+import re
+LUA_DOC_DIR = """./LuaDocs"""
+
+
+"""
+group:
+1 0 static
+2 1 const
+3 2 返回值（整体）包含(4 7)
+4 3 返回值类型
+7 6 返回值的&标记
+
+8 7 命名空间/类名
+10 9 函数/成员名字
+"""
+FUNC_NAME_REG = re.compile('^(static )?(const )?((([_a-zA-Z0-9]+::)*([_a-zA-Z0-9]+))(&)? )?(([_a-zA-Z0-9]+::)*)([_a-zA-Z0-9]+)$')
+
+def IsStatic(groups):
+    return not groups[0] == None
+def IsConst(groups):
+    return not groups[1] == None
+def GetRetType(groups):
+    if IsCtor(groups):
+        return GetClassName(groups).strip('::')
+    if groups[3] == None:
+        return None
+    return convert_text_type(groups[3])
+def IsRetRef(groups):
+    return not groups[6] == None
+def GetClassName(groups):
+    return groups[7]
+def GetName(groups):
+    return groups[9]
+def IsCtor(groups):
+    return GetClassName(groups).strip('::').split('::')[-1] == GetName(groups)
+
+# colours
+name_to_color_map = {}
+name_to_color_current = 0
+def NameToColour(name):
+    global name_to_color_current
+    if not name in name_to_color_map:
+        name_to_color_map[name] = str(name_to_color_current)
+        name_to_color_current = name_to_color_current + 2
+    return name_to_color_map[name]
+
+# inherts
+inhert = {
+    "Number":"integer", # If I need a float, you can give me a Number(by Blockly)
+    "integer":"float",
+    "Boolean":"boolean",
+    "String":"string",
+    "EntityBomb":"Entity",
+    "EntityEffect":"Entity",
+    "EntityFamiliar":"Entity",
+    "EntityKnife":"Entity",
+    "EntityLaser":"Entity",
+    "EntityNPC":"Entity",
+    "EntityPickup":"Entity",
+    "EntityPlayer":"Entity",
+    "EntityProjectile":"Entity",
+    "EntityPtr":"Entity",
+    "EntityTear":"Entity",
+    "GridEntityDesc":"GridEntity",
+    "GridEntityDoor":"GridEntity",
+    "GridEntityPit":"GridEntity",
+    "GridEntityPoop":"GridEntity",
+    "GridEntityPressurePlate":"GridEntity",
+    "GridEntityRock":"GridEntity",
+    "GridEntitySpikes":"GridEntity",
+    "GridEntityTNT":"GridEntity"
+}
+# inhert_cluster = {}
+
+# 手动处理不合法的定义
+def convert_text_name(text):
+    # Wow,I got a very const member just like "const const Costume& ItemConfig::Item::Costume"?
+    text = text.replace('const const','const')
+    # LuaArrayProxy..........
+    text = text.replace('LuaArrayProxy<RoomDescriptor, true>','RoomDescriptor')
+    return text
+def convert_text_type(text):
+    if text=='int':
+        return 'integer'
+    if text.startswith("Config::"):
+        return "ItemConfig::"+text
+    return text
+# 获得兼容类型
+# def getChildTypesWithSelf(typename):
+#     if typename in inhert_cluster:
+#         return inhert_cluster[typename]
+#     return [typename]
+
+toolbox = {}
+functions = {}
+def parse_class_text(text,is_namespace):
+    soup = BeautifulSoup(text,'html.parser')
+    for item in soup.find_all(attrs={"class":'memitem'}):
+        item_table = item.find('table', attrs={"class":'memname'})
+        item_name = item_table.find('td', attrs={"class":'memname'}).text.strip()
+        item_name = convert_text_name(item_name)
+
+        param_types = item.find_all(attrs={"class":'paramtype'})
+        param_names = item.find_all(attrs={"class":'paramname'})
+
+        item_type = 'unknown'
+        if len(param_names) == 0:
+            item_type = 'member'
+        else:
+            if is_namespace:
+                item_type = 'glofunc'
+            else:
+                item_type = 'memfunc'
+            if len(param_names) == 1 and len(param_types) == 0:
+                param_names = []
+        
+        assert item_type in ['member','glofunc','memfunc'], 'what type is it?' 
+        assert len(param_names) == len(param_types), 'how many params?'
+
+        param_types = [convert_text_type(x.text.strip()) for x in param_types]
+        param_names = [x.text.strip().rstrip(',') for x in param_names]
+        params = [[_type,_name] for _type, _name in zip(param_types, param_names)]
+
+        gp = FUNC_NAME_REG.match(item_name).groups()
+
+        text = {}
+        text['type'] = '"' + GetClassName(gp)+GetName(gp) + '"'
+        text['message0'] = '"'
+        if not GetRetType(gp) == None:
+            text['message0'] += '[' + GetRetType(gp).strip('::') + ']'
+        else:
+            text["previousStatement"]="null"
+            text["nextStatement"]="null"
+        text['message0'] +=GetName(gp)
+        text['args0']="["
+
+        # message0
+        text["message0"]+= "%1"
+        text['args0']+='{"type":"input_dummy"}'
+
+        arg_counter = 2
+
+        if not is_namespace and not IsStatic(gp) and not IsCtor(gp):
+            text['message0'] += " target[" + GetClassName(gp).strip('::') +"]: %2"
+            text['args0'] += ',{"type":"input_value","name":"thisobj","check":"'+GetClassName(gp).strip('::')+'"}'
+            arg_counter = 3
+
+        # arguments
+        for i in range(len(params)):
+            text['message0'] += param_names[i] + "[" + param_types[i] + "]" + " %" + str(arg_counter)
+            # arg = ',{"type":"input_value","name":"arg'+str(i)+'","check":['
+            # types = getChildTypesWithSelf(param_types[i])
+            # for j in range(len(types)):
+            #     if j > 0:
+            #         arg += ','
+            #     arg += '"' + types[j] + '"'
+            # arg+=']}'
+            arg = ',{"type":"input_value","name":"arg'+str(i)+'","check":"' + param_types[i] + '"}'
+            text['args0'] += arg
+            arg_counter = arg_counter + 1
+        text['message0'] += '"'
+        text['args0']+="]"
+
+        text['inputsInline']="false"
+        if not GetRetType(gp) == None:
+            text['output']='"'+GetRetType(gp)+'"'
+        if GetRetType(gp) == None:
+            text['colour'] = "230"
+        else:
+            text['colour'] = NameToColour(GetRetType(gp).strip('::'))
+        text['tooltip']='"'+GetName(gp)+'"'
+        text['helpUrl']='""'
+
+        if GetClassName(gp) == None:
+            # global function
+            print("glob func "+GetName(gp))
+            pass
+        elif not GetClassName(gp) in toolbox:
+            toolbox[GetClassName(gp)]=[]
+        toolbox[GetClassName(gp)].append(text)
+
+        # function (return a.b(c))
+
+        func_str = "function(block){return "
+        ret_str = ""
+        # a. or a:
+        if not is_namespace and not IsStatic(gp):
+            if not IsCtor(gp):
+                ret_str += "Blockly.Lua.valueToCode(block, 'thisobj', Blockly.Lua.ORDER_ATOMIC)"
+                if item_type == 'member':
+                    ret_str += "+'.'"
+                else:
+                    ret_str += "+':'"
+            else:
+                ret_str += '""'
+        else:
+            # It is okay for global functions
+            ret_str += '"' + GetClassName(gp).replace('::','.') + '"'
+        # b
+        ret_str += "+'" + GetName(gp) + "'"
+        # (c)
+        if not item_type == 'member':
+            ret_str += '+"("'
+
+            for i in range(len(params)):
+                if i > 0:
+                    ret_str += "+','"
+                ret_str += "+Blockly.Lua.valueToCode(block, 'arg" + str(i) +"', Blockly.Lua.ORDER_NONE)"
+
+            ret_str += '+")"'
+
+        if GetRetType(gp) == None:
+            func_str += ret_str + '+"\\n"'
+        else:
+            if item_type == 'member':
+                func_str += "[" + ret_str + ",Blockly.Lua.ORDER_ATOMIC]"
+            else:
+                func_str += "[" + ret_str + ",Blockly.Lua.ORDER_HIGH]"
+
+        func_str+="}"
+        functions[text['type'].strip('"')] = func_str
+
+        # print(text)
+
+        # do something with:item_type item_name params
+        # print(item_name)
+        # print(params)
+
+
+# enumerate
+
+def parse_enums(text):
+    soup = BeautifulSoup(text,'html.parser')
+    
+    for item in soup.find_all(attrs={"class":'memitem'}):
+        enum_name = item.find(attrs={"class":'memname'}).find('a').text.strip()
+        first = True
+        first_elem = True
+        # print("GOT:" + enum_name)
+        text = {}
+        text["type"] = '"' + enum_name + '"'
+        text['message0'] = '"[' + enum_name + '] %1 "'
+        text['args0'] = '[{"type": "field_dropdown","name": "ENUM_VAL","options":['
+        for ch in item.find(attrs={"class":'memdoc'}).find('table').children:
+            if isinstance(ch, element.Tag) and ch.name == 'tr':
+                if first:
+                    first = False
+                    continue
+                field_name = ch.find(attrs={"class":"fieldname"}).text.strip()
+                field_doc = ch.find(attrs={"class":"fielddoc"}).text.strip()
+
+                if not first_elem:
+                    text['args0'] += ','
+                else:
+                    first_elem = False
+                if len(field_doc) > 0:
+                    if len(field_doc) > 30:
+                        field_doc = field_doc[0:30] + '...'
+                    field_doc = '(' + field_doc.replace('"','\\"').replace('\n','') + ')'
+                else:
+                    field_doc = ''
+                text['args0'] += '["'+ field_name +  field_doc + '","' + field_name +'"]'
+
+                # print("name{"+field_name+"}")
+                # print("doc{"+field_doc+"}")
+        text['args0'] += ']}'
+        text['args0'] += ']'
+        text['output'] = '"' + enum_name + '"'
+        # text['output'] = '"Number"'
+        text['tooltip']='"'+enum_name+'"'
+        text['colour']='122'
+        text['helpUrl']='""'
+        if not 'Enums' in toolbox:
+            toolbox['Enums'] = []
+        toolbox['Enums'].append(text)
+
+        # functions for enum
+        func_str = "function (block){ return ['" + enum_name + ".'+ block.getFieldValue('ENUM_VAL'),Blockly.Lua.ORDER_ATOMIC]}"
+        functions[text['type'].strip('"')] = func_str
+
+        # all enums are number
+        inhert[enum_name]='Number'
+
+
+
+
+with open(LUA_DOC_DIR + '/group__enums.html') as f:
+    parse_enums(f.read())
+
+# # first scan
+# for k in inhert:
+#     parent = inhert[k]
+#     child = k
+#     if not parent in inhert_cluster:
+#         inhert_cluster[parent]=[ parent ]
+#     inhert_cluster[ parent ].append(child)
+# # cluster
+# stop_cluster = False
+# while not stop_cluster:
+#     stop_cluster = True
+#     for elem in inhert_cluster:
+#         for elem_child in inhert_cluster[elem]:
+#             if elem_child in inhert_cluster:
+#                 # elem_child_child -> elem
+#                 for elem_child_child in inhert_cluster[elem_child]:
+#                     if not elem_child_child in inhert_cluster[elem]:
+#                         inhert_cluster[elem].append(elem_child_child)
+#                         stop_cluster = False
+# ↑ It is so beautiful that I bought a vernier caliper
+
+
+# exit(0)
+
+with open(LUA_DOC_DIR + '/group__funcs.html') as f:
+    parse_class_text(f.read(),True)
+
+for ns in ['/namespace_isaac.html','/namespace_input.html']:
+    with open(LUA_DOC_DIR + ns) as f:
+        parse_class_text(f.read(),True)
+
+for clss in glob(LUA_DOC_DIR + "/class*.html"):
+    if clss.endswith('-members.html'):
+        continue
+    with open(clss.replace('\\','/')) as f:
+        parse_class_text(f.read(),False)
+
+#patch: replace all integer to math_number
+type_output_replace = {
+    "integer":"Number",
+    "float":"Number",
+    "boolean":"Boolean",
+    "string":"String"
+}
+for clss in toolbox:
+    for text in toolbox[clss]:
+        if 'output' in text and text['output'].strip('"') in type_output_replace:
+            text['output'] = '"' + type_output_replace[text['output'].strip('"')] + '"'
+
+
+
+#patch: Generate toolbox with some text
+def toolboxBlockText(block):
+    if block == 'Isaac::AddCallback':
+        return '<value name="arg1"><block type="ModCallbacks"></block></value><value name="arg3"><shadow type="logic_null"></shadow></value>'
+    
+    return ''
+
+
+# generate json
+
+json_str = None
+
+# toolbox[""] is global function
+# toolbox["ItemConfig::Item"]
+# toolbox["Game"]
+# ...
+for clss in toolbox:
+    for text in toolbox[clss]:
+        txt = None
+        for k in text:
+            if txt == None:
+                txt = '{'
+            else:
+                txt += ','
+            txt += '"' + k + '":' + text[k]
+        txt += "}"
+        if json_str == None:
+            json_str = '['
+        else:
+            json_str += ','
+        json_str += txt
+
+json_str += ']'
+
+# generate function
+func_str = ""
+for bname in functions:
+    func_str += "Blockly.Lua['"+ bname +"'] = " + functions[bname]
+    func_str += '\n'
+
+# generate toolbox xml
+toolbox_xml = ""
+for clss in toolbox:
+    name = clss.strip('::')
+    if clss == "":
+        name = "Global"
+    toolbox_xml += '<category name="'+ name +'" colour="'+NameToColour(name)+'">'
+    for text in toolbox[clss]:
+        toolbox_xml += '<block type="'+ text['type'].strip('"') +'">' + toolboxBlockText(text['type'].strip('"')) + '</block>'
+    toolbox_xml += '</category>'
+
+jsoutput = ""
+jsoutput += "Blockly.defineBlocksWithJsonArray("+json_str + ')\n'
+jsoutput += func_str + '\n'
+jsoutput += "var toolbox_elems_xml='" + toolbox_xml+"'\n"
+
+# inherts
+for k in inhert:
+    jsoutput += 'parent_of_block_type["'+k+'"]="'+inhert[k]+'"\n'
+with open('../game_blocks.js','w') as f:
+    f.write(jsoutput)

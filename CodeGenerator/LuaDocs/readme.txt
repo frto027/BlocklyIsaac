@@ -1,0 +1,1 @@
+Copy LuaDocs from "The Binding of Isaac Rebirth\tools\LuaDocs" to here
