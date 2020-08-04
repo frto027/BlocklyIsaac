@@ -1,6 +1,8 @@
 # BlocklyIsaac
 Create script for game The Binding of Isaac without lua.
 
+[Try it](https://frto027.github.io/BlocklyIsaac/)
+
 You can create script like:
 
 ![img](CodeGenerator/2020-08-04-20_54_24.jpg)

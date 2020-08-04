@@ -368,7 +368,8 @@ for clss in toolbox:
 def toolboxBlockText(block):
     if block == 'Isaac::AddCallback':
         return '<value name="arg1"><block type="ModCallbacks"></block></value><value name="arg3"><shadow type="logic_null"></shadow></value>'
-    
+    if block == 'Isaac::GetPlayer':
+        return '<value name="arg0"><shadow type="math_number"><field name="NUM">0</field></shadow></value>'
     return ''
 
 
