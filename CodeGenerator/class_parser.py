@@ -25,7 +25,7 @@ from bs4 import BeautifulSoup
 from bs4 import element
 from glob import glob
 import re
-LUA_DOC_DIR = """./LuaDocs"""
+LUA_DOC_DIR = """./CodeGenerator/LuaDocs"""
 
 
 """
@@ -367,7 +367,9 @@ for clss in toolbox:
 #patch: Generate toolbox with some text
 def toolboxBlockText(block):
     if block == 'Isaac::AddCallback':
-        return '<value name="arg1"><block type="ModCallbacks"></block></value><value name="arg3"><shadow type="logic_null"></shadow></value>'
+        return '<value name="arg1"><block type="ModCallbacks"></block></value>'+\
+            '<value name="arg2"><block type="lambda_func"></block></value>'+\
+            '<value name="arg3"><shadow type="logic_null"></shadow></value>'
     if block == 'Isaac::GetPlayer':
         return '<value name="arg0"><shadow type="math_number"><field name="NUM">0</field></shadow></value>'
     return ''
@@ -424,5 +426,5 @@ jsoutput += "var toolbox_elems_xml='" + toolbox_xml+"'\n"
 # inherts
 for k in inhert:
     jsoutput += 'parent_of_block_type["'+k+'"]="'+inhert[k]+'"\n'
-with open('../game_blocks.js','w') as f:
+with open('./game_blocks.js','w') as f:
     f.write(jsoutput)

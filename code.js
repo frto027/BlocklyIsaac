@@ -430,7 +430,7 @@ Code.init = function() {
       function(m, p1, p2) {return p1 + MSG[p2];});
   //Inject Blocks from isaac
   toolboxText = toolboxText.replace('<replace></replace>',toolbox_elems_xml);
-  console.log(toolboxText)
+  //console.log(toolboxText)
   var toolboxXml = Blockly.Xml.textToDom(toolboxText);
 
   Code.workspace = Blockly.inject('content_blocks',

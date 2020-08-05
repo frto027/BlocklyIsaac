@@ -214,19 +214,11 @@ var parent_of_block_type = {}
 var orig_check = Blockly.Connection.prototype.checkType
 
 function type_compat(a,b){
-  let initb = b
   while(b){
     if(a==b){
       return true
     }
     b = parent_of_block_type[b]
-  }
-  //blockly对继承的支持不是很好
-  while(a){
-    if(a == initb){
-      return true
-    }
-    a = parent_of_block_type[a]
   }
   return false
 }
@@ -237,29 +229,39 @@ Blockly.Connection.prototype.checkType = function(a){
   if(orig_check.call(this,a)){
     return true
   }
-  if(this.check_ && a.check_){
-    if(type_compat(a.check_,this.check_)){
+  let b
+  if(this.type == Blockly.INPUT_VALUE && a.type ){
+    console.log("swap")
+    b = a
+    a = this
+  }else{
+    b = this
+  }
+
+
+  if(b.check_ && a.check_){
+    if(type_compat(a.check_,b.check_)){
       return true //a string b string
     }
     for(let i=0;i<a.check_.length;i++){
       if(a.check_[i].length == 1){
         break
       }
-      for(let j=0;j<this.check_.length;j++){
-        if(this.check_[j].length == 1){
+      for(let j=0;j<b.check_.length;j++){
+        if(b.check_[j].length == 1){
           break
         }
-        if(type_compat(a.check_[i],this.check_[j]))
+        if(type_compat(a.check_[i],b.check_[j]))
           return true //a array b array
       }
-      if(type_compat(a.check_[i],this.check_))
+      if(type_compat(a.check_[i],b.check_))
         return true //a array b string
     }
-    for(let j=0;j<this.check_.length;j++){
-      if(this.check_[j].length == 1){
+    for(let j=0;j<b.check_.length;j++){
+      if(b.check_[j].length == 1){
         break
       }
-      if(type_compat(a.check_,this.check_[j]))
+      if(type_compat(a.check_,b.check_[j]))
         return true //a string b array
     }
   }
@@ -354,9 +356,11 @@ var arg_config = {arg_mxcount: 10}
           this.inputList[0].fieldRow[0].setValue("(argument)"+target_argument.name)
         }
         this.setOutput(true,target_argument.type)
+        this.setWarningText()
       }else{
         this.inputList[0].fieldRow[0].setValue('INVALID')
-        this.setOutput('INVALID')
+        this.setOutput('')
+        this.setWarningText('Invalid argument')
       }
     }
   }
@@ -393,11 +397,16 @@ function handleAddCallbackSelect(blk){
 function handleAddCallbackDelete(blkid){
   if(arg_config.last_select_id == blkid){
     Code.arg_info.length = 0
+    arg_config.last_type = ""
   }
 }
 
 function handleArgumentChangeSelect(evt){
-  if((evt.type == Blockly.Events.MOVE || (evt.type == Blockly.Events.UI && evt.element == "click")) && evt.blockId){
+  if((
+      evt.type == Blockly.Events.MOVE || 
+      (evt.type == Blockly.Events.UI && evt.element == "click") ||
+      (evt.type == Blockly.Events.CHANGE && Code.workspace.blockDB_[evt.blockId].type == "ModCallbacks")
+    ) && evt.blockId){
       let blk = evt.getEventWorkspace_().getBlockById(evt.blockId)
       while(blk) {
           if (blk.type == "Isaac::AddCallback") {
@@ -406,6 +415,8 @@ function handleArgumentChangeSelect(evt){
           }
           blk = blk.getSurroundParent()
       }
+  }else{
+    console.log(evt)
   }
   if(evt.type == Blockly.Events.DELETE){
     handleAddCallbackDelete(evt.blockId)
@@ -450,9 +461,8 @@ function inject_init(){
   })
   //Change callback argument names
   Code.workspace.addChangeListener(handleArgumentChangeSelect)
-  /*
-  replaceFunc(Blockly.Blocks["Isaac::AddCallback"],function(){
-
-  })
-  */
+  
+  // replaceFunc(Blockly.Blocks["Isaac::AddCallback"],function(){
+  //
+  // })
 }
