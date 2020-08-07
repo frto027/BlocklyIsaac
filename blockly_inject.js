@@ -231,7 +231,6 @@ Blockly.Connection.prototype.checkType = function(a){
   }
   let b
   if(this.type == Blockly.INPUT_VALUE && a.type ){
-    console.log("swap")
     b = a
     a = this
   }else{
@@ -416,7 +415,7 @@ function handleArgumentChangeSelect(evt){
           blk = blk.getSurroundParent()
       }
   }else{
-    console.log(evt)
+    //console.log(evt)
   }
   if(evt.type == Blockly.Events.DELETE){
     handleAddCallbackDelete(evt.blockId)
@@ -434,6 +433,7 @@ function replaceFunc(block,func){
 
 //called after workspace init
 function inject_init(){
+  init_game_blocks()
   //Arguments
   var arg_array_str = "<xml>"
   for(let i=0;i<10;i++) arg_array_str+="<block type='FUNC_ARG_"+i+"'></block>"
@@ -465,4 +465,29 @@ function inject_init(){
   // replaceFunc(Blockly.Blocks["Isaac::AddCallback"],function(){
   //
   // })
+}
+
+//translate
+var trans_reg = /%{([A-Z0-9:_]+)}/g
+
+function translate_str(str){
+  return str.replace(/%{([A-Z0-9:_]*)}/g,(m,a)=>{
+    console.log(a)
+    if(TMSG[a]){
+      return TMSG[a]
+    }
+    return m
+  })
+}
+function translate_tjson(json){
+  for(k of json){
+    k.message0 = translate_str(k.message0)
+    if(k.args0 && k.args0.length > 0 && k.args0[0].name=="ENUM_VAL"){
+      var opts = k.args0[0].options
+      for(let i=0;i<opts.length;i++){
+        opts[i][0] = translate_str(opts[i][0])
+      }
+    }
+  }
+  return json
 }

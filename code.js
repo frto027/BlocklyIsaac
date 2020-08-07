@@ -429,6 +429,7 @@ Code.init = function() {
   toolboxText = toolboxText.replace(/(^|[^%]){(\w+)}/g,
       function(m, p1, p2) {return p1 + MSG[p2];});
   //Inject Blocks from isaac
+  toolbox_elems_xml = translate_str(toolbox_elems_xml)
   toolboxText = toolboxText.replace('<replace></replace>',toolbox_elems_xml);
   //console.log(toolboxText)
   var toolboxXml = Blockly.Xml.textToDom(toolboxText);
@@ -565,6 +566,8 @@ Code.discard = function() {
 document.write('<script src="msg/' + Code.LANG + '.js"></script>\n');
 // Load Blockly's language strings.
 document.write('<script src="msg/js/' + Code.LANG + '.js"></script>\n');
+// Trnaslate code
+document.write('<script src="code_translate/' + Code.LANG + '.js"></script>\n');
 
 window.addEventListener('load', Code.init);
 

@@ -70,6 +70,18 @@ def NameToColour(name):
         name_to_color_current = name_to_color_current + 2
     return name_to_color_map[name]
 
+# translate_map
+
+translate_default = {}
+
+def apply_translate(text):
+    if len(text) == 0:
+        return text
+    key = text.upper().replace('"','')
+    if not key in translate_default:
+        translate_default[key] = text
+    return '%{' + key + '}'
+
 # inherts
 inhert = {
     "Number":"integer", # If I need a float, you can give me a Number(by Blockly)
@@ -153,11 +165,14 @@ def parse_class_text(text,is_namespace):
         text['type'] = '"' + GetClassName(gp)+GetName(gp) + '"'
         text['message0'] = '"'
         if not GetRetType(gp) == None:
-            text['message0'] += '[' + GetRetType(gp).strip('::') + ']'
+            text['message0'] += '[' + apply_translate(GetRetType(gp).strip('::')) + ']'
         else:
             text["previousStatement"]="null"
             text["nextStatement"]="null"
-        text['message0'] +=GetName(gp)
+        if IsCtor(gp):
+            text['message0'] += apply_translate(GetName(gp)+"_CTOR")
+        else:
+            text['message0'] += apply_translate(GetName(gp))
         text['args0']="["
 
         # message0
@@ -167,13 +182,13 @@ def parse_class_text(text,is_namespace):
         arg_counter = 2
 
         if not is_namespace and not IsStatic(gp) and not IsCtor(gp):
-            text['message0'] += " target[" + GetClassName(gp).strip('::') +"]: %2"
-            text['args0'] += ',{"type":"input_value","name":"thisobj","check":"'+GetClassName(gp).strip('::')+'"}'
+            text['message0'] += " "+apply_translate("target")+"[" + apply_translate(GetClassName(gp).strip('::')) +"] %2"
+            text['args0'] += ',{"type":"input_value","name":"thisobj","check":"'+GetClassName(gp).strip('::')+'",align:"RIGHT"}'
             arg_counter = 3
 
         # arguments
         for i in range(len(params)):
-            text['message0'] += param_names[i] + "[" + param_types[i] + "]" + " %" + str(arg_counter)
+            text['message0'] += apply_translate(param_names[i]) + "[" + apply_translate(param_types[i]) + "]" + " %" + str(arg_counter)
             # arg = ',{"type":"input_value","name":"arg'+str(i)+'","check":['
             # types = getChildTypesWithSelf(param_types[i])
             # for j in range(len(types)):
@@ -181,7 +196,7 @@ def parse_class_text(text,is_namespace):
             #         arg += ','
             #     arg += '"' + types[j] + '"'
             # arg+=']}'
-            arg = ',{"type":"input_value","name":"arg'+str(i)+'","check":"' + param_types[i] + '"}'
+            arg = ',{"type":"input_value","name":"arg'+str(i)+'","check":"' + param_types[i] + '",align:"RIGHT"}'
             text['args0'] += arg
             arg_counter = arg_counter + 1
         text['message0'] += '"'
@@ -265,7 +280,7 @@ def parse_enums(text):
         # print("GOT:" + enum_name)
         text = {}
         text["type"] = '"' + enum_name + '"'
-        text['message0'] = '"[' + enum_name + '] %1 "'
+        text['message0'] = '"[' + apply_translate(enum_name) + '] %1 "'
         text['args0'] = '[{"type": "field_dropdown","name": "ENUM_VAL","options":['
         for ch in item.find(attrs={"class":'memdoc'}).find('table').children:
             if isinstance(ch, element.Tag) and ch.name == 'tr':
@@ -282,10 +297,12 @@ def parse_enums(text):
                 if len(field_doc) > 0:
                     if len(field_doc) > 30:
                         field_doc = field_doc[0:30] + '...'
+                    field_doc = apply_translate(field_doc)
                     field_doc = '(' + field_doc.replace('"','\\"').replace('\n','') + ')'
                 else:
                     field_doc = ''
-                text['args0'] += '["'+ field_name +  field_doc + '","' + field_name +'"]'
+
+                text['args0'] += '["'+ apply_translate(field_name) + field_doc + '","' + field_name +'"]'
 
                 # print("name{"+field_name+"}")
                 # print("doc{"+field_doc+"}")
@@ -413,13 +430,15 @@ for clss in toolbox:
     name = clss.strip('::')
     if clss == "":
         name = "Global"
+    name = apply_translate(name)
     toolbox_xml += '<category name="'+ name +'" colour="'+NameToColour(name)+'">'
     for text in toolbox[clss]:
         toolbox_xml += '<block type="'+ text['type'].strip('"') +'">' + toolboxBlockText(text['type'].strip('"')) + '</block>'
     toolbox_xml += '</category>'
 
-jsoutput = ""
-jsoutput += "Blockly.defineBlocksWithJsonArray("+json_str + ')\n'
+jsoutput = "function init_game_blocks(){\n"
+jsoutput += "Blockly.defineBlocksWithJsonArray(translate_tjson("+json_str + '))\n'
+jsoutput += "}\n"
 jsoutput += func_str + '\n'
 jsoutput += "var toolbox_elems_xml='" + toolbox_xml+"'\n"
 
@@ -428,3 +447,33 @@ for k in inhert:
     jsoutput += 'parent_of_block_type["'+k+'"]="'+inhert[k]+'"\n'
 with open('./game_blocks.js','w') as f:
     f.write(jsoutput)
+
+# generate translate table
+
+translate_files = [
+    'code_translate/en.js',
+    'code_translate/zh-hans.js']
+
+def translate_already_def(linesarr,translate):
+    for k in linesarr:
+        if k.startswith('"' + translate + '"'):
+            return True
+    return False
+
+for trans_file in translate_files:
+    try:
+        with open(trans_file,encoding='utf-8') as f:
+            texts = f.readlines()
+    except FileNotFoundError:
+        texts = []
+    while len(texts) > 0 and not texts.pop().startswith('}'):
+        pass
+    if len(texts) == 0:
+        texts.append('TMSG={\n')
+    for k in translate_default:
+        if not translate_already_def(texts,k):
+            texts.append('"'+k+'":"' + translate_default[k].replace('\n','\\n').replace('"','\\"') + '",\n')
+    texts.append('}\n')
+    with open(trans_file,'w',encoding='utf-8') as f:
+        f.writelines(texts)
+
