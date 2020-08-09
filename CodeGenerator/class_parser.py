@@ -216,7 +216,12 @@ def parse_class_text(text,is_namespace,file_path):
         gp = FUNC_NAME_REG.match(item_name).groups()
 
         text = {}
-        text['type'] = '"' + GetClassName(gp)+GetName(gp) + '"'
+        if item_type == 'member':
+            type_prefix = 'm_'
+        else:
+            type_prefix = ''
+
+        text['type'] = '"'+ type_prefix + GetClassName(gp)+GetName(gp) + '"'
         text['message0'] = '"'
         if not GetRetType(gp) == None:
             text['message0'] += '[' + apply_translate(GetRetType(gp).strip('::'),True) + ']'
