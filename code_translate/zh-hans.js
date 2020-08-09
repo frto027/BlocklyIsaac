@@ -21,6 +21,8 @@ TMSG={
 "ARG_INVALID":"非法参数",
 "ARGUMENT_IS_UNLINKED":"参数没有被连接到对应的块上",
 "ARGUMENT_POS_ERROR":"参数被连接在了错误的块上",
+"COPY_TO_CONSOLE_BTN_TEXT":"复制到游戏控制台",
+"COPY_SUCCESS":"复制成功",
 "__TYPE_INT":"int",
 "__TYPE_ACTIONTRIGGERS":"ActionTriggers",
 "__TXT_ACTIONTRIGGER_NONE":"ACTIONTRIGGER_NONE",

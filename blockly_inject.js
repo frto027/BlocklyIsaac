@@ -352,6 +352,7 @@ function replaceFunc(block,func){
 
 //called after workspace init
 function inject_init(){
+  // Code.bindClick('copyConsoleBtn',copy_to_clickboard_single_line)
   Blockly.defineBlocksWithJsonArray(translate_tjson([{
       "type": "registermod",
       "message0": "%{MODNAME} %1",
@@ -408,6 +409,15 @@ function inject_init(){
   // replaceFunc(Blockly.Blocks["Isaac::AddCallback"],function(){
   //
   // })
+  document.getElementById('copy_to_console').innerText = translate_str('%{COPY_TO_CONSOLE_BTN_TEXT}')
+  new ClipboardJS('#copy_to_console',{text:function(trigger){
+    let txt = Blockly.Lua.workspaceToCode(Code.workspace)
+    txt = txt.replaceAll(/\n */g,'\n')
+    txt = txt.replaceAll('\n',';')
+    return 'l ' + txt
+  }}).on('success',function(){
+    Blockly.alert(translate_str("%{COPY_SUCCESS}"))
+  })
 }
 
 //translate
@@ -439,3 +449,8 @@ function translate_tjson(json){
 function get_blk_help(url){
   return "https://moddingofisaac.com/docs" + url
 }
+
+function copy_to_clickboard_single_line(){
+
+}
+

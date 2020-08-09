@@ -8,6 +8,8 @@ TMSG={
 "ARG_INVALID":"ARG_INVALID",
 "ARGUMENT_IS_UNLINKED":"unlinked argument",
 "ARGUMENT_POS_ERROR":"invalid argument",
+"COPY_TO_CONSOLE_BTN_TEXT":"copy to console",
+"COPY_SUCCESS":"success",
 "__TYPE_INT":"int",
 "__TYPE_ACTIONTRIGGERS":"ActionTriggers",
 "__TXT_ACTIONTRIGGER_NONE":"ACTIONTRIGGER_NONE",
