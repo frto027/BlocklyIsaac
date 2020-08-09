@@ -25,8 +25,8 @@ from bs4 import BeautifulSoup
 from bs4 import element
 from glob import glob
 import re
-LUA_DOC_DIR = """./CodeGenerator/LuaDocs"""
-
+LUA_DOC_DIR = "CodeGenerator/IsaacDocs"  # """CodeGenerator/LuaDocs"""
+MOD_DOC_WEB_DIR = "" # "https://moddingofisaac.com/docs" see function get_blk_help at blockly_inject.js
 
 """
 group:
@@ -74,10 +74,25 @@ def NameToColour(name):
 
 translate_default = {}
 
-def apply_translate(text):
-    if len(text) == 0:
-        return text
-    key = text.upper().replace('"','')
+translate_no_dup_texts = [""]
+
+def apply_translate(text,istype = False):
+    key = text.upper().replace('"','').replace(' ','_')
+    key = re.sub('[^A-Z0-9_]','',key)
+    if istype:
+        # type can be duplicated
+        key = '__TYPE_' + key
+    else:
+        if key in translate_no_dup_texts:
+            # text can not be duplicated
+            dup_id = 0
+            while '__TXT_'+str(dup_id) + '_'+key in translate_default:
+                dup_id = dup_id + 1
+            key = '__TXT_'+str(dup_id) + '_'+key
+            translate_default[key] = text + '(dup ' + str(dup_id) + ')'
+        else:
+            # text can be duplicated
+            key = '__TXT_'+key
     if not key in translate_default:
         translate_default[key] = text
     return '%{' + key + '}'
@@ -97,9 +112,7 @@ inhert = {
     "EntityPickup":"Entity",
     "EntityPlayer":"Entity",
     "EntityProjectile":"Entity",
-    "EntityPtr":"Entity",
     "EntityTear":"Entity",
-    "GridEntityDesc":"GridEntity",
     "GridEntityDoor":"GridEntity",
     "GridEntityPit":"GridEntity",
     "GridEntityPoop":"GridEntity",
@@ -116,6 +129,10 @@ def convert_text_name(text):
     text = text.replace('const const','const')
     # LuaArrayProxy..........
     text = text.replace('LuaArrayProxy<RoomDescriptor, true>','RoomDescriptor')
+    # I don't care about unsigned in lua
+    text = text.replace('unsigned int','int')
+    # LevelStage (UserData) Game::GetLastDevilRoomStage the function in unusable, but I still translate it
+    text = text.replace('LevelStage (UserData)','LevelStage')
     return text
 def convert_text_type(text):
     if text=='int':
@@ -129,17 +146,54 @@ def convert_text_type(text):
 #         return inhert_cluster[typename]
 #     return [typename]
 
+callback_func_arg_reg = re.compile('Function Args:.?\\(([a-zA-Z\\[\\] ,]+)\\)')
+callback_func_add_arg_reg = re.compile('Optional callback Args: ?([a-zA-Z]+)')
+
+callback_args = {}
+callback_add_args = {}
+def handleCallbackArguments(callback_name,text):
+    arg_result = callback_func_arg_reg.search(text)
+    if arg_result:
+        callback_args[callback_name] = []
+        arg_result = re.split(', ?',arg_result.group(1))
+        for arg in arg_result:
+            name_gp = re.match('^([a-zA-Z]+) ?\\[([a-zA-Z]+)\\]$',arg)
+            if name_gp:
+                arg_name = name_gp[1]
+                arg_type = name_gp[2]
+            else:
+                assert re.match('^[a-zA-Z]+$',arg), "can't match ModCallbacks argument text."
+                arg_name = callback_name + "_callbackArg"
+                arg_type = arg
+            arg_type = convert_text_type(arg_type)
+            arg_name = '[' + apply_translate(arg_type,True) + ']' + apply_translate(arg_name)
+            callback_args[callback_name].append({"type":arg_type,"name":arg_name})
+            # print(arg_name)
+            # print(arg_type)
+
+        # arg_result is array of arguments
+    add_arg_result = callback_func_add_arg_reg.search(text)
+    if add_arg_result:
+        add_arg_result = add_arg_result.group(1)
+        add_arg_result = convert_text_type(add_arg_result)
+        callback_add_args[callback_name]={"type":add_arg_result,"name":"["+apply_translate(add_arg_result,True)+"]"}
+        # add_arg_result is string of argument type
+        # print(add_arg_result)
+    pass
+
 toolbox = {}
 functions = {}
-def parse_class_text(text,is_namespace):
+def parse_class_text(text,is_namespace,file_path):
     soup = BeautifulSoup(text,'html.parser')
     for item in soup.find_all(attrs={"class":'memitem'}):
+        href_url = file_path + item.find_previous_sibling(attrs={"class":'memtitle'}).find('a')['href']
+
         item_table = item.find('table', attrs={"class":'memname'})
         item_name = item_table.find('td', attrs={"class":'memname'}).text.strip()
         item_name = convert_text_name(item_name)
 
-        param_types = item.find_all(attrs={"class":'paramtype'})
-        param_names = item.find_all(attrs={"class":'paramname'})
+        param_types = item_table.find_all(attrs={"class":'paramtype'})
+        param_names = item_table.find_all(attrs={"class":'paramname'})
 
         item_type = 'unknown'
         if len(param_names) == 0:
@@ -165,7 +219,7 @@ def parse_class_text(text,is_namespace):
         text['type'] = '"' + GetClassName(gp)+GetName(gp) + '"'
         text['message0'] = '"'
         if not GetRetType(gp) == None:
-            text['message0'] += '[' + apply_translate(GetRetType(gp).strip('::')) + ']'
+            text['message0'] += '[' + apply_translate(GetRetType(gp).strip('::'),True) + ']'
         else:
             text["previousStatement"]="null"
             text["nextStatement"]="null"
@@ -182,13 +236,13 @@ def parse_class_text(text,is_namespace):
         arg_counter = 2
 
         if not is_namespace and not IsStatic(gp) and not IsCtor(gp):
-            text['message0'] += " "+apply_translate("target")+"[" + apply_translate(GetClassName(gp).strip('::')) +"] %2"
+            text['message0'] += " "+apply_translate("target")+"[" + apply_translate(GetClassName(gp).strip('::'),True) +"] %2"
             text['args0'] += ',{"type":"input_value","name":"thisobj","check":"'+GetClassName(gp).strip('::')+'",align:"RIGHT"}'
             arg_counter = 3
 
         # arguments
         for i in range(len(params)):
-            text['message0'] += apply_translate(param_names[i]) + "[" + apply_translate(param_types[i]) + "]" + " %" + str(arg_counter)
+            text['message0'] += apply_translate(param_names[i]) + "[" + apply_translate(param_types[i],True) + "]" + " %" + str(arg_counter)
             # arg = ',{"type":"input_value","name":"arg'+str(i)+'","check":['
             # types = getChildTypesWithSelf(param_types[i])
             # for j in range(len(types)):
@@ -210,7 +264,7 @@ def parse_class_text(text,is_namespace):
         else:
             text['colour'] = NameToColour(GetRetType(gp).strip('::'))
         text['tooltip']='"'+GetName(gp)+'"'
-        text['helpUrl']='""'
+        text['helpUrl']='()=>get_blk_help("' + href_url + '")'
 
         if GetClassName(gp) == None:
             # global function
@@ -270,7 +324,7 @@ def parse_class_text(text,is_namespace):
 
 # enumerate
 
-def parse_enums(text):
+def parse_enums(text,folder_path):
     soup = BeautifulSoup(text,'html.parser')
     
     for item in soup.find_all(attrs={"class":'memitem'}):
@@ -280,16 +334,23 @@ def parse_enums(text):
         # print("GOT:" + enum_name)
         text = {}
         text["type"] = '"' + enum_name + '"'
-        text['message0'] = '"[' + apply_translate(enum_name) + '] %1 "'
+        text['message0'] = '"[' + apply_translate(enum_name,True) + '] %1 "'
         text['args0'] = '[{"type": "field_dropdown","name": "ENUM_VAL","options":['
+        help_url = ''
         for ch in item.find(attrs={"class":'memdoc'}).find('table').children:
             if isinstance(ch, element.Tag) and ch.name == 'tr':
                 if first:
                     first = False
+                    help_url = folder_path + ch.find_parent(attrs={"class":'memitem'}).find(attrs={"class":'memproto'}).find('a')['href']
                     continue
                 field_name = ch.find(attrs={"class":"fieldname"}).text.strip()
                 field_doc = ch.find(attrs={"class":"fielddoc"}).text.strip()
 
+                if field_name.find('\xa0') > 0:
+                    handleCallbackArguments(field_name[0:field_name.find('\xa0')],field_name[field_name.find('\xa0'):])
+                    field_name = field_name[0:field_name.find('\xa0')]
+                    assert enum_name == "ModCallbacks"
+                
                 if not first_elem:
                     text['args0'] += ','
                 else:
@@ -312,7 +373,7 @@ def parse_enums(text):
         # text['output'] = '"Number"'
         text['tooltip']='"'+enum_name+'"'
         text['colour']='122'
-        text['helpUrl']='""'
+        text['helpUrl']='()=>get_blk_help("' + help_url + '")'
         if not 'Enums' in toolbox:
             toolbox['Enums'] = []
         toolbox['Enums'].append(text)
@@ -328,7 +389,7 @@ def parse_enums(text):
 
 
 with open(LUA_DOC_DIR + '/group__enums.html') as f:
-    parse_enums(f.read())
+    parse_enums(f.read(),MOD_DOC_WEB_DIR + '/')
 
 # # first scan
 # for k in inhert:
@@ -355,17 +416,17 @@ with open(LUA_DOC_DIR + '/group__enums.html') as f:
 # exit(0)
 
 with open(LUA_DOC_DIR + '/group__funcs.html') as f:
-    parse_class_text(f.read(),True)
+    parse_class_text(f.read(),True,MOD_DOC_WEB_DIR + '/group__funcs.html')
 
 for ns in ['/namespace_isaac.html','/namespace_input.html']:
     with open(LUA_DOC_DIR + ns) as f:
-        parse_class_text(f.read(),True)
+        parse_class_text(f.read(),True,MOD_DOC_WEB_DIR + ns)
 
 for clss in glob(LUA_DOC_DIR + "/class*.html"):
     if clss.endswith('-members.html'):
         continue
     with open(clss.replace('\\','/')) as f:
-        parse_class_text(f.read(),False)
+        parse_class_text(f.read(),False,MOD_DOC_WEB_DIR + clss.replace('\\','/')[len(LUA_DOC_DIR):])
 
 #patch: replace all integer to math_number
 type_output_replace = {
@@ -430,17 +491,33 @@ for clss in toolbox:
     name = clss.strip('::')
     if clss == "":
         name = "Global"
-    name = apply_translate(name)
+    name = apply_translate(name,True)
     toolbox_xml += '<category name="'+ name +'" colour="'+NameToColour(name)+'">'
     for text in toolbox[clss]:
         toolbox_xml += '<block type="'+ text['type'].strip('"') +'">' + toolboxBlockText(text['type'].strip('"')) + '</block>'
     toolbox_xml += '</category>'
+
+# generate CallbackArguments and AddCallbackArguments
+cbargs = "var CallbackArguments = {"
+for k in callback_args:
+    cbargs += '"' + k + '":[{name:"_",type:undefined}'
+    for arg in callback_args[k]:
+        cbargs += ',{name:"' + arg["name"] + '",type:"'+arg["type"] + '"}'
+    cbargs += ']'
+    cbargs += ','
+cbargs += '}\n'
+cbargs += "var AddCallbackArguments = {"
+for k in callback_add_args:
+    cbargs += '"' + k + '":{name:"' + callback_add_args[k]['name'] + '",type:"'+callback_add_args[k]['type'] + '"},'
+cbargs += '}\n'
+
 
 jsoutput = "function init_game_blocks(){\n"
 jsoutput += "Blockly.defineBlocksWithJsonArray(translate_tjson("+json_str + '))\n'
 jsoutput += "}\n"
 jsoutput += func_str + '\n'
 jsoutput += "var toolbox_elems_xml='" + toolbox_xml+"'\n"
+jsoutput += cbargs
 
 # inherts
 for k in inhert:
@@ -471,8 +548,12 @@ for trans_file in translate_files:
     if len(texts) == 0:
         texts.append('TMSG={\n')
     for k in translate_default:
+        default_line_str = '"'+k+'":"' + translate_default[k].replace('\n','\\n').replace('"','\\"') + '",\n'
+        # 让旧值浮上来，默认值沉下去
+        if default_line_str in texts:
+            texts.remove(default_line_str)
         if not translate_already_def(texts,k):
-            texts.append('"'+k+'":"' + translate_default[k].replace('\n','\\n').replace('"','\\"') + '",\n')
+            texts.append(default_line_str)
     texts.append('}\n')
     with open(trans_file,'w',encoding='utf-8') as f:
         f.writelines(texts)
