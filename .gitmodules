@@ -1,3 +1,3 @@
 [submodule "CodeGenerator/IsaacDocs"]
 	path = CodeGenerator/IsaacDocs
-	url = git@github.com:wofsauge/IsaacDocs.git
+	url = https://github.com/wofsauge/IsaacDocs.git
