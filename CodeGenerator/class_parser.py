@@ -455,6 +455,9 @@ def toolboxBlockText(block):
             '<value name="arg3"><shadow type="logic_null"></shadow></value>'
     if block == 'Isaac::GetPlayer':
         return '<value name="arg0"><shadow type="math_number"><field name="NUM">0</field></shadow></value>'
+    if block == 'Game::GetPlayer':
+        return '<value name="thisobj"><shadow type="Game"></shadow></value>'+\
+        '<value name="arg0"><shadow type="math_number"><field name="NUM">0</field></shadow></value>'
     return ''
 
 
