@@ -61,6 +61,14 @@ var orig_check = Blockly.Connection.prototype.checkType
 function type_compat(a,b){
   //console.log(a)
   //console.log(b)
+  if(a.indexOf('::')!=-1){
+    let arr = a.split('::')
+    a = arr[arr.length-1]
+  }
+  if(b.indexOf('::')!=-1){
+    let arr = b.split('::')
+    b = arr[arr.length-1]
+  }
   while(b){
     if(a==b){
       return true
