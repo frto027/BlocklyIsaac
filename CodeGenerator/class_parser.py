@@ -321,8 +321,31 @@ def parse_class_text(text,is_namespace,file_path):
 
         func_str+="}"
         functions[text['type'].strip('"')] = func_str
-
+        
         # print(text)
+
+        # create setter for a member
+        if item_type == 'member' and not IsConst(gp) and not GetRetType(gp) == None:
+            # lots of members have no type, so I can't generate setter for them.
+            # assert not GetRetType(gp) == None, 'why class member has no type?\nfile:{filepath}\ntext:{text}'.format(filepath=file_path, text=str(text))
+            text = text.copy()
+            text['type']='"set' + text['type'].strip('"') + '"'
+            text.pop('output')
+            text['args0'] = text['args0'].rstrip(']') + ',{"type":"input_value","name":"arg0","check":"' + GetRetType(gp) + '",align:"RIGHT"}' + ']'
+            # add 'set' prefix
+            text['message0'] = text['message0'].replace(']'+apply_translate(GetName(gp)),']' + apply_translate('set ') + apply_translate(GetName(gp)), 1)
+            # add 'new value' to message
+            text['message0']=text['message0'].rstrip('"') + apply_translate('new value') + '[' + apply_translate(GetRetType(gp), True) + '] %' + str(arg_counter) + '"'
+            text["previousStatement"]="null"
+            text["nextStatement"]="null"
+
+            arg_counter += 1
+            toolbox[GetClassName(gp)].append(text)
+
+            # now for function
+            func_str = 'function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_ATOMIC)+"."+"' + GetName(gp) + '="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)}'
+            functions[text['type'].strip('"')] = func_str
+
 
         # do something with:item_type item_name params
         # print(item_name)
