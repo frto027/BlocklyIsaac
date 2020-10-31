@@ -123,6 +123,12 @@ inhert = {
 }
 
 typealias = {
+    # 这些类型的使用和定义不一致，真不知道该怎么吐槽了
+    "CardList":"CardConfigList",
+    "CostumeList":"CostumeConfigList",
+    "ItemList":"ItemConfigList",
+    "PillList":"PillConfigList",
+
     "Number":"integer", # If I need a float, you can give me a Number(by Blockly)
     "integer":"float",
     "Boolean":"boolean",
