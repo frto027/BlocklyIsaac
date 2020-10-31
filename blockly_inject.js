@@ -55,8 +55,28 @@ Blockly.Lua['tool_do'] = function(block) {
 //check type inject
 
 var parent_of_block_type = {}
+// type_alias have to a DAG
+var type_aliase = {}
 
 var orig_check = Blockly.Connection.prototype.checkType
+
+function compare_type_with_alias(a,b){
+  while(type_aliase[a])
+    a = type_aliase[a]
+  while(type_aliase[b])
+    b = type_aliase[b]
+  return a == b
+}
+//note:it is not a true alias,
+//a alias to b, c alias to b, then a.parent maybe b.parent, but a.parent can not be c.parent
+//and b.parent can not be a.parent
+function get_parent_with_alias(a){
+  while(a){
+    if(parent_of_block_type[a])
+      return parent_of_block_type[a];
+    a = type_aliase[a]
+  }
+}
 
 function type_compat(a,b){
   //don't check object
@@ -74,7 +94,7 @@ function type_compat(a,b){
     b = arr[arr.length-1]
   }
   while(b){
-    if(a==b){
+    if(compare_type_with_alias(a,b)){
       return true
     }
     b = parent_of_block_type[b]

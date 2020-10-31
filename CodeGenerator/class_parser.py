@@ -103,10 +103,6 @@ def apply_translate(text,position_hash='',istype = False):
 
 # inherts
 inhert = {
-    "Number":"integer", # If I need a float, you can give me a Number(by Blockly)
-    "integer":"float",
-    "Boolean":"boolean",
-    "String":"string",
     "EntityBomb":"Entity",
     "EntityEffect":"Entity",
     "EntityFamiliar":"Entity",
@@ -125,6 +121,14 @@ inhert = {
     "GridEntitySpikes":"GridEntity",
     "GridEntityTNT":"GridEntity"
 }
+
+typealias = {
+    "Number":"integer", # If I need a float, you can give me a Number(by Blockly)
+    "integer":"float",
+    "Boolean":"boolean",
+    "String":"string",
+}
+
 # inhert_cluster = {}
 
 # 手动处理不合法的定义
@@ -447,7 +451,7 @@ def parse_enums(text,folder_path):
         functions[text['type'].strip('"')] = func_str
 
         # all enums are number
-        inhert[enum_name]='Number'
+        typealias[enum_name]='Number'
 
 
 
@@ -589,6 +593,11 @@ jsoutput += cbargs
 # inherts
 for k in inhert:
     jsoutput += 'parent_of_block_type["'+k+'"]="'+inhert[k]+'"\n'
+
+#aliase
+for k in typealias:
+    jsoutput += 'type_aliase["' + k + '"]="' + typealias[k]+'"\n'
+
 with open('./game_blocks.js','w') as f:
     f.write(jsoutput)
 
