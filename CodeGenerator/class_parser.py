@@ -400,6 +400,16 @@ def parse_enums(text,folder_path):
                 field_name = ch.find(attrs={"class":"fieldname"}).text.strip()
                 field_doc = ch.find(attrs={"class":"fielddoc"}).text.strip()
 
+                # some callbacks parse with wrong space, so I patch the script
+                # it turns 'MC_PRE_ROOM_ENTITY_SPAWNFunction Args......' into 'MC_PRE_ROOM_ENTITY_SPAWN\xa0Function Args......'
+                if enum_name == "ModCallbacks" and re.search('MC_[A-Z_]+Function',field_name):
+                    mid = re.search('(MC_[A-Z_]+)Function',field_name).span(1)[1]
+                    print('update modcallbacks, before:')
+                    print('\t' + field_name)
+                    field_name = field_name[:mid] + '\xa0' + field_name[mid:]
+                    print('after:')
+                    print('\t' + field_name)
+
                 if field_name.find('\xa0') > 0:
                     handleCallbackArguments(field_name[0:field_name.find('\xa0')],field_name[field_name.find('\xa0'):])
                     field_name = field_name[0:field_name.find('\xa0')]
