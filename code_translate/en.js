@@ -3338,6 +3338,8 @@ TMSG={
 "__TXT_GREENTINT":"GreenTint",
 "__TXT_BLUETINT":"BlueTint",
 "__TXT_ALPHATINT":"AlphaTint",
+"__TXT_SET_":"set ",
+"__TXT_NEW_VALUE":"new value",
 "__TXT_GET":"Get",
 "__TYPE_CPPCONTAINERARRAYPROXYROOMLIST":"CppContainer::ArrayProxy::RoomList",
 "__TXT_IDX":"Idx",
