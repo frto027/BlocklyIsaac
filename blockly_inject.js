@@ -83,6 +83,10 @@ function type_compat(a,b){
   if(a == 'Object' || b == 'Object'){
     return true
   }
+  //actually there is no boolean type in lua, everything can be boolean
+  if(a == 'Boolean'){
+    return true
+  }
   //console.log(a)
   //console.log(b)
   if(a.indexOf('::')!=-1){
