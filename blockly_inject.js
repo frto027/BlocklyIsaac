@@ -59,6 +59,10 @@ var parent_of_block_type = {}
 var orig_check = Blockly.Connection.prototype.checkType
 
 function type_compat(a,b){
+  //don't check object
+  if(a == 'Object' || b == 'Object'){
+    return true
+  }
   //console.log(a)
   //console.log(b)
   if(a.indexOf('::')!=-1){

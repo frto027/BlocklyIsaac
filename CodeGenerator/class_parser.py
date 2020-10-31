@@ -224,6 +224,17 @@ def parse_class_text(text,is_namespace,file_path):
             params = []
 
         gp = FUNC_NAME_REG.match(item_name).groups()
+        
+        # fix param list for function 'GetPtrHash' manually
+        if GetName(gp)=='GetPtrHash':
+            if len(param_types) == 0 and len(param_names) == 0 :
+                param_types = ['Object']
+                param_names = ['object']
+                params = [[_type,_name] for _type, _name in zip(param_types, param_names)]
+            else:
+                print('Warring:please look at the block "GetPtrHash", it maybe not correct.')
+                import traceback
+                traceback.print_stack()
 
         text = {}
         if item_type == 'member':
