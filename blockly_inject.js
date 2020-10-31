@@ -328,7 +328,7 @@ function handleAddCallbackSelect(blk){
       blk.getInput('arg3').fieldRow[0].setValue(translate_str(AddCallbackArguments[callback_type].name))
       blk.getInput('arg3').setCheck([AddCallbackArguments[callback_type].type])
     }else{
-      blk.getInput('arg3').fieldRow[0].setValue("Not used")
+      blk.getInput('arg3').fieldRow[0].setValue(translate_str("%{NOT_USED}"))
     }
   }
 }

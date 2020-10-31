@@ -74,7 +74,12 @@ def NameToColour(name):
 
 translate_default = {}
 
-translate_no_dup_texts = [""]
+translate_no_dup_texts = [
+	"",
+	"MC_INPUT_ACTION_CALLBACKARG",
+    "MC_GET_CARD_CALLBACKARG",
+    "MC_PRE_USE_ITEM_CALLBACKARG",
+]
 
 def apply_translate(text,position_hash='',istype = False):
     # position_hash need to be a valid key!
