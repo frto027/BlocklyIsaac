@@ -76,7 +76,11 @@ translate_default = {}
 
 translate_no_dup_texts = [""]
 
-def apply_translate(text,istype = False):
+def apply_translate(text,position_hash='',istype = False):
+    # position_hash need to be a valid key!
+    position_hash = position_hash.upper().replace('"','').replace(' ','_')
+    position_hash = re.sub('[^A-Z0-9_]','',position_hash)
+
     key = text.upper().replace('"','').replace(' ','_')
     key = re.sub('[^A-Z0-9_]','',key)
     if istype:
@@ -86,10 +90,10 @@ def apply_translate(text,istype = False):
         if key in translate_no_dup_texts:
             # text can not be duplicated
             dup_id = 0
-            while '__TXT_'+str(dup_id) + '_'+key in translate_default:
+            while '__TXT_'+str(dup_id) + '_'+key + position_hash in translate_default:
                 dup_id = dup_id + 1
-            key = '__TXT_'+str(dup_id) + '_'+key
-            translate_default[key] = text + '(dup ' + str(dup_id) + ')'
+            key = '__TXT_'+str(dup_id) + '_'+key + position_hash
+            translate_default[key] = text + '(dup ' + str(dup_id) + ')' + position_hash
         else:
             # text can be duplicated
             key = '__TXT_'+key
@@ -168,7 +172,7 @@ def handleCallbackArguments(callback_name,text):
                 arg_name = callback_name + "_callbackArg"
                 arg_type = arg
             arg_type = convert_text_type(arg_type)
-            arg_name = '[' + apply_translate(arg_type,True) + ']' + apply_translate(arg_name)
+            arg_name = '[' + apply_translate(arg_type,callback_name,True) + ']' + apply_translate(arg_name,callback_name)
             callback_args[callback_name].append({"type":arg_type,"name":arg_name})
             # print(arg_name)
             # print(arg_type)
@@ -178,7 +182,7 @@ def handleCallbackArguments(callback_name,text):
     if add_arg_result:
         add_arg_result = add_arg_result.group(1)
         add_arg_result = convert_text_type(add_arg_result)
-        callback_add_args[callback_name]={"type":add_arg_result,"name":"["+apply_translate(add_arg_result,True)+"]"}
+        callback_add_args[callback_name]={"type":add_arg_result,"name":"["+apply_translate(add_arg_result,callback_name,True)+"]"}
         # add_arg_result is string of argument type
         # print(add_arg_result)
     pass
@@ -215,6 +219,10 @@ def parse_class_text(text,is_namespace,file_path):
         param_names = [x.text.strip().rstrip(',') for x in param_names]
         params = [[_type,_name] for _type, _name in zip(param_types, param_names)]
 
+        if len(params) == 1 and params[0][0] == 'void' and params[0][1] == '':
+            # this is some functions such as 'Font::font(void)', remove the parameter list
+            params = []
+
         gp = FUNC_NAME_REG.match(item_name).groups()
 
         text = {}
@@ -223,17 +231,19 @@ def parse_class_text(text,is_namespace,file_path):
         else:
             type_prefix = ''
 
+        dup_hash = type_prefix + GetClassName(gp)+GetName(gp)
+
         text['type'] = '"'+ type_prefix + GetClassName(gp)+GetName(gp) + '"'
         text['message0'] = '"'
         if not GetRetType(gp) == None:
-            text['message0'] += '[' + apply_translate(GetRetType(gp).strip('::'),True) + ']'
+            text['message0'] += '[' + apply_translate(GetRetType(gp).strip('::'),dup_hash,True) + ']'
         else:
             text["previousStatement"]="null"
             text["nextStatement"]="null"
         if IsCtor(gp):
-            text['message0'] += apply_translate(GetName(gp)+"_CTOR")
+            text['message0'] += apply_translate(GetName(gp)+"_CTOR",dup_hash)
         else:
-            text['message0'] += apply_translate(GetName(gp))
+            text['message0'] += apply_translate(GetName(gp),dup_hash)
         text['args0']="["
 
         # message0
@@ -243,13 +253,13 @@ def parse_class_text(text,is_namespace,file_path):
         arg_counter = 2
 
         if not is_namespace and not IsStatic(gp) and not IsCtor(gp):
-            text['message0'] += " "+apply_translate("target")+"[" + apply_translate(GetClassName(gp).strip('::'),True) +"] %2"
+            text['message0'] += " "+apply_translate("target",dup_hash)+"[" + apply_translate(GetClassName(gp).strip('::'),dup_hash,True) +"] %2"
             text['args0'] += ',{"type":"input_value","name":"thisobj","check":"'+GetClassName(gp).strip('::')+'",align:"RIGHT"}'
             arg_counter = 3
 
         # arguments
         for i in range(len(params)):
-            text['message0'] += apply_translate(param_names[i]) + "[" + apply_translate(param_types[i],True) + "]" + " %" + str(arg_counter)
+            text['message0'] += apply_translate(param_names[i],dup_hash) + "[" + apply_translate(param_types[i],dup_hash,True) + "]" + " %" + str(arg_counter)
             # arg = ',{"type":"input_value","name":"arg'+str(i)+'","check":['
             # types = getChildTypesWithSelf(param_types[i])
             # for j in range(len(types)):
@@ -333,9 +343,9 @@ def parse_class_text(text,is_namespace,file_path):
             text.pop('output')
             text['args0'] = text['args0'].rstrip(']') + ',{"type":"input_value","name":"arg0","check":"' + GetRetType(gp) + '",align:"RIGHT"}' + ']'
             # add 'set' prefix
-            text['message0'] = text['message0'].replace(']'+apply_translate(GetName(gp)),']' + apply_translate('set ') + apply_translate(GetName(gp)), 1)
+            text['message0'] = text['message0'].replace(']'+apply_translate(GetName(gp),dup_hash),']' + apply_translate('set ',dup_hash) + apply_translate(GetName(gp),dup_hash), 1)
             # add 'new value' to message
-            text['message0']=text['message0'].rstrip('"') + apply_translate('new value') + '[' + apply_translate(GetRetType(gp), True) + '] %' + str(arg_counter) + '"'
+            text['message0']=text['message0'].rstrip('"') + apply_translate('new value',dup_hash) + '[' + apply_translate(GetRetType(gp),dup_hash, True) + '] %' + str(arg_counter) + '"'
             text["previousStatement"]="null"
             text["nextStatement"]="null"
 
@@ -361,10 +371,13 @@ def parse_enums(text,folder_path):
         enum_name = item.find(attrs={"class":'memname'}).find('a').text.strip()
         first = True
         first_elem = True
+
+        dup_hash = enum_name
+
         # print("GOT:" + enum_name)
         text = {}
         text["type"] = '"' + enum_name + '"'
-        text['message0'] = '"[' + apply_translate(enum_name,True) + '] %1 "'
+        text['message0'] = '"[' + apply_translate(enum_name,dup_hash,True) + '] %1 "'
         text['args0'] = '[{"type": "field_dropdown","name": "ENUM_VAL","options":['
         help_url = ''
         for ch in item.find(attrs={"class":'memdoc'}).find('table').children:
@@ -388,12 +401,12 @@ def parse_enums(text,folder_path):
                 if len(field_doc) > 0:
                     if len(field_doc) > 30:
                         field_doc = field_doc[0:30] + '...'
-                    field_doc = apply_translate(field_doc)
+                    field_doc = apply_translate(field_doc,dup_hash)
                     field_doc = '(' + field_doc.replace('"','\\"').replace('\n','') + ')'
                 else:
                     field_doc = ''
 
-                text['args0'] += '["'+ apply_translate(field_name) + field_doc + '","' + field_name +'"]'
+                text['args0'] += '["'+ apply_translate(field_name,dup_hash) + field_doc + '","' + field_name +'"]'
 
                 # print("name{"+field_name+"}")
                 # print("doc{"+field_doc+"}")
@@ -524,7 +537,7 @@ for clss in toolbox:
     name = clss.strip('::')
     if clss == "":
         name = "Global"
-    name = apply_translate(name,True)
+    name = apply_translate(name,'toolbox',True)
     toolbox_xml += '<category name="'+ name +'" colour="'+NameToColour(name)+'">'
     for text in toolbox[clss]:
         toolbox_xml += '<block type="'+ text['type'].strip('"') +'">' + toolboxBlockText(text['type'].strip('"')) + '</block>'
