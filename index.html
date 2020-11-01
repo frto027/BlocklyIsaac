@@ -330,7 +330,25 @@
       </block>
       <block type="lambda_func">
       </block>
+      <!-- mod object -->
+      <block type="variables_set">
+        <field name="VAR">{myMod}</field>
+        <value name="VALUE">
+          <block type="registermod">
+            <value name="TEXT">
+              <shadow type="text">
+                <field name="TEXT">MyBlocklyMod</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+      </block>
       <block type="AddCallback">
+        <value name="arg0">
+          <block type="variables_get">
+            <field name="VAR">{myMod}</field>
+          </block>
+        </value>
         <value name="arg1"><block type="ModCallbacks"></block></value>
         <value name="arg2"><block type="lambda_func"></block></value>
         <value name="arg3"><shadow type="logic_null"></shadow></value>

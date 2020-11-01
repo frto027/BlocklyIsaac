@@ -22,5 +22,6 @@ var MSG = {
   xmlError: "无法载入您保存的文件。您是否使用其他版本的Blockly创建该文件的？",
   badXml: "XML解析错误：\n%1\n\n选择“确定”以取消您对XML的修改，或选择“取消”以继续编辑XML。",
   catArguments: "回调参数",
-  catTools: "工具块"
+  catTools: "工具块",
+  myMod:"我的mod"
 };
