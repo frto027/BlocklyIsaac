@@ -58,6 +58,7 @@ var parent_of_block_type = {}
 // type_alias have to a DAG
 var type_aliase = {}
 
+var type_dontcheck = ['Object', 'table']
 var orig_check = Blockly.Connection.prototype.checkType
 
 function compare_type_with_alias(a,b){
@@ -79,10 +80,10 @@ function get_parent_with_alias(a){
 }
 
 function type_compat(a,b){
-  //don't check object
-  if(a == 'Object' || b == 'Object'){
-    return true
-  }
+  //don't check
+  if(type_dontcheck.indexOf(a) != -1 || type_dontcheck.indexOf(b) != -1)
+    return true;
+    
   //actually there is no boolean type in lua, everything can be boolean
   if(a == 'Boolean'){
     return true
