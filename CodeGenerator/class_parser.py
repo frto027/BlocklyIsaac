@@ -147,7 +147,7 @@ def convert_text_name(text):
     # Wow,I got a very const member just like "const const Costume& ItemConfig::Item::Costume"?
     text = text.replace('const const','const')
     # LuaArrayProxy..........
-    text = text.replace('LuaArrayProxy<RoomDescriptor, true>','RoomDescriptor')
+    text = text.replace('LuaArrayProxy<RoomDescriptor, true>','table')
     # I don't care about unsigned in lua
     text = text.replace('unsigned int','int')
     text = text.replace('u8','int').replace('u16','int').replace('u32','int')
