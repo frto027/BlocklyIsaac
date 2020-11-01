@@ -50,7 +50,13 @@ Blockly.Lua['tool_do'] = function(block) {
     var code = value_op + '\n';
     return code;
   };
-
+//Add undocumented 'mod:AddCallback'
+Blockly.Lua['AddCallback'] = function(block){
+  return Blockly.Lua.valueToCode(block, 'arg0', Blockly.Lua.ORDER_NONE)+':AddCallback('+
+    Blockly.Lua.valueToCode(block, 'arg1', Blockly.Lua.ORDER_NONE)+','+
+    Blockly.Lua.valueToCode(block, 'arg2', Blockly.Lua.ORDER_NONE)+','+
+    Blockly.Lua.valueToCode(block, 'arg3', Blockly.Lua.ORDER_NONE)+")\n"
+}
 
 //check type inject
 
@@ -160,7 +166,7 @@ Blockly.Lua['lambda_func'] = function(block) {
   //find AddCallback -> ModCallbacks, get arg_count
   let blk = block
   while(blk) {
-      if (blk.type == "Isaac::AddCallback") {
+      if (blk.type == "Isaac::AddCallback" || blk.type == 'AddCallback') {
         var callback_enum = blk.getInputTargetBlock("arg1")
         if(callback_enum && callback_enum.getFieldValue("ENUM_VAL")){
           var callback_type = callback_enum.getFieldValue("ENUM_VAL")
@@ -211,7 +217,7 @@ function define_argument_blocks()
 }
 function updateChildArgumentBlocksWithCallback(callback_enum_str,block,this_is_addcallback = false){
   //DFS
-  if(block.type != "Isaac::AddCallback" || this_is_addcallback){
+  if((block.type != "Isaac::AddCallback" &&  block.type != 'AddCallback') || this_is_addcallback){
     let children = block.getChildren()
     //DFS all arguments
     for(let i=0;i<children.length;i++){
@@ -243,7 +249,7 @@ function handlerCallbackArgBlockWarring(evt){
   function find_add_callback(blkid){
     if(blkid){
       var blk = Code.workspace.getBlockById(blkid)
-      while(blk && blk.type != "Isaac::AddCallback"){
+      while(blk && (blk.type != "Isaac::AddCallback"  && blk.type != 'AddCallback')){
         blk = blk.getParent()
       }
       return blk
@@ -276,7 +282,7 @@ function handlerCallbackArgBlockWarring(evt){
     if(target){
       if(target.type == "ModCallbacks" && evt.name == "ENUM_VAL" && evt.newValue && evt.newValue != evt.oldValue){
         //当ModCallbacks枚举变量改变时
-        while(target && target.type != "Isaac::AddCallback"){
+        while(target && (target.type != "Isaac::AddCallback" && target.type != "AddCallback")){
           target = target.getParent()
         }
         //更新所有的Argument
@@ -353,7 +359,7 @@ function handleArgumentChangeSelect(evt){
       if(target.type == "ModCallbacks" && evt.name == "ENUM_VAL" && evt.newValue && evt.newValue != evt.oldValue){
         //当ModCallbacks枚举变量改变时
         target_block = target
-        while(target_block && target_block.type != "Isaac::AddCallback"){
+        while(target_block && (target_block.type != "Isaac::AddCallback" && target_block.type != "AddCallback" )){
           target_block = target_block.getParent()
         }
       }
@@ -361,12 +367,12 @@ function handleArgumentChangeSelect(evt){
   }else if(evt.type == Blockly.Events.CREATE){
     //当AddCallback创建时
     let target = Code.workspace.getBlockById(evt.blockId)
-    if(target && target.type == "Isaac::AddCallback")
+    if(target && (target.type == "Isaac::AddCallback" || target.type == "AddCallback"))
       target_block = target
   }else if(evt.type == Blockly.Events.UI && evt.element=="click"){
     //当点击AddCallback时
     let target = Code.workspace.getBlockById(evt.blockId)
-    if(target && target.type == "Isaac::AddCallback")
+    if(target && (target.type == "Isaac::AddCallback" || target.type == "AddCallback"))
       target_block = target
   }
   if(target_block){
@@ -432,6 +438,21 @@ function inject_init(){
     "colour": 230,
     "tooltip": "%{FN_REF_TOOLTIP}",
     "helpUrl": ""
+  },{
+    "type":"AddCallback",
+    "message0":"%{__TXT_ADDCALLBACK}%1%{__TXT_REF}[%{__TYPE_TABLE}] %2%{__TXT_CALLBACKID}[%{__TYPE_MODCALLBACKS}] %3%{__TXT_CALLBACKFN}[%{__TYPE_TABLE}] %4%{__TXT_ENTITYID}[%{__TYPE_INTEGER}] %5",
+    "previousStatement":null,
+    "nextStatement":null,
+    "args0":[
+      {"type":"input_dummy"},
+      {"type":"input_value","name":"arg0","check":"table",align:"RIGHT"},
+      {"type":"input_value","name":"arg1","check":"ModCallbacks",align:"RIGHT"},
+      {"type":"input_value","name":"arg2","check":"table",align:"RIGHT"},
+      {"type":"input_value","name":"arg3","check":"integer",align:"RIGHT"}
+    ],
+    "inputsInline":false,
+    "colour":230,
+    "tooltip":"AddCallback",
   }]))
   define_argument_blocks()
 
