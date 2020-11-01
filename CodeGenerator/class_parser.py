@@ -150,7 +150,8 @@ def convert_text_name(text):
     text = text.replace('LuaArrayProxy<RoomDescriptor, true>','RoomDescriptor')
     # I don't care about unsigned in lua
     text = text.replace('unsigned int','int')
-    text = text.replace('u16','int')
+    text = text.replace('u8','int').replace('u16','int').replace('u32','int')
+    text = text.replace('s8','int').replace('s16','int').replace('s32','int')
     # LevelStage (UserData) Game::GetLastDevilRoomStage the function in unusable, but I still translate it
     text = text.replace('LevelStage (UserData)','LevelStage')
     return text
