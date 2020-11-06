@@ -53,6 +53,11 @@ python -m pip install bs4
 python ./CodeGenerator/class_parser.py
 ```
 
+the `node.js` project is under development. Try it as follows.
+```
+npm install
+npm start
+```
 
 # Translate it to your language
 

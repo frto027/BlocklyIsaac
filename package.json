@@ -1,0 +1,28 @@
+{
+  "name": "blockly_isaac_workspace",
+  "version": "1.0.0",
+  "description": "A more powerful BlocklyIsaac workspace.",
+  "main": "electron\\main.js",
+  "scripts": {
+    "start":"electron .",
+    "test": "electron . --dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/frto027/BlocklyIsaac.git"
+  },
+  "keywords": [
+    "blockly",
+    "mod",
+    "the_binding_of_isaac"
+  ],
+  "author": "frto027",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/frto027/BlocklyIsaac/issues"
+  },
+  "homepage": "https://github.com/frto027/BlocklyIsaac#readme",
+  "devDependencies": {
+    "electron": "^10.1.5"
+  }
+}
