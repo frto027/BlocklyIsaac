@@ -26,6 +26,7 @@ TMSG={
 "OPEN_FILE_BTN_TEXT":"打开",
 "SAVE_FILE_BTN_TEXT":"保存",
 "SAVE_FILE_AS_BTN_TEXT":"另存为",
+"BLOCKLY_ISAAC_WORKSPACE":"以撒的积木工坊",
 "NOT_USED":"未使用",
 "__TYPE_INT":"整数型",
 "__TYPE_ACTIONTRIGGERS":"行为触发器_枚举",

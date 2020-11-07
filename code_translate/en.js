@@ -13,6 +13,7 @@ TMSG={
 "OPEN_FILE_BTN_TEXT":"open",
 "SAVE_FILE_BTN_TEXT":"save",
 "SAVE_FILE_AS_BTN_TEXT":"save as",
+"BLOCKLY_ISAAC_WORKSPACE":"Blockly Isaac Workspace",
 "NOT_USED":"not used",
 "__TYPE_INT":"int",
 "__TYPE_UNSIGNED_INT":"unsigned int",

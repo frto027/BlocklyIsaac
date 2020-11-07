@@ -72,6 +72,9 @@ var electron_inject_init = function(){};
         orig_onKyeDown(e)
     }
 
+    Blockly.alert = text =>{
+        new Notification(translate_str('%{BLOCKLY_ISAAC_WORKSPACE}'),{body:text})
+    }
 
     //右键菜单中增加复制和粘贴两个操作
 
