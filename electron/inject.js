@@ -11,6 +11,8 @@
     //we are running in electron, do more things
 
     const { shell, ipcRenderer, clipboard } = require('electron')
+    const zlib = require('zlib')
+
     //用户点击帮助时打开浏览器，而不是新窗口
     //redefine the show help url to open a real web browser
     Blockly.BlockSvg.prototype.showHelp =function(){
@@ -33,11 +35,11 @@
     //给复制粘贴打补丁，当复制粘贴块时，应该复制到系统剪切板
     CLIPBOARD_PREFIX = 'bcdt'
     CLIPBOARD_TAIL = 'isend'
-    //TODO: 剪切板压缩存储
     Blockly.__defineGetter__('clipboardXml_', function(){
-        var text = clipboard.readText()
         try{
-            text = Buffer.from(text,'base64').toString('utf-8')
+            var compressed_text_buffer = clipboard.readBuffer('io.github.frto027.blocklyisaac.clip')
+            //解压->编码utf8->校验首尾->返回dom
+            var text = zlib.inflateSync(compressed_text_buffer).toString('utf-8')
             if(text.startsWith(CLIPBOARD_PREFIX) && text.endsWith(CLIPBOARD_TAIL)){
                 text = text.substr(CLIPBOARD_PREFIX.length,text.length - CLIPBOARD_PREFIX.length - CLIPBOARD_TAIL.length)
                 return Blockly.Xml.textToDom(text)
@@ -47,10 +49,11 @@
         return undefined
     })
     Blockly.__defineSetter__('clipboardXml_',function(clipboardXml){
+        //编码text->增加首尾->编码utf-8->压缩
         var text = Blockly.Xml.domToText(clipboardXml)
         text = CLIPBOARD_PREFIX + text + CLIPBOARD_TAIL
-        text = Buffer.from(text,'utf-8').toString('base64')
-        clipboard.writeText(text)
+        var compressed_text_buffer = zlib.deflateSync(Buffer.from(text,'utf-8'))
+        clipboard.writeBuffer('io.github.frto027.blocklyisaac.clip',compressed_text_buffer)
     })
     //需要拦截原版的ctrl+v
     let orig_onKyeDown = Blockly.onKeyDown
@@ -67,6 +70,9 @@
 
         orig_onKyeDown(e)
     }
+
+    //右键菜单中的复制改成克隆
+    //右键菜单中增加复制和粘贴两个操作
 
     //增加文件保存按钮
 
