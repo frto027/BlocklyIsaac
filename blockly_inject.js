@@ -476,6 +476,39 @@ function inject_init(){
   }}).on('success',function(){
     Blockly.alert(translate_str("%{COPY_SUCCESS}"))
   })
+
+  var open_btn = document.getElementById('open_file')
+  var open_file_dialog = document.getElementById('open_file_dialog')
+  open_btn.innerText = translate_str('%{OPEN_FILE_BTN_TEXT}')
+  open_btn.addEventListener('click',function(){
+    open_file_dialog.click()
+  })
+  open_file_dialog.addEventListener('change',function(){
+    if(open_file_dialog.files.length == 0){
+      return;
+    }
+    var file = open_file_dialog.files[0];
+    file.text().then(text=>{
+      var xml = Blockly.Xml.textToDom(text)
+      Blockly.Xml.domToWorkspace(xml, Code.workspace)
+    })
+  })
+
+  var save_btn = document.getElementById("save_file")
+  var save_file_href = document.getElementById("save_file_href")
+  
+  save_btn.innerText = translate_str('%{SAVE_FILE_BTN_TEXT}')
+  save_btn.addEventListener('click',function(){
+    var xml = Blockly.Xml.workspaceToDom(Code.workspace);
+    var text = Blockly.Xml.domToText(xml);
+    save_file_href.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    save_file_href.setAttribute('download', 'output.biml');
+    save_file_href.click()
+  })
+
+  try{
+    electron_inject_init()
+  }catch(e){ }
 }
 
 //translate

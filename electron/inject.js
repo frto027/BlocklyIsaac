@@ -1,3 +1,4 @@
+var electron_inject_init = function(){};
 (function(){
     electron = undefined
     try{
@@ -71,12 +72,15 @@
         orig_onKyeDown(e)
     }
 
-    //右键菜单中的复制改成克隆
+
     //右键菜单中增加复制和粘贴两个操作
 
-    //增加文件保存按钮
-
-    //增加文件打开按钮
+    //此函数在inject_init被调用
+    electron_inject_init = function(){
+        //另存为按钮
+        //TODO
+        //将所有的按钮移动到菜单中
+    }
 
     //增加输出main.lua的按钮
 })()

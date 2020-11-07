@@ -43,6 +43,11 @@
               <select id="code_menu"></select>
             </td>
             <td class="tabmax">
+              <input type="file" id="open_file_dialog" accept=".biml" hidden>
+              <button id="open_file">open</button>
+              <a id="save_file_href" hidden>save_me</a>
+              <button id="save_file">save</button>
+              <button id="save_file_as" hidden>save as</button><!-- only visible at electron -->
               <button id="copy_to_console">copy to console</button>
               <button id="trashButton" class="notext" title="...">
                 <img src='media/1x1.gif' class="trash icon21">
