@@ -538,6 +538,7 @@ function inject_init(){
     file.text().then(text=>{
       var xml = Blockly.Xml.textToDom(text)
       Code.workspace.clear()
+      Code.workspace.clearUndo()
       Blockly.Xml.domToWorkspace(xml, Code.workspace)
     })
   })

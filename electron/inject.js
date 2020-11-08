@@ -101,7 +101,8 @@ var electron_inject_init = function(){};
         try{
             var text = fs.readFileSync(file,{encoding:'utf8'})
             var xml = Blockly.Xml.textToDom(text)
-            Code.workspace.cleanUp()
+            Code.workspace.clear()
+            Code.workspace.clearUndo()
             Blockly.Xml.domToWorkspace(xml,Code.workspace)
             FileOpenConfig.currentPath = file
             FileOpenConfig.currentFileRecord = text
@@ -170,10 +171,10 @@ var electron_inject_init = function(){};
 
         //将所有的文件操作进行封装
         ToolButtonOperations.open = function(){
-            if(FileOpenConfig.currentPath){
+            if(Code.workspace.getAllBlocks(false).length > 0){
                 var xml = Blockly.Xml.workspaceToDom(Code.workspace)
                 var text = Blockly.Xml.domToText(xml)
-                if(text != FileOpenConfig.currentFileRecord){
+                if(FileOpenConfig.currentPath == undefined || text != FileOpenConfig.currentFileRecord){
                     if(confirm('当前文件未保存，是否继续？') == false){
                         return
                     }

@@ -36,7 +36,6 @@ function createWindow () {
         nodeIntegration: true,
         enableRemoteModule: true
       },
-      autoHideMenuBar:true
     })
   
     win.loadFile('index.html',{
@@ -49,6 +48,8 @@ function createWindow () {
     if(is_dev){
       win.webContents.openDevTools()
     }
+
+    win.setMenu(null)
 
   }
 

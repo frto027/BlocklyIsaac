@@ -556,6 +556,8 @@ Code.discard = function() {
   if (count < 2 ||
       window.confirm(Blockly.Msg['DELETE_ALL_BLOCKS'].replace('%1', count))) {
     Code.workspace.clear();
+    //if you can undo, do not disturb user!
+    Code.workspace.clearUndo();
     if (window.location.hash) {
       window.location.hash = '';
     }
