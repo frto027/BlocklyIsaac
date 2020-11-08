@@ -407,7 +407,7 @@ function getRandStr(){
 //called after workspace init
 function inject_init(){
   //hide switch labels
-  {
+  if(Code.getStringParamFromUrl('dev') != '1'){
     let hides = document.getElementsByClassName('normal_hide')
     for(let i=0;i<hides.length;i++){
       hides[i].hidden = true

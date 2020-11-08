@@ -40,7 +40,8 @@ function createWindow () {
   
     win.loadFile('index.html',{
         query:{
-            lang:read_config('defaultLanguage')
+            lang:read_config('defaultLanguage'),
+            dev:is_dev ? '1' : '0'
         }
     })
 
