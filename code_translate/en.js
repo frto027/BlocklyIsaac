@@ -16,6 +16,7 @@ TMSG={
 "SAVE_FILE_AS_BTN_TEXT":"save as",
 "UNDO":"undo",
 "BLOCKLY_ISAAC_WORKSPACE":"Blockly Isaac Workspace",
+"NEW_WINDOW_BTN_TEXT":"new window",
 "EXPORT_LUA_BTN_TEXT":"export lua program",
 "NOT_USED":"not used",
 "__TYPE_INT":"int",

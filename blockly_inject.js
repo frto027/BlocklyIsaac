@@ -568,6 +568,8 @@ function inject_init(){
     Code.workspace.undo()
   })
 
+  var new_window_btn = document.getElementById('new_window_button')
+  new_window_btn.title = translate_str('%{NEW_WINDOW_BTN_TEXT}')
   document.title = translate_str('%{WEB_PAGE_TITLE}')
 
   try{

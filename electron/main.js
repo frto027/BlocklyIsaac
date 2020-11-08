@@ -50,11 +50,14 @@ function createWindow () {
     }
 
     win.setMenu(null)
-
   }
 
 app.whenReady().then(createWindow)
 
 ipcMain.handle('change-language',(_e,lang)=>{
   write_config('defaultLanguage',lang)
+})
+
+ipcMain.handle('new-window',(_e)=>{
+  createWindow()
 })

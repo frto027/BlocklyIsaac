@@ -11,8 +11,7 @@ var electron_inject_init = function(){};
 
     //we are running in electron, do more things
     const { assert } = require('console');
-    const { title } = require('process');
-    const { shell, ipcRenderer, clipboard } = require('electron')
+    const { shell, ipcRenderer, clipboard, remote } = require('electron')
     const { dialog } = require('electron').remote
     const fs = require('fs')
     const path = require('path')
@@ -135,7 +134,7 @@ var electron_inject_init = function(){};
     }
 
     function save_as_file(){
-        var file = dialog.showSaveDialogSync({
+        var file = dialog.showSaveDialogSync(remote.getCurrentWindow(), {
             defaultPath: FileOpenConfig.currentPath, 
             filters:[
                 {name:'Blockly Isaac XML', extensions:['biml']}
@@ -206,7 +205,7 @@ var electron_inject_init = function(){};
                 }
             }
 
-            let file = dialog.showOpenDialogSync({
+            let file = dialog.showOpenDialogSync(remote.getCurrentWindow(), {
                 properties:['openFile'],
                 filters:[
                     {name:'Blockly Isaac XML', extensions:['biml']}
@@ -230,6 +229,12 @@ var electron_inject_init = function(){};
         }
 
         ToolButtonOperations.save_as = save_as_file
+
+        var new_window_btn = document.getElementById('new_window_button')
+        new_window_btn.hidden = false
+        Code.bindClick(new_window_btn,function(){
+            ipcRenderer.invoke('new-window')
+        })
     }
 })()
 

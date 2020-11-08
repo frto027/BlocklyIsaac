@@ -27,6 +27,7 @@ TMSG={
 "OPEN_FILE_BTN_TEXT":"打开",
 "SAVE_FILE_BTN_TEXT":"保存",
 "SAVE_FILE_AS_BTN_TEXT":"另存为",
+"NEW_WINDOW_BTN_TEXT":"新窗口",
 "UNDO":"撤销",
 "BLOCKLY_ISAAC_WORKSPACE":"以撒的积木工坊",
 "EXPORT_LUA_BTN_TEXT":"导出lua程序",
