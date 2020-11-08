@@ -536,6 +536,7 @@ function inject_init(){
       return;
     }
     var file = open_file_dialog.files[0];
+    open_file_dialog.value = ''
     file.text().then(text=>{
       var xml = Blockly.Xml.textToDom(text)
       Code.workspace.clear()
