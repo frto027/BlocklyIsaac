@@ -392,9 +392,29 @@ function replaceFunc(block,func){
   }
 }
 
+function getRandStr(){
+  var str = "abcdefghijklmnopqrstuvwxyz0123456789"
+  var rand = Math.floor(Math.random()*1000000000)
+
+  var r = ""
+  while(rand > 0){
+    r += str[rand % str.length]
+    rand = Math.floor(rand / str.length)
+  }
+  return r
+}
 
 //called after workspace init
 function inject_init(){
+  //hide switch labels
+  {
+    let hides = document.getElementsByClassName('normal_hide')
+    for(let i=0;i<hides.length;i++){
+      hides[i].hidden = true
+    }
+    document.getElementById('btn_panel').style.textAlign = 'left' 
+  }
+
   // Code.bindClick('copyConsoleBtn',copy_to_clickboard_single_line)
   Blockly.defineBlocksWithJsonArray(translate_tjson([{
       "type": "registermod",
@@ -467,7 +487,7 @@ function inject_init(){
   // replaceFunc(Blockly.Blocks["Isaac::AddCallback"],function(){
   //
   // })
-  document.getElementById('copy_to_console').innerText = translate_str('%{COPY_TO_CONSOLE_BTN_TEXT}')
+  document.getElementById('copy_to_console').title = translate_str('%{COPY_TO_CONSOLE_BTN_TEXT}')
   new ClipboardJS('#copy_to_console',{text:function(trigger){
     let txt = Blockly.Lua.workspaceToCode(Code.workspace)
     txt = txt.replaceAll(/\n */g,'\n')
@@ -479,7 +499,7 @@ function inject_init(){
 
   var open_btn = document.getElementById('open_file')
   var open_file_dialog = document.getElementById('open_file_dialog')
-  open_btn.innerText = translate_str('%{OPEN_FILE_BTN_TEXT}')
+  open_btn.title = translate_str('%{OPEN_FILE_BTN_TEXT}')
   open_btn.addEventListener('click',function(){
     open_file_dialog.click()
   })
@@ -497,14 +517,31 @@ function inject_init(){
   var save_btn = document.getElementById("save_file")
   var save_file_href = document.getElementById("save_file_href")
   
-  save_btn.innerText = translate_str('%{SAVE_FILE_BTN_TEXT}')
+  save_btn.title = translate_str('%{SAVE_FILE_BTN_TEXT}')
   save_btn.addEventListener('click',function(){
     var xml = Blockly.Xml.workspaceToDom(Code.workspace);
     var text = Blockly.Xml.domToText(xml);
     save_file_href.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    save_file_href.setAttribute('download', 'output.biml');
+    save_file_href.setAttribute('download', 'output_' + getRandStr() +'.biml');
     save_file_href.click()
   })
+
+  var export_lua_btn = document.getElementById("export_lua")
+  export_lua_btn.title = translate_str('%{EXPORT_LUA_BTN_TEXT}')
+  export_lua_btn.addEventListener('click',function(){
+    var luacode = Blockly.Lua.workspaceToCode(Code.workspace)
+    save_file_href.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(luacode));
+    save_file_href.setAttribute('download', 'main.lua');
+    save_file_href.click()
+  })
+
+  var undo_btn = document.getElementById("undo")
+  undo_btn.title = translate_str('%{UNDO}')
+  undo_btn.addEventListener('click',function(){
+    Code.workspace.undo()
+  })
+
+  document.title = translate_str('%{WEB_PAGE_TITLE}')
 
   try{
     electron_inject_init()

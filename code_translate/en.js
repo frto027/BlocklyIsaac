@@ -1,4 +1,5 @@
 TMSG={
+"WEB_PAGE_TITLE":"BlocklyIsaac",
 "MODNAME":"Mod name",
 "DO":"Do",
 "FN_REF":"FnRef",
@@ -13,7 +14,9 @@ TMSG={
 "OPEN_FILE_BTN_TEXT":"open",
 "SAVE_FILE_BTN_TEXT":"save",
 "SAVE_FILE_AS_BTN_TEXT":"save as",
+"UNDO":"undo",
 "BLOCKLY_ISAAC_WORKSPACE":"Blockly Isaac Workspace",
+"EXPORT_LUA_BTN_TEXT":"export lua program",
 "NOT_USED":"not used",
 "__TYPE_INT":"int",
 "__TYPE_UNSIGNED_INT":"unsigned int",

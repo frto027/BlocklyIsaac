@@ -1,4 +1,5 @@
 TMSG={
+"WEB_PAGE_TITLE":"以撒的积木",
 "__TXT_TARGET":"操作对象",
 "__TYPE_GAME":"游戏类",
 "__TXT_GAME":"取游戏对象",
@@ -26,7 +27,9 @@ TMSG={
 "OPEN_FILE_BTN_TEXT":"打开",
 "SAVE_FILE_BTN_TEXT":"保存",
 "SAVE_FILE_AS_BTN_TEXT":"另存为",
+"UNDO":"撤销",
 "BLOCKLY_ISAAC_WORKSPACE":"以撒的积木工坊",
+"EXPORT_LUA_BTN_TEXT":"导出lua程序",
 "NOT_USED":"未使用",
 "__TYPE_INT":"整数型",
 "__TYPE_ACTIONTRIGGERS":"行为触发器_枚举",
