@@ -68,8 +68,15 @@ var electron_inject_init = function(){};
                 if(Blockly.clipboardXml_ != undefined){
                     Code.workspace.paste(Blockly.clipboardXml_)
                 }
+                return
+            }
+        }
 
-                return;
+        //ctrl s for save
+        if (e.altKey || e.ctrlKey || e.metaKey){
+            if (e.keyCode == Blockly.utils.KeyCodes.S){
+                ToolButtonOperations.save()
+                return
             }
         }
 
@@ -78,6 +85,19 @@ var electron_inject_init = function(){};
 
     Blockly.alert = text =>{
         new Notification(translate_str('%{BLOCKLY_ISAAC_WORKSPACE}'),{body:text})
+    }
+
+
+    //我们需要一个“假的”文件保存提示，因为保存文件太快了，界面没办法相应
+    let title_tip = {
+        timeout:0,
+        text:""
+    }
+    function tip_text(text, timems){
+        title_tip.text = text
+        title_tip.timeout = new Date().getTime() + timems
+        updateTitle()
+        setTimeout(updateTitle, timems + 200)
     }
 
     //右键菜单中增加复制和粘贴两个操作
@@ -93,7 +113,9 @@ var electron_inject_init = function(){};
         var str = translate_str('%{BLOCKLY_ISAAC_WORKSPACE}')
         if(FileOpenConfig.currentPath)
             str += ' - ' + path.basename(FileOpenConfig.currentPath)
-        document.title = str
+        if(new Date().getTime() < title_tip.timeout)
+            str += ' - ' + title_tip.text
+        document.title = str 
     }
 
     //File IO
@@ -127,6 +149,7 @@ var electron_inject_init = function(){};
             fs.writeFileSync(file,text,{encoding:'utf8'})
             FileOpenConfig.currentPath = file
             FileOpenConfig.currentFileRecord = text
+            tip_text('保存中',200)
         }catch(e){ 
             alert('文件写入出错，保存失败')
         }
@@ -156,9 +179,11 @@ var electron_inject_init = function(){};
         try{
         fs.writeFileSync(FileOpenConfig.currentPath,text,{encoding:'utf8'})
         FileOpenConfig.currentFileRecord = text
+        tip_text('保存中',200)
         }catch(e){ 
             alert('文件写入出错，保存失败')
         }
+        
     }
 
     //此函数在inject_init被调用
