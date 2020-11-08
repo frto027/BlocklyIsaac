@@ -189,6 +189,19 @@ var electron_inject_init = function(){};
     electron_inject_init = function(){
         updateTitle()
 
+        //复制按钮
+        document.getElementById('copy_to_console').hidden = true
+        var copy_to_console_btn = document.getElementById('copy_to_console_electron')
+        copy_to_console_btn.hidden = false
+        Code.bindClick(copy_to_console_btn,function(){
+            let txt = Blockly.Lua.workspaceToCode(Code.workspace)
+            txt = txt.replaceAll(/\n */g,'\n')
+            txt = txt.replaceAll('\n',';')
+            txt = 'l ' + txt
+            clipboard.writeText(txt)
+            tip_text('已复制',2000)
+        })
+
         //另存为按钮
         let save_as_btn = document.getElementById('save_file_as')
         save_as_btn.hidden = false
