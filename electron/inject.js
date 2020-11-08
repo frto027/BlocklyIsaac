@@ -10,8 +10,12 @@ var electron_inject_init = function(){};
     }
 
     //we are running in electron, do more things
-
+    const { assert } = require('console');
+    const { title } = require('process');
     const { shell, ipcRenderer, clipboard } = require('electron')
+    const { dialog } = require('electron').remote
+    const fs = require('fs')
+    const path = require('path')
     const zlib = require('zlib')
 
     //用户点击帮助时打开浏览器，而不是新窗口
@@ -53,7 +57,7 @@ var electron_inject_init = function(){};
         //编码text->增加首尾->编码utf-8->压缩
         var text = Blockly.Xml.domToText(clipboardXml)
         text = CLIPBOARD_PREFIX + text + CLIPBOARD_TAIL
-        var compressed_text_buffer = zlib.deflateSync(Buffer.from(text,'utf-8'))
+        var compressed_text_buffer = zlib.deflateSync(Buffer.from(text,'utf8'))
         clipboard.writeBuffer('io.github.frto027.blocklyisaac.clip',compressed_text_buffer)
     })
     //需要拦截原版的ctrl+v
@@ -78,13 +82,128 @@ var electron_inject_init = function(){};
 
     //右键菜单中增加复制和粘贴两个操作
 
-    //此函数在inject_init被调用
-    electron_inject_init = function(){
-        //另存为按钮
-        //TODO
-        //将所有的按钮移动到菜单中
+
+    var FileOpenConfig = {
+        currentPath : undefined,
+        currentFileRecord : undefined, 
+        currentModFolder : undefined
     }
 
-    //增加输出main.lua的按钮
+    function updateTitle(){
+        var str = translate_str('%{BLOCKLY_ISAAC_WORKSPACE}')
+        if(FileOpenConfig.currentPath)
+            str += ' - ' + path.basename(FileOpenConfig.currentPath)
+        document.title = str
+    }
+
+    //File IO
+    function openfile(file){
+        try{
+            var text = fs.readFileSync(file,{encoding:'utf8'})
+            var xml = Blockly.Xml.textToDom(text)
+            Code.workspace.cleanUp()
+            Blockly.Xml.domToWorkspace(xml,Code.workspace)
+            FileOpenConfig.currentPath = file
+            FileOpenConfig.currentFileRecord = text
+            updateTitle()
+        }catch(e){ 
+            alert('打开文件失败')
+        }
+    }
+
+    function save_as_file(){
+        var file = dialog.showSaveDialogSync({
+            defaultPath: FileOpenConfig.currentPath, 
+            filters:[
+                {name:'Blockly Isaac XML', extensions:['biml']}
+            ]
+        })
+        if(file == undefined)
+            return
+        var xml = Blockly.Xml.workspaceToDom(Code.workspace)
+        var text = Blockly.Xml.domToText(xml)
+        try{
+            fs.writeFileSync(file,text,{encoding:'utf8'})
+            FileOpenConfig.currentPath = file
+            FileOpenConfig.currentFileRecord = text
+        }catch(e){ 
+            alert('文件写入出错，保存失败')
+        }
+    }
+
+    function savefile(){
+        assert(FileOpenConfig.currentPath)
+
+        var current_old_record = undefined
+        //check old file
+        //try check old files
+        try{
+            current_old_record = fs.readFileSync(FileOpenConfig.currentPath, {encoding:'utf8'})
+        }catch(e){
+            if(confirm('文件不存在，是否继续保存？')==false){
+                return;
+            }
+        }
+        if(FileOpenConfig.currentFileRecord != undefined && current_old_record != undefined 
+        && current_old_record != FileOpenConfig.currentFileRecord){
+            if(confirm('检测到项目文件被其它程序修改，是否继续覆盖保存？')==false){
+                return;
+            }
+        }
+        var xml = Blockly.Xml.workspaceToDom(Code.workspace)
+        var text = Blockly.Xml.domToText(xml)
+        try{
+        fs.writeFileSync(FileOpenConfig.currentPath,text,{encoding:'utf8'})
+        FileOpenConfig.currentFileRecord = text
+        }catch(e){ 
+            alert('文件写入出错，保存失败')
+        }
+    }
+
+    //此函数在inject_init被调用
+    electron_inject_init = function(){
+        updateTitle()
+
+        //另存为按钮
+        let save_as_btn = document.getElementById('save_file_as')
+        save_as_btn.hidden = false
+
+        //将所有的文件操作进行封装
+        ToolButtonOperations.open = function(){
+            if(FileOpenConfig.currentPath){
+                var xml = Blockly.Xml.workspaceToDom(Code.workspace)
+                var text = Blockly.Xml.domToText(xml)
+                if(text != FileOpenConfig.currentFileRecord){
+                    if(confirm('当前文件未保存，是否继续？') == false){
+                        return
+                    }
+                }
+            }
+
+            let file = dialog.showOpenDialogSync({
+                properties:['openFile'],
+                filters:[
+                    {name:'Blockly Isaac XML', extensions:['biml']}
+                ]
+            })
+            if(file == undefined || file.length == 0){
+                console.log('no file open')
+                return
+            }
+            file = file[0]
+            
+            openfile(file)
+        }
+
+        ToolButtonOperations.save = function(){
+            if(FileOpenConfig.currentPath){
+                savefile()
+            }else{
+                save_as_file()
+            }
+        }
+
+        ToolButtonOperations.save_as = save_as_file
+    }
 })()
 

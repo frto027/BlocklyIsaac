@@ -5,7 +5,7 @@ var MSG = {
   runTooltip: "于工作区中运行块所定义的程式。",
   badCode: "程序错误：\n%1",
   timeout: "超过最大执行行数。",
-  trashTooltip: "放弃所有块。",
+  trashTooltip: "清空",
   catLogic: "逻辑",
   catLoops: "循环",
   catMath: "数学",

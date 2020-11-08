@@ -216,6 +216,10 @@ function define_argument_blocks()
   Blockly.defineBlocksWithJsonArray(arr)
 }
 function updateChildArgumentBlocksWithCallback(callback_enum_str,block,this_is_addcallback = false){
+  if(block == undefined){
+    //I tried my best...
+    return
+  }
   //DFS
   if((block.type != "Isaac::AddCallback" &&  block.type != 'AddCallback') || this_is_addcallback){
     let children = block.getChildren()
@@ -404,6 +408,30 @@ function getRandStr(){
   return r
 }
 
+var ToolButtonOperations = {
+  open:function(){
+    document.getElementById('open_file_dialog').click()
+  },
+  save:function(){
+    var save_file_href = document.getElementById("save_file_href")
+    var xml = Blockly.Xml.workspaceToDom(Code.workspace);
+    var text = Blockly.Xml.domToText(xml);
+    save_file_href.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    save_file_href.setAttribute('download', 'output_' + getRandStr() +'.biml');
+    save_file_href.click()
+  },
+  save_as:function(){
+
+  },
+  exportlua:function(){
+    var save_file_href = document.getElementById("save_file_href")
+    var luacode = Blockly.Lua.workspaceToCode(Code.workspace)
+    save_file_href.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(luacode));
+    save_file_href.setAttribute('download', 'main.lua');
+    save_file_href.click()
+  }
+}
+
 //called after workspace init
 function inject_init(){
   //hide switch labels
@@ -415,7 +443,6 @@ function inject_init(){
     document.getElementById('btn_panel').style.textAlign = 'left' 
   }
 
-  // Code.bindClick('copyConsoleBtn',copy_to_clickboard_single_line)
   Blockly.defineBlocksWithJsonArray(translate_tjson([{
       "type": "registermod",
       "message0": "%{MODNAME} %1",
@@ -500,8 +527,8 @@ function inject_init(){
   var open_btn = document.getElementById('open_file')
   var open_file_dialog = document.getElementById('open_file_dialog')
   open_btn.title = translate_str('%{OPEN_FILE_BTN_TEXT}')
-  open_btn.addEventListener('click',function(){
-    open_file_dialog.click()
+  Code.bindClick(open_btn ,function(){
+    ToolButtonOperations.open()
   })
   open_file_dialog.addEventListener('change',function(){
     if(open_file_dialog.files.length == 0){
@@ -510,34 +537,33 @@ function inject_init(){
     var file = open_file_dialog.files[0];
     file.text().then(text=>{
       var xml = Blockly.Xml.textToDom(text)
+      Code.workspace.clear()
       Blockly.Xml.domToWorkspace(xml, Code.workspace)
     })
   })
 
   var save_btn = document.getElementById("save_file")
-  var save_file_href = document.getElementById("save_file_href")
   
   save_btn.title = translate_str('%{SAVE_FILE_BTN_TEXT}')
-  save_btn.addEventListener('click',function(){
-    var xml = Blockly.Xml.workspaceToDom(Code.workspace);
-    var text = Blockly.Xml.domToText(xml);
-    save_file_href.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    save_file_href.setAttribute('download', 'output_' + getRandStr() +'.biml');
-    save_file_href.click()
+  Code.bindClick(save_btn,function(){
+    ToolButtonOperations.save()
+  })
+
+  var save_as_btn = document.getElementById('save_file_as')
+  save_as_btn.title = translate_str('%{SAVE_FILE_AS_BTN_TEXT}')
+  Code.bindClick(save_as_btn,function(){
+    ToolButtonOperations.save_as()
   })
 
   var export_lua_btn = document.getElementById("export_lua")
   export_lua_btn.title = translate_str('%{EXPORT_LUA_BTN_TEXT}')
-  export_lua_btn.addEventListener('click',function(){
-    var luacode = Blockly.Lua.workspaceToCode(Code.workspace)
-    save_file_href.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(luacode));
-    save_file_href.setAttribute('download', 'main.lua');
-    save_file_href.click()
+  Code.bindClick(export_lua_btn,function(){
+    ToolButtonOperations.exportlua()
   })
 
   var undo_btn = document.getElementById("undo")
   undo_btn.title = translate_str('%{UNDO}')
-  undo_btn.addEventListener('click',function(){
+  Code.bindClick(undo_btn,function(){
     Code.workspace.undo()
   })
 
@@ -576,9 +602,5 @@ function translate_tjson(json){
 
 function get_blk_help(url){
   return "https://moddingofisaac.com/docs" + url
-}
-
-function copy_to_clickboard_single_line(){
-
 }
 
