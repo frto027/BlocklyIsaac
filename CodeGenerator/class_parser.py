@@ -135,6 +135,7 @@ typealias = {
     "CostumeList":"CostumeConfigList",
     "ItemList":"ItemConfigList",
     "PillList":"PillConfigList",
+    "GridEntity":"GridEntityType",
 
     "Number":"integer", # If I need a float, you can give me a Number(by Blockly)
     "integer":"float",
@@ -169,6 +170,16 @@ def convert_text_type(text):
 #     if typename in inhert_cluster:
 #         return inhert_cluster[typename]
 #     return [typename]
+
+# argument_type_dict = 
+# {
+#     "Level:GetName":{
+#         "thisarg":"Level",
+#         "arg1":"xxx",
+#     }
+# }
+argument_type_dict = {}
+
 
 callback_func_arg_reg = re.compile('Function Args:.?\\(([a-zA-Z\\[\\] ,]+)\\)')
 callback_func_add_arg_reg = re.compile('Optional callback Args: ?([a-zA-Z]+)')
@@ -218,6 +229,8 @@ def parse_class_text(text,is_namespace,file_path):
 
         param_types = item_table.find_all(attrs={"class":'paramtype'})
         param_names = item_table.find_all(attrs={"class":'paramname'})
+
+        self_argument_types = {}
 
         item_type = 'unknown'
         if len(param_names) == 0:
@@ -284,6 +297,7 @@ def parse_class_text(text,is_namespace,file_path):
         if not is_namespace and not IsStatic(gp) and not IsCtor(gp):
             text['message0'] += " "+apply_translate("target",dup_hash)+"[" + apply_translate(GetClassName(gp).strip('::'),dup_hash,True) +"] %2"
             text['args0'] += ',{"type":"input_value","name":"thisobj","check":"'+GetClassName(gp).strip('::')+'",align:"RIGHT"}'
+            self_argument_types["thisobj"] = GetClassName(gp).strip('::')
             arg_counter = 3
 
         # arguments
@@ -297,6 +311,7 @@ def parse_class_text(text,is_namespace,file_path):
             #     arg += '"' + types[j] + '"'
             # arg+=']}'
             arg = ',{"type":"input_value","name":"arg'+str(i)+'","check":"' + param_types[i] + '",align:"RIGHT"}'
+            self_argument_types['arg'+str(i)] = param_types[i]
             text['args0'] += arg
             arg_counter = arg_counter + 1
         text['message0'] += '"'
@@ -361,6 +376,7 @@ def parse_class_text(text,is_namespace,file_path):
         func_str+="}"
         functions[text['type'].strip('"')] = func_str
         
+        argument_type_dict[text['type'].strip('"')] = self_argument_types
         # print(text)
 
         # create setter for a member
@@ -380,6 +396,9 @@ def parse_class_text(text,is_namespace,file_path):
 
             arg_counter += 1
             toolbox[GetClassName(gp)].append(text)
+
+            # use the same argument type dict
+            argument_type_dict[text['type'].strip('"')] = self_argument_types
 
             # now for function
             func_str = 'function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_ATOMIC)+"."+"' + GetName(gp) + '="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)}'
@@ -535,7 +554,61 @@ def toolboxBlockText(block):
     if block == 'Game::GetPlayer':
         return '<value name="thisobj"><shadow type="Game"></shadow></value>'+\
         '<value name="arg0"><shadow type="math_number"><field name="NUM">0</field></shadow></value>'
-    return ''
+    if block == 'Level::GetName':
+        return '\
+        <value name="thisobj">\
+          <block type="Game::GetLevel">\
+            <value name="thisobj">\
+              <block type="Game"></block>\
+            </value>\
+          </block>\
+        </value>\
+        <value name="arg0">\
+          <shadow type="logic_null"></shadow>\
+        </value>\
+        <value name="arg1">\
+          <shadow type="logic_null"></shadow>\
+        </value>\
+        <value name="arg2">\
+          <shadow type="logic_null"></shadow>\
+        </value>\
+        <value name="arg3">\
+          <shadow type="logic_null"></shadow>\
+        </value>\
+        <value name="arg4">\
+          <shadow type="logic_null"></shadow>\
+        </value>'
+    
+    # the default value
+    ret = ''
+    if block in argument_type_dict:
+        type_dict = argument_type_dict[block]
+        for argname in type_dict:
+            if type_dict[argname] == 'Game':
+                ret += '<value name="{arg}"><block type="Game"></block></value>'.format(arg=argname)
+            if type_dict[argname] == 'EntityPlayer':
+                ret += ('<value name="{arg}"><shadow type="Isaac::GetPlayer">'+\
+                    '<value name="arg0"><shadow type="math_number"><field name="NUM">0</field></shadow></value>'+\
+                    '</shadow></value>').format(arg=argname)
+            if type_dict[argname] == 'MusicManager':
+                ret += '<value name="{arg}"><block type="MusicManager"></block></value>'.format(arg=argname)
+            if type_dict[argname] == 'Font':
+                ret += ('<value name="{arg}"><shadow type="Game::GetFont">'+\
+                    '<value name="thisobj"><shadow type="Game"></shadow></value>'+\
+                    '</shadow></value>').format(arg=argname)
+            if type_dict[argname] == 'Level':
+                ret += ('<value name="{arg}"><block type="Game::GetLevel">'+\
+                    '<value name="thisobj"><block type="Game"></block></value>'+\
+                    '</block></value>').format(arg=argname)
+            if type_dict[argname] == 'Room':
+                ret += ('<value name="{arg}"><block type="Game::GetRoom">'+\
+                    '<value name="thisobj"><block type="Game"></block></value>'+\
+                    '</block></value>').format(arg=argname)
+            if type_dict[argname] == 'Seeds':
+                ret += ('<value name="{arg}"><block type="Game::GetSeeds">'+\
+                    '<value name="thisobj"><block type="Game"></block></value>'+\
+                    '</block></value>').format(arg=argname)
+    return ret
 
 
 # generate json
