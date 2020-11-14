@@ -124,7 +124,9 @@ inhert = {
     "GridEntityPressurePlate":"GridEntity",
     "GridEntityRock":"GridEntity",
     "GridEntitySpikes":"GridEntity",
-    "GridEntityTNT":"GridEntity"
+    "GridEntityTNT":"GridEntity",
+    # SampleList is a const VectorList(maybe)
+    "SampleList":"VectorList"
 }
 
 typealias = {
