@@ -23,5 +23,6 @@ var MSG = {
   badXml: "XML解析错误：\n%1\n\n选择“确定”以取消您对XML的修改，或选择“取消”以继续编辑XML。",
   catArguments: "回调参数",
   catTools: "工具块",
-  myMod:"我的mod"
+  myMod:"我的mod",
+  catFlagCalc:"标记"
 };

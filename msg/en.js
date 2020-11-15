@@ -23,5 +23,6 @@ var MSG = {
   badXml: "Error parsing XML:\n%1\n\nSelect 'OK' to abandon your changes or 'Cancel' to further edit the XML.",
   catArguments: "Arguments",
   catTools:"Tools",
-  myMod:"MyMod"
+  myMod:"MyMod",
+  catFlagCalc:"flag"
 };

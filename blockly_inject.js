@@ -38,7 +38,11 @@ SOFTWARE.
 //   },
 // }
 
-
+//补充完整Blockly的优先级定义
+Blockly.Lua.ORDER_BIT_MOVE = 6.1  // << >>
+Blockly.Lua.ORDER_BIT_AND = 6.2   // &
+Blockly.Lua.ORDER_BIT_NOT = 6.3   // ~
+Blockly.Lua.ORDER_BIT_OR = 6.4    // |
 
 Blockly.Lua['registermod'] = function(block) {
     var value_text = Blockly.Lua.valueToCode(block, 'TEXT', Blockly.Lua.ORDER_ATOMIC);
@@ -60,6 +64,29 @@ Blockly.Lua['AddCallback'] = function(block){
 Blockly.Lua['FunctionReturn'] = function(block){
   return 'return ' + Blockly.Lua.valueToCode(block, 'retvalue', Blockly.Lua.ORDER_NONE)
 }
+
+Blockly.Lua['FlagTestExist'] = function(block){
+  return [
+    Blockly.Lua.valueToCode(block,'arg0',Blockly.Lua.ORDER_BIT_AND) + '&' + 
+    Blockly.Lua.valueToCode(block,'arg1',Blockly.Lua.ORDER_BIT_AND) + '~=0' 
+    ,Blockly.Lua.ORDER_RELATIONAL
+  ]
+}
+Blockly.Lua['FlagAdd'] = function(block){
+  return [
+    Blockly.Lua.valueToCode(block,'arg0',Blockly.Lua.ORDER_BIT_OR) + '|' + 
+    Blockly.Lua.valueToCode(block,'arg1',Blockly.Lua.ORDER_BIT_OR)
+    ,Blockly.Lua.ORDER_BIT_OR
+  ]
+}
+Blockly.Lua['FlagRemove'] = function(block){
+  return [
+    Blockly.Lua.valueToCode(block,'arg0',Blockly.Lua.ORDER_BIT_AND) + '&(~' + 
+    Blockly.Lua.valueToCode(block,'arg1',Blockly.Lua.ORDER_BIT_NOT)+')'
+    ,Blockly.Lua.ORDER_BIT_AND
+  ]
+}
+
 //check type inject
 
 var parent_of_block_type = {}
@@ -511,6 +538,39 @@ function inject_init(){
     "previousStatement": null,
     "colour":230,
     "tooltip":"%{FN_RET_TOOLTIP}"
+  },{
+    "type":"FlagTestExist",
+    "message0":"[%{__TYPE_BOOL}]%{FLAG_CALLED}[%{__TYPE_INTEGER}]%1%{FLAG_CONTAINS}[%{__TYPE_INTEGER}]%2",
+    "args0":[
+      {"type":"input_value","name":"arg0","check":"integer",align:"RIGHT"},
+      {"type":"input_value","name":"arg1","check":"integer",align:"RIGHT"},
+    ],
+    "output": "boolean",
+    "colour": 230,
+    "inputsInline":true,
+    "tooltip":"%{FLAT_TEST_EXIST_TOOLTIP}"
+  },{
+    "type":"FlagAdd",
+    "message0":"[%{__TYPE_INTEGER}]%{FLAG_CALLED}[%{__TYPE_INTEGER}]%1%{FLAG_ADD}[%{__TYPE_INTEGER}]%2",
+    "args0":[
+      {"type":"input_value","name":"arg0","check":"integer",align:"RIGHT"},
+      {"type":"input_value","name":"arg1","check":"integer",align:"RIGHT"},
+    ],
+    "output": "integer",
+    "colour": 230,
+    "inputsInline":true,
+    "tooltip":"%{FLAT_TEST_ADD_TOOLTIP}"
+  },{
+    "type":"FlagRemove",
+    "message0":"[%{__TYPE_INTEGER}]%{FLAG_CALLED}[%{__TYPE_INTEGER}]%1%{FLAG_REMOVE}[%{__TYPE_INTEGER}]%2",
+    "args0":[
+      {"type":"input_value","name":"arg0","check":"integer",align:"RIGHT"},
+      {"type":"input_value","name":"arg1","check":"integer",align:"RIGHT"},
+    ],
+    "output": "integer",
+    "colour": 230,
+    "inputsInline":true,
+    "tooltip":"%{FLAT_TEST_REMOVE_TOOLTIP}"
   }]))
   define_argument_blocks()
 
