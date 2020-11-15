@@ -136,6 +136,8 @@ typealias = {
     "ItemList":"ItemConfigList",
     "PillList":"PillConfigList",
     "GridEntity":"GridEntityType",
+    # I don't know what ProjectilesMode is...
+    "ProjectilesMode":"integer",
 
     "Number":"integer", # If I need a float, you can give me a Number(by Blockly)
     "integer":"float",
@@ -608,6 +610,8 @@ def toolboxBlockText(block):
                 ret += ('<value name="{arg}"><block type="Game::GetSeeds">'+\
                     '<value name="thisobj"><block type="Game"></block></value>'+\
                     '</block></value>').format(arg=argname)
+            if type_dict[argname] == 'SFXManager':
+                ret += ('<value name="{arg}"><block type="SFXManager"></block></value>').format(arg=argname)
     return ret
 
 
