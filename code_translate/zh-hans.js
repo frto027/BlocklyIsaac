@@ -1,5 +1,6 @@
 TMSG={
 "WEB_PAGE_TITLE":"以撒的积木",
+"COPYRIGHT":"版权声明",
 "__TXT_TARGET":"操作对象",
 "__TYPE_GAME":"游戏类",
 "__TXT_GAME":"取游戏对象",

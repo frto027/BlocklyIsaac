@@ -42,13 +42,6 @@ Isaac.AddCallback(MyMode,ModCallbacks.MC_USE_ITEM,function(__arg_0,__arg_1,__arg
 end ,CollectibleType.COLLECTIBLE_D20)
 ```
 
-# Reference
-
-[Blockly](https://developers.google.com/blockly)
-
-[IsaacDocs](https://github.com/wofsauge/IsaacDocs)
-
-
 # How to build
 
 the project is already built, you can click `index.html` to run directly.
@@ -79,3 +72,15 @@ npm start
 2. Add an item to the `translate_files` variable in `CodeGenerator/class_parser.py`
 3. Rebuild project.
 4. Edit your language config at `code_translate` directory.
+
+# Special thanks
+
+I used the [Blockly](https://developers.google.com/blockly) as the front-end language.
+
+The [IsaacDocs](https://github.com/wofsauge/IsaacDocs) project helped me solve a lot of problems, and it was also the input source for automatic scripts written by [Python](https://www.python.org/).
+
+[NodeJs](https://nodejs.org/) and [electron](https://www.electronjs.org/) provide native execution support.
+
+Icons from the [Material Design](https://material.io/).
+
+And the game [The Binding of Isaac: Afterbirth+](https://store.steampowered.com/app/570660/The_Binding_of_Isaac_Afterbirth/)

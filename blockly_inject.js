@@ -645,6 +645,30 @@ function inject_init(){
   new_window_btn.title = translate_str('%{NEW_WINDOW_BTN_TEXT}')
   document.title = translate_str('%{WEB_PAGE_TITLE}')
 
+  var copyright_btn = document.getElementById('copyright_btn')
+  var copyright_span = document.getElementById('copyright_span')
+  copyright_span.innerText = translate_str('%{COPYRIGHT}')
+  Code.bindClick(copyright_btn,function(){
+    alert(`
+MIT License
+
+Copyright (c) 2020 frto027
+
+BlocklyIsaac project page: 
+https://github.com/frto027/BlocklyIsaac
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+    `)
+  })
+  
   try{
     electron_inject_init()
   }catch(e){ }

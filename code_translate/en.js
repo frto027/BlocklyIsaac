@@ -1,5 +1,6 @@
 TMSG={
 "WEB_PAGE_TITLE":"BlocklyIsaac",
+"COPYRIGHT":"Copyright",
 "MODNAME":"Mod name",
 "DO":"Do",
 "FN_REF":"FnRef",
