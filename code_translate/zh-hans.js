@@ -13,6 +13,8 @@ TMSG={
 "__TYPE_GLOBAL":"全局函数",
 "__TYPE_INPUT":"输入函数",
 "MODNAME": "Mod名称",
+"FN_RET_VALUE":"返回",
+"FN_RET_TOOLTIP":"返回一个值给上层系统",
 "MOD_NAME_TOOLTIP":"向游戏系统申请一个Mod，一般情况下一个mod只会使用一次。将它的值保存在一个变量里，以备后续使用。",
 "DO":"做",
 "FN_REF":"函引",

@@ -57,7 +57,9 @@ Blockly.Lua['AddCallback'] = function(block){
     Blockly.Lua.valueToCode(block, 'arg2', Blockly.Lua.ORDER_NONE)+','+
     Blockly.Lua.valueToCode(block, 'arg3', Blockly.Lua.ORDER_NONE)+")\n"
 }
-
+Blockly.Lua['FunctionReturn'] = function(block){
+  return 'return ' + Blockly.Lua.valueToCode(block, 'retvalue', Blockly.Lua.ORDER_NONE)
+}
 //check type inject
 
 var parent_of_block_type = {}
@@ -500,6 +502,15 @@ function inject_init(){
     "inputsInline":false,
     "colour":230,
     "tooltip":"AddCallback",
+  },{
+    "type":"FunctionReturn",
+    "message0":"%{FN_RET_VALUE} %1",
+    "args0":[
+      {"type":"input_value","name":"retvalue",align:"RIGHT"}
+    ],
+    "previousStatement": null,
+    "colour":230,
+    "tooltip":"%{FN_RET_TOOLTIP}"
   }]))
   define_argument_blocks()
 
