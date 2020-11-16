@@ -45,7 +45,7 @@ button:hover>img {
 button:active {
   border: 0px solid rgb(255, 255, 255) !important;
 }
-button:hover {
+.toolbar>button:hover {
   box-shadow: 0px -2px 0px rgb(0, 0, 0);
   background-color: #eee;
 }

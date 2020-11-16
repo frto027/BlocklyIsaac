@@ -86,6 +86,17 @@ var electron_inject_init = function(){};
         new Notification(translate_str('%{BLOCKLY_ISAAC_WORKSPACE}'),{body:text})
     }
 
+    const Dialogs = require('dialogs')
+    const dialogs = Dialogs(
+        {
+            ok:translate_str('%{OK}'),
+            cancel:translate_str('%{CANCEL}')
+        }
+    )
+    Blockly.prompt = (a,b,c)=>{
+        dialogs.prompt(a,b,c)
+    }
+
 
     //我们需要一个“假的”文件保存提示，因为保存文件太快了，界面没办法相应
     let title_tip = {
