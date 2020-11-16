@@ -345,7 +345,7 @@ def parse_class_text(text,is_namespace,file_path):
         # a. or a:
         if not is_namespace and not IsStatic(gp):
             if not IsCtor(gp):
-                ret_str += "Blockly.Lua.valueToCode(block, 'thisobj', Blockly.Lua.ORDER_ATOMIC)"
+                ret_str += "Blockly.Lua.valueToCode(block, 'thisobj', Blockly.Lua.ORDER_HIGH)"
                 if item_type == 'member':
                     ret_str += "+'.'"
                 else:
@@ -372,7 +372,7 @@ def parse_class_text(text,is_namespace,file_path):
             func_str += ret_str + '+"\\n"'
         else:
             if item_type == 'member':
-                func_str += "[" + ret_str + ",Blockly.Lua.ORDER_ATOMIC]"
+                func_str += "[" + ret_str + ",Blockly.Lua.ORDER_HIGH]"
             else:
                 func_str += "[" + ret_str + ",Blockly.Lua.ORDER_HIGH]"
 
@@ -404,7 +404,7 @@ def parse_class_text(text,is_namespace,file_path):
             argument_type_dict[text['type'].strip('"')] = self_argument_types
 
             # now for function
-            func_str = 'function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_ATOMIC)+"."+"' + GetName(gp) + '="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)}'
+            func_str = 'function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_HIGH)+"."+"' + GetName(gp) + '="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\\n"}'
             functions[text['type'].strip('"')] = func_str
 
 
@@ -483,7 +483,7 @@ def parse_enums(text,folder_path):
         toolbox['Enums'].append(text)
 
         # functions for enum
-        func_str = "function (block){ return ['" + enum_name + ".'+ block.getFieldValue('ENUM_VAL'),Blockly.Lua.ORDER_ATOMIC]}"
+        func_str = "function (block){ return ['" + enum_name + ".'+ block.getFieldValue('ENUM_VAL'),Blockly.Lua.ORDER_HIGH]}"
         functions[text['type'].strip('"')] = func_str
 
         # all enums are number

@@ -238,7 +238,7 @@ function define_argument_blocks()
         "helpUrl": ""
       })
       Blockly.Lua["CALLBACK_ARG_" + i + callback_name] = function(block){
-        return ["__arg_" + i,Blockly.Lua.ORDER_NONE]
+        return ["__arg_" + i,Blockly.Lua.ORDER_ATOMIC]
       }
     }
   }
