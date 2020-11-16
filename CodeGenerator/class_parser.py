@@ -138,6 +138,7 @@ typealias = {
     "GridEntity":"GridEntityType",
     # I don't know what ProjectilesMode is...
     "ProjectilesMode":"integer",
+    "Curses":"LevelCurse",
 
     "Number":"integer", # If I need a float, you can give me a Number(by Blockly)
     "integer":"float",
