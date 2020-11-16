@@ -38,11 +38,28 @@ SOFTWARE.
 //   },
 // }
 
+//I HAVE TO rewrite it.
+Blockly.Lua.ORDER_ATOMIC = 0;          // literals
+// The next level was not explicit in documentation and inferred by Ellen.
+Blockly.Lua.ORDER_HIGH = 1;            // Function calls, tables[]
+Blockly.Lua.ORDER_EXPONENTIATION = 3;  // ^
+Blockly.Lua.ORDER_UNARY = 4;           // not # - ~
+Blockly.Lua.ORDER_MULTIPLICATIVE = 5;  // * / %
+Blockly.Lua.ORDER_ADDITIVE = 6;        // + -
+Blockly.Lua.ORDER_CONCATENATION = 11;   // ..
+Blockly.Lua.ORDER_RELATIONAL = 12;      // < > <=  >= ~= ==
+Blockly.Lua.ORDER_AND = 13;             // and
+Blockly.Lua.ORDER_OR = 14;              // or
+Blockly.Lua.ORDER_NONE = 99;
+
+// The next level is inferred by ME
+Blockly.Lua.ORDER_TABLE_ACCESS = 2
+
 //补充完整Blockly的优先级定义
-Blockly.Lua.ORDER_BIT_MOVE = 6.1  // << >>
-Blockly.Lua.ORDER_BIT_AND = 6.2   // &
-Blockly.Lua.ORDER_BIT_NOT = 6.3   // ~
-Blockly.Lua.ORDER_BIT_OR = 6.4    // |
+Blockly.Lua.ORDER_BIT_MOVE = 7  // << >>
+Blockly.Lua.ORDER_BIT_AND = 8   // &
+Blockly.Lua.ORDER_BIT_NOT = 9   // ~
+Blockly.Lua.ORDER_BIT_OR = 10    // |
 
 Blockly.Lua['registermod'] = function(block) {
     var value_text = Blockly.Lua.valueToCode(block, 'TEXT', Blockly.Lua.ORDER_ATOMIC);

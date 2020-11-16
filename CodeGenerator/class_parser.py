@@ -345,7 +345,7 @@ def parse_class_text(text,is_namespace,file_path):
         # a. or a:
         if not is_namespace and not IsStatic(gp):
             if not IsCtor(gp):
-                ret_str += "Blockly.Lua.valueToCode(block, 'thisobj', Blockly.Lua.ORDER_HIGH)"
+                ret_str += "Blockly.Lua.valueToCode(block, 'thisobj', Blockly.Lua.ORDER_TABLE_ACCESS)"
                 if item_type == 'member':
                     ret_str += "+'.'"
                 else:
@@ -404,7 +404,7 @@ def parse_class_text(text,is_namespace,file_path):
             argument_type_dict[text['type'].strip('"')] = self_argument_types
 
             # now for function
-            func_str = 'function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_HIGH)+"."+"' + GetName(gp) + '="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\\n"}'
+            func_str = 'function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"' + GetName(gp) + '="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\\n"}'
             functions[text['type'].strip('"')] = func_str
 
 
