@@ -5,7 +5,8 @@
   "main": "electron\\main.js",
   "scripts": {
     "start": "electron .",
-    "test": "electron . --dev"
+    "test": "electron . --dev",
+    "build": "node electron\\build.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,8 @@
   },
   "homepage": "https://github.com/frto027/BlocklyIsaac#readme",
   "devDependencies": {
-    "electron": "^10.1.5"
+    "electron": "^10.1.5",
+    "electron-packager": "^15.1.0"
   },
   "dependencies": {
     "dialogs": "^2.0.1"

@@ -2,6 +2,10 @@ const { app, BrowserWindow, ipcMain } = require("electron")
 const fs = require("fs")
 const path = require("path")
 
+if(!app.requestSingleInstanceLock()){
+  app.quit()
+}
+
 const is_dev = process.argv.indexOf('--dev') != -1 || process.argv.indexOf('-d') != -1
 
 const config_file = path.join(app.getPath('userData'), 'blockly_config.json')
@@ -41,7 +45,8 @@ function createWindow () {
     win.loadFile('index.html',{
         query:{
             lang:read_config('defaultLanguage'),
-            dev:is_dev ? '1' : '0'
+            dev:is_dev ? '1' : '0',
+            version:app.getVersion()
         }
     })
 
@@ -53,6 +58,7 @@ function createWindow () {
   }
 
 app.whenReady().then(createWindow)
+app.on('second-instance', createWindow)
 
 ipcMain.handle('change-language',(_e,lang)=>{
   write_config('defaultLanguage',lang)

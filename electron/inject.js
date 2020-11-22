@@ -17,6 +17,8 @@ var electron_inject_init = function(){};
     const path = require('path')
     const zlib = require('zlib')
 
+    const version = Code.getStringParamFromUrl('version', '')
+
     //用户点击帮助时打开浏览器，而不是新窗口
     //redefine the show help url to open a real web browser
     Blockly.BlockSvg.prototype.showHelp =function(){
@@ -125,6 +127,7 @@ var electron_inject_init = function(){};
             str += ' - ' + path.basename(FileOpenConfig.currentPath)
         if(new Date().getTime() < title_tip.timeout)
             str += ' - ' + title_tip.text
+        str += ' ' + version
         document.title = str 
     }
 

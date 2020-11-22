@@ -66,6 +66,11 @@ npm install
 npm start
 ```
 
+build the electron exe as follows.
+```
+npm run build
+```
+
 # Translate it to your language
 
 1. Uncomment the `Code.LANGUAGE_NAME` variable in the `code.js`.
