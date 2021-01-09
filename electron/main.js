@@ -1,6 +1,8 @@
 const { app, BrowserWindow, ipcMain } = require("electron")
 const fs = require("fs")
+const { url } = require("inspector")
 const path = require("path")
+const assert = require("assert")
 
 if(!app.requestSingleInstanceLock()){
   app.quit()
@@ -38,7 +40,7 @@ function createWindow () {
       height: 768,
       webPreferences: {
         nodeIntegration: true,
-        enableRemoteModule: true
+        enableRemoteModule: true,
       },
     })
   
@@ -54,8 +56,16 @@ function createWindow () {
       win.webContents.openDevTools()
     }
 
-    win.setMenu(null)
+    win.removeMenu()
+    win.webContents.on('new-window',new_window_event)
   }
+
+let TMSG = undefined
+{
+  let translate_file_path = `code_translate/${read_config('defaultLanguage')}.js`
+  eval(fs.readFileSync(translate_file_path,{encoding:'utf8'}))
+  assert(TMSG != undefined,`Can't load translate file:${translate_file_path}`)
+}
 
 app.whenReady().then(createWindow)
 app.on('second-instance', createWindow)
@@ -67,3 +77,24 @@ ipcMain.handle('change-language',(_e,lang)=>{
 ipcMain.handle('new-window',(_e)=>{
   createWindow()
 })
+
+
+let docs_callback_graph = fs.readdirSync("media/callbacks")
+function is_callback_graph_url(url){
+  for(const doc of docs_callback_graph){
+    if(url.endsWith(doc))
+      return true
+  }
+  return false
+}
+
+function new_window_event(event,url){
+  if(is_callback_graph_url(url)){
+    event.preventDefault()
+    with(event.newGuest = new BrowserWindow()){
+      removeMenu()
+      loadURL(url)
+      setTitle(TMSG["CALLBACK_GRAPH"]||"Callback Graph")
+    }
+  }
+}

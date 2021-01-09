@@ -13,6 +13,8 @@ TMSG={
 "ARGUMENT_IS_UNLINKED":"unlinked argument",
 "ARGUMENT_POS_ERROR":"invalid argument",
 "COPY_TO_CONSOLE_BTN_TEXT":"copy to console",
+"CALLBACK_GRAPH":"Callback graph",
+"CALLBACK_GRAPH_PATH":"media/callbacks/Callbacks_en.svg",
 "COPY_SUCCESS":"success",
 "OPEN_FILE_BTN_TEXT":"open",
 "SAVE_FILE_BTN_TEXT":"save",

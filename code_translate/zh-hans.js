@@ -15,6 +15,8 @@ TMSG={
 "__TYPE_ENUMS":"枚举型值",
 "__TYPE_GLOBAL":"全局函数",
 "__TYPE_INPUT":"输入函数",
+"CALLBACK_GRAPH":"回调图",
+"CALLBACK_GRAPH_PATH":"media/callbacks/Callbacks_zh-hans.svg",
 "FLAG_CALLED":"标记",
 "FLAG_CONTAINS":"中是否存在单一标记",
 "FLAG_ADD":"中增加",

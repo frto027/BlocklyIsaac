@@ -433,6 +433,18 @@ function handleArgumentChangeSelect(evt){
     handleAddCallbackDelete(evt)
   }
 }
+function setup_callback_graph(){
+  let mod_callback_blockdef = Blockly.Blocks["ModCallbacks"]
+  mod_callback_blockdef.customContextMenu = (menuitems)=>{
+    menuitems.push({
+      text:translate_str("%{CALLBACK_GRAPH}"),
+      enabled:true,
+      callback:()=>{
+        window.open(translate_str("%{CALLBACK_GRAPH_PATH}"))
+      }
+    })
+  }
+}
 
 function replaceFunc(block,func){
   let v = block.init
@@ -593,6 +605,7 @@ function inject_init(){
 
 
   init_game_blocks()
+  setup_callback_graph()
   //Arguments
   defineArgumentCategory()
   

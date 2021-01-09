@@ -20,6 +20,14 @@ api中充斥着大量的缩写、略写、重复单词。为提高翻译效率�
 
 由于解决这些问题需要逐条确认各个模块，且会引入大量的不可复用翻译，工作量巨大。目前的版本不处理这些情况，这个问题（不一定）会在之后逐条确认解决。
 
+# 回调流程翻译
+
+回调参考文件为[IsaacDocs文档](https://moddingofisaac.com/docs/customImg/Isaac%20Callbacks.svg)。
+
+`CodeGenerator/callback_gen.js`是根据code_translate中的js文件自动翻译此文档中MC开头字符的自动化脚本。
+
+翻译好的文档位于`media/callbacks`目录下。
+
 # BlocklyIsaac
 Create script for game The Binding of Isaac without lua.
 
