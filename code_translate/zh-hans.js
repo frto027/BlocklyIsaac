@@ -439,7 +439,7 @@ TMSG={
 "__TXT_SEED":"种子",
 "__TXT_MC_PRE_ENTITY_SPAWN":"回调_实体即将生成",
 "__TXT_RENDEROFFSET":"渲染偏移",
-"__TXT_MC_POST_FAMILIAR_RENDER":"回调_即将渲染跟班",
+"__TXT_MC_POST_FAMILIAR_RENDER":"回调_触发跟班渲染",
 "__TYPE_ENTITYPICKUP":"拾取物实体",
 "__TYPE_PICKUPVARIANT":"拾取物_变体",
 "__TYPE_ENTITYTEAR":"眼泪实体",
