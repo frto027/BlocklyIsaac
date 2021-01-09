@@ -1,6 +1,6 @@
 # MIT License
 
-# Copyright (c) 2020 frto027
+# Copyright (c) 2020-2021 frto027
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -79,6 +79,7 @@ translate_no_dup_texts = [
 	"MC_INPUT_ACTION_CALLBACKARG",
     "MC_GET_CARD_CALLBACKARG",
     "MC_PRE_USE_ITEM_CALLBACKARG",
+    "COLLIDE_WITH_ALL_GRID_ENTITIES",
 ]
 
 def apply_translate(text,position_hash='',istype = False):
