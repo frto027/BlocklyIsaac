@@ -1437,7 +1437,7 @@ TMSG={
 "__TXT_MC_POST_PLAYER_INIT":"回调_触发玩家初始化",
 "__TXT_MC_USE_PILL_CALLBACKARG":"药丸",
 "__TXT_MC_ENTITY_TAKE_DMG_CALLBACKARG":"伤害标记",
-"__TXT_MC_INPUT_ACTION":"回调_输入行动",
+"__TXT_MC_INPUT_ACTION":"回调_输入行为",
 "__TXT_MC_LEVEL_GENERATOR":"回调_关卡生成器",
 "__TXT_ISGAMEOVER":"是否游戏结束",
 "__TXT_SHOULDSAVE":"需要保存",
