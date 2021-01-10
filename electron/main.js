@@ -86,7 +86,8 @@ function createWindow () {
 
 let TMSG = undefined
 {
-  let translate_file_path = `code_translate/${read_config('defaultLanguage')}.js`
+  console.log()
+  let translate_file_path = `${__dirname}/../code_translate/${read_config('defaultLanguage')}.js`
   eval(fs.readFileSync(translate_file_path,{encoding:'utf8'}))
   assert(TMSG != undefined,`Can't load translate file:${translate_file_path}`)
 }
@@ -103,7 +104,7 @@ ipcMain.handle('new-window',(_e)=>{
 })
 
 
-let docs_callback_graph = fs.readdirSync("media/callbacks")
+let docs_callback_graph = fs.readdirSync(`${__dirname}/../media/callbacks`)
 function is_callback_graph_url(url){
   for(const doc of docs_callback_graph){
     if(url.endsWith(doc))
