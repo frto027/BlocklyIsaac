@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2020 frto027
+Copyright (c) 2020-2021 frto027
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -79,7 +79,7 @@ Blockly.Lua['AddCallback'] = function(block){
     Blockly.Lua.valueToCode(block, 'arg3', Blockly.Lua.ORDER_NONE)+")\n"
 }
 Blockly.Lua['FunctionReturn'] = function(block){
-  return 'return ' + Blockly.Lua.valueToCode(block, 'retvalue', Blockly.Lua.ORDER_NONE)
+  return 'return ' + Blockly.Lua.valueToCode(block, 'retvalue', Blockly.Lua.ORDER_NONE) + '\n'
 }
 
 Blockly.Lua['FlagTestExist'] = function(block){
