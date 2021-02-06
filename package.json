@@ -1,6 +1,6 @@
 {
   "name": "blockly_isaac_workspace",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A more powerful BlocklyIsaac workspace.",
   "main": "electron\\main.js",
   "scripts": {

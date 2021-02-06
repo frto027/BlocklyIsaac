@@ -682,7 +682,7 @@ function inject_init(){
     alert(`
 MIT License
 
-Copyright (c) 2020 frto027
+Copyright (c) 2020-2021 frto027
 
 BlocklyIsaac project page: 
 https://github.com/frto027/BlocklyIsaac
