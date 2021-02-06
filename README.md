@@ -28,6 +28,16 @@ api中充斥着大量的缩写、略写、重复单词。为提高翻译效率�
 
 翻译好的文档位于`media/callbacks`目录下。
 
+# 帮助说明
+
+右键一个块，点击帮助，就可以打开对应的IsaacDocs英文文档。
+
+如果右键枚举变量`Mod回调`，还能看到一份翻译过的回调图。
+
+# `Help` button and IsaacDocs
+
+You will be redirected to IsaacDocs webpage if you right-click blocks and press the `Help` button.  
+
 # BlocklyIsaac
 Create script for game The Binding of Isaac without lua.
 
@@ -90,7 +100,7 @@ npm run build
 
 I used the [Blockly](https://developers.google.com/blockly) as the front-end language.
 
-The [IsaacDocs](https://github.com/wofsauge/IsaacDocs) project helped me solve a lot of problems, and it was also the input source for automatic scripts written by [Python](https://www.python.org/).
+The [IsaacDocs](https://github.com/wofsauge/IsaacDocs) project helped me solve a lot of problems, and it was also the input source for automatic scripts written with [Python](https://www.python.org/).
 
 [NodeJs](https://nodejs.org/) and [electron](https://www.electronjs.org/) provide native execution support.
 

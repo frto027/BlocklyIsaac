@@ -225,8 +225,6 @@ functions = {}
 def parse_class_text(text,is_namespace,file_path):
     soup = BeautifulSoup(text,'html.parser')
     for item in soup.find_all(attrs={"class":'memitem'}):
-        href_url = file_path + item.find_previous_sibling(attrs={"class":'memtitle'}).find('a')['href']
-
         item_table = item.find('table', attrs={"class":'memname'})
         item_name = item_table.find('td', attrs={"class":'memname'}).text.strip()
         item_name = convert_text_name(item_name)
@@ -260,6 +258,18 @@ def parse_class_text(text,is_namespace,file_path):
 
         gp = FUNC_NAME_REG.match(item_name).groups()
         
+        # href_url = file_path + item.find_previous_sibling(attrs={"class":'memtitle'}).find('a')['href']
+        url_path = GetClassName(gp) \
+                        .strip(':') \
+                        .replace('::','_') \
+                        .replace(':','/')
+        if len(url_path) == 0:
+            # Global Functions
+            url_path = 'Functions'
+        url_anchor = GetName(gp).lower()
+        href_url = f'/{url_path}/#{url_anchor}'
+        print(href_url)
+
         # fix param list for function 'GetPtrHash' manually
         if GetName(gp)=='GetPtrHash':
             if len(param_types) == 0 and len(param_names) == 0 :
@@ -431,12 +441,12 @@ def parse_enums(text,folder_path):
         text["type"] = '"' + enum_name + '"'
         text['message0'] = '"[' + apply_translate(enum_name,dup_hash,True) + '] %1 "'
         text['args0'] = '[{"type": "field_dropdown","name": "ENUM_VAL","options":['
-        help_url = ''
+        help_url = f'/enums/{enum_name}/'
         for ch in item.find(attrs={"class":'memdoc'}).find('table').children:
             if isinstance(ch, element.Tag) and ch.name == 'tr':
                 if first:
                     first = False
-                    help_url = folder_path + ch.find_parent(attrs={"class":'memitem'}).find(attrs={"class":'memproto'}).find('a')['href']
+                    # help_url = folder_path + ch.find_parent(attrs={"class":'memitem'}).find(attrs={"class":'memproto'}).find('a')['href']
                     continue
                 field_name = ch.find(attrs={"class":"fieldname"}).text.strip()
                 field_doc = ch.find(attrs={"class":"fielddoc"}).text.strip()
