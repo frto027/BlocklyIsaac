@@ -269,7 +269,7 @@ def parse_class_text(text,is_namespace,file_path):
             url_path = 'Functions'
         url_anchor = GetName(gp).lower()
         href_url = f'/{url_path}/#{url_anchor}'
-        print(href_url)
+        # print(href_url)
 
         # fix param list for function 'GetPtrHash' manually
         if GetName(gp)=='GetPtrHash':
@@ -279,6 +279,14 @@ def parse_class_text(text,is_namespace,file_path):
                 params = [[_type,_name] for _type, _name in zip(param_types, param_names)]
             else:
                 print('Warring:please look at the block "GetPtrHash", it maybe not correct.')
+                import traceback
+                traceback.print_stack()
+        # fix param type for 'Isaac.GridSpawn' manually
+        if GetClassName(gp) == 'Isaac::' and GetName(gp) == 'GridSpawn':
+            if len(param_types) > 0 and param_types[0] == 'GridEntity':
+                param_types[0] = 'GridEntityType'
+            else:
+                print('Warring:please look at the block "Isaac.GridSpawn", it maybe not correct.')
                 import traceback
                 traceback.print_stack()
 
