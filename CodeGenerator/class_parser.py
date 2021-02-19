@@ -318,7 +318,7 @@ def parse_class_text(text,is_namespace,file_path):
         arg_counter = 2
 
         if not is_namespace and not IsStatic(gp) and not IsCtor(gp):
-            text['message0'] += " "+apply_translate("target",dup_hash)+"[" + apply_translate(GetClassName(gp).strip('::'),dup_hash,True) +"] %2"
+            text['message0'] += " "+apply_translate("this_target",dup_hash)+"[" + apply_translate(GetClassName(gp).strip('::'),dup_hash,True) +"] %2"
             text['args0'] += ',{"type":"input_value","name":"thisobj","check":"'+GetClassName(gp).strip('::')+'",align:"RIGHT"}'
             self_argument_types["thisobj"] = GetClassName(gp).strip('::')
             arg_counter = 3

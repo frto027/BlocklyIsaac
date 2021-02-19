@@ -3386,6 +3386,7 @@ TMSG={
 "__TXT_GO":"GO",
 "__TXT_BO":"BO",
 "__TXT___MUL":"__mul",
+"__TXT_THIS_TARGET":"this",
 "__TXT_LERP":"Lerp",
 "__TXT_M1":"m1",
 "__TXT_M2":"m2",
