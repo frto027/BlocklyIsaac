@@ -290,6 +290,13 @@ def parse_class_text(text,is_namespace,file_path):
                 import traceback
                 traceback.print_stack()
 
+        # fix params for __unm
+        if GetName(gp) == '__unm':
+            param_types = []
+            param_names = []
+            params = []
+
+
         text = {}
         if item_type == 'member':
             type_prefix = 'm_'
@@ -362,39 +369,63 @@ def parse_class_text(text,is_namespace,file_path):
 
         func_str = "function(block){return "
         ret_str = ""
-        # a. or a:
-        if not is_namespace and not IsStatic(gp):
-            if not IsCtor(gp):
-                ret_str += "Blockly.Lua.valueToCode(block, 'thisobj', Blockly.Lua.ORDER_TABLE_ACCESS)"
-                if item_type == 'member':
-                    ret_str += "+'.'"
+
+        OPERATORS_MARK = {
+            '__add':'+',
+            '__sub':'-',
+            '__mul':'*',
+            '__div':'/',
+            '__unm':'-'
+        }
+
+        if GetName(gp) in ['__add','__sub','__div','__mul','__unm']:
+            assert not is_namespace and not IsStatic(gp) and not IsCtor(gp)
+            ORDER = 'ORDER_MULTIPLICATIVE' if GetName(gp) in ['__div','__mul'] else 'ORDER_ADDITIVE' if GetName(gp) in ['__add','__sub'] else 'ORDER_UNARY'
+            if GetName(gp) != '__unm':
+                ret_str += "Blockly.Lua.valueToCode(block, 'thisobj', Blockly.Lua." + ORDER + ")"
+                ret_str += "+"
+            ret_str += "'" + OPERATORS_MARK[GetName(gp)] + "'"
+            ret_str += "+"
+            if GetName(gp) != '__unm':
+                ret_str += "Blockly.Lua.valueToCode(block, 'arg0', Blockly.Lua." + ORDER + ")"
+            else:
+                ret_str += "Blockly.Lua.valueToCode(block, 'thisobj', Blockly.Lua." + ORDER + ")"
+            assert GetRetType(gp) != None
+            func_str += "[" + ret_str + ",Blockly.Lua." + ORDER + "]"
+        else:
+            # a. or a:
+            if not is_namespace and not IsStatic(gp):
+                if not IsCtor(gp):
+                    ret_str += "Blockly.Lua.valueToCode(block, 'thisobj', Blockly.Lua.ORDER_TABLE_ACCESS)"
+                    if item_type == 'member':
+                        ret_str += "+'.'"
+                    else:
+                        ret_str += "+':'"
                 else:
-                    ret_str += "+':'"
+                    ret_str += '""'
             else:
-                ret_str += '""'
-        else:
-            # It is okay for global functions
-            ret_str += '"' + GetClassName(gp).replace('::','.') + '"'
-        # b
-        ret_str += "+'" + GetName(gp) + "'"
-        # (c)
-        if not item_type == 'member':
-            ret_str += '+"("'
+                # It is okay for global functions
+                ret_str += '"' + GetClassName(gp).replace('::','.') + '"'
+            # b
+            ret_str += "+'" + GetName(gp) + "'"
+            # (c)
+            if not item_type == 'member':
+                ret_str += '+"("'
 
-            for i in range(len(params)):
-                if i > 0:
-                    ret_str += "+','"
-                ret_str += "+Blockly.Lua.valueToCode(block, 'arg" + str(i) +"', Blockly.Lua.ORDER_NONE)"
+                for i in range(len(params)):
+                    if i > 0:
+                        ret_str += "+','"
+                    ret_str += "+Blockly.Lua.valueToCode(block, 'arg" + str(i) +"', Blockly.Lua.ORDER_NONE)"
 
-            ret_str += '+")"'
+                ret_str += '+")"'
 
-        if GetRetType(gp) == None:
-            func_str += ret_str + '+"\\n"'
-        else:
-            if item_type == 'member':
-                func_str += "[" + ret_str + ",Blockly.Lua.ORDER_HIGH]"
+            if GetRetType(gp) == None:
+                func_str += ret_str + '+"\\n"'
             else:
-                func_str += "[" + ret_str + ",Blockly.Lua.ORDER_HIGH]"
+                if item_type == 'member':
+                    func_str += "[" + ret_str + ",Blockly.Lua.ORDER_HIGH]"
+                else:
+                    func_str += "[" + ret_str + ",Blockly.Lua.ORDER_HIGH]"
 
         func_str+="}"
         functions[text['type'].strip('"')] = func_str
