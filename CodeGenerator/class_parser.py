@@ -21,8 +21,8 @@
 # SOFTWARE.
 
 
-from bs4 import BeautifulSoup
-from bs4 import element
+# from bs4 import BeautifulSoup
+# from bs4 import element
 from glob import glob
 import re
 LUA_DOC_DIR = "CodeGenerator/IsaacDocs"  # """CodeGenerator/LuaDocs"""
@@ -188,38 +188,6 @@ argument_type_dict = {}
 
 callback_func_arg_reg = re.compile('Function Args:.?\\(([a-zA-Z\\[\\] ,]+)\\)')
 callback_func_add_arg_reg = re.compile('Optional callback Args: ?([a-zA-Z]+)')
-
-callback_args = {}
-callback_add_args = {}
-def handleCallbackArguments(callback_name,text):
-    arg_result = callback_func_arg_reg.search(text)
-    if arg_result:
-        callback_args[callback_name] = []
-        arg_result = re.split(', ?',arg_result.group(1))
-        for arg in arg_result:
-            name_gp = re.match('^([a-zA-Z]+) ?\\[([a-zA-Z]+)\\]$',arg)
-            if name_gp:
-                arg_name = name_gp[1]
-                arg_type = name_gp[2]
-            else:
-                assert re.match('^[a-zA-Z]+$',arg), "can't match ModCallbacks argument text."
-                arg_name = callback_name + "_callbackArg"
-                arg_type = arg
-            arg_type = convert_text_type(arg_type)
-            arg_name = '[' + apply_translate(arg_type,callback_name,True) + ']' + apply_translate(arg_name,callback_name)
-            callback_args[callback_name].append({"type":arg_type,"name":arg_name})
-            # print(arg_name)
-            # print(arg_type)
-
-        # arg_result is array of arguments
-    add_arg_result = callback_func_add_arg_reg.search(text)
-    if add_arg_result:
-        add_arg_result = add_arg_result.group(1)
-        add_arg_result = convert_text_type(add_arg_result)
-        callback_add_args[callback_name]={"type":add_arg_result,"name":"["+apply_translate(add_arg_result,callback_name,True)+"]"}
-        # add_arg_result is string of argument type
-        # print(add_arg_result)
-    pass
 
 toolbox = {}
 functions = {}
@@ -466,85 +434,256 @@ def parse_class_text(text,is_namespace,file_path):
 
 # enumerate
 
-def parse_enums(text,folder_path):
-    soup = BeautifulSoup(text,'html.parser')
+def parse_enums(md_text,enum_name):
+
+    assert enum_name != 'ModCallbacks', 'ModCallbacks file format is not same with others'
+
+    found_header = None
+    first_elem = True
+
+    item_count = 0
+
+    dup_hash = enum_name
+
+    print("GOT:" + enum_name)
+    text = {}
+    text["type"] = f'"{enum_name}"'
+    text['message0'] = f'"[{apply_translate(enum_name,dup_hash,True)}] %1 "'
+    text['args0'] = '[{"type": "field_dropdown","name": "ENUM_VAL","options":['
+    help_url = f'/enums/{enum_name}.html'
+    for line in md_text.split('\n'):
+        # for enum, we only care about table lines
+        if line in [
+            "|DLC|Value|Enumerator|Comment|",
+            "|DLC|Value|Enumerator|Icon|Comment|",
+            "|DLC|Value|Enumerator|Value|Comment|",
+            "|DLC|Value|Enumerator| Name in itempool.xml |Comment|",
+            "|DLC|Value| Enumerator|internal id|possible stages|Comment|",
+            "|DLC|Value|Enumerator|Ingame Color|Comment|",
+            "|DLC|Value|Enumerator|Preview|Possible Gridindicies|Comment|"
+            ]:
+            found_header = line
+            continue
+        if not found_header:
+            continue
+        
+        if not line.startswith('|[ ](#)'):
+            continue
+
+        if found_header == '|DLC|Value|Enumerator|Comment|':
+            arr = line.split('|')
+            DLC = arr[1]
+            Value = arr[2]
+            Enumerator = arr[3]
+            Comment = arr[4] if len(arr) > 4 else ''
+        elif found_header in [
+            '|DLC|Value|Enumerator|Value|Comment|',
+            '|DLC|Value|Enumerator|Icon|Comment|',
+            '|DLC|Value|Enumerator|Ingame Color|Comment|',
+            '|DLC|Value|Enumerator| Name in itempool.xml |Comment|',
+        ]:
+            # [_,DLC,Value,Enumerator,_,Comment,_] = line.split('|')
+            arr = line.split('|')
+            DLC = arr[1]
+            Value = arr[2]
+            Enumerator = arr[3]
+            Comment = arr[5] if len(arr) > 6 else ''
+        elif found_header in [
+            '|DLC|Value| Enumerator|internal id|possible stages|Comment|',
+            '|DLC|Value|Enumerator|Preview|Possible Gridindicies|Comment|'
+            ]:
+            #[_,DLC,Value,Enumerator,_,_,Comment,_] = line.split('|')
+            arr = line.split('|')
+            DLC = arr[1]
+            Value = arr[2]
+            Enumerator = arr[3]
+            Comment = arr[6] if len(arr) > 6 else ''
+
+        else:
+            assert False, f'invalid header:{found_header}'
+
+        # Collectibles ' Does not exist anymore '
+        if enum_name == 'CollectibleType' and Enumerator == ' Does not exist anymore ':
+            continue
+
+        enum_item_names = re.match(r'([_A-Zx0-9]+) \{: .copyable \}',Enumerator)
+        assert enum_item_names, f'invalid enum name:{Enumerator}'
+
+        Comment = Comment.replace('<br>',' ').strip()
+
+        field_name = enum_item_names.group(1)
+        field_doc = Comment
+
+        if not first_elem:
+            text['args0'] += ','
+        else:
+            first_elem = False
+        if len(field_doc) > 0:
+            if len(field_doc) > 30:
+                field_doc = field_doc[0:30] + '...'
+            field_doc = apply_translate(field_doc,dup_hash)
+            field_doc = '(' + field_doc.replace('"','\\"').replace('\n','') + ')'
+        else:
+            field_doc = ''
+
+        text['args0'] += f'["{apply_translate(field_name,dup_hash)}{field_doc}","{field_name}"]'
+        item_count += 1
+
+        print("name{"+field_name+"}")
+        print("doc{"+field_doc+"}")
+
+    assert item_count > 0, f'empty enum {enum_name}'
+
+    text['args0'] += ']}'
+    text['args0'] += ']'
+    text['output'] = f'"{enum_name}"'
+    # text['output'] = '"Number"'
+    text['tooltip']=f'"{enum_name}"'
+    text['colour']='122'
+    text['helpUrl']=f'()=>get_blk_help("{help_url}")'
+    if not 'Enums' in toolbox:
+        toolbox['Enums'] = []
+    toolbox['Enums'].append(text)
+
+    # functions for enum
+    func_str = "function (block){ return ['" + enum_name + ".'+ block.getFieldValue('ENUM_VAL'),Blockly.Lua.ORDER_HIGH]}"
+    functions[text['type'].strip('"')] = func_str
+
+    # all enums are number
+    typealias[enum_name]='Number'
+
+callback_args = {}
+callback_add_args = {}
+def parse_callback_args(args_text, callback_name):
+    ret = []
+    args_text = args_text.strip()
+    if len(args_text) == 0:
+        return ret
+    for arg in args_text.split(',<br>'):
+        assert arg.count(',') == 0, f'invalid argument text:{arg}'
+        no_padding_arg = arg.strip()
+
+        
+        # type A: Name [[Type](type.md)]
+        match = re.match(r'(([A-Za-z0-9_]+) )?\[\[([a-zA-Z0-9_]+)\](\(.*\))?\]',no_padding_arg)
+        if match:
+            Type = match.group(3)
+            Name = match.group(2)
+        else:
+            # type B: Name [Type](type.md)
+            match = re.match(r'(([A-Za-z0-9_]+) )?\[([a-zA-Z0-9_]+)\](\(.*\))?',no_padding_arg)
+            if match:
+                Type = match.group(3)
+                Name = match.group(2)
+            else:
+                # type
+                match = re.match(r'([a-zA-Z0-9]+)\*?',no_padding_arg)
+                if match:
+                    Type = match.group(1)
+                    Name = None
+                else:
+                    assert False, f'cant match argument "{no_padding_arg}", all is {args_text}'
+        assert Type != None, f'cant match type for argument "{no_padding_arg}"'
+
+        ret.append({
+            "type":Type,
+            "name":f'[{apply_translate(Type,callback_name,True)}]' +
+                (apply_translate(Name,callback_name) if Name != None else '')
+        })
+    return ret
+
+def parse_mod_callback_enum(md_text):
+    assert md_text.startswith('# Enum "ModCallbacks"'), 'invalid mod_callback_enum file'
+
+    enum_name = 'ModCallbacks'
+    first_elem = True
+    dup_hash = "ModCallbacks"
+
+    text = {}
+    text["type"] = f'"{enum_name}"'
+    text['message0'] = f'"[{apply_translate(enum_name,dup_hash,True)}] %1 "'
+    text['args0'] = '[{"type": "field_dropdown","name": "ENUM_VAL","options":['
+    help_url = f'/enums/ModCallbacks.html'
+
+    item_count = 0
+
+    for enum_item in md_text.split('### ')[1:]:
+        assert enum_item.count('|DLC|Value|Name|Function Args| Optional Args|') == 1 and enum_item.count('|:--|:--|:--|:--|:--|') == 1
+        items_line = enum_item.split('|:--|:--|:--|:--|:--|')[1].split('\n')[1]
+        desc_text = enum_item.split('\n')[1]
+
+        assert items_line.count('|') == 6, f'modcallbacks bad format:{items_line}'
+        [_,DLC,Value,Name,FunctionArgs,OptionalArgs,_] = items_line.split('|')
+        Name = re.match(r'([_A-Z0-9]+) +\{: .copyable \}',Name)
+        assert Name, f'invalid enum name:{Name}, all is {items_line}'
+        Name = Name.group(1)
+
+        FunctionArgs = FunctionArgs.strip()
+        if FunctionArgs != '-':
+            assert FunctionArgs.startswith('(') and FunctionArgs.endswith(')'), f'Bad function args {FunctionArgs}'
+            FunctionArgs = FunctionArgs[1:][:-1]
+        else:
+            FunctionArgs = ''
+        if OptionalArgs.strip() == '-':
+            OptionalArgs = ''
+
+        m_callback_args = parse_callback_args(FunctionArgs, Name)
+        m_callback_add_args = parse_callback_args(OptionalArgs, Name)
+
+        callback_args[Name] = m_callback_args
+        assert len(m_callback_add_args) <= 1
+        if len(m_callback_add_args) == 1:
+            callback_add_args[Name] = m_callback_add_args[0]
+
+        field_name = Name
+        field_doc = desc_text
+
+        if not first_elem:
+            text['args0'] += ','
+        else:
+            first_elem = False
+        if len(field_doc) > 0:
+            if len(field_doc) > 30:
+                field_doc = field_doc[0:30] + '...'
+            field_doc = apply_translate(field_doc,dup_hash)
+            field_doc = '(' + field_doc.replace('"','\\"').replace('\n','') + ')'
+        else:
+            field_doc = ''
+
+        text['args0'] += f'["{apply_translate(field_name,dup_hash)}{field_doc}","{field_name}"]'
+        item_count += 1
     
-    for item in soup.find_all(attrs={"class":'memitem'}):
-        enum_name = item.find(attrs={"class":'memname'}).find('a').text.strip()
-        first = True
-        first_elem = True
+    assert item_count > 0
 
-        dup_hash = enum_name
+    text['args0'] += ']}'
+    text['args0'] += ']'
+    text['output'] = f'"{enum_name}"'
+    # text['output'] = '"Number"'
+    text['tooltip']=f'"{enum_name}"'
+    text['colour']='122'
+    text['helpUrl']=f'()=>get_blk_help("{help_url}")'
+    if not 'Enums' in toolbox:
+        toolbox['Enums'] = []
+    toolbox['Enums'].append(text)
 
-        # print("GOT:" + enum_name)
-        text = {}
-        text["type"] = '"' + enum_name + '"'
-        text['message0'] = '"[' + apply_translate(enum_name,dup_hash,True) + '] %1 "'
-        text['args0'] = '[{"type": "field_dropdown","name": "ENUM_VAL","options":['
-        help_url = f'/enums/{enum_name}.html'
-        for ch in item.find(attrs={"class":'memdoc'}).find('table').children:
-            if isinstance(ch, element.Tag) and ch.name == 'tr':
-                if first:
-                    first = False
-                    # help_url = folder_path + ch.find_parent(attrs={"class":'memitem'}).find(attrs={"class":'memproto'}).find('a')['href']
-                    continue
-                field_name = ch.find(attrs={"class":"fieldname"}).text.strip()
-                field_doc = ch.find(attrs={"class":"fielddoc"}).text.strip()
+    # functions for enum
+    func_str = "function (block){ return ['" + enum_name + ".'+ block.getFieldValue('ENUM_VAL'),Blockly.Lua.ORDER_HIGH]}"
+    functions[text['type'].strip('"')] = func_str
 
-                # some callbacks parse with wrong space, so I patch the script
-                # it turns 'MC_PRE_ROOM_ENTITY_SPAWNFunction Args......' into 'MC_PRE_ROOM_ENTITY_SPAWN\xa0Function Args......'
-                if enum_name == "ModCallbacks" and re.search('MC_[A-Z_]+Function',field_name):
-                    mid = re.search('(MC_[A-Z_]+)Function',field_name).span(1)[1]
-                    print('update modcallbacks, before:')
-                    print('\t' + field_name)
-                    field_name = field_name[:mid] + '\xa0' + field_name[mid:]
-                    print('after:')
-                    print('\t' + field_name)
-
-                if field_name.find('\xa0') > 0:
-                    handleCallbackArguments(field_name[0:field_name.find('\xa0')],field_name[field_name.find('\xa0'):])
-                    field_name = field_name[0:field_name.find('\xa0')]
-                    assert enum_name == "ModCallbacks"
-                
-                if not first_elem:
-                    text['args0'] += ','
-                else:
-                    first_elem = False
-                if len(field_doc) > 0:
-                    if len(field_doc) > 30:
-                        field_doc = field_doc[0:30] + '...'
-                    field_doc = apply_translate(field_doc,dup_hash)
-                    field_doc = '(' + field_doc.replace('"','\\"').replace('\n','') + ')'
-                else:
-                    field_doc = ''
-
-                text['args0'] += '["'+ apply_translate(field_name,dup_hash) + field_doc + '","' + field_name +'"]'
-
-                # print("name{"+field_name+"}")
-                # print("doc{"+field_doc+"}")
-        text['args0'] += ']}'
-        text['args0'] += ']'
-        text['output'] = '"' + enum_name + '"'
-        # text['output'] = '"Number"'
-        text['tooltip']='"'+enum_name+'"'
-        text['colour']='122'
-        text['helpUrl']='()=>get_blk_help("' + help_url + '")'
-        if not 'Enums' in toolbox:
-            toolbox['Enums'] = []
-        toolbox['Enums'].append(text)
-
-        # functions for enum
-        func_str = "function (block){ return ['" + enum_name + ".'+ block.getFieldValue('ENUM_VAL'),Blockly.Lua.ORDER_HIGH]}"
-        functions[text['type'].strip('"')] = func_str
-
-        # all enums are number
-        typealias[enum_name]='Number'
+    # all enums are number
+    typealias[enum_name]='Number'
 
 
 
-
-with open(LUA_DOC_DIR + '/group__enums.html') as f:
-    parse_enums(f.read(),MOD_DOC_WEB_DIR + '/')
+for enum_md in glob(f'{LUA_DOC_DIR}/docs/enums/*.md'):
+    enum_name = enum_md.split('\\')[-1][:-3]
+    with open(enum_md) as f:
+        if enum_name == 'ModCallbacks':
+            parse_mod_callback_enum(f.read()) 
+        else:
+            parse_enums(f.read(),enum_name)
+# with open(LUA_DOC_DIR + '/group__enums.html') as f:
+#     parse_enums(f.read(),MOD_DOC_WEB_DIR + '/')
 
 # # first scan
 # for k in inhert:
@@ -570,18 +709,18 @@ with open(LUA_DOC_DIR + '/group__enums.html') as f:
 
 # exit(0)
 
-with open(LUA_DOC_DIR + '/group__funcs.html') as f:
-    parse_class_text(f.read(),True,MOD_DOC_WEB_DIR + '/group__funcs.html')
+# with open(LUA_DOC_DIR + '/group__funcs.html') as f:
+#     parse_class_text(f.read(),True,MOD_DOC_WEB_DIR + '/group__funcs.html')
 
-for ns in ['/namespace_isaac.html','/namespace_input.html']:
-    with open(LUA_DOC_DIR + ns) as f:
-        parse_class_text(f.read(),True,MOD_DOC_WEB_DIR + ns)
+# for ns in ['/namespace_isaac.html','/namespace_input.html']:
+#     with open(LUA_DOC_DIR + ns) as f:
+#         parse_class_text(f.read(),True,MOD_DOC_WEB_DIR + ns)
 
-for clss in glob(LUA_DOC_DIR + "/class*.html"):
-    if clss.endswith('-members.html'):
-        continue
-    with open(clss.replace('\\','/')) as f:
-        parse_class_text(f.read(),False,MOD_DOC_WEB_DIR + clss.replace('\\','/')[len(LUA_DOC_DIR):])
+# for clss in glob(LUA_DOC_DIR + "/class*.html"):
+#     if clss.endswith('-members.html'):
+#         continue
+#     with open(clss.replace('\\','/')) as f:
+#         parse_class_text(f.read(),False,MOD_DOC_WEB_DIR + clss.replace('\\','/')[len(LUA_DOC_DIR):])
 
 #patch: replace all integer to math_number
 type_output_replace = {
@@ -690,6 +829,9 @@ for clss in toolbox:
         else:
             json_str += ','
         json_str += txt
+
+if json_str == None:
+    json_str = '['
 
 json_str += ']'
 
