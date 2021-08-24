@@ -731,6 +731,6 @@ function translate_tjson(json){
 }
 
 function get_blk_help(url){
-  return "https://moddingofisaac.com/docs" + url
+  return "https://moddingofisaac.com/docs/rep" + url
 }
 

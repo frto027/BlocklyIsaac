@@ -266,9 +266,9 @@ def parse_class_text(text,is_namespace,file_path):
                         .replace(':','/')
         if len(url_path) == 0:
             # Global Functions
-            url_path = 'Functions'
+            url_path = 'GlobalFunctions'
         url_anchor = GetName(gp).lower()
-        href_url = f'/{url_path}/#{url_anchor}'
+        href_url = f'/{url_path}.html#{url_anchor}'
         # print(href_url)
 
         # fix param list for function 'GetPtrHash' manually
@@ -450,7 +450,7 @@ def parse_enums(text,folder_path):
         text["type"] = '"' + enum_name + '"'
         text['message0'] = '"[' + apply_translate(enum_name,dup_hash,True) + '] %1 "'
         text['args0'] = '[{"type": "field_dropdown","name": "ENUM_VAL","options":['
-        help_url = f'/enums/{enum_name}/'
+        help_url = f'/enums/{enum_name}.html'
         for ch in item.find(attrs={"class":'memdoc'}).find('table').children:
             if isinstance(ch, element.Tag) and ch.name == 'tr':
                 if first:
