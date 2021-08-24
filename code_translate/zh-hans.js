@@ -593,7 +593,7 @@ TMSG={
 "__TXT_GET":"取内容",
 "__TYPE_CPPCONTAINERARRAYPROXYROOMLIST":"房间列表(C++数组代理)",
 "__TXT_IDX":"索引",
-"__TXT_SIZE":"容量",
+"__TXT_SIZE":"大小",
 "__TXT___LEN":"长度",
 "__TYPE_CPPCONTAINERENTITYLIST":"实体列表(C++容器)",
 "__TYPE_CPPCONTAINERVECTORCARDCONFIGLIST":"卡牌配置列表(C++向量表)",
