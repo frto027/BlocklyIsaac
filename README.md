@@ -22,7 +22,7 @@ api中充斥着大量的缩写、略写、重复单词。为提高翻译效率�
 
 # 回调流程翻译
 
-回调参考文件为[IsaacDocs文档](https://moddingofisaac.com/docs/customImg/Isaac%20Callbacks.svg)。
+回调参考文件为[IsaacDocs文档](https://moddingofisaac.com/docs/rep/images/infographics/Isaac%20Callbacks.svg)。
 
 `CodeGenerator/callback_gen.js`是根据code_translate中的js文件自动翻译此文档中MC开头字符的自动化脚本。
 
