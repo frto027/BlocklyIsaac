@@ -28,37 +28,67 @@ import re
 LUA_DOC_DIR = "CodeGenerator/IsaacDocs"  # """CodeGenerator/LuaDocs"""
 MOD_DOC_WEB_DIR = "" # "https://moddingofisaac.com/docs" see function get_blk_help at blockly_inject.js
 
-"""
-group:
-1 0 static
-2 1 const
-3 2 返回值（整体）包含(4 7)
-4 3 返回值类型
-7 6 返回值的&标记
+# """
+# group:
+# 1 0 static
+# 2 1 const
+# 3 2 返回值（整体）包含(4 7)
+# 4 3 返回值类型
+# 7 6 返回值的&标记
 
-8 7 命名空间/类名
-10 9 函数/成员名字
-"""
-FUNC_NAME_REG = re.compile('^(static )?(const )?((([_a-zA-Z0-9]+::)*([_a-zA-Z0-9]+))(&)? )?(([_a-zA-Z0-9]+::)*)([_a-zA-Z0-9]+)$')
+# 8 7 命名空间/类名
+# 10 9 函数/成员名字
+# """
+# FUNC_NAME_REG = re.compile('^(static )?(const )?((([_a-zA-Z0-9]+::)*([_a-zA-Z0-9]+))(&)? )?(([_a-zA-Z0-9]+::)*)([_a-zA-Z0-9]+)$')
+
+# group 1 0 static
+# group 2 1 const
+# group 4 3 return type/value type
+# group 5 4 func name / value name
+# group 7 6 arg list (func only)
+FUNC_NAME_REG = re.compile(r'^(static )?(const )?(([_a-zA-Z0-9:]+) )([a-zA-Z0-9_]+)( \((.*)\))?$')
 
 def IsStatic(groups):
     return not groups[0] == None
 def IsConst(groups):
     return not groups[1] == None
+def IsFunc(groups):
+    return groups[6] != None
+def IsVar(groups):
+    return groups[6] == None
 def GetRetType(groups):
-    if IsCtor(groups):
-        return GetClassName(groups).strip('::')
-    if groups[3] == None:
-        return None
-    return convert_text_type(groups[3])
-def IsRetRef(groups):
-    return not groups[6] == None
-def GetClassName(groups):
-    return groups[7]
-def GetName(groups):
-    return groups[9]
-def IsCtor(groups):
-    return GetClassName(groups).strip('::').split('::')[-1] == GetName(groups)
+    assert groups[3] != None and IsFunc(groups)
+    return groups[3]
+def GetVarName(groups):
+    assert groups[4] != None and IsVar(groups)
+    return groups[4]
+def GetFuncName(groups):
+    assert groups[4] != None and IsFunc(groups)
+    return groups[4]
+def GetVarType(groups):
+    assert groups[3] != None and IsVar(groups)
+    return groups[3]
+def GetArgListText(groups):
+    assert IsFunc(groups)
+    return groups[6]
+# def IsStatic(groups):
+#     return not groups[0] == None
+# def IsConst(groups):
+#     return not groups[1] == None
+# def GetRetType(groups):
+#     if IsCtor(groups):
+#         return GetClassName(groups).strip('::')
+#     if groups[3] == None:
+#         return None
+#     return convert_text_type(groups[3])
+# def IsRetRef(groups):
+#     return not groups[6] == None
+# def GetClassName(groups):
+#     return groups[7]
+# def GetName(groups):
+#     return groups[9]
+# def IsCtor(groups):
+#     return GetClassName(groups).strip('::').split('::')[-1] == GetName(groups)
 
 # colours
 name_to_color_map = {}
@@ -431,6 +461,161 @@ def parse_class_text(text,is_namespace,file_path):
         # print(item_name)
         # print(params)
 
+def parse_function_params(param_text):
+    param_text = param_text.strip()
+    ret = []
+    if len(param_text) == 0:
+        return ret
+    for param in param_text.split(','):
+        param = re.sub(r'\[([a-zA-Z0-9:]+)\]\([a-zA-Z0-9/\._]+\)',r'\1',param).strip()
+        match = re.match(r'^([^ ]+)( +([^ ]+))?( *= *([^ ]+))?$',param)
+        assert match, f'not match {param}'
+        ret.append({
+            'type':match.group(1),
+            'name':match.group(3) if match.group(3) != None else '',
+            'default':match.group(5)
+        })
+    return ret
+
+    
+
+def parse_class(text, class_file_name):
+    lines = text.split('\n')
+    if class_file_name in [
+        'GlobalFunctions',
+        'ModReference', # TODO we should parse ModReference
+    ]:
+        class_name = class_file_name
+    else:
+        class_name_match = re.match(r'# Class "([a-zA-Z0-9:_]+)"',lines[0]) 
+        assert class_name_match, f'not found class name in {class_file_name}'
+        class_name = class_name_match.group(1)
+
+    # Functions Variables Operators
+    current_subtitle = "None"
+    tags = None
+
+    for line in lines:
+        if line.startswith('## '):
+            current_subtitle = line[3:]
+            continue
+        if line.startswith('### '):
+            if 'Children Classes' in line or 'Inherits from Class' in line:
+                # we dont care about inhert relationship in documents
+                continue
+            # this is a Title of function, variable or operator
+            assert f"aria-label='{current_subtitle}'" in line, f'unknown line format:{line}, file:{class_file_name}'
+            tags = None
+            continue
+        if line.startswith('[ ](#)'):
+            assert tags == None, 'already saw tags!'
+            tags = line
+            continue
+        if line.startswith('#### '):
+            assert f"aria-label='{current_subtitle}'" in line, f'unknown line format:{line}'
+
+            # TODO RoomDescriptor::List type
+
+            line = line\
+                .replace('[ItemConfig Card]','[ItemConfig::Card]')\
+                .replace('[ItemConfig Item]','[ItemConfig::Item]')\
+                .replace('[ItemConfig PillEffect]','[ItemConfig::PillEffect]')\
+                .replace('[RoomDescriptor List]','[RoomDescriptor::List]')\
+                .replace('[RoomConfig Spawn]','[RoomConfig::Spawn]')\
+                .replace('[RoomConfig Entry]','[RoomConfig::Entry]')\
+                .replace('[RoomConfig Room]','[RoomConfig::Room]')\
+                .replace('[Mod Reference]','[ModReference]')
+
+            line = re.sub(r'\[([a-zA-Z0-9:]+)\]\([a-zA-Z0-9/\._]+\)',r'\1',line[5:])
+            line = re.sub(r'{[^}]+}$','',line.strip()).strip()
+            assert not ('[' in line or ']' in line) , f'line should not contains markdown text:{line}'
+            print(line)
+
+            gp = FUNC_NAME_REG.match(line).groups()
+            text = {}
+
+            # we should parse the function header here
+            if current_subtitle == 'Operators':
+                operator_name = GetFuncName(gp)
+                assert operator_name in ['__add','__sub','__div','__mul','__unm','__len']
+                dup_hash = f'{class_name}::{operator_name}'
+                text['type'] = f'"{class_name}::{operator_name}"'
+
+                text['message0']=f'"[{apply_translate(GetRetType(gp),dup_hash,True)}]{apply_translate(operator_name,dup_hash)}%1'
+                text['args0']='[{"type":"input_dummy"}'
+                args = parse_function_params(GetArgListText(gp))
+                assert len(args) == (1 if operator_name != '__len' else 0)
+                if operator_name in ['__add','__sub','__div','__mul']:
+                    text['message0'] += f' {apply_translate("this_target",dup_hash)}[{apply_translate(class_name,dup_hash,True)}]%2'
+                    text['args0'] += ',{"type":"input_value","name":"thisobj","check":"'+ class_name +'","align":"RIGHT"}'
+                    text['message0'] += f' {apply_translate(args[0]["name"],dup_hash)}[{apply_translate(args[0]["type"],dup_hash,True)}]%3'
+                    text['args0'] += ',{"type":"input_value","name":"arg0","check":"'+ args[0]["type"] +'","align":"RIGHT"}'
+                else:
+                    text['message0'] += f' {apply_translate("this_target",dup_hash)}[{apply_translate(class_name,dup_hash,True)}]%2'
+                    text['args0'] += ',{"type":"input_value","name":"thisobj","check":"'+ class_name +'","align":"RIGHT"}'
+                text['message0'] += '"'
+                text['args0'] += ']'
+                text['inputsInline']="false"
+                text['output']=f'"{GetRetType(gp)}"'
+                text['colour']=NameToColour(GetRetType(gp))
+                text['tooltip']=f'"{GetFuncName(gp)}"'
+                href_url = f'/{class_file_name}.html#{GetFuncName(gp).lower()}'
+                text['helpUrl']=f'()=>get_blk_help("{href_url}")'
+                if not class_name in toolbox:
+                    toolbox[class_name] = []
+                toolbox[class_name].append(text)
+                # TODO generate function
+                func_str = "function(block){return "
+                ret_str = ""
+                ORDER = 'ORDER_NONE' # len(xx)
+                if operator_name in ['__div', '__mul']:
+                    ORDER = 'ORDER_MULTIPLICATIVE'
+                elif operator_name in ['__add','__sub']:
+                    ORDER = 'ORDER_ADDITIVE'
+                elif operator_name in ['__unm']:
+                    ORDER = 'ORDER_UNARY'
+                else:
+                    assert operator_name == '__len'
+                OPERATORS_MARK = {
+                    '__add':'+',
+                    '__sub':'-',
+                    '__mul':'*',
+                    '__div':'/',
+                }
+                if operator_name in operator_name in ['__add','__sub','__div','__mul']:
+                    ret_str += f'Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.{ORDER})+"{OPERATORS_MARK[operator_name]}"+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.{ORDER})'
+                elif operator_name == '__unm':
+                    ret_str += f'"-"+Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.{ORDER})'
+                else:
+                    assert operator_name == '__len'
+                    ret_str += f'"len("+Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.{ORDER})+")"'
+                    ORDER = 'ORDER_HIGH' # we will generate a function call
+                func_str += f'[{ret_str},Blockly.Lua.{ORDER}]'
+                func_str += '}'
+                functions[f'{class_name}::{GetFuncName(gp)}']=func_str
+
+                self_argument_types = {}
+                self_argument_types['thisobj']=class_name
+                if len(args) >= 1:
+                    self_argument_types['arg0']=args[0]['type']
+                    assert len(args) == 1
+                argument_type_dict[text['type']] = self_argument_types
+            elif current_subtitle == 'Variables':
+                continue
+            elif current_subtitle == 'Constructors':
+                args = parse_function_params(GetArgListText(gp))
+                continue
+            elif current_subtitle == 'Functions':
+                # TODO:fix GetPtrHash
+                # TODO:fix Isaac.GridSpawn
+                args = parse_function_params(GetArgListText(gp))
+                continue
+            else:
+                assert False, f'unknown subtitle {current_subtitle} in {class_file_name}'
+        
+
+
+
 
 # enumerate
 
@@ -529,8 +714,8 @@ def parse_enums(md_text,enum_name):
         text['args0'] += f'["{apply_translate(field_name,dup_hash)}{field_doc}","{field_name}"]'
         item_count += 1
 
-        print("name{"+field_name+"}")
-        print("doc{"+field_doc+"}")
+        # print("name{"+field_name+"}")
+        # print("doc{"+field_doc+"}")
 
     assert item_count > 0, f'empty enum {enum_name}'
 
@@ -674,6 +859,19 @@ def parse_mod_callback_enum(md_text):
     typealias[enum_name]='Number'
 
 
+for class_md in glob(f'{LUA_DOC_DIR}/docs/*.md'):
+    class_name = class_md.split('\\')[-1][:-3]
+    if class_name in [
+        'PLACEHOLDER',
+        'index',
+        ]:
+        continue
+    print(f'parse class file : {class_md}')
+
+    with open(class_md) as f:
+        parse_class(f.read(),class_name)
+
+# raise 'stop'
 
 for enum_md in glob(f'{LUA_DOC_DIR}/docs/enums/*.md'):
     enum_name = enum_md.split('\\')[-1][:-3]
