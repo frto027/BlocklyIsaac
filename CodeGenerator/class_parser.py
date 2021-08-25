@@ -599,9 +599,73 @@ def parse_class(text, class_file_name):
                 if len(args) >= 1:
                     self_argument_types['arg0']=args[0]['type']
                     assert len(args) == 1
-                argument_type_dict[text['type']] = self_argument_types
+                argument_type_dict[text['type'].strip('"')] = self_argument_types
             elif current_subtitle == 'Variables':
-                continue
+                variable_name = GetVarName(gp)
+                dup_hash = f'{class_name}::{variable_name}'
+
+                assert not IsStatic(gp), f'{variable_name} at {class_md} is static'
+
+                text['type'] = f'"{class_name}::m_{variable_name}"'
+
+                text['message0']=f'"[{apply_translate(GetVarType(gp),dup_hash,True)}]{apply_translate(variable_name,dup_hash)}'
+
+                text['message0'] += '%1'
+                text['args0']='[{"type":"input_dummy"}'
+                
+                text['message0'] += f' {apply_translate("this_target",dup_hash)}[{apply_translate(class_name,dup_hash,True)}] %2'
+                text['args0'] += ',{"type":"input_value","name":"thisobj","check":"'+class_name+'",align:"RIGHT"}'
+
+                text['message0'] += '"'
+                text['args0'] += ']'
+
+                text['inputsInline']='false'
+                text['output']=f'"{GetVarType(gp)}"'
+                text['colour']=NameToColour(GetVarType(gp))
+                text['tooltip']=f'"{GetVarName(gp)}"'
+                href_url = f'/{class_file_name}.html#{GetVarName(gp).lower()}'
+                text['helpUrl']=f'()=>get_blk_help("{href_url}")'
+                if not class_name in toolbox:
+                    toolbox[class_name] = []
+                toolbox[class_name].append(text)
+                
+                self_argument_types = {}
+                self_argument_types['thisobj']=class_name
+                argument_type_dict[text['type'].strip('"')] = self_argument_types
+                func_str = "function(block){return "
+                ret_str = f'Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".{GetVarName(gp)}"'
+                func_str += f'[{ret_str},Blockly.Lua.ORDER_HIGH]'
+                func_str += '}'
+                functions[f'{class_name}::m_{variable_name}']=func_str
+
+                if not IsConst(gp):
+                    # add setter for variable
+                    text = text.copy()
+                    text['type'] = f'"{class_name}::m_set_{variable_name}"'
+                    text.pop('output')
+                    text['message0']=f'"{apply_translate("set ",dup_hash)}{apply_translate(variable_name,dup_hash)}'
+                    text['message0'] += '%1'
+                    text['args0']='[{"type":"input_dummy"}'
+                    text['message0'] += f' {apply_translate("this_target",dup_hash)}[{apply_translate(class_name,dup_hash,True)}] %2'
+                    text['args0'] += ',{"type":"input_value","name":"thisobj","check":"'+class_name+'",align:"RIGHT"}'
+
+                    # new value
+                    text['message0']+=f' {apply_translate("new value",dup_hash)}[{apply_translate(GetVarType(gp),dup_hash,True)}] %3'
+                    text['args0'] += ',{"type":"input_value","name":"arg0","check":"'+GetVarType(gp)+'",align:"RIGHT"}'
+                    text['message0'] += '"'
+                    text['args0'] += ']'
+                    text["previousStatement"]="null"
+                    text["nextStatement"]="null"
+                    text['colour']='230'
+
+                    toolbox[class_name].append(text)
+                    argument_type_dict[text['type'].strip('"')] = {
+                        'thisobj':class_name,
+                        'arg0':GetVarType(gp)
+                    }
+
+                    func_str = 'function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"' + GetVarName(gp) + '="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\\n"}'
+                    functions[text['type'].strip('"')] = func_str
             elif current_subtitle == 'Constructors':
                 args = parse_function_params(GetArgListText(gp))
                 continue
