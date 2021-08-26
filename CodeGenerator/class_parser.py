@@ -529,7 +529,6 @@ def parse_class(text, class_file_name):
             line = re.sub(r'\[([a-zA-Z0-9:]+)\]\([a-zA-Z0-9/\._]+\)',r'\1',line[5:])
             line = re.sub(r'{[^}]+}$','',line.strip()).strip()
             assert not ('[' in line or ']' in line) , f'line should not contains markdown text:{line}'
-            print(line)
 
             gp = FUNC_NAME_REG.match(line).groups()
             text = {}
@@ -668,12 +667,105 @@ def parse_class(text, class_file_name):
                     functions[text['type'].strip('"')] = func_str
             elif current_subtitle == 'Constructors':
                 args = parse_function_params(GetArgListText(gp))
+                # TODO use func name instead of class_name
                 continue
             elif current_subtitle == 'Functions':
                 # TODO:fix GetPtrHash
                 # TODO:fix Isaac.GridSpawn
+                # TODO:ModReference
+                # ALDO GlobalFunction
+
+                func_name = GetFuncName(gp)
+                dup_hash = f'{class_name}::{func_name}'
+                is_global = class_name == 'GlobalFunctions'
+
+                # assert not IsStatic(gp), f'{func_name} at {class_md} is static'
+                if IsConst(gp):
+                    # These 'const function' means the value they return are const, instean of a real 'const function'
+                    # Currently, we don't support const variable.
+                    # So we just ignore it.
+                    print(f'Warring: {func_name} at {class_md} is const, ignore const function')
+                
+                text['type'] = f'"{class_name}::{func_name}"'
+
+                self_argument_types = {}
+
+                text['message0'] = '"'
+                if GetRetType(gp) != 'void':
+                    text['message0'] += f'[{apply_translate(GetRetType(gp),dup_hash,True)}]'
+                    text['output']=f'"{GetRetType(gp)}"'
+
+                text['message0']+=f'{apply_translate(func_name,dup_hash)}'
+
+                text['message0'] += '%1'
+                text['args0']='[{"type":"input_dummy"}'
+                
+                arg_counter = 2
+                if not IsStatic(gp) and not is_global:
+                    # add this
+                    text['message0'] += f' {apply_translate("this_target",dup_hash)}[{apply_translate(class_name,dup_hash,True)}] %2'
+                    text['args0'] += ',{"type":"input_value","name":"thisobj","check":"'+class_name+'",align:"RIGHT"}'
+                    self_argument_types['thisobj']=class_name
+                    arg_counter = 3
+
+
+                # add function arguments
+
                 args = parse_function_params(GetArgListText(gp))
-                continue
+                arg_id = 0
+                for arg in args:
+                    text['message0'] += f' {apply_translate(arg["name"],dup_hash)}[{apply_translate(arg["type"],dup_hash,True)}] %{arg_counter}'
+                    text['args0'] += ',{"type":"input_value","name":"arg'+str(arg_id)+'","check":"' + arg["type"] + '",align:"RIGHT"}'
+                    self_argument_types['arg'+str(arg_id)] = arg['type']
+                    arg_counter += 1
+                    arg_id += 1
+
+                text['message0'] += '"'
+                text['args0'] += ']'
+
+                text['inputsInline']='false'
+                
+                text['colour']=NameToColour(GetRetType(gp))
+                text['tooltip']=f'"{GetFuncName(gp)}"'
+                href_url = f'/{class_file_name}.html#{GetFuncName(gp).lower()}'
+                text['helpUrl']=f'()=>get_blk_help("{href_url}")'
+                if not class_name in toolbox:
+                    toolbox[class_name] = []
+                toolbox[class_name].append(text)
+                
+                argument_type_dict[text['type'].strip('"')] = self_argument_types
+                func_str = "function(block){return "
+
+                ret_str = ''
+                # a.b(c)
+                if not is_global:
+                    # a.
+                    if IsStatic(gp):
+                        assert not ':' in class_name
+                        ret_str += f'"{class_name}"'
+                    else:
+                        ret_str += 'Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)'
+                    ret_str += '+"."'
+                else:
+                    ret_str += '""'
+                # b
+                ret_str += f'+"{GetFuncName(gp)}"'
+
+                #(c)
+                ret_str += '+"("'
+                
+                for i in range(arg_id):
+                    if i > 0:
+                        ret_str += '+","'
+                    ret_str += f'+Blockly.Lua.valueToCode(block, "arg{i}", Blockly.Lua.ORDER_NONE)'
+
+                ret_str += '+")"'
+                if GetRetType(gp) == 'void':
+                    func_str += f'{ret_str}\n'
+                else:
+                    func_str += f'[{ret_str},Blockly.Lua.ORDER_HIGH]'
+                func_str += '}'
+                functions[f'{class_name}::{func_name}']=func_str
             else:
                 assert False, f'unknown subtitle {current_subtitle} in {class_file_name}'
         
@@ -694,7 +786,7 @@ def parse_enums(md_text,enum_name):
 
     dup_hash = enum_name
 
-    print("GOT:" + enum_name)
+    # print("GOT:" + enum_name)
     text = {}
     text["type"] = f'"{enum_name}"'
     text['message0'] = f'"[{apply_translate(enum_name,dup_hash,True)}] %1 "'
@@ -930,7 +1022,7 @@ for class_md in glob(f'{LUA_DOC_DIR}/docs/*.md'):
         'index',
         ]:
         continue
-    print(f'parse class file : {class_md}')
+    # print(f'parse class file : {class_md}')
 
     with open(class_md) as f:
         parse_class(f.read(),class_name)
