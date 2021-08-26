@@ -274,8 +274,6 @@ def parse_class(text, class_file_name):
         if line.startswith('#### '):
             assert f"aria-label='{current_subtitle}'" in line, f'unknown line format:{line}'
 
-            # TODO RoomDescriptor::List type
-
             line = line\
                 .replace('[ItemConfig Card]','[ItemConfig::Card]')\
                 .replace('[ItemConfig Item]','[ItemConfig::Item]')\
@@ -323,7 +321,7 @@ def parse_class(text, class_file_name):
                 if not class_name in toolbox:
                     toolbox[class_name] = []
                 toolbox[class_name].append(text)
-                # TODO generate function
+                # generate function
                 func_str = "function(block){return "
                 ret_str = ""
                 ORDER = 'ORDER_NONE' # len(xx)
@@ -425,12 +423,7 @@ def parse_class(text, class_file_name):
 
                     func_str = 'function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"' + GetVarName(gp) + '="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\\n"}'
                     functions[text['type'].strip('"')] = func_str
-            elif current_subtitle == 'Functions' or current_subtitle == 'Constructors':
-                # TODO:fix GetPtrHash
-                # TODO:fix Isaac.GridSpawn
-                # TODO:ModReference
-                # ALDO GlobalFunction
-                
+            elif current_subtitle == 'Functions' or current_subtitle == 'Constructors':                
                 func_name = GetFuncName(gp)
                 dup_hash = f'{class_name}::{func_name}'
                 is_ctor = current_subtitle == 'Constructors'
@@ -500,7 +493,10 @@ def parse_class(text, class_file_name):
                         args[1]['type'] = 'ModCallbacks'
                         assert args[2]['type'] == 'table'
                         args[2]['type'] = 'function'
-
+                # Isaac.GridSpawn's first argument is a enum instead of GridEntity
+                if GetFuncName(gp) == 'GridSpawn' and class_name == 'Isaac':
+                    assert args[0]['type'] == 'GridEntity'
+                    args[0]['type'] = 'GridEntityType'
 
                 arg_id = 0
 
