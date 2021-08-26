@@ -447,7 +447,16 @@ def parse_class(text, class_file_name):
                     # So we just ignore it.
                     print(f'Warring: {func_name} at {class_file_name} is const, ignore const function')
                 
-                text['type'] = f'"{class_name}::{func_name}"'
+                # function overload
+                overload_tag = ''
+                overload_tag_i = 0
+                while f'{class_name}::{func_name}{overload_tag}' in functions:
+                    overload_tag_i += 1
+                    overload_tag = f'_overload{overload_tag_i}'
+                if overload_tag_i != 0:
+                    print(f"Warring: overload function {class_name}::{func_name}{overload_tag}")
+
+                text['type'] = f'"{class_name}::{func_name}{overload_tag}"'
 
                 self_argument_types = {}
 
@@ -559,7 +568,7 @@ def parse_class(text, class_file_name):
                 else:
                     func_str += f'[{ret_str},Blockly.Lua.ORDER_HIGH]'
                 func_str += '}'
-                functions[f'{class_name}::{func_name}']=func_str
+                functions[text['type'].strip('"')]=func_str
             else:
                 assert False, f'unknown subtitle {current_subtitle} in {class_file_name}'
         
