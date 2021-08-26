@@ -168,12 +168,12 @@ typealias = {
     "ItemList":"ItemConfigList",
     "PillList":"PillConfigList",
     "GridEntity":"GridEntityType",
-    # I don't know what ProjectilesMode is...
+    # TODO:I don't know what ProjectilesMode is...
     "ProjectilesMode":"integer",
     "Curses":"LevelCurse",
 
-    "Number":"integer", # If I need a float, you can give me a Number(by Blockly)
-    "integer":"float",
+    "Number":"int", # If I need a float, you can give me a Number(by Blockly)
+    "int":"float",
     "Boolean":"boolean",
     "String":"string",
 }
@@ -221,246 +221,6 @@ callback_func_add_arg_reg = re.compile('Optional callback Args: ?([a-zA-Z]+)')
 
 toolbox = {}
 functions = {}
-def parse_class_text(text,is_namespace,file_path):
-    soup = BeautifulSoup(text,'html.parser')
-    for item in soup.find_all(attrs={"class":'memitem'}):
-        item_table = item.find('table', attrs={"class":'memname'})
-        item_name = item_table.find('td', attrs={"class":'memname'}).text.strip()
-        item_name = convert_text_name(item_name)
-
-        param_types = item_table.find_all(attrs={"class":'paramtype'})
-        param_names = item_table.find_all(attrs={"class":'paramname'})
-
-        self_argument_types = {}
-
-        item_type = 'unknown'
-        if len(param_names) == 0:
-            item_type = 'member'
-        else:
-            if is_namespace:
-                item_type = 'glofunc'
-            else:
-                item_type = 'memfunc'
-            if len(param_names) == 1 and len(param_types) == 0:
-                param_names = []
-        
-        assert item_type in ['member','glofunc','memfunc'], 'what type is it?' 
-        assert len(param_names) == len(param_types), 'how many params?'
-
-        param_types = [convert_text_type(x.text.strip()) for x in param_types]
-        param_names = [x.text.strip().rstrip(',') for x in param_names]
-        params = [[_type,_name] for _type, _name in zip(param_types, param_names)]
-
-        if len(params) == 1 and params[0][0] == 'void' and params[0][1] == '':
-            # this is some functions such as 'Font::font(void)', remove the parameter list
-            params = []
-
-        gp = FUNC_NAME_REG.match(item_name).groups()
-        
-        # href_url = file_path + item.find_previous_sibling(attrs={"class":'memtitle'}).find('a')['href']
-        url_path = GetClassName(gp) \
-                        .strip(':') \
-                        .replace('::','_') \
-                        .replace(':','/')
-        if len(url_path) == 0:
-            # Global Functions
-            url_path = 'GlobalFunctions'
-        url_anchor = GetName(gp).lower()
-        href_url = f'/{url_path}.html#{url_anchor}'
-        # print(href_url)
-
-        # fix param list for function 'GetPtrHash' manually
-        if GetName(gp)=='GetPtrHash':
-            if len(param_types) == 0 and len(param_names) == 0 :
-                param_types = ['Object']
-                param_names = ['object']
-                params = [[_type,_name] for _type, _name in zip(param_types, param_names)]
-            else:
-                print('Warring:please look at the block "GetPtrHash", it maybe not correct.')
-                import traceback
-                traceback.print_stack()
-        # fix param type for 'Isaac.GridSpawn' manually
-        if GetClassName(gp) == 'Isaac::' and GetName(gp) == 'GridSpawn':
-            if len(param_types) > 0 and param_types[0] == 'GridEntity':
-                param_types[0] = 'GridEntityType'
-            else:
-                print('Warring:please look at the block "Isaac.GridSpawn", it maybe not correct.')
-                import traceback
-                traceback.print_stack()
-
-        # fix params for __unm
-        if GetName(gp) == '__unm':
-            param_types = []
-            param_names = []
-            params = []
-
-
-        text = {}
-        if item_type == 'member':
-            type_prefix = 'm_'
-        else:
-            type_prefix = ''
-
-        dup_hash = type_prefix + GetClassName(gp)+GetName(gp)
-
-        text['type'] = '"'+ type_prefix + GetClassName(gp)+GetName(gp) + '"'
-        text['message0'] = '"'
-        if not GetRetType(gp) == None:
-            text['message0'] += '[' + apply_translate(GetRetType(gp).strip('::'),dup_hash,True) + ']'
-        else:
-            text["previousStatement"]="null"
-            text["nextStatement"]="null"
-        if IsCtor(gp):
-            text['message0'] += apply_translate(GetName(gp)+"_CTOR",dup_hash)
-        else:
-            text['message0'] += apply_translate(GetName(gp),dup_hash)
-        text['args0']="["
-
-        # message0
-        text["message0"]+= "%1"
-        text['args0']+='{"type":"input_dummy"}'
-
-        arg_counter = 2
-
-        if not is_namespace and not IsStatic(gp) and not IsCtor(gp):
-            text['message0'] += " "+apply_translate("this_target",dup_hash)+"[" + apply_translate(GetClassName(gp).strip('::'),dup_hash,True) +"] %2"
-            text['args0'] += ',{"type":"input_value","name":"thisobj","check":"'+GetClassName(gp).strip('::')+'",align:"RIGHT"}'
-            self_argument_types["thisobj"] = GetClassName(gp).strip('::')
-            arg_counter = 3
-
-        # arguments
-        for i in range(len(params)):
-            text['message0'] += apply_translate(param_names[i],dup_hash) + "[" + apply_translate(param_types[i],dup_hash,True) + "]" + " %" + str(arg_counter)
-            # arg = ',{"type":"input_value","name":"arg'+str(i)+'","check":['
-            # types = getChildTypesWithSelf(param_types[i])
-            # for j in range(len(types)):
-            #     if j > 0:
-            #         arg += ','
-            #     arg += '"' + types[j] + '"'
-            # arg+=']}'
-            arg = ',{"type":"input_value","name":"arg'+str(i)+'","check":"' + param_types[i] + '",align:"RIGHT"}'
-            self_argument_types['arg'+str(i)] = param_types[i]
-            text['args0'] += arg
-            arg_counter = arg_counter + 1
-        text['message0'] += '"'
-        text['args0']+="]"
-
-        text['inputsInline']="false"
-        if not GetRetType(gp) == None:
-            text['output']='"'+GetRetType(gp)+'"'
-        if GetRetType(gp) == None:
-            text['colour'] = "230"
-        else:
-            text['colour'] = NameToColour(GetRetType(gp).strip('::'))
-        text['tooltip']='"'+GetName(gp)+'"'
-        text['helpUrl']='()=>get_blk_help("' + href_url + '")'
-
-        if GetClassName(gp) == None:
-            # global function
-            print("glob func "+GetName(gp))
-            pass
-        elif not GetClassName(gp) in toolbox:
-            toolbox[GetClassName(gp)]=[]
-        toolbox[GetClassName(gp)].append(text)
-
-        # function (return a.b(c))
-
-        func_str = "function(block){return "
-        ret_str = ""
-
-        OPERATORS_MARK = {
-            '__add':'+',
-            '__sub':'-',
-            '__mul':'*',
-            '__div':'/',
-            '__unm':'-'
-        }
-
-        if GetName(gp) in ['__add','__sub','__div','__mul','__unm']:
-            assert not is_namespace and not IsStatic(gp) and not IsCtor(gp)
-            ORDER = 'ORDER_MULTIPLICATIVE' if GetName(gp) in ['__div','__mul'] else 'ORDER_ADDITIVE' if GetName(gp) in ['__add','__sub'] else 'ORDER_UNARY'
-            if GetName(gp) != '__unm':
-                ret_str += "Blockly.Lua.valueToCode(block, 'thisobj', Blockly.Lua." + ORDER + ")"
-                ret_str += "+"
-            ret_str += "'" + OPERATORS_MARK[GetName(gp)] + "'"
-            ret_str += "+"
-            if GetName(gp) != '__unm':
-                ret_str += "Blockly.Lua.valueToCode(block, 'arg0', Blockly.Lua." + ORDER + ")"
-            else:
-                ret_str += "Blockly.Lua.valueToCode(block, 'thisobj', Blockly.Lua." + ORDER + ")"
-            assert GetRetType(gp) != None
-            func_str += "[" + ret_str + ",Blockly.Lua." + ORDER + "]"
-        else:
-            # a. or a:
-            if not is_namespace and not IsStatic(gp):
-                if not IsCtor(gp):
-                    ret_str += "Blockly.Lua.valueToCode(block, 'thisobj', Blockly.Lua.ORDER_TABLE_ACCESS)"
-                    if item_type == 'member':
-                        ret_str += "+'.'"
-                    else:
-                        ret_str += "+':'"
-                else:
-                    ret_str += '""'
-            else:
-                # It is okay for global functions
-                ret_str += '"' + GetClassName(gp).replace('::','.') + '"'
-            # b
-            ret_str += "+'" + GetName(gp) + "'"
-            # (c)
-            if not item_type == 'member':
-                ret_str += '+"("'
-
-                for i in range(len(params)):
-                    if i > 0:
-                        ret_str += "+','"
-                    ret_str += "+Blockly.Lua.valueToCode(block, 'arg" + str(i) +"', Blockly.Lua.ORDER_NONE)"
-
-                ret_str += '+")"'
-
-            if GetRetType(gp) == None:
-                func_str += ret_str + '+"\\n"'
-            else:
-                if item_type == 'member':
-                    func_str += "[" + ret_str + ",Blockly.Lua.ORDER_HIGH]"
-                else:
-                    func_str += "[" + ret_str + ",Blockly.Lua.ORDER_HIGH]"
-
-        func_str+="}"
-        functions[text['type'].strip('"')] = func_str
-        
-        argument_type_dict[text['type'].strip('"')] = self_argument_types
-        # print(text)
-
-        # create setter for a member
-        if item_type == 'member' and not IsConst(gp) and not GetRetType(gp) == None:
-            # lots of members have no type, so I can't generate setter for them.
-            # assert not GetRetType(gp) == None, 'why class member has no type?\nfile:{filepath}\ntext:{text}'.format(filepath=file_path, text=str(text))
-            text = text.copy()
-            text['type']='"set' + text['type'].strip('"') + '"'
-            text.pop('output')
-            text['args0'] = text['args0'].rstrip(']') + ',{"type":"input_value","name":"arg0","check":"' + GetRetType(gp) + '",align:"RIGHT"}' + ']'
-            # add 'set' prefix
-            text['message0'] = text['message0'].replace(']'+apply_translate(GetName(gp),dup_hash),']' + apply_translate('set ',dup_hash) + apply_translate(GetName(gp),dup_hash), 1)
-            # add 'new value' to message
-            text['message0']=text['message0'].rstrip('"') + apply_translate('new value',dup_hash) + '[' + apply_translate(GetRetType(gp),dup_hash, True) + '] %' + str(arg_counter) + '"'
-            text["previousStatement"]="null"
-            text["nextStatement"]="null"
-
-            arg_counter += 1
-            toolbox[GetClassName(gp)].append(text)
-
-            # use the same argument type dict
-            argument_type_dict[text['type'].strip('"')] = self_argument_types
-
-            # now for function
-            func_str = 'function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"' + GetName(gp) + '="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\\n"}'
-            functions[text['type'].strip('"')] = func_str
-
-
-        # do something with:item_type item_name params
-        # print(item_name)
-        # print(params)
-
 def parse_function_params(param_text):
     param_text = param_text.strip()
     ret = []
@@ -603,7 +363,7 @@ def parse_class(text, class_file_name):
                 variable_name = GetVarName(gp)
                 dup_hash = f'{class_name}::{variable_name}'
 
-                assert not IsStatic(gp), f'{variable_name} at {class_md} is static'
+                assert not IsStatic(gp), f'{variable_name} at {class_file_name} is static'
 
                 text['type'] = f'"{class_name}::m_{variable_name}"'
 
@@ -665,43 +425,52 @@ def parse_class(text, class_file_name):
 
                     func_str = 'function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"' + GetVarName(gp) + '="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\\n"}'
                     functions[text['type'].strip('"')] = func_str
-            elif current_subtitle == 'Constructors':
-                args = parse_function_params(GetArgListText(gp))
-                # TODO use func name instead of class_name
-                continue
-            elif current_subtitle == 'Functions':
+            elif current_subtitle == 'Functions' or current_subtitle == 'Constructors':
                 # TODO:fix GetPtrHash
                 # TODO:fix Isaac.GridSpawn
                 # TODO:ModReference
                 # ALDO GlobalFunction
-
+                
                 func_name = GetFuncName(gp)
                 dup_hash = f'{class_name}::{func_name}'
+                is_ctor = current_subtitle == 'Constructors'
                 is_global = class_name == 'GlobalFunctions'
+                is_static = IsStatic(gp) or class_name == 'Isaac'
+                # I dont think RegisterMod is a constructor
+                if is_global and func_name == 'RegisterMod':
+                    is_ctor = False
 
                 # assert not IsStatic(gp), f'{func_name} at {class_md} is static'
                 if IsConst(gp):
                     # These 'const function' means the value they return are const, instean of a real 'const function'
                     # Currently, we don't support const variable.
                     # So we just ignore it.
-                    print(f'Warring: {func_name} at {class_md} is const, ignore const function')
+                    print(f'Warring: {func_name} at {class_file_name} is const, ignore const function')
                 
                 text['type'] = f'"{class_name}::{func_name}"'
 
                 self_argument_types = {}
 
                 text['message0'] = '"'
+
                 if GetRetType(gp) != 'void':
                     text['message0'] += f'[{apply_translate(GetRetType(gp),dup_hash,True)}]'
                     text['output']=f'"{GetRetType(gp)}"'
+                else:
+                    text["previousStatement"]="null"
+                    text["nextStatement"]="null"
 
-                text['message0']+=f'{apply_translate(func_name,dup_hash)}'
+                if is_ctor:
+                    assert GetRetType(gp) == GetFuncName(gp), f'constructor return type mismatch {func_name} at {class_file_name}'
+                    text['message0']+=f'{apply_translate(func_name + "_CTOR",dup_hash)}'
+                else:
+                    text['message0']+=f'{apply_translate(func_name,dup_hash)}'
 
                 text['message0'] += '%1'
                 text['args0']='[{"type":"input_dummy"}'
                 
                 arg_counter = 2
-                if not IsStatic(gp) and not is_global:
+                if not is_static and not is_global and not is_ctor:
                     # add this
                     text['message0'] += f' {apply_translate("this_target",dup_hash)}[{apply_translate(class_name,dup_hash,True)}] %2'
                     text['args0'] += ',{"type":"input_value","name":"thisobj","check":"'+class_name+'",align:"RIGHT"}'
@@ -712,7 +481,24 @@ def parse_class(text, class_file_name):
                 # add function arguments
 
                 args = parse_function_params(GetArgListText(gp))
+
+                # fix param types
+
+                # AddCallback 'function' type to 'ModCallbacks' enum
+                if GetFuncName(gp) == 'AddCallback':
+                    if class_name == 'Isaac':
+                        assert args[1]['type'] == 'function'
+                        args[1]['type'] = 'ModCallbacks'
+                        assert args[2]['type'] == 'table'
+                        args[2]['type'] = 'function'
+
+
                 arg_id = 0
+
+                if GetFuncName(gp) == 'AddCallback' and class_name == 'ModReference':
+                    # hack, ModReference::Addcallback has no arg0
+                    arg_id = 1
+
                 for arg in args:
                     text['message0'] += f' {apply_translate(arg["name"],dup_hash)}[{apply_translate(arg["type"],dup_hash,True)}] %{arg_counter}'
                     text['args0'] += ',{"type":"input_value","name":"arg'+str(arg_id)+'","check":"' + arg["type"] + '",align:"RIGHT"}'
@@ -738,15 +524,17 @@ def parse_class(text, class_file_name):
 
                 ret_str = ''
                 # a.b(c)
-                if not is_global:
+                if not is_global and not is_ctor:
                     # a.
-                    if IsStatic(gp):
+                    if is_static:
                         assert not ':' in class_name
                         ret_str += f'"{class_name}"'
+                        ret_str += '+"."'
                     else:
                         ret_str += 'Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)'
-                    ret_str += '+"."'
+                        ret_str += '+":"'
                 else:
+                    # global function and constructor has no this
                     ret_str += '""'
                 # b
                 ret_str += f'+"{GetFuncName(gp)}"'
@@ -755,7 +543,13 @@ def parse_class(text, class_file_name):
                 ret_str += '+"("'
                 
                 for i in range(arg_id):
-                    if i > 0:
+                    if GetFuncName(gp) == 'AddCallback' and class_name == 'ModReference':
+                        # hack:skip arg0
+                        if i == 0:
+                            continue
+                        if i > 1:
+                            ret_str += '+","'
+                    elif i > 0:
                         ret_str += '+","'
                     ret_str += f'+Blockly.Lua.valueToCode(block, "arg{i}", Blockly.Lua.ORDER_NONE)'
 
@@ -769,10 +563,6 @@ def parse_class(text, class_file_name):
             else:
                 assert False, f'unknown subtitle {current_subtitle} in {class_file_name}'
         
-
-
-
-
 # enumerate
 
 def parse_enums(md_text,enum_name):
@@ -1015,6 +805,15 @@ def parse_mod_callback_enum(md_text):
     typealias[enum_name]='Number'
 
 
+for enum_md in glob(f'{LUA_DOC_DIR}/docs/enums/*.md'):
+    enum_name = enum_md.split('\\')[-1][:-3]
+    with open(enum_md) as f:
+        if enum_name == 'ModCallbacks':
+            parse_mod_callback_enum(f.read()) 
+        else:
+            parse_enums(f.read(),enum_name)
+
+            
 for class_md in glob(f'{LUA_DOC_DIR}/docs/*.md'):
     class_name = class_md.split('\\')[-1][:-3]
     if class_name in [
@@ -1027,15 +826,7 @@ for class_md in glob(f'{LUA_DOC_DIR}/docs/*.md'):
     with open(class_md) as f:
         parse_class(f.read(),class_name)
 
-# raise 'stop'
 
-for enum_md in glob(f'{LUA_DOC_DIR}/docs/enums/*.md'):
-    enum_name = enum_md.split('\\')[-1][:-3]
-    with open(enum_md) as f:
-        if enum_name == 'ModCallbacks':
-            parse_mod_callback_enum(f.read()) 
-        else:
-            parse_enums(f.read(),enum_name)
 # with open(LUA_DOC_DIR + '/group__enums.html') as f:
 #     parse_enums(f.read(),MOD_DOC_WEB_DIR + '/')
 
@@ -1063,22 +854,10 @@ for enum_md in glob(f'{LUA_DOC_DIR}/docs/enums/*.md'):
 
 # exit(0)
 
-# with open(LUA_DOC_DIR + '/group__funcs.html') as f:
-#     parse_class_text(f.read(),True,MOD_DOC_WEB_DIR + '/group__funcs.html')
-
-# for ns in ['/namespace_isaac.html','/namespace_input.html']:
-#     with open(LUA_DOC_DIR + ns) as f:
-#         parse_class_text(f.read(),True,MOD_DOC_WEB_DIR + ns)
-
-# for clss in glob(LUA_DOC_DIR + "/class*.html"):
-#     if clss.endswith('-members.html'):
-#         continue
-#     with open(clss.replace('\\','/')) as f:
-#         parse_class_text(f.read(),False,MOD_DOC_WEB_DIR + clss.replace('\\','/')[len(LUA_DOC_DIR):])
 
 #patch: replace all integer to math_number
 type_output_replace = {
-    "integer":"Number",
+    "int":"Number",
     "float":"Number",
     "boolean":"Boolean",
     "string":"String"
@@ -1096,17 +875,24 @@ def toolboxBlockText(block):
         return '<value name="arg1"><block type="ModCallbacks"></block></value>'+\
             '<value name="arg2"><block type="lambda_func"></block></value>'+\
             '<value name="arg3"><shadow type="logic_null"></shadow></value>'
+    if block == 'ModReference::AddCallback':
+        return '<value name="arg1"><block type="ModCallbacks"></block></value>'+\
+            '<value name="arg2"><block type="lambda_func"></block></value>'+\
+            '<value name="arg3"><shadow type="logic_null"></shadow></value>'
+    if block == 'GlobalFunctions::RegisterMod':
+        return '<value name="arg0"><shadow type="text"><field name="TEXT">MyBlocklyMod</field></shadow></value>'+\
+            '<value name="arg1"><shadow type="math_number"><field name="NUM">1</field></shadow></value>'
     if block == 'Isaac::GetPlayer':
         return '<value name="arg0"><shadow type="math_number"><field name="NUM">0</field></shadow></value>'
     if block == 'Game::GetPlayer':
-        return '<value name="thisobj"><shadow type="Game"></shadow></value>'+\
+        return '<value name="thisobj"><shadow type="Game::Game"></shadow></value>'+\
         '<value name="arg0"><shadow type="math_number"><field name="NUM">0</field></shadow></value>'
     if block == 'Level::GetName':
         return '\
         <value name="thisobj">\
           <block type="Game::GetLevel">\
             <value name="thisobj">\
-              <block type="Game"></block>\
+              <block type="Game::Game"></block>\
             </value>\
           </block>\
         </value>\
@@ -1132,31 +918,31 @@ def toolboxBlockText(block):
         type_dict = argument_type_dict[block]
         for argname in type_dict:
             if type_dict[argname] == 'Game':
-                ret += '<value name="{arg}"><block type="Game"></block></value>'.format(arg=argname)
+                ret += '<value name="{arg}"><block type="Game::Game"></block></value>'.format(arg=argname)
             if type_dict[argname] == 'EntityPlayer':
                 ret += ('<value name="{arg}"><shadow type="Isaac::GetPlayer">'+\
                     '<value name="arg0"><shadow type="math_number"><field name="NUM">0</field></shadow></value>'+\
                     '</shadow></value>').format(arg=argname)
             if type_dict[argname] == 'MusicManager':
-                ret += '<value name="{arg}"><block type="MusicManager"></block></value>'.format(arg=argname)
+                ret += '<value name="{arg}"><block type="MusicManager::MusicManager"></block></value>'.format(arg=argname)
             if type_dict[argname] == 'Font':
                 ret += ('<value name="{arg}"><shadow type="Game::GetFont">'+\
-                    '<value name="thisobj"><shadow type="Game"></shadow></value>'+\
+                    '<value name="thisobj"><shadow type="Game::Game"></shadow></value>'+\
                     '</shadow></value>').format(arg=argname)
             if type_dict[argname] == 'Level':
                 ret += ('<value name="{arg}"><block type="Game::GetLevel">'+\
-                    '<value name="thisobj"><block type="Game"></block></value>'+\
+                    '<value name="thisobj"><block type="Game::Game"></block></value>'+\
                     '</block></value>').format(arg=argname)
             if type_dict[argname] == 'Room':
                 ret += ('<value name="{arg}"><block type="Game::GetRoom">'+\
-                    '<value name="thisobj"><block type="Game"></block></value>'+\
+                    '<value name="thisobj"><block type="Game::Game"></block></value>'+\
                     '</block></value>').format(arg=argname)
             if type_dict[argname] == 'Seeds':
                 ret += ('<value name="{arg}"><block type="Game::GetSeeds">'+\
-                    '<value name="thisobj"><block type="Game"></block></value>'+\
+                    '<value name="thisobj"><block type="Game::Game"></block></value>'+\
                     '</block></value>').format(arg=argname)
             if type_dict[argname] == 'SFXManager':
-                ret += ('<value name="{arg}"><block type="SFXManager"></block></value>').format(arg=argname)
+                ret += ('<value name="{arg}"><block type="SFXManager::SFXManager"></block></value>').format(arg=argname)
     return ret
 
 
@@ -1164,7 +950,7 @@ def toolboxBlockText(block):
 
 json_str = None
 
-# toolbox[""] is global function
+# toolbox["GlobalFunctions"] is global function
 # toolbox["ItemConfig::Item"]
 # toolbox["Game"]
 # ...
