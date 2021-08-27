@@ -378,17 +378,18 @@
       <block type="variables_set">
         <field name="VAR">{myMod}</field>
         <value name="VALUE">
-          <block type="registermod">
-            <value name="TEXT">
+          <block type="GlobalFunctions::RegisterMod">
+            <value name="arg0">
               <shadow type="text">
                 <field name="TEXT">MyBlocklyMod</field>
               </shadow>
             </value>
+            <value name="arg1"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
           </block>
         </value>
       </block>
-      <block type="AddCallback">
-        <value name="arg0">
+      <block type="ModReference::AddCallback">
+        <value name="thisobj">
           <block type="variables_get">
             <field name="VAR">{myMod}</field>
           </block>

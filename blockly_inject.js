@@ -48,6 +48,7 @@ Blockly.Lua.ORDER_MULTIPLICATIVE = 5;  // * / %
 Blockly.Lua.ORDER_ADDITIVE = 6;        // + -
 Blockly.Lua.ORDER_CONCATENATION = 11;   // ..
 Blockly.Lua.ORDER_RELATIONAL = 12;      // < > <=  >= ~= ==
+// 'and' 'or' order is wrong in lua, they shares the same order, but we dont use it
 Blockly.Lua.ORDER_AND = 13;             // and
 Blockly.Lua.ORDER_OR = 14;              // or
 Blockly.Lua.ORDER_NONE = 99;
@@ -61,23 +62,12 @@ Blockly.Lua.ORDER_BIT_AND = 8   // &
 Blockly.Lua.ORDER_BIT_NOT = 9   // ~
 Blockly.Lua.ORDER_BIT_OR = 10    // |
 
-Blockly.Lua['registermod'] = function(block) {
-    var value_text = Blockly.Lua.valueToCode(block, 'TEXT', Blockly.Lua.ORDER_ATOMIC);
-    var code = 'RegisterMod('+value_text+',1)';
-    return [code, Blockly.Lua.ORDER_NONE];
-};
 Blockly.Lua['tool_do'] = function(block) {
     var value_op = Blockly.Lua.valueToCode(block, 'op', Blockly.Lua.ORDER_NONE);
     var code = value_op + '\n';
     return code;
   };
-//Add undocumented 'mod:AddCallback'
-Blockly.Lua['AddCallback'] = function(block){
-  return Blockly.Lua.valueToCode(block, 'arg0', Blockly.Lua.ORDER_NONE)+':AddCallback('+
-    Blockly.Lua.valueToCode(block, 'arg1', Blockly.Lua.ORDER_NONE)+','+
-    Blockly.Lua.valueToCode(block, 'arg2', Blockly.Lua.ORDER_NONE)+','+
-    Blockly.Lua.valueToCode(block, 'arg3', Blockly.Lua.ORDER_NONE)+")\n"
-}
+
 Blockly.Lua['FunctionReturn'] = function(block){
   return 'return ' + Blockly.Lua.valueToCode(block, 'retvalue', Blockly.Lua.ORDER_NONE) + '\n'
 }
@@ -212,7 +202,7 @@ Blockly.Lua['lambda_func'] = function(block) {
   //find AddCallback -> ModCallbacks, get arg_count
   let blk = block
   while(blk) {
-      if (blk.type == "Isaac::AddCallback" || blk.type == 'AddCallback') {
+      if (blk.type == "Isaac::AddCallback" || blk.type == 'ModReference::AddCallback') {
         var callback_enum = blk.getInputTargetBlock("arg1")
         if(callback_enum && callback_enum.getFieldValue("ENUM_VAL")){
           var callback_type = callback_enum.getFieldValue("ENUM_VAL")
@@ -267,7 +257,7 @@ function updateChildArgumentBlocksWithCallback(callback_enum_str,block,this_is_a
     return
   }
   //DFS
-  if((block.type != "Isaac::AddCallback" &&  block.type != 'AddCallback') || this_is_addcallback){
+  if((block.type != "Isaac::AddCallback" &&  block.type != 'ModReference::AddCallback') || this_is_addcallback){
     let children = block.getChildren()
     //DFS all arguments
     for(let i=0;i<children.length;i++){
@@ -299,7 +289,7 @@ function handlerCallbackArgBlockWarring(evt){
   function find_add_callback(blkid){
     if(blkid){
       var blk = Code.workspace.getBlockById(blkid)
-      while(blk && (blk.type != "Isaac::AddCallback"  && blk.type != 'AddCallback')){
+      while(blk && (blk.type != "Isaac::AddCallback"  && blk.type != 'ModReference::AddCallback')){
         blk = blk.getParent()
       }
       return blk
@@ -332,7 +322,7 @@ function handlerCallbackArgBlockWarring(evt){
     if(target){
       if(target.type == "ModCallbacks" && evt.name == "ENUM_VAL" && evt.newValue && evt.newValue != evt.oldValue){
         //当ModCallbacks枚举变量改变时
-        while(target && (target.type != "Isaac::AddCallback" && target.type != "AddCallback")){
+        while(target && (target.type != "Isaac::AddCallback" && target.type != "ModReference::AddCallback")){
           target = target.getParent()
         }
         //更新所有的Argument
@@ -409,7 +399,7 @@ function handleArgumentChangeSelect(evt){
       if(target.type == "ModCallbacks" && evt.name == "ENUM_VAL" && evt.newValue && evt.newValue != evt.oldValue){
         //当ModCallbacks枚举变量改变时
         target_block = target
-        while(target_block && (target_block.type != "Isaac::AddCallback" && target_block.type != "AddCallback" )){
+        while(target_block && (target_block.type != "Isaac::AddCallback" && target_block.type != "ModReference::AddCallback" )){
           target_block = target_block.getParent()
         }
       }
@@ -417,12 +407,12 @@ function handleArgumentChangeSelect(evt){
   }else if(evt.type == Blockly.Events.CREATE){
     //当AddCallback创建时
     let target = Code.workspace.getBlockById(evt.blockId)
-    if(target && (target.type == "Isaac::AddCallback" || target.type == "AddCallback"))
+    if(target && (target.type == "Isaac::AddCallback" || target.type == "ModReference::AddCallback"))
       target_block = target
   }else if(evt.type == Blockly.Events.UI && evt.element=="click"){
     //当点击AddCallback时
     let target = Code.workspace.getBlockById(evt.blockId)
-    if(target && (target.type == "Isaac::AddCallback" || target.type == "AddCallback"))
+    if(target && (target.type == "Isaac::AddCallback" || target.type == "ModReference::AddCallback"))
       target_block = target
   }
   if(target_block){
@@ -539,25 +529,10 @@ function inject_init(){
         "name": "stmt"
       }
     ],
-    "output": "table",
+    "output": "function",
     "colour": 230,
     "tooltip": "%{FN_REF_TOOLTIP}",
     "helpUrl": ""
-  },{
-    "type":"AddCallback",
-    "message0":"%{__TXT_ADDCALLBACK}%1%{__TXT_REF}[%{__TYPE_TABLE}] %2%{__TXT_CALLBACKID}[%{__TYPE_MODCALLBACKS}] %3%{__TXT_CALLBACKFN}[%{__TYPE_TABLE}] %4%{__TXT_ENTITYID}[%{__TYPE_INTEGER}] %5",
-    "previousStatement":null,
-    "nextStatement":null,
-    "args0":[
-      {"type":"input_dummy"},
-      {"type":"input_value","name":"arg0","check":"table",align:"RIGHT"},
-      {"type":"input_value","name":"arg1","check":"ModCallbacks",align:"RIGHT"},
-      {"type":"input_value","name":"arg2","check":"table",align:"RIGHT"},
-      {"type":"input_value","name":"arg3","check":"integer",align:"RIGHT"}
-    ],
-    "inputsInline":false,
-    "colour":230,
-    "tooltip":"AddCallback",
   },{
     "type":"FunctionReturn",
     "message0":"%{FN_RET_VALUE} %1",
