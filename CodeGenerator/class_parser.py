@@ -71,24 +71,6 @@ def GetVarType(groups):
 def GetArgListText(groups):
     assert IsFunc(groups)
     return groups[6]
-# def IsStatic(groups):
-#     return not groups[0] == None
-# def IsConst(groups):
-#     return not groups[1] == None
-# def GetRetType(groups):
-#     if IsCtor(groups):
-#         return GetClassName(groups).strip('::')
-#     if groups[3] == None:
-#         return None
-#     return convert_text_type(groups[3])
-# def IsRetRef(groups):
-#     return not groups[6] == None
-# def GetClassName(groups):
-#     return groups[7]
-# def GetName(groups):
-#     return groups[9]
-# def IsCtor(groups):
-#     return GetClassName(groups).strip('::').split('::')[-1] == GetName(groups)
 
 # colours
 name_to_color_map = {}
@@ -169,7 +151,7 @@ typealias = {
     "PillList":"PillConfigList",
     "GridEntity":"GridEntityType",
     # TODO:I don't know what ProjectilesMode is...
-    "ProjectilesMode":"integer",
+    "ProjectilesMode":"int",
     "Curses":"LevelCurse",
 
     "Number":"int", # If I need a float, you can give me a Number(by Blockly)
@@ -177,34 +159,6 @@ typealias = {
     "Boolean":"boolean",
     "String":"string",
 }
-
-# inhert_cluster = {}
-
-# 手动处理不合法的定义
-def convert_text_name(text):
-    # Wow,I got a very const member just like "const const Costume& ItemConfig::Item::Costume"?
-    text = text.replace('const const','const')
-    # LuaArrayProxy..........
-    text = text.replace('LuaArrayProxy<RoomDescriptor, true>','table')
-    # I don't care about unsigned in lua
-    text = text.replace('unsigned int','int')
-    text = text.replace('u8','int').replace('u16','int').replace('u32','int')
-    text = text.replace('s8','int').replace('s16','int').replace('s32','int')
-    # LevelStage (UserData) Game::GetLastDevilRoomStage the function in unusable, but I still translate it
-    text = text.replace('LevelStage (UserData)','LevelStage')
-    return text
-def convert_text_type(text):
-    if text in ['int','unsigned int','u16']:
-        return 'integer'
-    
-    if text.startswith("Config::"):
-        return "ItemConfig::"+text
-    return text
-# 获得兼容类型
-# def getChildTypesWithSelf(typename):
-#     if typename in inhert_cluster:
-#         return inhert_cluster[typename]
-#     return [typename]
 
 # argument_type_dict = 
 # {
@@ -455,15 +409,31 @@ def parse_class(text, class_file_name):
 
                 text['message0'] = '"'
 
-                if GetRetType(gp) != 'void':
-                    text['message0'] += f'[{apply_translate(GetRetType(gp),dup_hash,True)}]'
-                    text['output']=f'"{GetRetType(gp)}"'
+                ret_type = GetRetType(gp)
+                # fix the return type
+                # Isaac.GetItemConfig should returns ItemConfig
+                if class_name == 'Isaac' and func_name == 'GetItemConfig':
+                    assert ret_type == 'Config'
+                    ret_type = 'ItemConfig'
+                if class_name == 'ItemConfig':
+                    REPLACE_DICT = {
+                        'CardList':'CppContainer::Vector::CardConfigList',
+                        'CostumeList':'CppContainer::Vector::CostumeConfigList',
+                        'ItemList':'CppContainer::Vector::ItemConfigList',
+                        'PillList':'CppContainer::Vector::PillConfigList',
+                    }
+                    if ret_type in REPLACE_DICT:
+                        ret_type = REPLACE_DICT[ret_type]
+
+                if ret_type != 'void':
+                    text['message0'] += f'[{apply_translate(ret_type,dup_hash,True)}]'
+                    text['output']=f'"{ret_type}"'
                 else:
                     text["previousStatement"]="null"
                     text["nextStatement"]="null"
 
                 if is_ctor:
-                    assert GetRetType(gp) == GetFuncName(gp), f'constructor return type mismatch {func_name} at {class_file_name}'
+                    assert ret_type == GetFuncName(gp), f'constructor return type mismatch {func_name} at {class_file_name}'
                     text['message0']+=f'{apply_translate(func_name + "_CTOR",dup_hash)}'
                 else:
                     text['message0']+=f'{apply_translate(func_name,dup_hash)}'
@@ -516,7 +486,7 @@ def parse_class(text, class_file_name):
 
                 text['inputsInline']='false'
                 
-                text['colour']=NameToColour(GetRetType(gp))
+                text['colour']=NameToColour(ret_type)
                 text['tooltip']=f'"{GetFuncName(gp)}"'
                 href_url = f'/{class_file_name}.html#{GetFuncName(gp).lower()}'
                 text['helpUrl']=f'()=>get_blk_help("{href_url}")'
@@ -559,7 +529,7 @@ def parse_class(text, class_file_name):
                     ret_str += f'+Blockly.Lua.valueToCode(block, "arg{i}", Blockly.Lua.ORDER_NONE)'
 
                 ret_str += '+")"'
-                if GetRetType(gp) == 'void':
+                if ret_type == 'void':
                     func_str += f'{ret_str}\n'
                 else:
                     func_str += f'[{ret_str},Blockly.Lua.ORDER_HIGH]'
@@ -916,6 +886,11 @@ def toolboxBlockText(block):
         <value name="arg4">\
           <shadow type="logic_null"></shadow>\
         </value>'
+    if block == 'EntityNPC::FireProjectiles':
+        # the FireProjectiles argument is not documented, we need a comment here
+        return '<value name="arg2"><shadow type="math_number"><field name="NUM">0</field>'+\
+        '<comment pinned="false" h="240.66668701171875" w="738">%{ENTITYNPC_FIREPROJECTILES_ARGUMENT_PROJECTILE_MODE}</comment>'+\
+        '</shadow></value>'
     
     # the default value
     ret = ''
