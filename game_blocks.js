@@ -77,14 +77,10 @@ Blockly.Lua['WeaponType'] = function (block){ return ['WeaponType.'+ block.getFi
 Blockly.Lua['Color::Color'] = function(block){return [""+"Color"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg6", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Color::__mul'] = function(block){return [Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_MULTIPLICATIVE)+"*"+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_MULTIPLICATIVE),Blockly.Lua.ORDER_MULTIPLICATIVE]}
 Blockly.Lua['Color::Lerp'] = function(block){return ["Color"+"."+"Lerp"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Color::Reset'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Reset"+"("+")"
-}
-Blockly.Lua['Color::SetColorize'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetColorize"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Color::SetOffset'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetOffset"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Color::SetTint'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetTint"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Color::Reset'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Reset"+"("+")"+"\n"}
+Blockly.Lua['Color::SetColorize'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetColorize"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Color::SetOffset'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetOffset"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Color::SetTint'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetTint"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Color::m_A'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".A",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Color::m_set_A'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"A="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['Color::m_B'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".B",Blockly.Lua.ORDER_HIGH]}
@@ -132,38 +128,23 @@ Blockly.Lua['CppContainer::Vector::PillConfigList::m_Size'] = function(block){re
 Blockly.Lua['CppContainer::Vector::VectorList::__len'] = function(block){return ["len("+Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['CppContainer::Vector::VectorList::Get'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Get"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['CppContainer::Vector::VectorList::m_Size'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Size",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Entity::AddBurn'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddBurn"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Entity::AddCharmed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCharmed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Entity::AddConfusion'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddConfusion"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Entity::AddEntityFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddEntityFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Entity::AddFear'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddFear"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Entity::AddFreeze'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddFreeze"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Entity::AddHealth'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddHealth"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Entity::AddMidasFreeze'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddMidasFreeze"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Entity::AddPoison'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddPoison"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Entity::AddShrink'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddShrink"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Entity::AddSlowing'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddSlowing"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Entity::AddVelocity'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddVelocity"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Entity::BloodExplode'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"BloodExplode"+"("+")"
-}
+Blockly.Lua['Entity::AddBurn'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddBurn"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Entity::AddCharmed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCharmed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Entity::AddConfusion'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddConfusion"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Entity::AddEntityFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddEntityFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Entity::AddFear'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddFear"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Entity::AddFreeze'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddFreeze"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Entity::AddHealth'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddHealth"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Entity::AddMidasFreeze'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddMidasFreeze"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Entity::AddPoison'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddPoison"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Entity::AddShrink'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddShrink"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Entity::AddSlowing'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddSlowing"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Entity::AddVelocity'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddVelocity"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Entity::BloodExplode'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"BloodExplode"+"("+")"+"\n"}
 Blockly.Lua['Entity::CanShutDoors'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CanShutDoors"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Entity::ClearEntityFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearEntityFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Entity::ClearEntityFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearEntityFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Entity::CollidesWithGrid'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CollidesWithGrid"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Entity::Die'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Die"+"("+")"
-}
+Blockly.Lua['Entity::Die'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Die"+"("+")"+"\n"}
 Blockly.Lua['Entity::Exists'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Exists"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Entity::GetBossID'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetBossID"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Entity::GetColor'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetColor"+"("+")",Blockly.Lua.ORDER_HIGH]}
@@ -186,27 +167,17 @@ Blockly.Lua['Entity::IsFrame'] = function(block){return [Blockly.Lua.valueToCode
 Blockly.Lua['Entity::IsInvincible'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsInvincible"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Entity::IsVisible'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsVisible"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Entity::IsVulnerableEnemy'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsVulnerableEnemy"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Entity::Kill'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Kill"+"("+")"
-}
-Blockly.Lua['Entity::MultiplyFriction'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MultiplyFriction"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Entity::PostRender'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PostRender"+"("+")"
-}
-Blockly.Lua['Entity::Remove'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Remove"+"("+")"
-}
-Blockly.Lua['Entity::RemoveStatusEffects'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveStatusEffects"+"("+")"
-}
-Blockly.Lua['Entity::Render'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Render"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Entity::Kill'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Kill"+"("+")"+"\n"}
+Blockly.Lua['Entity::MultiplyFriction'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MultiplyFriction"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Entity::PostRender'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PostRender"+"("+")"+"\n"}
+Blockly.Lua['Entity::Remove'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Remove"+"("+")"+"\n"}
+Blockly.Lua['Entity::RemoveStatusEffects'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveStatusEffects"+"("+")"+"\n"}
+Blockly.Lua['Entity::Render'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Render"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Entity::RenderShadowLayer'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RenderShadowLayer"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Entity::SetColor'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetColor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Entity::SetSize'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetSize"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Entity::SetSpriteFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetSpriteFrame"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Entity::SetSpriteOverlayFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetSpriteOverlayFrame"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Entity::SetColor'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetColor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Entity::SetSize'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetSize"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Entity::SetSpriteFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetSpriteFrame"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Entity::SetSpriteOverlayFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetSpriteOverlayFrame"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Entity::TakeDamage'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TakeDamage"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Entity::ToBomb'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ToBomb"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Entity::ToEffect'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ToEffect"+"("+")",Blockly.Lua.ORDER_HIGH]}
@@ -218,8 +189,7 @@ Blockly.Lua['Entity::ToPickup'] = function(block){return [Blockly.Lua.valueToCod
 Blockly.Lua['Entity::ToPlayer'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ToPlayer"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Entity::ToProjectile'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ToProjectile"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Entity::ToTear'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ToTear"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Entity::Update'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Update"+"("+")"
-}
+Blockly.Lua['Entity::Update'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Update"+"("+")"+"\n"}
 Blockly.Lua['Entity::m_Child'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Child",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Entity::m_set_Child'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Child="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['Entity::m_CollisionDamage'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".CollisionDamage",Blockly.Lua.ORDER_HIGH]}
@@ -283,13 +253,10 @@ Blockly.Lua['Entity::m_Velocity'] = function(block){return [Blockly.Lua.valueToC
 Blockly.Lua['Entity::m_set_Velocity'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Velocity="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['Entity::m_Visible'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Visible",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Entity::m_set_Visible'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Visible="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['EntityBomb::AddTearFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityBomb::ClearTearFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityBomb::AddTearFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityBomb::ClearTearFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityBomb::HasTearFlags'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"HasTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityBomb::SetExplosionCountdown'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetExplosionCountdown"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityBomb::SetExplosionCountdown'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetExplosionCountdown"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityBomb::m_ExplosionDamage'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".ExplosionDamage",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityBomb::m_set_ExplosionDamage'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"ExplosionDamage="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['EntityBomb::m_Flags'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Flags",Blockly.Lua.ORDER_HIGH]}
@@ -298,15 +265,11 @@ Blockly.Lua['EntityBomb::m_IsFetus'] = function(block){return [Blockly.Lua.value
 Blockly.Lua['EntityBomb::m_set_IsFetus'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"IsFetus="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['EntityBomb::m_RadiusMultiplier'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".RadiusMultiplier",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityBomb::m_set_RadiusMultiplier'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"RadiusMultiplier="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['EntityEffect::FollowParent'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FollowParent"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityEffect::FollowParent'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FollowParent"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityEffect::IsPlayerCreep'] = function(block){return ["EntityEffect"+"."+"IsPlayerCreep"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityEffect::SetDamageSource'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetDamageSource"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityEffect::SetRadii'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetRadii"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityEffect::SetTimeout'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetTimeout"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityEffect::SetDamageSource'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetDamageSource"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityEffect::SetRadii'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetRadii"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityEffect::SetTimeout'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetTimeout"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityEffect::m_DamageSource'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".DamageSource",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityEffect::m_set_DamageSource'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"DamageSource="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['EntityEffect::m_FallingAcceleration'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".FallingAcceleration",Blockly.Lua.ORDER_HIGH]}
@@ -333,46 +296,28 @@ Blockly.Lua['EntityEffect::m_State'] = function(block){return [Blockly.Lua.value
 Blockly.Lua['EntityEffect::m_set_State'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"State="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['EntityEffect::m_Timeout'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Timeout",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityEffect::m_set_Timeout'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Timeout="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['EntityFamiliar::AddCoins'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCoins"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityFamiliar::AddHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityFamiliar::AddKeys'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddKeys"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityFamiliar::AddToDelayed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddToDelayed"+"("+")"
-}
-Blockly.Lua['EntityFamiliar::AddToFollowers'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddToFollowers"+"("+")"
-}
-Blockly.Lua['EntityFamiliar::AddToOrbit'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddToOrbit"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityFamiliar::AddCoins'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCoins"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityFamiliar::AddHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityFamiliar::AddKeys'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddKeys"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityFamiliar::AddToDelayed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddToDelayed"+"("+")"+"\n"}
+Blockly.Lua['EntityFamiliar::AddToFollowers'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddToFollowers"+"("+")"+"\n"}
+Blockly.Lua['EntityFamiliar::AddToOrbit'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddToOrbit"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityFamiliar::FireProjectile'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FireProjectile"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityFamiliar::FollowParent'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FollowParent"+"("+")"
-}
-Blockly.Lua['EntityFamiliar::FollowPosition'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FollowPosition"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityFamiliar::FollowParent'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FollowParent"+"("+")"+"\n"}
+Blockly.Lua['EntityFamiliar::FollowPosition'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FollowPosition"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityFamiliar::GetOrbitDistance'] = function(block){return ["EntityFamiliar"+"."+"GetOrbitDistance"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityFamiliar::GetOrbitPosition'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetOrbitPosition"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityFamiliar::MoveDelayed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MoveDelayed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityFamiliar::MoveDiagonally'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MoveDiagonally"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityFamiliar::PickEnemyTarget'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PickEnemyTarget"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityFamiliar::PlayChargeAnim'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayChargeAnim"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityFamiliar::PlayFloatAnim'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayFloatAnim"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityFamiliar::PlayShootAnim'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayShootAnim"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityFamiliar::MoveDelayed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MoveDelayed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityFamiliar::MoveDiagonally'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MoveDiagonally"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityFamiliar::PickEnemyTarget'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PickEnemyTarget"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityFamiliar::PlayChargeAnim'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayChargeAnim"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityFamiliar::PlayFloatAnim'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayFloatAnim"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityFamiliar::PlayShootAnim'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayShootAnim"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityFamiliar::RecalculateOrbitOffset'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RecalculateOrbitOffset"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityFamiliar::RemoveFromDelayed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveFromDelayed"+"("+")"
-}
-Blockly.Lua['EntityFamiliar::RemoveFromFollowers'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveFromFollowers"+"("+")"
-}
-Blockly.Lua['EntityFamiliar::RemoveFromOrbit'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveFromOrbit"+"("+")"
-}
-Blockly.Lua['EntityFamiliar::Shoot'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Shoot"+"("+")"
-}
+Blockly.Lua['EntityFamiliar::RemoveFromDelayed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveFromDelayed"+"("+")"+"\n"}
+Blockly.Lua['EntityFamiliar::RemoveFromFollowers'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveFromFollowers"+"("+")"+"\n"}
+Blockly.Lua['EntityFamiliar::RemoveFromOrbit'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveFromOrbit"+"("+")"+"\n"}
+Blockly.Lua['EntityFamiliar::Shoot'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Shoot"+"("+")"+"\n"}
 Blockly.Lua['EntityFamiliar::m_Coins'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Coins",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityFamiliar::m_set_Coins'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Coins="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['EntityFamiliar::m_FireCooldown'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".FireCooldown",Blockly.Lua.ORDER_HIGH]}
@@ -399,21 +344,16 @@ Blockly.Lua['EntityFamiliar::m_ShootDirection'] = function(block){return [Blockl
 Blockly.Lua['EntityFamiliar::m_set_ShootDirection'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"ShootDirection="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['EntityFamiliar::m_State'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".State",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityFamiliar::m_set_State'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"State="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['EntityKnife::AddTearFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityKnife::ClearTearFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityKnife::AddTearFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityKnife::ClearTearFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityKnife::GetKnifeDistance'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetKnifeDistance"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityKnife::GetKnifeVelocity'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetKnifeVelocity"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityKnife::GetRenderZ'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetRenderZ"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityKnife::HasTearFlags'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"HasTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityKnife::IsFlying'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsFlying"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityKnife::Reset'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Reset"+"("+")"
-}
-Blockly.Lua['EntityKnife::SetPathFollowSpeed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetPathFollowSpeed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityKnife::Shoot'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Shoot"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityKnife::Reset'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Reset"+"("+")"+"\n"}
+Blockly.Lua['EntityKnife::SetPathFollowSpeed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetPathFollowSpeed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityKnife::Shoot'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Shoot"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityKnife::m_Charge'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Charge",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityKnife::m_set_Charge'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Charge="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['EntityKnife::m_MaxDistance'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".MaxDistance",Blockly.Lua.ORDER_HIGH]}
@@ -430,11 +370,9 @@ Blockly.Lua['EntityKnife::m_Scale'] = function(block){return [Blockly.Lua.valueT
 Blockly.Lua['EntityKnife::m_set_Scale'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Scale="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['EntityKnife::m_TearFlags'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".TearFlags",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityKnife::m_set_TearFlags'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"TearFlags="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['EntityLaser::AddTearFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityLaser::AddTearFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityLaser::CalculateEndPoint'] = function(block){return ["EntityLaser"+"."+"CalculateEndPoint"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityLaser::ClearTearFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityLaser::ClearTearFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityLaser::GetEndPoint'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetEndPoint"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityLaser::GetNonOptimizedSamples'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetNonOptimizedSamples"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityLaser::GetRenderZ'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetRenderZ"+"("+")",Blockly.Lua.ORDER_HIGH]}
@@ -442,20 +380,13 @@ Blockly.Lua['EntityLaser::GetSamples'] = function(block){return [Blockly.Lua.val
 Blockly.Lua['EntityLaser::HasTearFlags'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"HasTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityLaser::IsCircleLaser'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsCircleLaser"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityLaser::IsSampleLaser'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsSampleLaser"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityLaser::SetActiveRotation'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetActiveRotation"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityLaser::SetBlackHpDropChance'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetBlackHpDropChance"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityLaser::SetHomingType'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetHomingType"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityLaser::SetMaxDistance'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetMaxDistance"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityLaser::SetMultidimensionalTouched'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetMultidimensionalTouched"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityLaser::SetOneHit'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetOneHit"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityLaser::SetTimeout'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetTimeout"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityLaser::SetActiveRotation'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetActiveRotation"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityLaser::SetBlackHpDropChance'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetBlackHpDropChance"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityLaser::SetHomingType'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetHomingType"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityLaser::SetMaxDistance'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetMaxDistance"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityLaser::SetMultidimensionalTouched'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetMultidimensionalTouched"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityLaser::SetOneHit'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetOneHit"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityLaser::SetTimeout'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetTimeout"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityLaser::ShootAngle'] = function(block){return ["EntityLaser"+"."+"ShootAngle"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityLaser::m_Angle'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Angle",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityLaser::m_set_Angle'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Angle="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
@@ -509,33 +440,27 @@ Blockly.Lua['EntityLaser::m_TearFlags'] = function(block){return [Blockly.Lua.va
 Blockly.Lua['EntityLaser::m_set_TearFlags'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"TearFlags="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['EntityLaser::m_Timeout'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Timeout",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityLaser::m_set_Timeout'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Timeout="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['EntityNPC::AnimWalkFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimWalkFrame"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityNPC::AnimWalkFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimWalkFrame"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityNPC::CalcTargetPosition'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CalcTargetPosition"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityNPC::CanBeDamagedFromVelocity'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CanBeDamagedFromVelocity"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityNPC::CanReroll'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CanReroll"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityNPC::FireBossProjectiles'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FireBossProjectiles"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityNPC::FireProjectiles'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FireProjectiles"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityNPC::FireProjectiles'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FireProjectiles"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityNPC::GetAliveEnemyCount'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetAliveEnemyCount"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityNPC::GetBossColorIdx'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetBossColorIdx"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityNPC::GetChampionColorIdx'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetChampionColorIdx"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityNPC::GetPlayerTarget'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetPlayerTarget"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityNPC::IsBoss'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsBoss"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityNPC::IsChampion'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsChampion"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityNPC::KillUnique'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"KillUnique"+"("+")"
-}
-Blockly.Lua['EntityNPC::MakeChampion'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MakeChampion"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityNPC::KillUnique'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"KillUnique"+"("+")"+"\n"}
+Blockly.Lua['EntityNPC::MakeChampion'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MakeChampion"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityNPC::MakeSplat'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MakeSplat"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityNPC::Morph'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Morph"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityNPC::PlaySound'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlaySound"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityNPC::PlaySound'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlaySound"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityNPC::QueryNPCsGroup'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"QueryNPCsGroup"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityNPC::QueryNPCsSpawnerType'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"QueryNPCsSpawnerType"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityNPC::QueryNPCsType'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"QueryNPCsType"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityNPC::ResetPathFinderTarget'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ResetPathFinderTarget"+"("+")"
-}
+Blockly.Lua['EntityNPC::ResetPathFinderTarget'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ResetPathFinderTarget"+"("+")"+"\n"}
 Blockly.Lua['EntityNPC::ThrowSpider'] = function(block){return ["EntityNPC"+"."+"ThrowSpider"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityNPC::m_CanShutDoors'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".CanShutDoors",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityNPC::m_set_CanShutDoors'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"CanShutDoors="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
@@ -565,17 +490,13 @@ Blockly.Lua['EntityNPC::m_V1'] = function(block){return [Blockly.Lua.valueToCode
 Blockly.Lua['EntityNPC::m_set_V1'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"V1="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['EntityNPC::m_V2'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".V2",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityNPC::m_set_V2'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"V2="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['EntityPickup::AppearFast'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AppearFast"+"("+")"
-}
+Blockly.Lua['EntityPickup::AppearFast'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AppearFast"+"("+")"+"\n"}
 Blockly.Lua['EntityPickup::CanReroll'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CanReroll"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPickup::GetCoinValue'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetCoinValue"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPickup::IsShopItem'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsShopItem"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityPickup::Morph'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Morph"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPickup::PlayDropSound'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayDropSound"+"("+")"
-}
-Blockly.Lua['EntityPickup::PlayPickupSound'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayPickupSound"+"("+")"
-}
+Blockly.Lua['EntityPickup::Morph'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Morph"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPickup::PlayDropSound'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayDropSound"+"("+")"+"\n"}
+Blockly.Lua['EntityPickup::PlayPickupSound'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayPickupSound"+"("+")"+"\n"}
 Blockly.Lua['EntityPickup::TryOpenChest'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TryOpenChest"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPickup::m_AutoUpdatePrice'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".AutoUpdatePrice",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPickup::m_set_AutoUpdatePrice'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"AutoUpdatePrice="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
@@ -595,102 +516,57 @@ Blockly.Lua['EntityPickup::m_Touched'] = function(block){return [Blockly.Lua.val
 Blockly.Lua['EntityPickup::m_set_Touched'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Touched="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['EntityPickup::m_Wait'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Wait",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPickup::m_set_Wait'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Wait="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['EntityPlayer::AddBlackHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddBlackHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddBloodCharge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddBloodCharge"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityPlayer::AddBlackHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddBlackHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddBloodCharge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddBloodCharge"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityPlayer::AddBlueFlies'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddBlueFlies"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::AddBlueSpider'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddBlueSpider"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityPlayer::AddBombs'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddBombs"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddBoneHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddBoneHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddBrokenHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddBrokenHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddCacheFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCacheFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddCard'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCard"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddCoins'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCoins"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddCollectible'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCollectible"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddControlsCooldown'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddControlsCooldown"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddCostume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCostume"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddCurseMistEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCurseMistEffect"+"("+")"
-}
-Blockly.Lua['EntityPlayer::AddDeadEyeCharge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddDeadEyeCharge"+"("+")"
-}
-Blockly.Lua['EntityPlayer::AddDollarBillEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddDollarBillEffect"+"("+")"
-}
-Blockly.Lua['EntityPlayer::AddEternalHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddEternalHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddFriendlyDip'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddFriendlyDip"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddGigaBombs'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddGigaBombs"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddGoldenBomb'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddGoldenBomb"+"("+")"
-}
-Blockly.Lua['EntityPlayer::AddGoldenHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddGoldenHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddGoldenKey'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddGoldenKey"+"("+")"
-}
-Blockly.Lua['EntityPlayer::AddHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityPlayer::AddBombs'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddBombs"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddBoneHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddBoneHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddBrokenHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddBrokenHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddCacheFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCacheFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddCard'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCard"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddCoins'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCoins"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddCollectible'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCollectible"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddControlsCooldown'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddControlsCooldown"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddCostume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCostume"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddCurseMistEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCurseMistEffect"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddDeadEyeCharge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddDeadEyeCharge"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddDollarBillEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddDollarBillEffect"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddEternalHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddEternalHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddFriendlyDip'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddFriendlyDip"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddGigaBombs'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddGigaBombs"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddGoldenBomb'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddGoldenBomb"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddGoldenHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddGoldenHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddGoldenKey'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddGoldenKey"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityPlayer::AddItemWisp'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddItemWisp"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityPlayer::AddJarFlies'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddJarFlies"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddJarHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddJarHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddKeys'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddKeys"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddMaxHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddMaxHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityPlayer::AddJarFlies'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddJarFlies"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddJarHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddJarHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddKeys'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddKeys"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddMaxHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddMaxHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityPlayer::AddMinisaac'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddMinisaac"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityPlayer::AddNullCostume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddNullCostume"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddPill'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddPill"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddPlayerFormCostume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddPlayerFormCostume"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddPrettyFly'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddPrettyFly"+"("+")"
-}
-Blockly.Lua['EntityPlayer::AddRottenHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddRottenHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddSoulCharge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddSoulCharge"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AddSoulHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddSoulHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityPlayer::AddNullCostume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddNullCostume"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddPill'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddPill"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddPlayerFormCostume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddPlayerFormCostume"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddPrettyFly'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddPrettyFly"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddRottenHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddRottenHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddSoulCharge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddSoulCharge"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AddSoulHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddSoulHearts"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityPlayer::AddSwarmFlyOrbital'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddSwarmFlyOrbital"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityPlayer::AddTrinket'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddTrinket"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityPlayer::AddTrinket'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddTrinket"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityPlayer::AddWisp'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddWisp"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityPlayer::AnimateAppear'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateAppear"+"("+")"
-}
-Blockly.Lua['EntityPlayer::AnimateCard'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateCard"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AnimateCollectible'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateCollectible"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AnimateHappy'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateHappy"+"("+")"
-}
-Blockly.Lua['EntityPlayer::AnimateLightTravel'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateLightTravel"+"("+")"
-}
-Blockly.Lua['EntityPlayer::AnimatePill'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimatePill"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AnimatePitfallIn'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimatePitfallIn"+"("+")"
-}
-Blockly.Lua['EntityPlayer::AnimatePitfallOut'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimatePitfallOut"+"("+")"
-}
-Blockly.Lua['EntityPlayer::AnimateSad'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateSad"+"("+")"
-}
-Blockly.Lua['EntityPlayer::AnimateTeleport'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateTeleport"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::AnimateTrapdoor'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateTrapdoor"+"("+")"
-}
-Blockly.Lua['EntityPlayer::AnimateTrinket'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateTrinket"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityPlayer::AnimateAppear'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateAppear"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::AnimateCard'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateCard"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AnimateCollectible'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateCollectible"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AnimateHappy'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateHappy"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::AnimateLightTravel'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateLightTravel"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::AnimatePill'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimatePill"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AnimatePitfallIn'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimatePitfallIn"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::AnimatePitfallOut'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimatePitfallOut"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::AnimateSad'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateSad"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::AnimateTeleport'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateTeleport"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::AnimateTrapdoor'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateTrapdoor"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::AnimateTrinket'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AnimateTrinket"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityPlayer::AreControlsEnabled'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AreControlsEnabled"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::AreOpposingShootDirectionsPressed'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AreOpposingShootDirectionsPressed"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::CanAddCollectible'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CanAddCollectible"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
@@ -703,28 +579,17 @@ Blockly.Lua['EntityPlayer::CanPickSoulHearts'] = function(block){return [Blockly
 Blockly.Lua['EntityPlayer::CanPickupItem'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CanPickupItem"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::CanShoot'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CanShoot"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::CanTurnHead'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CanTurnHead"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityPlayer::ChangePlayerType'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ChangePlayerType"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::CheckFamiliar'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CheckFamiliar"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::ClearCostumes'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearCostumes"+"("+")"
-}
-Blockly.Lua['EntityPlayer::ClearDeadEyeCharge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearDeadEyeCharge"+"("+")"
-}
-Blockly.Lua['EntityPlayer::ClearTemporaryEffects'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearTemporaryEffects"+"("+")"
-}
-Blockly.Lua['EntityPlayer::DischargeActiveItem'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DischargeActiveItem"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::DonateLuck'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DonateLuck"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::DoZitEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DoZitEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::DropPocketItem'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DropPocketItem"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::DropTrinket'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DropTrinket"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::EvaluateItems'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"EvaluateItems"+"("+")"
-}
+Blockly.Lua['EntityPlayer::ChangePlayerType'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ChangePlayerType"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::CheckFamiliar'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CheckFamiliar"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::ClearCostumes'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearCostumes"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::ClearDeadEyeCharge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearDeadEyeCharge"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::ClearTemporaryEffects'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearTemporaryEffects"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::DischargeActiveItem'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DischargeActiveItem"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::DonateLuck'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DonateLuck"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::DoZitEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DoZitEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::DropPocketItem'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DropPocketItem"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::DropTrinket'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DropTrinket"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::EvaluateItems'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"EvaluateItems"+"("+")"+"\n"}
 Blockly.Lua['EntityPlayer::FireBomb'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FireBomb"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::FireBrimstone'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FireBrimstone"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::FireDelayedBrimstone'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FireDelayedBrimstone"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
@@ -829,8 +694,7 @@ Blockly.Lua['EntityPlayer::HasPlayerForm'] = function(block){return [Blockly.Lua
 Blockly.Lua['EntityPlayer::HasTimedItem'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"HasTimedItem"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::HasTrinket'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"HasTrinket"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::HasWeaponType'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"HasWeaponType"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityPlayer::InitBabySkin'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"InitBabySkin"+"("+")"
-}
+Blockly.Lua['EntityPlayer::InitBabySkin'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"InitBabySkin"+"("+")"+"\n"}
 Blockly.Lua['EntityPlayer::IsBlackHeart'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsBlackHeart"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::IsBoneHeart'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsBoneHeart"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::IsCoopGhost'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsCoopGhost"+"("+")",Blockly.Lua.ORDER_HIGH]}
@@ -843,100 +707,57 @@ Blockly.Lua['EntityPlayer::IsP2Appearing'] = function(block){return [Blockly.Lua
 Blockly.Lua['EntityPlayer::IsPosInSpotLight'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsPosInSpotLight"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::IsSubPlayer'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsSubPlayer"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::NeedsCharge'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"NeedsCharge"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityPlayer::PlayExtraAnimation'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayExtraAnimation"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::QueueExtraAnimation'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"QueueExtraAnimation"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::QueueItem'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"QueueItem"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::RemoveBlackHeart'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveBlackHeart"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::RemoveBlueFly'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveBlueFly"+"("+")"
-}
-Blockly.Lua['EntityPlayer::RemoveBlueSpider'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveBlueSpider"+"("+")"
-}
-Blockly.Lua['EntityPlayer::RemoveCollectible'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveCollectible"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::RemoveCostume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveCostume"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::RemoveCurseMistEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveCurseMistEffect"+"("+")"
-}
-Blockly.Lua['EntityPlayer::RemoveGoldenBomb'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveGoldenBomb"+"("+")"
-}
-Blockly.Lua['EntityPlayer::RemoveGoldenKey'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveGoldenKey"+"("+")"
-}
-Blockly.Lua['EntityPlayer::RemoveSkinCostume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveSkinCostume"+"("+")"
-}
-Blockly.Lua['EntityPlayer::RenderBody'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RenderBody"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::RenderGlow'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RenderGlow"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::RenderHead'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RenderHead"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::RenderTop'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RenderTop"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::ReplaceCostumeSprite'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ReplaceCostumeSprite"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::ResetDamageCooldown'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ResetDamageCooldown"+"("+")"
-}
-Blockly.Lua['EntityPlayer::ResetItemState'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ResetItemState"+"("+")"
-}
-Blockly.Lua['EntityPlayer::RespawnFamiliars'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RespawnFamiliars"+"("+")"
-}
-Blockly.Lua['EntityPlayer::Revive'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Revive"+"("+")"
-}
-Blockly.Lua['EntityPlayer::SetActiveCharge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetActiveCharge"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::SetBloodCharge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetBloodCharge"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::SetCard'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetCard"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::SetFullHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetFullHearts"+"("+")"
-}
-Blockly.Lua['EntityPlayer::SetMinDamageCooldown'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetMinDamageCooldown"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::SetPill'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetPill"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::SetPocketActiveItem'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetPocketActiveItem"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::SetShootingCooldown'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetShootingCooldown"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::SetSoulCharge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetSoulCharge"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::SetTargetTrapDoor'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetTargetTrapDoor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::ShootRedCandle'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShootRedCandle"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityPlayer::PlayExtraAnimation'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayExtraAnimation"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::QueueExtraAnimation'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"QueueExtraAnimation"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::QueueItem'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"QueueItem"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::RemoveBlackHeart'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveBlackHeart"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::RemoveBlueFly'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveBlueFly"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::RemoveBlueSpider'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveBlueSpider"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::RemoveCollectible'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveCollectible"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::RemoveCostume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveCostume"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::RemoveCurseMistEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveCurseMistEffect"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::RemoveGoldenBomb'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveGoldenBomb"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::RemoveGoldenKey'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveGoldenKey"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::RemoveSkinCostume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveSkinCostume"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::RenderBody'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RenderBody"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::RenderGlow'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RenderGlow"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::RenderHead'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RenderHead"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::RenderTop'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RenderTop"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::ReplaceCostumeSprite'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ReplaceCostumeSprite"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::ResetDamageCooldown'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ResetDamageCooldown"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::ResetItemState'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ResetItemState"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::RespawnFamiliars'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RespawnFamiliars"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::Revive'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Revive"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::SetActiveCharge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetActiveCharge"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::SetBloodCharge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetBloodCharge"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::SetCard'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetCard"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::SetFullHearts'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetFullHearts"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::SetMinDamageCooldown'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetMinDamageCooldown"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::SetPill'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetPill"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::SetPocketActiveItem'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetPocketActiveItem"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::SetShootingCooldown'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetShootingCooldown"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::SetSoulCharge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetSoulCharge"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::SetTargetTrapDoor'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetTargetTrapDoor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::ShootRedCandle'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShootRedCandle"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityPlayer::SpawnMawOfVoid'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SpawnMawOfVoid"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityPlayer::StopExtraAnimation'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"StopExtraAnimation"+"("+")"
-}
-Blockly.Lua['EntityPlayer::SwapActiveItems'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SwapActiveItems"+"("+")"
-}
+Blockly.Lua['EntityPlayer::StopExtraAnimation'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"StopExtraAnimation"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::SwapActiveItems'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SwapActiveItems"+"("+")"+"\n"}
 Blockly.Lua['EntityPlayer::ThrowBlueSpider'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ThrowBlueSpider"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::ThrowFriendlyDip'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ThrowFriendlyDip"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::ThrowHeldEntity'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ThrowHeldEntity"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityPlayer::TriggerBookOfVirtues'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TriggerBookOfVirtues"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityPlayer::TriggerBookOfVirtues'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TriggerBookOfVirtues"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityPlayer::TryHoldEntity'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TryHoldEntity"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::TryHoldTrinket'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TryHoldTrinket"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityPlayer::TryRemoveCollectibleCostume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TryRemoveCollectibleCostume"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::TryRemoveNullCostume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TryRemoveNullCostume"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityPlayer::TryRemoveCollectibleCostume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TryRemoveCollectibleCostume"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::TryRemoveNullCostume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TryRemoveNullCostume"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityPlayer::TryRemoveTrinket'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TryRemoveTrinket"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityPlayer::TryRemoveTrinketCostume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TryRemoveTrinketCostume"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityPlayer::TryRemoveTrinketCostume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TryRemoveTrinketCostume"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityPlayer::TryUseKey'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TryUseKey"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityPlayer::UpdateCanShoot'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UpdateCanShoot"+"("+")"
-}
-Blockly.Lua['EntityPlayer::UseActiveItem'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UseActiveItem"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::UseActiveItem_overload1'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UseActiveItem"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::UseCard'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UseCard"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityPlayer::UsePill'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UsePill"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityPlayer::UpdateCanShoot'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UpdateCanShoot"+"("+")"+"\n"}
+Blockly.Lua['EntityPlayer::UseActiveItem'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UseActiveItem"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::UseActiveItem_overload1'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UseActiveItem"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::UseCard'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UseCard"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityPlayer::UsePill'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UsePill"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityPlayer::WillPlayerRevive'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"WillPlayerRevive"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::m_BabySkin'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".BabySkin",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::m_set_BabySkin'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"BabySkin="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
@@ -984,20 +805,13 @@ Blockly.Lua['EntityPlayer::m_TearHeight'] = function(block){return [Blockly.Lua.
 Blockly.Lua['EntityPlayer::m_set_TearHeight'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"TearHeight="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['EntityPlayer::m_TearsOffset'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".TearsOffset",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPlayer::m_set_TearsOffset'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"TearsOffset="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['EntityProjectile::AddChangeFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddChangeFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityProjectile::AddFallingAccel'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddFallingAccel"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityProjectile::AddFallingSpeed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddFallingSpeed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityProjectile::AddHeight'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddHeight"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityProjectile::AddProjectileFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddProjectileFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityProjectile::AddScale'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddScale"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityProjectile::ClearProjectileFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearProjectileFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityProjectile::AddChangeFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddChangeFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityProjectile::AddFallingAccel'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddFallingAccel"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityProjectile::AddFallingSpeed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddFallingSpeed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityProjectile::AddHeight'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddHeight"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityProjectile::AddProjectileFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddProjectileFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityProjectile::AddScale'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddScale"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityProjectile::ClearProjectileFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearProjectileFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityProjectile::HasProjectileFlags'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"HasProjectileFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityProjectile::m_Acceleration'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Acceleration",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityProjectile::m_set_Acceleration'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Acceleration="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
@@ -1028,8 +842,7 @@ Blockly.Lua['EntityProjectile::m_set_Scale'] = function(block){return Blockly.Lu
 Blockly.Lua['EntityProjectile::m_WiggleFrameOffset'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".WiggleFrameOffset",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityProjectile::m_set_WiggleFrameOffset'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"WiggleFrameOffset="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['EntityPtr::EntityPtr'] = function(block){return [""+"EntityPtr"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityPtr::SetReference'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetReference"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityPtr::SetReference'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetReference"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityPtr::m_Ref'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Ref",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityPtr::m_set_Ref'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Ref="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['EntityRef::EntityRef'] = function(block){return [""+"EntityRef"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
@@ -1049,23 +862,15 @@ Blockly.Lua['EntityRef::m_Type'] = function(block){return [Blockly.Lua.valueToCo
 Blockly.Lua['EntityRef::m_set_Type'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Type="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['EntityRef::m_Variant'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Variant",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityRef::m_set_Variant'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Variant="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['EntityTear::AddTearFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityTear::ChangeVariant'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ChangeVariant"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityTear::ClearTearFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityTear::AddTearFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityTear::ChangeVariant'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ChangeVariant"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityTear::ClearTearFlags'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityTear::HasTearFlags'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"HasTearFlags"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['EntityTear::ResetSpriteScale'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ResetSpriteScale"+"("+")"
-}
-Blockly.Lua['EntityTear::SetDeadEyeIntensity'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetDeadEyeIntensity"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityTear::SetKnockbackMultiplier'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetKnockbackMultiplier"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityTear::SetParentOffset'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetParentOffset"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['EntityTear::SetWaitFrames'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetWaitFrames"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['EntityTear::ResetSpriteScale'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ResetSpriteScale"+"("+")"+"\n"}
+Blockly.Lua['EntityTear::SetDeadEyeIntensity'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetDeadEyeIntensity"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityTear::SetKnockbackMultiplier'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetKnockbackMultiplier"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityTear::SetParentOffset'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetParentOffset"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['EntityTear::SetWaitFrames'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetWaitFrames"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['EntityTear::m_BaseDamage'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".BaseDamage",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityTear::m_BaseScale'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".BaseScale",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityTear::m_Bounced'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Bounced",Blockly.Lua.ORDER_HIGH]}
@@ -1103,14 +908,10 @@ Blockly.Lua['EntityTear::m_TearIndex'] = function(block){return [Blockly.Lua.val
 Blockly.Lua['EntityTear::m_WaitFrames'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".WaitFrames",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['EntityTear::m_set_WaitFrames'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"WaitFrames="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['Font::Font'] = function(block){return [""+"Font"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Font::DrawString'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DrawString"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Font::DrawStringScaled'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DrawStringScaled"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg6", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg7", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Font::DrawStringScaledUTF8'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DrawStringScaledUTF8"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg6", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg7", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Font::DrawStringUTF8'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DrawStringUTF8"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Font::DrawString'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DrawString"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Font::DrawStringScaled'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DrawStringScaled"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg6", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg7", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Font::DrawStringScaledUTF8'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DrawStringScaledUTF8"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg6", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg7", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Font::DrawStringUTF8'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DrawStringUTF8"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Font::GetBaselineHeight'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetBaselineHeight"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Font::GetCharacterWidth'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetCharacterWidth"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Font::GetLineHeight'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetLineHeight"+"("+")",Blockly.Lua.ORDER_HIGH]}
@@ -1118,59 +919,33 @@ Blockly.Lua['Font::GetStringWidth'] = function(block){return [Blockly.Lua.valueT
 Blockly.Lua['Font::GetStringWidthUTF8'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetStringWidthUTF8"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Font::IsLoaded'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsLoaded"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Font::Load'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Load"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Font::SetMissingCharacter'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetMissingCharacter"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Font::Unload'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Unload"+"("+")"
-}
+Blockly.Lua['Font::SetMissingCharacter'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetMissingCharacter"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Font::Unload'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Unload"+"("+")"+"\n"}
 Blockly.Lua['Game::Game'] = function(block){return [""+"Game"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Game::AddDevilRoomDeal'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddDevilRoomDeal"+"("+")"
-}
-Blockly.Lua['Game::AddEncounteredBoss'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddEncounteredBoss"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::AddPixelation'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddPixelation"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::AddStageWithoutDamage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddStageWithoutDamage"+"("+")"
-}
-Blockly.Lua['Game::AddStageWithoutHeartsPicked'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddStageWithoutHeartsPicked"+"("+")"
-}
-Blockly.Lua['Game::AddTreasureRoomsVisited'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddTreasureRoomsVisited"+"("+")"
-}
-Blockly.Lua['Game::BombDamage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"BombDamage"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg6", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg7", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::BombExplosionEffects'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"BombExplosionEffects"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg6", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg7", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg8", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::BombTearflagEffects'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"BombTearflagEffects"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::ButterBeanFart'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ButterBeanFart"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::ChangeRoom'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ChangeRoom"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::CharmFart'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CharmFart"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::ClearDonationModAngel'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearDonationModAngel"+"("+")"
-}
-Blockly.Lua['Game::ClearDonationModGreed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearDonationModGreed"+"("+")"
-}
-Blockly.Lua['Game::ClearStagesWithoutDamage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearStagesWithoutDamage"+"("+")"
-}
-Blockly.Lua['Game::ClearStagesWithoutHeartsPicked'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearStagesWithoutHeartsPicked"+"("+")"
-}
-Blockly.Lua['Game::Darken'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Darken"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::DonateAngel'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DonateAngel"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::DonateGreed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DonateGreed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::End'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"End"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::Fadein'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Fadein"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::Fadeout'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Fadeout"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::Fart'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Fart"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::FinishChallenge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FinishChallenge"+"("+")"
-}
+Blockly.Lua['Game::AddDevilRoomDeal'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddDevilRoomDeal"+"("+")"+"\n"}
+Blockly.Lua['Game::AddEncounteredBoss'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddEncounteredBoss"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::AddPixelation'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddPixelation"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::AddStageWithoutDamage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddStageWithoutDamage"+"("+")"+"\n"}
+Blockly.Lua['Game::AddStageWithoutHeartsPicked'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddStageWithoutHeartsPicked"+"("+")"+"\n"}
+Blockly.Lua['Game::AddTreasureRoomsVisited'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddTreasureRoomsVisited"+"("+")"+"\n"}
+Blockly.Lua['Game::BombDamage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"BombDamage"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg6", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg7", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::BombExplosionEffects'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"BombExplosionEffects"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg6", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg7", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg8", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::BombTearflagEffects'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"BombTearflagEffects"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::ButterBeanFart'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ButterBeanFart"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::ChangeRoom'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ChangeRoom"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::CharmFart'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CharmFart"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::ClearDonationModAngel'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearDonationModAngel"+"("+")"+"\n"}
+Blockly.Lua['Game::ClearDonationModGreed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearDonationModGreed"+"("+")"+"\n"}
+Blockly.Lua['Game::ClearStagesWithoutDamage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearStagesWithoutDamage"+"("+")"+"\n"}
+Blockly.Lua['Game::ClearStagesWithoutHeartsPicked'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearStagesWithoutHeartsPicked"+"("+")"+"\n"}
+Blockly.Lua['Game::Darken'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Darken"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::DonateAngel'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DonateAngel"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::DonateGreed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DonateGreed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::End'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"End"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::Fadein'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Fadein"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::Fadeout'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Fadeout"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::Fart'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Fart"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::FinishChallenge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FinishChallenge"+"("+")"+"\n"}
 Blockly.Lua['Game::GetAmbush'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetAmbush"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Game::GetDarknessModifier'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetDarknessModifier"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Game::GetDevilRoomDeals'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetDevilRoomDeals"+"("+")",Blockly.Lua.ORDER_HIGH]}
@@ -1205,45 +980,27 @@ Blockly.Lua['Game::HasEncounteredBoss'] = function(block){return [Blockly.Lua.va
 Blockly.Lua['Game::HasHallucination'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"HasHallucination"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Game::IsGreedMode'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsGreedMode"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Game::IsPaused'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsPaused"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Game::MoveToRandomRoom'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MoveToRandomRoom"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::NextVictoryLap'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"NextVictoryLap"+"("+")"
-}
-Blockly.Lua['Game::Render'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Render"+"("+")"
-}
+Blockly.Lua['Game::MoveToRandomRoom'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MoveToRandomRoom"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::NextVictoryLap'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"NextVictoryLap"+"("+")"+"\n"}
+Blockly.Lua['Game::Render'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Render"+"("+")"+"\n"}
 Blockly.Lua['Game::RerollEnemy'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RerollEnemy"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Game::RerollLevelCollectibles'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RerollLevelCollectibles"+"("+")"
-}
-Blockly.Lua['Game::RerollLevelPickups'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RerollLevelPickups"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::SetLastDevilRoomStage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetLastDevilRoomStage"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::SetLastLevelWithDamage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetLastLevelWithDamage"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::SetLastLevelWithoutHalfHp'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetLastLevelWithoutHalfHp"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::SetStateFlag'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetStateFlag"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::ShakeScreen'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShakeScreen"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::ShowFortune'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShowFortune"+"("+")"
-}
-Blockly.Lua['Game::ShowHallucination'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShowHallucination"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::ShowRule'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShowRule"+"("+")"
-}
+Blockly.Lua['Game::RerollLevelCollectibles'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RerollLevelCollectibles"+"("+")"+"\n"}
+Blockly.Lua['Game::RerollLevelPickups'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RerollLevelPickups"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::SetLastDevilRoomStage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetLastDevilRoomStage"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::SetLastLevelWithDamage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetLastLevelWithDamage"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::SetLastLevelWithoutHalfHp'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetLastLevelWithoutHalfHp"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::SetStateFlag'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetStateFlag"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::ShakeScreen'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShakeScreen"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::ShowFortune'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShowFortune"+"("+")"+"\n"}
+Blockly.Lua['Game::ShowHallucination'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShowHallucination"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::ShowRule'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShowRule"+"("+")"+"\n"}
 Blockly.Lua['Game::Spawn'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Spawn"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg6", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Game::SpawnEntityDesc'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SpawnEntityDesc"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Game::SpawnParticles'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SpawnParticles"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg6", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::StartRoomTransition'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"StartRoomTransition"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::StartStageTransition'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"StartStageTransition"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Game::Update'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Update"+"("+")"
-}
-Blockly.Lua['Game::UpdateStrangeAttractor'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UpdateStrangeAttractor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Game::SpawnParticles'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SpawnParticles"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg6", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::StartRoomTransition'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"StartRoomTransition"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::StartStageTransition'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"StartStageTransition"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Game::Update'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Update"+"("+")"+"\n"}
+Blockly.Lua['Game::UpdateStrangeAttractor'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UpdateStrangeAttractor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Game::m_BlueWombParTime'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".BlueWombParTime",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Game::m_set_BlueWombParTime'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"BlueWombParTime="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['Game::m_BossRushParTime'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".BossRushParTime",Blockly.Lua.ORDER_HIGH]}
@@ -1278,16 +1035,11 @@ Blockly.Lua['GridEntity::GetSprite'] = function(block){return [Blockly.Lua.value
 Blockly.Lua['GridEntity::GetType'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetType"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntity::GetVariant'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetVariant"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntity::Hurt'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Hurt"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['GridEntity::Init'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Init"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['GridEntity::PostInit'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PostInit"+"("+")"
-}
-Blockly.Lua['GridEntity::Render'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Render"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['GridEntity::SetType'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetType"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['GridEntity::SetVariant'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetVariant"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['GridEntity::Init'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Init"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['GridEntity::PostInit'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PostInit"+"("+")"+"\n"}
+Blockly.Lua['GridEntity::Render'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Render"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['GridEntity::SetType'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetType"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['GridEntity::SetVariant'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetVariant"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['GridEntity::ToDoor'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ToDoor"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntity::ToPit'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ToPit"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntity::ToPoop'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ToPoop"+"("+")",Blockly.Lua.ORDER_HIGH]}
@@ -1295,8 +1047,7 @@ Blockly.Lua['GridEntity::ToPressurePlate'] = function(block){return [Blockly.Lua
 Blockly.Lua['GridEntity::ToRock'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ToRock"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntity::ToSpikes'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ToSpikes"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntity::ToTNT'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ToTNT"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['GridEntity::Update'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Update"+"("+")"
-}
+Blockly.Lua['GridEntity::Update'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Update"+"("+")"+"\n"}
 Blockly.Lua['GridEntity::m_CollisionClass'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".CollisionClass",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntity::m_set_CollisionClass'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"CollisionClass="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['GridEntity::m_Desc'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Desc",Blockly.Lua.ORDER_HIGH]}
@@ -1322,11 +1073,9 @@ Blockly.Lua['GridEntityDesc::m_VariableSeed'] = function(block){return [Blockly.
 Blockly.Lua['GridEntityDesc::m_set_VariableSeed'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"VariableSeed="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['GridEntityDesc::m_Variant'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Variant",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntityDesc::m_set_Variant'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Variant="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['GridEntityDoor::Bar'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Bar"+"("+")"
-}
+Blockly.Lua['GridEntityDoor::Bar'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Bar"+"("+")"+"\n"}
 Blockly.Lua['GridEntityDoor::CanBlowOpen'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CanBlowOpen"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['GridEntityDoor::Close'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Close"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['GridEntityDoor::Close'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Close"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['GridEntityDoor::GetSpriteOffset'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetSpriteOffset"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntityDoor::IsBusted'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsBusted"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntityDoor::IsKeyFamiliarTarget'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsKeyFamiliarTarget"+"("+")",Blockly.Lua.ORDER_HIGH]}
@@ -1334,14 +1083,10 @@ Blockly.Lua['GridEntityDoor::IsLocked'] = function(block){return [Blockly.Lua.va
 Blockly.Lua['GridEntityDoor::IsOpen'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsOpen"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntityDoor::IsRoomType'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsRoomType"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntityDoor::IsTargetRoomArcade'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsTargetRoomArcade"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['GridEntityDoor::Open'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Open"+"("+")"
-}
-Blockly.Lua['GridEntityDoor::SetLocked'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetLocked"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['GridEntityDoor::SetRoomTypes'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetRoomTypes"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['GridEntityDoor::SpawnDust'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SpawnDust"+"("+")"
-}
+Blockly.Lua['GridEntityDoor::Open'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Open"+"("+")"+"\n"}
+Blockly.Lua['GridEntityDoor::SetLocked'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetLocked"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['GridEntityDoor::SetRoomTypes'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetRoomTypes"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['GridEntityDoor::SpawnDust'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SpawnDust"+"("+")"+"\n"}
 Blockly.Lua['GridEntityDoor::TryBlowOpen'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TryBlowOpen"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntityDoor::TryUnlock'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TryUnlock"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntityDoor::m_Busted'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Busted",Blockly.Lua.ORDER_HIGH]}
@@ -1372,18 +1117,13 @@ Blockly.Lua['GridEntityDoor::m_TargetRoomIndex'] = function(block){return [Block
 Blockly.Lua['GridEntityDoor::m_set_TargetRoomIndex'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"TargetRoomIndex="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['GridEntityDoor::m_TargetRoomType'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".TargetRoomType",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntityDoor::m_set_TargetRoomType'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"TargetRoomType="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['GridEntityPit::MakeBridge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MakeBridge"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['GridEntityPit::SetLadder'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetLadder"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['GridEntityPit::UpdateCollision'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UpdateCollision"+"("+")"
-}
+Blockly.Lua['GridEntityPit::MakeBridge'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MakeBridge"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['GridEntityPit::SetLadder'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetLadder"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['GridEntityPit::UpdateCollision'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UpdateCollision"+"("+")"+"\n"}
 Blockly.Lua['GridEntityPit::m_HasLadder'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".HasLadder",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntityPit::m_set_HasLadder'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"HasLadder="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['GridEntityPoop::ReduceSpawnRate'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ReduceSpawnRate"+"("+")"
-}
-Blockly.Lua['GridEntityPoop::RespawnRedPoop'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RespawnRedPoop"+"("+")"
-}
+Blockly.Lua['GridEntityPoop::ReduceSpawnRate'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ReduceSpawnRate"+"("+")"+"\n"}
+Blockly.Lua['GridEntityPoop::RespawnRedPoop'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RespawnRedPoop"+"("+")"+"\n"}
 Blockly.Lua['GridEntityPoop::m_ReducedSpawnRate'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".ReducedSpawnRate",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntityPoop::m_set_ReducedSpawnRate'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"ReducedSpawnRate="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['GridEntityPoop::m_ReviveTimer'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".ReviveTimer",Blockly.Lua.ORDER_HIGH]}
@@ -1392,8 +1132,7 @@ Blockly.Lua['GridEntityPoop::m_StateAnimation'] = function(block){return [Blockl
 Blockly.Lua['GridEntityPoop::m_set_StateAnimation'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"StateAnimation="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['GridEntityPoop::m_UnderPlayer'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".UnderPlayer",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntityPoop::m_set_UnderPlayer'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"UnderPlayer="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['GridEntityPressurePlate::Reward'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Reward"+"("+")"
-}
+Blockly.Lua['GridEntityPressurePlate::Reward'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Reward"+"("+")"+"\n"}
 Blockly.Lua['GridEntityPressurePlate::m_GreedModeRNG'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".GreedModeRNG",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntityPressurePlate::m_set_GreedModeRNG'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"GreedModeRNG="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['GridEntityPressurePlate::m_NextGreedAnimation'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".NextGreedAnimation",Blockly.Lua.ORDER_HIGH]}
@@ -1403,10 +1142,8 @@ Blockly.Lua['GridEntityPressurePlate::m_set_TimerPlate'] = function(block){retur
 Blockly.Lua['GridEntityRock::GetBigRockFrame'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetBigRockFrame"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntityRock::GetRubbleAnim'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetRubbleAnim"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntityRock::GetSprite'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetSprite"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['GridEntityRock::SetBigRockFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetBigRockFrame"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['GridEntityRock::UpdateAnimFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UpdateAnimFrame"+"("+")"
-}
+Blockly.Lua['GridEntityRock::SetBigRockFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetBigRockFrame"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['GridEntityRock::UpdateAnimFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UpdateAnimFrame"+"("+")"+"\n"}
 Blockly.Lua['GridEntityRock::m_Anim'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Anim",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntityRock::m_set_Anim'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Anim="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['GridEntityRock::m_FrameCnt'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".FrameCnt",Blockly.Lua.ORDER_HIGH]}
@@ -1417,23 +1154,15 @@ Blockly.Lua['GridEntitySpikes::m_Timeout'] = function(block){return [Blockly.Lua
 Blockly.Lua['GridEntitySpikes::m_set_Timeout'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Timeout="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['GridEntityTNT::m_FrameCnt'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".FrameCnt",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['GridEntityTNT::m_set_FrameCnt'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"FrameCnt="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['HUD::AssignPlayerHUDs'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AssignPlayerHUDs"+"("+")"
-}
-Blockly.Lua['HUD::FlashChargeBar'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FlashChargeBar"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['HUD::InvalidateActiveItem'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"InvalidateActiveItem"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['HUD::InvalidateCraftingItem'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"InvalidateCraftingItem"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['HUD::AssignPlayerHUDs'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AssignPlayerHUDs"+"("+")"+"\n"}
+Blockly.Lua['HUD::FlashChargeBar'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FlashChargeBar"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['HUD::InvalidateActiveItem'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"InvalidateActiveItem"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['HUD::InvalidateCraftingItem'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"InvalidateCraftingItem"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['HUD::IsVisible'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsVisible"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['HUD::ShowFortuneText'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShowFortuneText"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['HUD::ShowItemText'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShowItemText"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['HUD::ShowItemText_overload1'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShowItemText"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['HUD::SetVisible'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetVisible"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['HUD::ShowFortuneText'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShowFortuneText"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['HUD::ShowItemText'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShowItemText"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['HUD::ShowItemText_overload1'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShowItemText"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['HUD::SetVisible'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetVisible"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Input::GetActionValue'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetActionValue"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Input::GetButtonValue'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetButtonValue"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Input::GetMousePosition'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetMousePosition"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
@@ -1442,19 +1171,15 @@ Blockly.Lua['Input::IsActionTriggered'] = function(block){return [Blockly.Lua.va
 Blockly.Lua['Input::IsButtonPressed'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsButtonPressed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Input::IsButtonTriggered'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsButtonTriggered"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Input::IsMouseBtnPressed'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsMouseBtnPressed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Isaac::AddCallback'] = function(block){return "Isaac"+"."+"AddCallback"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Isaac::AddCallback'] = function(block){return "Isaac"+"."+"AddCallback"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Isaac::AddPillEffectToPool'] = function(block){return ["Isaac"+"."+"AddPillEffectToPool"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Isaac::ConsoleOutput'] = function(block){return "Isaac"+"."+"ConsoleOutput"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Isaac::ConsoleOutput'] = function(block){return "Isaac"+"."+"ConsoleOutput"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Isaac::CountBosses'] = function(block){return ["Isaac"+"."+"CountBosses"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Isaac::CountEnemies'] = function(block){return ["Isaac"+"."+"CountEnemies"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Isaac::CountEntities'] = function(block){return ["Isaac"+"."+"CountEntities"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Isaac::DebugString'] = function(block){return "Isaac"+"."+"DebugString"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Isaac::DebugString'] = function(block){return "Isaac"+"."+"DebugString"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Isaac::ExecuteCommand'] = function(block){return ["Isaac"+"."+"ExecuteCommand"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Isaac::Explode'] = function(block){return "Isaac"+"."+"Explode"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Isaac::Explode'] = function(block){return "Isaac"+"."+"Explode"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Isaac::FindByType'] = function(block){return ["Isaac"+"."+"FindByType"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Isaac::FindInRadius'] = function(block){return ["Isaac"+"."+"FindInRadius"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Isaac::GetCardIdByName'] = function(block){return ["Isaac"+"."+"GetCardIdByName"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
@@ -1481,18 +1206,12 @@ Blockly.Lua['Isaac::GetTrinketIdByName'] = function(block){return ["Isaac"+"."+"
 Blockly.Lua['Isaac::GridSpawn'] = function(block){return ["Isaac"+"."+"GridSpawn"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Isaac::HasModData'] = function(block){return ["Isaac"+"."+"HasModData"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Isaac::LoadModData'] = function(block){return ["Isaac"+"."+"LoadModData"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Isaac::RegisterMod'] = function(block){return "Isaac"+"."+"RegisterMod"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Isaac::RemoveCallback'] = function(block){return "Isaac"+"."+"RemoveCallback"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Isaac::RemoveModData'] = function(block){return "Isaac"+"."+"RemoveModData"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Isaac::RenderScaledText'] = function(block){return "Isaac"+"."+"RenderScaledText"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg6", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg7", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg8", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Isaac::RenderText'] = function(block){return "Isaac"+"."+"RenderText"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg6", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Isaac::SaveModData'] = function(block){return "Isaac"+"."+"SaveModData"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Isaac::RegisterMod'] = function(block){return "Isaac"+"."+"RegisterMod"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Isaac::RemoveCallback'] = function(block){return "Isaac"+"."+"RemoveCallback"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Isaac::RemoveModData'] = function(block){return "Isaac"+"."+"RemoveModData"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Isaac::RenderScaledText'] = function(block){return "Isaac"+"."+"RenderScaledText"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg6", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg7", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg8", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Isaac::RenderText'] = function(block){return "Isaac"+"."+"RenderText"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg6", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Isaac::SaveModData'] = function(block){return "Isaac"+"."+"SaveModData"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Isaac::ScreenToWorld'] = function(block){return ["Isaac"+"."+"ScreenToWorld"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Isaac::ScreenToWorldDistance'] = function(block){return ["Isaac"+"."+"ScreenToWorldDistance"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Isaac::Spawn'] = function(block){return ["Isaac"+"."+"Spawn"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
@@ -1609,10 +1328,8 @@ Blockly.Lua['ItemConfig::PillEffect::m_ID'] = function(block){return [Blockly.Lu
 Blockly.Lua['ItemConfig::PillEffect::m_set_ID'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"ID="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['ItemConfig::PillEffect::m_Name'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Name",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['ItemConfig::PillEffect::m_set_Name'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Name="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['ItemPool::AddBibleUpgrade'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddBibleUpgrade"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['ItemPool::AddRoomBlacklist'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddRoomBlacklist"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['ItemPool::AddBibleUpgrade'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddBibleUpgrade"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['ItemPool::AddRoomBlacklist'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddRoomBlacklist"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['ItemPool::ForceAddPillEffect'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ForceAddPillEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['ItemPool::GetCard'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetCard"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['ItemPool::GetCollectible'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetCollectible"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
@@ -1621,15 +1338,12 @@ Blockly.Lua['ItemPool::GetPill'] = function(block){return [Blockly.Lua.valueToCo
 Blockly.Lua['ItemPool::GetPillEffect'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetPillEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['ItemPool::GetPoolForRoom'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetPoolForRoom"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['ItemPool::GetTrinket'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetTrinket"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['ItemPool::IdentifyPill'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IdentifyPill"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['ItemPool::IdentifyPill'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IdentifyPill"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['ItemPool::IsPillIdentified'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsPillIdentified"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['ItemPool::RemoveCollectible'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveCollectible"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['ItemPool::RemoveTrinket'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveTrinket"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['ItemPool::ResetRoomBlacklist'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ResetRoomBlacklist"+"("+")"
-}
-Blockly.Lua['ItemPool::ResetTrinkets'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ResetTrinkets"+"("+")"
-}
+Blockly.Lua['ItemPool::ResetRoomBlacklist'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ResetRoomBlacklist"+"("+")"+"\n"}
+Blockly.Lua['ItemPool::ResetTrinkets'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ResetTrinkets"+"("+")"+"\n"}
 Blockly.Lua['KColor::KColor'] = function(block){return [""+"KColor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['KColor::m_Alpha'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Alpha",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['KColor::m_set_Alpha'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Alpha="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
@@ -1639,23 +1353,16 @@ Blockly.Lua['KColor::m_Green'] = function(block){return [Blockly.Lua.valueToCode
 Blockly.Lua['KColor::m_set_Green'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Green="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['KColor::m_Red'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Red",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['KColor::m_set_Red'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Red="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['Level::AddAngelRoomChance'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddAngelRoomChance"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Level::AddCurse'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCurse"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Level::ApplyBlueMapEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ApplyBlueMapEffect"+"("+")"
-}
-Blockly.Lua['Level::ApplyCompassEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ApplyCompassEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Level::ApplyMapEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ApplyMapEffect"+"("+")"
-}
+Blockly.Lua['Level::AddAngelRoomChance'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddAngelRoomChance"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Level::AddCurse'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCurse"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Level::ApplyBlueMapEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ApplyBlueMapEffect"+"("+")"+"\n"}
+Blockly.Lua['Level::ApplyCompassEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ApplyCompassEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Level::ApplyMapEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ApplyMapEffect"+"("+")"+"\n"}
 Blockly.Lua['Level::CanOpenChallengeRoom'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CanOpenChallengeRoom"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Level::CanSpawnDevilRoom'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CanSpawnDevilRoom"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Level::CanStageHaveCurseOfLabyrinth'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CanStageHaveCurseOfLabyrinth"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Level::ChangeRoom'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ChangeRoom"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Level::DisableDevilRoom'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DisableDevilRoom"+"("+")"
-}
+Blockly.Lua['Level::ChangeRoom'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ChangeRoom"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Level::DisableDevilRoom'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DisableDevilRoom"+"("+")"+"\n"}
 Blockly.Lua['Level::ForceHorsemanBoss'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ForceHorsemanBoss"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Level::GetAbsoluteStage'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetAbsoluteStage"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Level::GetAngelRoomChance'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetAngelRoomChance"+"("+")",Blockly.Lua.ORDER_HIGH]}
@@ -1683,38 +1390,24 @@ Blockly.Lua['Level::GetStageType'] = function(block){return [Blockly.Lua.valueTo
 Blockly.Lua['Level::GetStartingRoomIndex'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetStartingRoomIndex"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Level::GetStateFlag'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetStateFlag"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Level::HasBossChallenge'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"HasBossChallenge"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Level::InitializeDevilAngelRoom'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"InitializeDevilAngelRoom"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Level::InitializeDevilAngelRoom'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"InitializeDevilAngelRoom"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Level::IsAltStage'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsAltStage"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Level::IsDevilRoomDisabled'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsDevilRoomDisabled"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Level::IsNextStageAvailable'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsNextStageAvailable"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Level::QueryRoomTypeIndex'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"QueryRoomTypeIndex"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Level::RemoveCompassEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveCompassEffect"+"("+")"
-}
-Blockly.Lua['Level::RemoveCurses'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveCurses"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Level::SetCanSeeEverything'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetCanSeeEverything"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Level::SetHeartPicked'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetHeartPicked"+"("+")"
-}
-Blockly.Lua['Level::SetNextStage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetNextStage"+"("+")"
-}
-Blockly.Lua['Level::SetRedHeartDamage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetRedHeartDamage"+"("+")"
-}
-Blockly.Lua['Level::SetStage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetStage"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Level::SetStateFlag'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetStateFlag"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Level::ShowMap'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShowMap"+"("+")"
-}
-Blockly.Lua['Level::ShowName'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShowName"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Level::UncoverHiddenDoor'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UncoverHiddenDoor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Level::Update'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Update"+"("+")"
-}
-Blockly.Lua['Level::UpdateVisibility'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UpdateVisibility"+"("+")"
-}
+Blockly.Lua['Level::RemoveCompassEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveCompassEffect"+"("+")"+"\n"}
+Blockly.Lua['Level::RemoveCurses'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveCurses"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Level::SetCanSeeEverything'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetCanSeeEverything"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Level::SetHeartPicked'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetHeartPicked"+"("+")"+"\n"}
+Blockly.Lua['Level::SetNextStage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetNextStage"+"("+")"+"\n"}
+Blockly.Lua['Level::SetRedHeartDamage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetRedHeartDamage"+"("+")"+"\n"}
+Blockly.Lua['Level::SetStage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetStage"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Level::SetStateFlag'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetStateFlag"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Level::ShowMap'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShowMap"+"("+")"+"\n"}
+Blockly.Lua['Level::ShowName'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShowName"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Level::UncoverHiddenDoor'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UncoverHiddenDoor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Level::Update'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Update"+"("+")"+"\n"}
+Blockly.Lua['Level::UpdateVisibility'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UpdateVisibility"+"("+")"+"\n"}
 Blockly.Lua['Level::m_DungeonReturnPosition'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".DungeonReturnPosition",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Level::m_set_DungeonReturnPosition'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"DungeonReturnPosition="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['Level::m_DungeonReturnRoomIndex'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".DungeonReturnRoomIndex",Blockly.Lua.ORDER_HIGH]}
@@ -1725,74 +1418,47 @@ Blockly.Lua['Level::m_GreedModeWave'] = function(block){return [Blockly.Lua.valu
 Blockly.Lua['Level::m_set_GreedModeWave'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"GreedModeWave="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['Level::m_LeaveDoor'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".LeaveDoor",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Level::m_set_LeaveDoor'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"LeaveDoor="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['ModReference::AddCallback'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCallback"+"("+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['ModReference::AddCallback'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCallback"+"("+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['ModReference::HasData'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"HasData"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['ModReference::LoadData'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"LoadData"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['ModReference::RemoveCallback'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveCallback"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['ModReference::RemoveData'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveData"+"("+")"
-}
-Blockly.Lua['ModReference::SaveData'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SaveData"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['ModReference::RemoveCallback'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveCallback"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['ModReference::RemoveData'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveData"+"("+")"+"\n"}
+Blockly.Lua['ModReference::SaveData'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SaveData"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['ModReference::m_Name'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Name",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['ModReference::m_set_Name'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Name="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['MusicManager::MusicManager'] = function(block){return [""+"MusicManager"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['MusicManager::Crossfade'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Crossfade"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['MusicManager::Disable'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Disable"+"("+")"
-}
-Blockly.Lua['MusicManager::DisableLayer'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DisableLayer"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['MusicManager::Enable'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Enable"+"("+")"
-}
-Blockly.Lua['MusicManager::EnableLayer'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"EnableLayer"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['MusicManager::Fadein'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Fadein"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['MusicManager::Fadeout'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Fadeout"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['MusicManager::Crossfade'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Crossfade"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['MusicManager::Disable'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Disable"+"("+")"+"\n"}
+Blockly.Lua['MusicManager::DisableLayer'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DisableLayer"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['MusicManager::Enable'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Enable"+"("+")"+"\n"}
+Blockly.Lua['MusicManager::EnableLayer'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"EnableLayer"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['MusicManager::Fadein'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Fadein"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['MusicManager::Fadeout'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Fadeout"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['MusicManager::GetCurrentMusicID'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetCurrentMusicID"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['MusicManager::GetQueuedMusicID'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetQueuedMusicID"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['MusicManager::IsEnabled'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsEnabled"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['MusicManager::IsLayerEnabled'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsLayerEnabled"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['MusicManager::Pause'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Pause"+"("+")"
-}
-Blockly.Lua['MusicManager::PitchSlide'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PitchSlide"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['MusicManager::Play'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Play"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['MusicManager::Queue'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Queue"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['MusicManager::ResetPitch'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ResetPitch"+"("+")"
-}
-Blockly.Lua['MusicManager::Resume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Resume"+"("+")"
-}
-Blockly.Lua['MusicManager::UpdateVolume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UpdateVolume"+"("+")"
-}
-Blockly.Lua['MusicManager::VolumeSlide'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"VolumeSlide"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['PathFinder::EvadeTarget'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"EvadeTarget"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['PathFinder::FindGridPath'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FindGridPath"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['MusicManager::Pause'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Pause"+"("+")"+"\n"}
+Blockly.Lua['MusicManager::PitchSlide'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PitchSlide"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['MusicManager::Play'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Play"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['MusicManager::Queue'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Queue"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['MusicManager::ResetPitch'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ResetPitch"+"("+")"+"\n"}
+Blockly.Lua['MusicManager::Resume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Resume"+"("+")"+"\n"}
+Blockly.Lua['MusicManager::UpdateVolume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UpdateVolume"+"("+")"+"\n"}
+Blockly.Lua['MusicManager::VolumeSlide'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"VolumeSlide"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['PathFinder::EvadeTarget'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"EvadeTarget"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['PathFinder::FindGridPath'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FindGridPath"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['PathFinder::GetEvadeMovementCountdown'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetEvadeMovementCountdown"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['PathFinder::GetGridIndex'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetGridIndex"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['PathFinder::HasDirectPath'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"HasDirectPath"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['PathFinder::HasPathToPos'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"HasPathToPos"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['PathFinder::MoveRandomly'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MoveRandomly"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['PathFinder::MoveRandomlyAxisAligned'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MoveRandomlyAxisAligned"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['PathFinder::MoveRandomlyBoss'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MoveRandomlyBoss"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['PathFinder::Reset'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Reset"+"("+")"
-}
-Blockly.Lua['PathFinder::ResetMovementTarget'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ResetMovementTarget"+"("+")"
-}
-Blockly.Lua['PathFinder::SetCanCrushRocks'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetCanCrushRocks"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['PathFinder::UpdateGridIndex'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UpdateGridIndex"+"("+")"
-}
+Blockly.Lua['PathFinder::MoveRandomlyAxisAligned'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MoveRandomlyAxisAligned"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['PathFinder::MoveRandomlyBoss'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MoveRandomlyBoss"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['PathFinder::Reset'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Reset"+"("+")"+"\n"}
+Blockly.Lua['PathFinder::ResetMovementTarget'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ResetMovementTarget"+"("+")"+"\n"}
+Blockly.Lua['PathFinder::SetCanCrushRocks'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetCanCrushRocks"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['PathFinder::UpdateGridIndex'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"UpdateGridIndex"+"("+")"+"\n"}
 Blockly.Lua['PlayerTypes::ActiveItemDesc::m_BatteryCharge'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".BatteryCharge",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['PlayerTypes::ActiveItemDesc::m_set_BatteryCharge'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"BatteryCharge="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['PlayerTypes::ActiveItemDesc::m_Charge'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Charge",Blockly.Lua.ORDER_HIGH]}
@@ -1867,13 +1533,11 @@ Blockly.Lua['RNG::GetSeed'] = function(block){return [Blockly.Lua.valueToCode(bl
 Blockly.Lua['RNG::Next'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Next"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['RNG::RandomFloat'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RandomFloat"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['RNG::RandomInt'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RandomInt"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['RNG::SetSeed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetSeed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['RNG::SetSeed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetSeed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Room::CheckLine'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CheckLine"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Room::DamageGrid'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DamageGrid"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Room::DestroyGrid'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"DestroyGrid"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Room::EmitBloodFromWalls'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"EmitBloodFromWalls"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Room::EmitBloodFromWalls'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"EmitBloodFromWalls"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Room::FindFreePickupSpawnPosition'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FindFreePickupSpawnPosition"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Room::FindFreeTilePosition'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"FindFreeTilePosition"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Room::GetAliveBossesCount'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetAliveBossesCount"+"("+")",Blockly.Lua.ORDER_HIGH]}
@@ -1939,65 +1603,40 @@ Blockly.Lua['Room::IsInitialized'] = function(block){return [Blockly.Lua.valueTo
 Blockly.Lua['Room::IsLShapedRoom'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsLShapedRoom"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Room::IsPositionInRoom'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsPositionInRoom"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Room::IsSacrificeDone'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsSacrificeDone"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Room::KeepDoorsClosed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"KeepDoorsClosed"+"("+")"
-}
-Blockly.Lua['Room::MamaMegaExplosion'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MamaMegaExplosion"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Room::PlayMusic'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayMusic"+"("+")"
-}
-Blockly.Lua['Room::RemoveDoor'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveDoor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Room::RemoveGridEntity'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveGridEntity"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Room::Render'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Render"+"("+")"
-}
-Blockly.Lua['Room::RespawnEnemies'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RespawnEnemies"+"("+")"
-}
+Blockly.Lua['Room::KeepDoorsClosed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"KeepDoorsClosed"+"("+")"+"\n"}
+Blockly.Lua['Room::MamaMegaExplosion'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"MamaMegaExplosion"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Room::PlayMusic'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayMusic"+"("+")"+"\n"}
+Blockly.Lua['Room::RemoveDoor'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveDoor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Room::RemoveGridEntity'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveGridEntity"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Room::Render'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Render"+"("+")"+"\n"}
+Blockly.Lua['Room::RespawnEnemies'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RespawnEnemies"+"("+")"+"\n"}
 Blockly.Lua['Room::ScreenWrapPosition'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ScreenWrapPosition"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Room::SetAmbushDone'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetAmbushDone"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Room::SetBrokenWatchState'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetBrokenWatchState"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Room::SetCardAgainstHumanity'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetCardAgainstHumanity"+"("+")"
-}
-Blockly.Lua['Room::SetClear'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetClear"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Room::SetFirstEnemyDead'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetFirstEnemyDead"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Room::SetFloorColor'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetFloorColor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Room::SetAmbushDone'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetAmbushDone"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Room::SetBrokenWatchState'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetBrokenWatchState"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Room::SetCardAgainstHumanity'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetCardAgainstHumanity"+"("+")"+"\n"}
+Blockly.Lua['Room::SetClear'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetClear"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Room::SetFirstEnemyDead'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetFirstEnemyDead"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Room::SetFloorColor'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetFloorColor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Room::SetGridPath'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetGridPath"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Room::SetRedHeartDamage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetRedHeartDamage"+"("+")"
-}
-Blockly.Lua['Room::SetSacrificeDone'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetSacrificeDone"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Room::SetShockwaveParam'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetShockwaveParam"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Room::SetSlowDown'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetSlowDown"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Room::SetWallColor'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetWallColor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Room::ShopReshuffle'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShopReshuffle"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Room::ShopRestockFull'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShopRestockFull"+"("+")"
-}
-Blockly.Lua['Room::ShopRestockPartial'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShopRestockPartial"+"("+")"
-}
-Blockly.Lua['Room::SpawnClearAward'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SpawnClearAward"+"("+")"
-}
+Blockly.Lua['Room::SetRedHeartDamage'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetRedHeartDamage"+"("+")"+"\n"}
+Blockly.Lua['Room::SetSacrificeDone'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetSacrificeDone"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Room::SetShockwaveParam'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetShockwaveParam"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Room::SetSlowDown'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetSlowDown"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Room::SetWallColor'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetWallColor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Room::ShopReshuffle'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShopReshuffle"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Room::ShopRestockFull'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShopRestockFull"+"("+")"+"\n"}
+Blockly.Lua['Room::ShopRestockPartial'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ShopRestockPartial"+"("+")"+"\n"}
+Blockly.Lua['Room::SpawnClearAward'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SpawnClearAward"+"("+")"+"\n"}
 Blockly.Lua['Room::SpawnGridEntity'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SpawnGridEntity"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Room::TryMakeBridge'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TryMakeBridge"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Room::TryPlaceLadder'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TryPlaceLadder"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Room::TryPlaceLadder'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TryPlaceLadder"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Room::TrySpawnBlueWombDoor'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TrySpawnBlueWombDoor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Room::TrySpawnBossRushDoor'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TrySpawnBossRushDoor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Room::TrySpawnDevilRoomDoor'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TrySpawnDevilRoomDoor"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Room::TrySpawnMegaSatanRoomDoor'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TrySpawnMegaSatanRoomDoor"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Room::TrySpawnTheVoidDoor'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TrySpawnTheVoidDoor"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Room::TurnGold'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TurnGold"+"("+")"
-}
-Blockly.Lua['Room::Update'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Update"+"("+")"
-}
+Blockly.Lua['Room::TurnGold'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"TurnGold"+"("+")"+"\n"}
+Blockly.Lua['Room::Update'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Update"+"("+")"+"\n"}
 Blockly.Lua['Room::WorldToScreenPosition'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"WorldToScreenPosition"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['RoomConfig::Entry::m_Subtype'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Subtype",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['RoomConfig::Entry::m_set_Subtype'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Subtype="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
@@ -2078,17 +1717,13 @@ Blockly.Lua['RoomDescriptor::m_SurpriseMiniboss'] = function(block){return [Bloc
 Blockly.Lua['RoomDescriptor::m_set_SurpriseMiniboss'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"SurpriseMiniboss="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['RoomDescriptor::m_VisitedCount'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".VisitedCount",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['RoomDescriptor::m_set_VisitedCount'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"VisitedCount="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['Seeds::AddSeedEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddSeedEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Seeds::AddSeedEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddSeedEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Seeds::CanAddSeedEffect'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CanAddSeedEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Seeds::ClearSeedEffects'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearSeedEffects"+"("+")"
-}
-Blockly.Lua['Seeds::ClearStartSeed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearStartSeed"+"("+")"
-}
+Blockly.Lua['Seeds::ClearSeedEffects'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearSeedEffects"+"("+")"+"\n"}
+Blockly.Lua['Seeds::ClearStartSeed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearStartSeed"+"("+")"+"\n"}
 Blockly.Lua['Seeds::CountSeedEffects'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"CountSeedEffects"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Seeds::CountUnlockedSeedEffects'] = function(block){return ["Seeds"+"."+"CountUnlockedSeedEffects"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Seeds::ForgetStageSeed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ForgetStageSeed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Seeds::ForgetStageSeed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ForgetStageSeed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Seeds::GetNextSeed'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetNextSeed"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Seeds::GetPlayerInitSeed'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetPlayerInitSeed"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Seeds::GetSeedEffect'] = function(block){return ["Seeds"+"."+"GetSeedEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
@@ -2096,42 +1731,29 @@ Blockly.Lua['Seeds::GetStageSeed'] = function(block){return [Blockly.Lua.valueTo
 Blockly.Lua['Seeds::GetStartSeed'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetStartSeed"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Seeds::GetStartSeedString'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetStartSeedString"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Seeds::HasSeedEffect'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"HasSeedEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Seeds::InitSeedInfo'] = function(block){return "Seeds"+"."+"InitSeedInfo"+"("+")"
-}
+Blockly.Lua['Seeds::InitSeedInfo'] = function(block){return "Seeds"+"."+"InitSeedInfo"+"("+")"+"\n"}
 Blockly.Lua['Seeds::IsCustomRun'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsCustomRun"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Seeds::IsInitialized'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsInitialized"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Seeds::IsSeedComboBanned'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsSeedComboBanned"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Seeds::IsSpecialSeed'] = function(block){return ["Seeds"+"."+"IsSpecialSeed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Seeds::IsStringValidSeed'] = function(block){return ["Seeds"+"."+"IsStringValidSeed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Seeds::RemoveBlockingSeedEffects'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveBlockingSeedEffects"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Seeds::RemoveSeedEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveSeedEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Seeds::Reset'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Reset"+"("+")"
-}
-Blockly.Lua['Seeds::Restart'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Restart"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Seeds::RemoveBlockingSeedEffects'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveBlockingSeedEffects"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Seeds::RemoveSeedEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveSeedEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Seeds::Reset'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Reset"+"("+")"+"\n"}
+Blockly.Lua['Seeds::Restart'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Restart"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Seeds::Seed2String'] = function(block){return ["Seeds"+"."+"Seed2String"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Seeds::SetStartSeed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetStartSeed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Seeds::SetStartSeed'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetStartSeed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Seeds::String2Seed'] = function(block){return ["Seeds"+"."+"String2Seed"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['SFXManager::SFXManager'] = function(block){return [""+"SFXManager"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['SFXManager::AdjustPitch'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AdjustPitch"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['SFXManager::AdjustVolume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AdjustVolume"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['SFXManager::AdjustPitch'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AdjustPitch"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['SFXManager::AdjustVolume'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AdjustVolume"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['SFXManager::GetAmbientSoundVolume'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetAmbientSoundVolume"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['SFXManager::IsPlaying'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsPlaying"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['SFXManager::Play'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Play"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['SFXManager::Preload'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Preload"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['SFXManager::SetAmbientSound'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetAmbientSound"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['SFXManager::Stop'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Stop"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['SFXManager::StopLoopingSounds'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"StopLoopingSounds"+"("+")"
-}
+Blockly.Lua['SFXManager::Play'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Play"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg4", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg5", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['SFXManager::Preload'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Preload"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['SFXManager::SetAmbientSound'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetAmbientSound"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['SFXManager::Stop'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Stop"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['SFXManager::StopLoopingSounds'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"StopLoopingSounds"+"("+")"+"\n"}
 Blockly.Lua['ShockwaveParams::m_Age'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Age",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['ShockwaveParams::m_set_Age'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Age="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['ShockwaveParams::m_LifeSpan'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".LifeSpan",Blockly.Lua.ORDER_HIGH]}
@@ -2160,46 +1782,27 @@ Blockly.Lua['Sprite::IsLoaded'] = function(block){return [Blockly.Lua.valueToCod
 Blockly.Lua['Sprite::IsOverlayFinished'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsOverlayFinished"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Sprite::IsOverlayPlaying'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsOverlayPlaying"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Sprite::IsPlaying'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"IsPlaying"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Sprite::Load'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Load"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Sprite::LoadGraphics'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"LoadGraphics"+"("+")"
-}
-Blockly.Lua['Sprite::Play'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Play"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Sprite::PlayOverlay'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayOverlay"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Sprite::PlayRandom'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayRandom"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Sprite::Reload'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Reload"+"("+")"
-}
-Blockly.Lua['Sprite::RemoveOverlay'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveOverlay"+"("+")"
-}
-Blockly.Lua['Sprite::Render'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Render"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Sprite::RenderLayer'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RenderLayer"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Sprite::ReplaceSpritesheet'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ReplaceSpritesheet"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Sprite::Reset'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Reset"+"("+")"
-}
+Blockly.Lua['Sprite::Load'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Load"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Sprite::LoadGraphics'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"LoadGraphics"+"("+")"+"\n"}
+Blockly.Lua['Sprite::Play'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Play"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Sprite::PlayOverlay'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayOverlay"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Sprite::PlayRandom'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"PlayRandom"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Sprite::Reload'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Reload"+"("+")"+"\n"}
+Blockly.Lua['Sprite::RemoveOverlay'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveOverlay"+"("+")"+"\n"}
+Blockly.Lua['Sprite::Render'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Render"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Sprite::RenderLayer'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RenderLayer"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Sprite::ReplaceSpritesheet'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ReplaceSpritesheet"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Sprite::Reset'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Reset"+"("+")"+"\n"}
 Blockly.Lua['Sprite::SetAnimation'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetAnimation"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Sprite::SetFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetFrame"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Sprite::SetFrame_overload1'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetFrame"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Sprite::SetLastFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetLastFrame"+"("+")"
-}
-Blockly.Lua['Sprite::SetLayerFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetLayerFrame"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Sprite::SetFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetFrame"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Sprite::SetFrame_overload1'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetFrame"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Sprite::SetLastFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetLastFrame"+"("+")"+"\n"}
+Blockly.Lua['Sprite::SetLayerFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetLayerFrame"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Sprite::SetOverlayAnimation'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetOverlayAnimation"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Sprite::SetOverlayFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetOverlayFrame"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Sprite::SetOverlayRenderPriority'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetOverlayRenderPriority"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['Sprite::Stop'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Stop"+"("+")"
-}
-Blockly.Lua['Sprite::Update'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Update"+"("+")"
-}
+Blockly.Lua['Sprite::SetOverlayFrame'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetOverlayFrame"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Sprite::SetOverlayRenderPriority'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"SetOverlayRenderPriority"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['Sprite::Stop'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Stop"+"("+")"+"\n"}
+Blockly.Lua['Sprite::Update'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Update"+"("+")"+"\n"}
 Blockly.Lua['Sprite::WasEventTriggered'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"WasEventTriggered"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Sprite::m_Color'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Color",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Sprite::m_set_Color'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Color="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
@@ -2235,14 +1838,10 @@ Blockly.Lua['TemporaryEffect::m_Count'] = function(block){return [Blockly.Lua.va
 Blockly.Lua['TemporaryEffect::m_set_Count'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Count="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
 Blockly.Lua['TemporaryEffect::m_Item'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".Item",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['TemporaryEffect::m_set_Item'] = function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"Item="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\n"}
-Blockly.Lua['TemporaryEffects::AddCollectibleEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCollectibleEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['TemporaryEffects::AddNullEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddNullEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['TemporaryEffects::AddTrinketEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddTrinketEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['TemporaryEffects::ClearEffects'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearEffects"+"("+")"
-}
+Blockly.Lua['TemporaryEffects::AddCollectibleEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddCollectibleEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['TemporaryEffects::AddNullEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddNullEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['TemporaryEffects::AddTrinketEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"AddTrinketEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['TemporaryEffects::ClearEffects'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"ClearEffects"+"("+")"+"\n"}
 Blockly.Lua['TemporaryEffects::GetCollectibleEffect'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetCollectibleEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['TemporaryEffects::GetCollectibleEffectNum'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetCollectibleEffectNum"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['TemporaryEffects::GetEffectsList'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"GetEffectsList"+"("+")",Blockly.Lua.ORDER_HIGH]}
@@ -2253,20 +1852,16 @@ Blockly.Lua['TemporaryEffects::GetTrinketEffectNum'] = function(block){return [B
 Blockly.Lua['TemporaryEffects::HasCollectibleEffect'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"HasCollectibleEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['TemporaryEffects::HasNullEffect'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"HasNullEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['TemporaryEffects::HasTrinketEffect'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"HasTrinketEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['TemporaryEffects::RemoveCollectibleEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveCollectibleEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['TemporaryEffects::RemoveNullEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveNullEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
-Blockly.Lua['TemporaryEffects::RemoveTrinketEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveTrinketEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['TemporaryEffects::RemoveCollectibleEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveCollectibleEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['TemporaryEffects::RemoveNullEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveNullEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
+Blockly.Lua['TemporaryEffects::RemoveTrinketEffect'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"RemoveTrinketEffect"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Vector::Vector'] = function(block){return [""+"Vector"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Vector::__add'] = function(block){return [Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_ADDITIVE)+"+"+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_ADDITIVE),Blockly.Lua.ORDER_ADDITIVE]}
 Blockly.Lua['Vector::__div'] = function(block){return [Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_MULTIPLICATIVE)+"/"+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_MULTIPLICATIVE),Blockly.Lua.ORDER_MULTIPLICATIVE]}
 Blockly.Lua['Vector::__mul'] = function(block){return [Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_MULTIPLICATIVE)+"*"+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_MULTIPLICATIVE),Blockly.Lua.ORDER_MULTIPLICATIVE]}
 Blockly.Lua['Vector::__sub'] = function(block){return [Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_ADDITIVE)+"-"+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_ADDITIVE),Blockly.Lua.ORDER_ADDITIVE]}
 Blockly.Lua['Vector::__unm'] = function(block){return ["-"+Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_UNARY),Blockly.Lua.ORDER_UNARY]}
-Blockly.Lua['Vector::Clamp'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Clamp"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Vector::Clamp'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Clamp"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Vector::Clamped'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Clamped"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg3", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Vector::Cross'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Cross"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Vector::Distance'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Distance"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
@@ -2277,11 +1872,9 @@ Blockly.Lua['Vector::GetAngleDegrees'] = function(block){return [Blockly.Lua.val
 Blockly.Lua['Vector::Length'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Length"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Vector::LengthSquared'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"LengthSquared"+"("+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Vector::Lerp'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Lerp"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg1", Blockly.Lua.ORDER_NONE)+","+Blockly.Lua.valueToCode(block, "arg2", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Vector::Normalize'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Normalize"+"("+")"
-}
+Blockly.Lua['Vector::Normalize'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Normalize"+"("+")"+"\n"}
 Blockly.Lua['Vector::Normalized'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Normalized"+"("+")",Blockly.Lua.ORDER_HIGH]}
-Blockly.Lua['Vector::Resize'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Resize"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"
-}
+Blockly.Lua['Vector::Resize'] = function(block){return Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Resize"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")"+"\n"}
 Blockly.Lua['Vector::Resized'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Resized"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Vector::Rotated'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+":"+"Rotated"+"("+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+")",Blockly.Lua.ORDER_HIGH]}
 Blockly.Lua['Vector::m_X'] = function(block){return [Blockly.Lua.valueToCode(block,"thisobj",Blockly.Lua.ORDER_TABLE_ACCESS)+".X",Blockly.Lua.ORDER_HIGH]}

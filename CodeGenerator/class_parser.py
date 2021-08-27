@@ -545,7 +545,7 @@ def parse_class(text, class_file_name):
 
                 ret_str += '+")"'
                 if ret_type == 'void':
-                    func_str += f'{ret_str}\n'
+                    func_str += f'{ret_str}+"\\n"'
                 else:
                     func_str += f'[{ret_str},Blockly.Lua.ORDER_HIGH]'
                 func_str += '}'
