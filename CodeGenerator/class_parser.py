@@ -424,10 +424,15 @@ def parse_class(text, class_file_name):
                     }
                     if ret_type in REPLACE_DICT:
                         ret_type = REPLACE_DICT[ret_type]
-
                 if class_name == 'Level' and func_name == 'GetRooms':
                     assert ret_type == 'RoomDescriptor::List'
                     ret_type = 'CppContainer::ArrayProxy::RoomDescriptor'
+                if class_name == 'MusicManager':
+                    # every ID is wrong
+                    if func_name in ['GetCurrentMusicID','GetQueuedMusicID']:
+                        assert ret_type == 'MusicManager'
+                        ret_type = 'Music'
+
 
                 if ret_type != 'void':
                     text['message0'] += f'[{apply_translate(ret_type,dup_hash,True)}]'
@@ -471,6 +476,16 @@ def parse_class(text, class_file_name):
                 if GetFuncName(gp) == 'GridSpawn' and class_name == 'Isaac':
                     assert args[0]['type'] == 'GridEntity'
                     args[0]['type'] = 'GridEntityType'
+                if class_name == 'TemporaryEffects':
+                    for i in range(len(args)):
+                        if args[i]['type'] == 'ItemConfig::NullItemID':
+                            args[i]['type'] = 'NullItemID'
+                if class_name == 'MusicManager':
+                    # every ID is wrong
+                    if func_name in ['Crossfade', 'Fadein', 'Play', 'Queue']:
+                        assert args[0]['name'] == 'ID'
+                        assert args[0]['type'] == 'MusicManager'
+                        args[0]['type'] = 'Music'
 
                 arg_id = 0
 
