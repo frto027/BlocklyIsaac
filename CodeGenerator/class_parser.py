@@ -425,6 +425,10 @@ def parse_class(text, class_file_name):
                     if ret_type in REPLACE_DICT:
                         ret_type = REPLACE_DICT[ret_type]
 
+                if class_name == 'Level' and func_name == 'GetRooms':
+                    assert ret_type == 'RoomDescriptor::List'
+                    ret_type = 'CppContainer::ArrayProxy::RoomDescriptor'
+
                 if ret_type != 'void':
                     text['message0'] += f'[{apply_translate(ret_type,dup_hash,True)}]'
                     text['output']=f'"{ret_type}"'
