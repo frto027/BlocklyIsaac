@@ -3,7 +3,7 @@
 
 这个工程允许你使用Google Blockly图形化编程语言来创建游戏的mod。你可以在[点击此处](http://frto027.gitee.io/blocklyisaac/?lang=zh-hans)进行试用。
 
-游戏的接口定义在`game_blocks.js`文件中，该文件通过`CodeGenerator\class_parser.py`识别LuaDocs的doxygen文档自动生成。
+游戏的接口定义在`game_blocks.js`文件中，该文件通过`CodeGenerator\class_parser.py`识别IsaacDoc的markdown文档自动生成。
 
 # 翻译说明
 
