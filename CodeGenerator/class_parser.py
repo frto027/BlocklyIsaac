@@ -486,6 +486,15 @@ def parse_class(text, class_file_name):
                         assert args[0]['name'] == 'ID'
                         assert args[0]['type'] == 'MusicManager'
                         args[0]['type'] = 'Music'
+                if class_name == 'EntityPlayer':
+                    if (func_name in ['UseActiveItem', 'UseCard']) and args[1]['name'] == 'UseFlags':
+                        assert args[1]['type'] == 'UseFlags'
+                        assert args[1]['name'] == 'UseFlags'
+                        args[1]['type'] = 'UseFlag'
+                    if func_name == 'UsePill':
+                        assert args[2]['type'] == 'UseFlags'
+                        assert args[2]['name'] == 'UseFlags'
+                        args[2]['type'] = 'UseFlag'
 
                 arg_id = 0
 
