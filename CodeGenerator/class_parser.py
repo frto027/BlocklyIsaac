@@ -28,19 +28,6 @@ import re
 LUA_DOC_DIR = "CodeGenerator/IsaacDocs"  # """CodeGenerator/LuaDocs"""
 MOD_DOC_WEB_DIR = "" # "https://moddingofisaac.com/docs" see function get_blk_help at blockly_inject.js
 
-# """
-# group:
-# 1 0 static
-# 2 1 const
-# 3 2 返回值（整体）包含(4 7)
-# 4 3 返回值类型
-# 7 6 返回值的&标记
-
-# 8 7 命名空间/类名
-# 10 9 函数/成员名字
-# """
-# FUNC_NAME_REG = re.compile('^(static )?(const )?((([_a-zA-Z0-9]+::)*([_a-zA-Z0-9]+))(&)? )?(([_a-zA-Z0-9]+::)*)([_a-zA-Z0-9]+)$')
-
 # group 1 0 static
 # group 2 1 const
 # group 4 3 return type/value type
@@ -150,7 +137,7 @@ typealias = {
     "ItemList":"ItemConfigList",
     "PillList":"PillConfigList",
     "GridEntity":"GridEntityType",
-    # TODO:I don't know what ProjectilesMode is...
+    # ProjectilesMode is int
     "ProjectilesMode":"int",
     "Curses":"LevelCurse",
 
@@ -828,34 +815,6 @@ for class_md in glob(f'{LUA_DOC_DIR}/docs/*.md'):
 
     with open(class_md) as f:
         parse_class(f.read(),class_name)
-
-
-# with open(LUA_DOC_DIR + '/group__enums.html') as f:
-#     parse_enums(f.read(),MOD_DOC_WEB_DIR + '/')
-
-# # first scan
-# for k in inhert:
-#     parent = inhert[k]
-#     child = k
-#     if not parent in inhert_cluster:
-#         inhert_cluster[parent]=[ parent ]
-#     inhert_cluster[ parent ].append(child)
-# # cluster
-# stop_cluster = False
-# while not stop_cluster:
-#     stop_cluster = True
-#     for elem in inhert_cluster:
-#         for elem_child in inhert_cluster[elem]:
-#             if elem_child in inhert_cluster:
-#                 # elem_child_child -> elem
-#                 for elem_child_child in inhert_cluster[elem_child]:
-#                     if not elem_child_child in inhert_cluster[elem]:
-#                         inhert_cluster[elem].append(elem_child_child)
-#                         stop_cluster = False
-# ↑ It is so beautiful that I bought a vernier caliper
-
-
-# exit(0)
 
 
 #patch: replace all integer to math_number
