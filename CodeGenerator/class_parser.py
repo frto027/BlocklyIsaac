@@ -673,6 +673,11 @@ def parse_enums(md_text,enum_name):
     # all enums are number
     typealias[enum_name]='Number'
 
+    # record all enum types
+    enum_types.append(enum_name)
+
+
+
 callback_args = {}
 callback_add_args = {}
 def parse_callback_args(args_text, callback_name):
@@ -712,7 +717,7 @@ def parse_callback_args(args_text, callback_name):
                 (apply_translate(Name,callback_name) if Name != None else '')
         })
     return ret
-
+enum_types = []
 def parse_mod_callback_enum(md_text):
     assert md_text.startswith('# Enum "ModCallbacks"'), 'invalid mod_callback_enum file'
 
@@ -794,6 +799,9 @@ def parse_mod_callback_enum(md_text):
     # all enums are number
     typealias[enum_name]='Number'
 
+    # record all enum types
+    enum_types.append(enum_name)
+
 
 for enum_md in glob(f'{LUA_DOC_DIR}/docs/enums/*.md'):
     enum_name = enum_md.split('\\')[-1][:-3]
@@ -849,30 +857,6 @@ def toolboxBlockText(block):
     if block == 'Game::GetPlayer':
         return '<value name="thisobj"><shadow type="Game::Game"></shadow></value>'+\
         '<value name="arg0"><shadow type="math_number"><field name="NUM">0</field></shadow></value>'
-    if block == 'Level::GetName':
-        return '\
-        <value name="thisobj">\
-          <block type="Game::GetLevel">\
-            <value name="thisobj">\
-              <block type="Game::Game"></block>\
-            </value>\
-          </block>\
-        </value>\
-        <value name="arg0">\
-          <shadow type="logic_null"></shadow>\
-        </value>\
-        <value name="arg1">\
-          <shadow type="logic_null"></shadow>\
-        </value>\
-        <value name="arg2">\
-          <shadow type="logic_null"></shadow>\
-        </value>\
-        <value name="arg3">\
-          <shadow type="logic_null"></shadow>\
-        </value>\
-        <value name="arg4">\
-          <shadow type="logic_null"></shadow>\
-        </value>'
     if block == 'EntityNPC::FireProjectiles':
         # the FireProjectiles argument is not documented, we need a comment here
         return '<value name="arg2"><shadow type="math_number"><field name="NUM">0</field>'+\
@@ -910,6 +894,8 @@ def toolboxBlockText(block):
                     '</block></value>').format(arg=argname)
             if type_dict[argname] == 'SFXManager':
                 ret += ('<value name="{arg}"><block type="SFXManager::SFXManager"></block></value>').format(arg=argname)
+            if type_dict[argname] in enum_types:
+                ret += ('<value name="{arg}"><shadow type="{enum_type}"></shadow></value>').format(arg=argname, enum_type=type_dict[argname])
     return ret
 
 
