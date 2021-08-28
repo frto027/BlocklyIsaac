@@ -139,6 +139,7 @@ typealias = {
     "GridEntity":"GridEntityType",
     # ProjectilesMode is int
     "ProjectilesMode":"int",
+    "LinecheckMode":"int",
     "Curses":"LevelCurse",
 
     "Number":"int", # If I need a float, you can give me a Number(by Blockly)
@@ -171,8 +172,14 @@ def parse_function_params(param_text):
         param = re.sub(r'\[([a-zA-Z0-9:]+)\]\([a-zA-Z0-9/\._]+\)',r'\1',param).strip()
         match = re.match(r'^([^ ]+)( +([^ ]+))?( *= *([^ ]+))?$',param)
         assert match, f'not match {param}'
+
+        a_type = match.group(1)
+
+        if a_type == 'bool':
+            a_type = 'boolean'
+
         ret.append({
-            'type':match.group(1),
+            'type':a_type,
             'name':match.group(3) if match.group(3) != None else '',
             'default':match.group(5)
         })
@@ -300,13 +307,18 @@ def parse_class(text, class_file_name):
                 argument_type_dict[text['type'].strip('"')] = self_argument_types
             elif current_subtitle == 'Variables':
                 variable_name = GetVarName(gp)
+                var_type = GetVarType(gp)
                 dup_hash = f'{class_name}::{variable_name}'
 
                 assert not IsStatic(gp), f'{variable_name} at {class_file_name} is static'
 
+                if class_name == 'RoomConfig::Room' and variable_name == 'Spawns':
+                    assert var_type == 'SpawnList'
+                    var_type = 'CppContainer::ArrayProxy::RoomConfigSpawns'
+
                 text['type'] = f'"{class_name}::m_{variable_name}"'
 
-                text['message0']=f'"[{apply_translate(GetVarType(gp),dup_hash,True)}]{apply_translate(variable_name,dup_hash)}'
+                text['message0']=f'"[{apply_translate(var_type,dup_hash,True)}]{apply_translate(variable_name,dup_hash)}'
 
                 text['message0'] += '%1'
                 text['args0']='[{"type":"input_dummy"}'
@@ -318,8 +330,8 @@ def parse_class(text, class_file_name):
                 text['args0'] += ']'
 
                 text['inputsInline']='false'
-                text['output']=f'"{GetVarType(gp)}"'
-                text['colour']=NameToColour(GetVarType(gp))
+                text['output']=f'"{var_type}"'
+                text['colour']=NameToColour(var_type)
                 text['tooltip']=f'"{GetVarName(gp)}"'
                 href_url = f'/{class_file_name}.html#{GetVarName(gp).lower()}'
                 text['helpUrl']=f'()=>get_blk_help("{href_url}")'
@@ -348,8 +360,8 @@ def parse_class(text, class_file_name):
                     text['args0'] += ',{"type":"input_value","name":"thisobj","check":"'+class_name+'",align:"RIGHT"}'
 
                     # new value
-                    text['message0']+=f' {apply_translate("new value",dup_hash)}[{apply_translate(GetVarType(gp),dup_hash,True)}] %3'
-                    text['args0'] += ',{"type":"input_value","name":"arg0","check":"'+GetVarType(gp)+'",align:"RIGHT"}'
+                    text['message0']+=f' {apply_translate("new value",dup_hash)}[{apply_translate(var_type,dup_hash,True)}] %3'
+                    text['args0'] += ',{"type":"input_value","name":"arg0","check":"'+var_type+'",align:"RIGHT"}'
                     text['message0'] += '"'
                     text['args0'] += ']'
                     text["previousStatement"]="null"
@@ -359,7 +371,7 @@ def parse_class(text, class_file_name):
                     toolbox[class_name].append(text)
                     argument_type_dict[text['type'].strip('"')] = {
                         'thisobj':class_name,
-                        'arg0':GetVarType(gp)
+                        'arg0':var_type
                     }
 
                     func_str = 'function(block){return Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.ORDER_TABLE_ACCESS)+"."+"' + GetVarName(gp) + '="+Blockly.Lua.valueToCode(block, "arg0", Blockly.Lua.ORDER_NONE)+"\\n"}'
@@ -419,6 +431,10 @@ def parse_class(text, class_file_name):
                     if func_name in ['GetCurrentMusicID','GetQueuedMusicID']:
                         assert ret_type == 'MusicManager'
                         ret_type = 'Music'
+                if class_name == 'EntityPlayer':
+                    if func_name == 'GetMultiShotPositionVelocity':
+                        assert ret_type == 'PosVel'
+                        ret_type = 'PlayerTypes::PosVel'
 
 
                 if ret_type != 'void':
@@ -862,7 +878,19 @@ def toolboxBlockText(block):
         return '<value name="arg2"><shadow type="math_number"><field name="NUM">0</field>'+\
         '<comment pinned="false" h="240.66668701171875" w="738">%{ENTITYNPC_FIREPROJECTILES_ARGUMENT_PROJECTILE_MODE}</comment>'+\
         '</shadow></value>'
-    
+    if block == 'Room::CheckLine':
+        return '<value name="thisobj"><block type="Game::GetRoom"><value name="thisobj"><block type="Game::Game"></block></value></block></value>'+\
+        '<value name="arg0"><shadow type="Vector::Vector" inline="true">'+\
+        '<value name="arg0"><shadow type="math_number"><field name="NUM">0</field></shadow></value>'+\
+        '<value name="arg1"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>'+\
+        '<value name="arg1"><shadow type="Vector::Vector" inline="true"><value name="arg0">'+\
+        '<shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="arg1">'+\
+        '<shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>'+\
+        '<value name="arg2"><shadow type="math_number"><field name="NUM">0</field>'+\
+        '<comment pinned="false" h="192" w="605">%{ROOM_CHECKLINE_LINECHECKMODE_COMMENT}</comment></shadow></value>'+\
+        '<value name="arg3"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="arg4">'+\
+        '<shadow type="logic_boolean"><field name="BOOL">FALSE</field></shadow></value><value name="arg5">'+\
+        '<shadow type="logic_boolean"><field name="BOOL">FALSE</field></shadow></value>'
     # the default value
     ret = ''
     if block in argument_type_dict:
@@ -905,6 +933,78 @@ def toolboxBlockText(block):
                     '<value name="arg0"><shadow type="math_number"><field name="NUM">0</field></shadow></value>'+\
                     '<value name="arg1"><shadow type="math_number"><field name="NUM">0</field></shadow></value>'+\
                     '</shadow></value>').format(arg=argname)
+            if type_dict[argname] == 'TemporaryEffects':
+                ret += ('<value name="{arg}"><shadow type="EntityPlayer::GetEffects">'+\
+                '<value name="thisobj"><shadow type="Isaac::GetPlayer">'+\
+                '<value name="arg0"><shadow type="math_number"><field name="NUM">0</field></shadow></value>'+\
+                '</shadow></value></shadow></value>').format(arg=argname)
+            if type_dict[argname] == 'TemporaryEffect':
+                ret += ('<value name="{arg}"><shadow type="TemporaryEffects::GetCollectibleEffect">'+\
+                '<value name="thisobj"><shadow type="EntityPlayer::GetEffects"><value name="thisobj">'+\
+                '<shadow type="Isaac::GetPlayer"><value name="arg0"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow>'+\
+                '</value></shadow></value><value name="arg0"><shadow type="CollectibleType">'+\
+                '<field name="ENUM_VAL">COLLECTIBLE_SAD_ONION</field></shadow></value></shadow></value>').format(arg=argname)
+            if type_dict[argname] == 'string':
+                ret += ('<value name="{arg}"><shadow type="text"><field name="TEXT"></field></shadow></value>').format(arg=argname)
+            if type_dict[argname] == 'TearParams':
+                ret += ('<value name="{arg}"><shadow type="EntityPlayer::GetTearHitParams">'+\
+                '<value name="thisobj"><shadow type="Isaac::GetPlayer"><value name="arg0"><shadow type="math_number">'+\
+                '<field name="NUM">0</field></shadow></value></shadow></value><value name="arg0">'+\
+                '<shadow type="WeaponType"><field name="ENUM_VAL">WEAPON_TEARS</field></shadow></value><value name="arg1">'+\
+                '<shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="arg2">'+\
+                '<shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="arg3">'+\
+                '<shadow type="logic_null"></shadow></value></shadow></value>').format(arg=argname)
+            if type_dict[argname] == 'RoomDescriptor':
+                ret += ('<value name="{arg}"><shadow type="Level::GetCurrentRoomDesc"><value name="thisobj">'+\
+                '<shadow type="Game::GetLevel"><value name="thisobj"><shadow type="Game::Game"></shadow></value></shadow>'+\
+                '</value></shadow></value>').format(arg=argname)
+            if type_dict[argname] == 'RoomConfig::Room':
+                ret += ('<value name="{arg}"><block type="RoomDescriptor::m_Data">'+\
+                '<value name="thisobj"><shadow type="Level::GetCurrentRoomDesc">'+\
+                '<value name="thisobj"><shadow type="Game::GetLevel"><value name="thisobj"><shadow type="Game::Game">'+\
+                '</shadow></value></shadow></value></shadow></value></block></value>').format(arg=argname)
+            if type_dict[argname] == 'RoomConfig::Spawn':
+                ret += ('<value name="{arg}"><block type="CppContainer::ArrayProxy::RoomConfigSpawns::Get">'+\
+                '<value name="thisobj"><block type="RoomConfig::Room::m_Spawns"><value name="thisobj">'+\
+                '<block type="RoomDescriptor::m_Data"><value name="thisobj"><shadow type="Level::GetCurrentRoomDesc">'+\
+                '<value name="thisobj"><shadow type="Game::GetLevel"><value name="thisobj"><shadow type="Game::Game">'+\
+                '</shadow></value></shadow></value></shadow></value></block></value></block></value><value name="arg0">'+\
+                '<shadow type="math_number"><field name="NUM">0</field></shadow></value></block></value>').format(arg=argname)
+            if type_dict[argname] == 'RoomConfig::Entry':
+                ret += ('<value name="{arg}"><block type="RoomConfig::Spawn::PickEntry"><value name="thisobj">'+\
+                '<block type="CppContainer::ArrayProxy::RoomConfigSpawns::Get"><value name="thisobj">'+\
+                '<block type="RoomConfig::Room::m_Spawns"><value name="thisobj"><block type="RoomDescriptor::m_Data">'+\
+                '<value name="thisobj"><shadow type="Level::GetCurrentRoomDesc"><value name="thisobj">'+\
+                '<shadow type="Game::GetLevel"><value name="thisobj"><shadow type="Game::Game"></shadow>'+\
+                '</value></shadow></value></shadow></value></block></value></block></value><value name="arg0">'+\
+                '<shadow type="math_number"><field name="NUM">0</field></shadow></value></block></value><value name="arg0">'+\
+                '<shadow type="math_number"><field name="NUM">0</field></shadow></value></block></value>').format(arg=argname)
+            if type_dict[argname] == 'ItemConfig::Item':
+                ret += ('<value name="{arg}"><shadow type="ItemConfig::GetCollectible"><value name="thisobj">'+\
+                '<shadow type="ItemConfig"><field name="ENUM_VAL">CHARGE_NORMAL</field></shadow></value>'+\
+                '<value name="arg0"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>').format(arg=argname)
+            if type_dict[argname] == 'PathFinder':
+                ret += ('<value name="{arg}"><block type="EntityNPC::m_Pathfinder"></block></value>').format(arg=argname)
+            if type_dict[argname] == 'KColor':
+                ret += ('<value name="{arg}"><shadow type="KColor::KColor"><value name="arg0"><shadow type="math_number">'+\
+                '<field name="NUM">0</field></shadow></value><value name="arg1"><shadow type="math_number">'+\
+                '<field name="NUM">0</field></shadow></value><value name="arg2"><shadow type="math_number">'+\
+                '<field name="NUM">0</field></shadow></value><value name="arg3"><shadow type="math_number">'+\
+                '<field name="NUM">0</field></shadow></value></shadow></value>').format(arg=argname)
+            if type_dict[argname] == 'PlayerTypes::PosVel':
+                ret += ('<value name="{arg}"><shadow type="EntityPlayer::GetMultiShotPositionVelocity">'+\
+                '<value name="thisobj"><shadow type="Isaac::GetPlayer"><value name="arg0"><shadow type="math_number">'+\
+                '<field name="NUM">0</field></shadow></value></shadow></value><value name="arg0"><shadow type="math_number">'+\
+                '<field name="NUM">0</field></shadow></value><value name="arg1"><shadow type="WeaponType">'+\
+                '<field name="ENUM_VAL">WEAPON_TEARS</field></shadow></value><value name="arg2">'+\
+                '<shadow type="Vector::Vector" inline="true"><value name="arg0"><shadow type="math_number">'+\
+                '<field name="NUM">0</field></shadow></value><value name="arg1"><shadow type="math_number">'+\
+                '<field name="NUM">0</field></shadow></value></shadow></value><value name="arg3">'+\
+                '<shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>').format(arg=argname)
+            if type_dict[argname] == 'ItemPool':
+                ret += ('<value name="{arg}"><shadow type="Game::GetItemPool"><value name="thisobj"><shadow type="Game::Game"></shadow></value></shadow></value>').format(arg=argname)
+            if type_dict[argname] == 'ItemConfig::Card':
+                ret += ('<value name="{arg}"><shadow type="ItemConfig::GetCard"><value name="thisobj"><shadow type="ItemConfig"><field name="ENUM_VAL">CHARGE_NORMAL</field></shadow></value><value name="arg0"><shadow type="Card"><field name="ENUM_VAL">CARD_RANDOM</field></shadow></value></shadow></value>').format(arg=argname)
 
     return ret
 
