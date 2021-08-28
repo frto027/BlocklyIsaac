@@ -381,7 +381,7 @@ def parse_class(text, class_file_name):
                 dup_hash = f'{class_name}::{func_name}'
                 is_ctor = current_subtitle == 'Constructors'
                 is_global = class_name == 'GlobalFunctions'
-                is_static = IsStatic(gp) or class_name == 'Isaac'
+                is_static = IsStatic(gp) or class_name == 'Isaac' or class_name == 'Input'
                 # I dont think RegisterMod is a constructor
                 if is_global and func_name == 'RegisterMod':
                     is_ctor = False
