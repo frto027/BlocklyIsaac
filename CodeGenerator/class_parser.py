@@ -896,6 +896,11 @@ def toolboxBlockText(block):
                 ret += ('<value name="{arg}"><block type="SFXManager::SFXManager"></block></value>').format(arg=argname)
             if type_dict[argname] in enum_types:
                 ret += ('<value name="{arg}"><shadow type="{enum_type}"></shadow></value>').format(arg=argname, enum_type=type_dict[argname])
+            if type_dict[argname] == 'boolean':
+                ret += ('<value name="{arg}"><shadow type="logic_boolean"><field name="BOOL">FALSE</field></shadow></value>').format(arg=argname)
+            if type_dict[argname] == 'int':
+                ret += ('<value name="{arg}"><shadow type="math_number"><field name="NUM">0</field></shadow></value>').format(arg=argname)
+            
     return ret
 
 
