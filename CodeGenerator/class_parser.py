@@ -848,6 +848,101 @@ type_output_replace = {
     "boolean":"Boolean",
     "string":"String"
 }
+
+
+# toolbox resort
+toolbox_resort_array = [
+    'Enums', 
+    '-----',
+    'GlobalFunctions', 
+    'Isaac', 
+    'Input', 
+    '-----',
+    'Game', 
+    'Level', 
+    'Room', 
+    'Seeds', 
+    'ItemPool', 
+    'SFXManager', 
+    'MusicManager', 
+    'HUD', 
+    '-----',
+    'Sprite', 
+    'PathFinder', 
+    'RNG', 
+    'Color', 
+    'KColor', 
+    'Vector',
+    'Font', 
+    'ModReference', 
+    '-----',
+    'Entity', 
+    'EntityBomb', 
+    'EntityEffect', 
+    'EntityFamiliar', 
+    'EntityKnife', 
+    'EntityLaser', 
+    'EntityNPC', 
+    'EntityPickup', 
+    'EntityPlayer', 
+    'EntityProjectile', 
+    'EntityPtr', 
+    'EntityRef', 
+    'EntityTear', 
+    '-----',
+    'GridEntity', 
+    'GridEntityDesc', 
+    'GridEntityDoor', 
+    'GridEntityPit', 
+    'GridEntityPoop', 
+    'GridEntityPressurePlate', 
+    'GridEntityRock', 
+    'GridEntitySpikes', 
+    'GridEntityTNT', 
+    '-----',
+    'QueueItemData', 
+    'ProjectileParams', 
+    'PlayerTypes::ActiveItemDesc', 
+    'PlayerTypes::PosVel', 
+    '-----',
+    'RoomConfig::Entry', 
+    'RoomConfig::Room', 
+    'RoomConfig::Spawn', 
+    'RoomDescriptor', 
+    '-----',
+    'ShockwaveParams', 
+    'TearParams', 
+    'TemporaryEffect', 
+    'TemporaryEffects', 
+    '-----',
+    'ItemConfig', 
+    'ItemConfig::Card', 
+    'ItemConfig::Costume', 
+    'ItemConfig::Item', 
+    'ItemConfig::PillEffect', 
+    '-----',
+    'CppContainer::ArrayProxy::intValues', 
+    'CppContainer::ArrayProxy::RoomConfigEntries', 
+    'CppContainer::ArrayProxy::RoomConfigSpawns', 
+    'CppContainer::ArrayProxy::RoomDescriptor', 
+    'CppContainer::EntityList', 
+    'CppContainer::Vector::CardConfigList', 
+    'CppContainer::Vector::CostumeConfigList', 
+    'CppContainer::Vector::EffectList', 
+    'CppContainer::Vector::ItemConfigList', 
+    'CppContainer::Vector::PillConfigList', 
+    'CppContainer::Vector::VectorList', 
+    ]
+
+for clss in toolbox:
+    if not clss in toolbox_resort_array:
+        print(f"Add {clss} to toolbox resort array")
+        toolbox_resort_array.append(clss)
+
+# print('Toolbox resort array is:')
+# print(toolbox_resort_array)
+
+
 for clss in toolbox:
     for text in toolbox[clss]:
         if 'output' in text and text['output'].strip('"') in type_output_replace:
@@ -1048,7 +1143,13 @@ for bname in functions:
 
 # generate toolbox xml
 toolbox_xml = ""
-for clss in toolbox:
+for clss in toolbox_resort_array:
+    if clss == '-----':
+        toolbox_xml += '<sep></sep>'
+        continue
+    if not clss in toolbox:
+        print(f'Warring: {clss}(from toolbox_restore_array) is not found in toolbox, ignore it')
+        continue
     name = clss.strip('::')
     if clss == "":
         name = "Global"

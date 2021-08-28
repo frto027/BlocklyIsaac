@@ -6567,6 +6567,6 @@ TMSG={
 "__TXT_ROTATED":"Rotated",
 "__TYPE_ENUMS":"Enums",
 "__TYPE_GLOBALFUNCTIONS":"GlobalFunctions",
-"__TYPE_INPUT":"Input",
 "__TYPE_ISAAC":"Isaac",
+"__TYPE_INPUT":"Input",
 }
