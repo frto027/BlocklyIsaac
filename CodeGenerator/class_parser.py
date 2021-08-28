@@ -898,9 +898,14 @@ def toolboxBlockText(block):
                 ret += ('<value name="{arg}"><shadow type="{enum_type}"></shadow></value>').format(arg=argname, enum_type=type_dict[argname])
             if type_dict[argname] == 'boolean':
                 ret += ('<value name="{arg}"><shadow type="logic_boolean"><field name="BOOL">FALSE</field></shadow></value>').format(arg=argname)
-            if type_dict[argname] == 'int':
+            if type_dict[argname] == 'int' or type_dict[argname] == 'float':
                 ret += ('<value name="{arg}"><shadow type="math_number"><field name="NUM">0</field></shadow></value>').format(arg=argname)
-            
+            if type_dict[argname] == 'Vector':
+                ret += ('<value name="{arg}"><shadow type="Vector::Vector" inline="true">'+\
+                    '<value name="arg0"><shadow type="math_number"><field name="NUM">0</field></shadow></value>'+\
+                    '<value name="arg1"><shadow type="math_number"><field name="NUM">0</field></shadow></value>'+\
+                    '</shadow></value>').format(arg=argname)
+
     return ret
 
 
