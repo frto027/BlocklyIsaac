@@ -498,7 +498,11 @@ def parse_class(text, class_file_name):
                         assert args[2]['type'] == 'UseFlags'
                         assert args[2]['name'] == 'UseFlags'
                         args[2]['type'] = 'UseFlag'
-
+                if class_name == 'HUD':
+                    if func_name == 'ShowFortuneText':
+                        assert len(args) == 3
+                        assert args[2]['type'] == '...'
+                        args = args[:-1]
                 arg_id = 0
 
                 if GetFuncName(gp) == 'AddCallback' and class_name == 'ModReference':
