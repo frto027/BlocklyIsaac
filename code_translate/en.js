@@ -5998,7 +5998,6 @@ TMSG={
 "__TYPE_ITEM":"Item",
 "__TXT_SETVISIBLE":"SetVisible",
 "__TXT_GETACTIONVALUE":"GetActionValue",
-"__TYPE_INPUT":"Input",
 "__TXT_ACTION":"action",
 "__TXT_CONTROLLERID":"controllerId",
 "__TXT_GETBUTTONVALUE":"GetButtonValue",
@@ -6568,5 +6567,6 @@ TMSG={
 "__TXT_ROTATED":"Rotated",
 "__TYPE_ENUMS":"Enums",
 "__TYPE_GLOBALFUNCTIONS":"GlobalFunctions",
+"__TYPE_INPUT":"Input",
 "__TYPE_ISAAC":"Isaac",
 }

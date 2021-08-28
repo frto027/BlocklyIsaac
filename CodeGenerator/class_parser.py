@@ -897,31 +897,31 @@ def toolboxBlockText(block):
         type_dict = argument_type_dict[block]
         for argname in type_dict:
             if type_dict[argname] == 'Game':
-                ret += '<value name="{arg}"><block type="Game::Game"></block></value>'.format(arg=argname)
+                ret += '<value name="{arg}"><shadow type="Game::Game"></shadow></value>'.format(arg=argname)
             if type_dict[argname] == 'EntityPlayer':
-                ret += ('<value name="{arg}"><shadow type="Isaac::GetPlayer">'+\
+                ret += ('<value name="{arg}"><block type="Isaac::GetPlayer">'+\
                     '<value name="arg0"><shadow type="math_number"><field name="NUM">0</field></shadow></value>'+\
-                    '</shadow></value>').format(arg=argname)
+                    '</block></value>').format(arg=argname)
             if type_dict[argname] == 'MusicManager':
-                ret += '<value name="{arg}"><block type="MusicManager::MusicManager"></block></value>'.format(arg=argname)
+                ret += '<value name="{arg}"><shadow type="MusicManager::MusicManager"></shadow></value>'.format(arg=argname)
             if type_dict[argname] == 'Font':
                 ret += ('<value name="{arg}"><shadow type="Game::GetFont">'+\
                     '<value name="thisobj"><shadow type="Game::Game"></shadow></value>'+\
                     '</shadow></value>').format(arg=argname)
             if type_dict[argname] == 'Level':
-                ret += ('<value name="{arg}"><block type="Game::GetLevel">'+\
-                    '<value name="thisobj"><block type="Game::Game"></block></value>'+\
-                    '</block></value>').format(arg=argname)
+                ret += ('<value name="{arg}"><shadow type="Game::GetLevel">'+\
+                    '<value name="thisobj"><shadow type="Game::Game"></shadow></value>'+\
+                    '</shadow></value>').format(arg=argname)
             if type_dict[argname] == 'Room':
-                ret += ('<value name="{arg}"><block type="Game::GetRoom">'+\
-                    '<value name="thisobj"><block type="Game::Game"></block></value>'+\
-                    '</block></value>').format(arg=argname)
+                ret += ('<value name="{arg}"><shadow type="Game::GetRoom">'+\
+                    '<value name="thisobj"><shadow type="Game::Game"></shadow></value>'+\
+                    '</shadow></value>').format(arg=argname)
             if type_dict[argname] == 'Seeds':
-                ret += ('<value name="{arg}"><block type="Game::GetSeeds">'+\
-                    '<value name="thisobj"><block type="Game::Game"></block></value>'+\
-                    '</block></value>').format(arg=argname)
+                ret += ('<value name="{arg}"><shadow type="Game::GetSeeds">'+\
+                    '<value name="thisobj"><shadow type="Game::Game"></shadow></value>'+\
+                    '</shadow></value>').format(arg=argname)
             if type_dict[argname] == 'SFXManager':
-                ret += ('<value name="{arg}"><block type="SFXManager::SFXManager"></block></value>').format(arg=argname)
+                ret += ('<value name="{arg}"><shadow type="SFXManager::SFXManager"></shadow></value>').format(arg=argname)
             if type_dict[argname] in enum_types:
                 ret += ('<value name="{arg}"><shadow type="{enum_type}"></shadow></value>').format(arg=argname, enum_type=type_dict[argname])
             if type_dict[argname] == 'boolean':
@@ -1005,6 +1005,8 @@ def toolboxBlockText(block):
                 ret += ('<value name="{arg}"><shadow type="Game::GetItemPool"><value name="thisobj"><shadow type="Game::Game"></shadow></value></shadow></value>').format(arg=argname)
             if type_dict[argname] == 'ItemConfig::Card':
                 ret += ('<value name="{arg}"><shadow type="ItemConfig::GetCard"><value name="thisobj"><shadow type="ItemConfig"><field name="ENUM_VAL">CHARGE_NORMAL</field></shadow></value><value name="arg0"><shadow type="Card"><field name="ENUM_VAL">CARD_RANDOM</field></shadow></value></shadow></value>').format(arg=argname)
+            if type_dict[argname] == 'HUD':
+                ret += ('<value name="{arg}"><shadow type="Game::GetHUD"><value name="thisobj"><shadow type="Game::Game"></shadow></value></shadow></value>').format(arg=argname)
 
     return ret
 
