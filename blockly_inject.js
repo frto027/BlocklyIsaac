@@ -593,7 +593,10 @@ function inject_init(){
   document.getElementById('copy_to_console').title = translate_str('%{COPY_TO_CONSOLE_BTN_TEXT}')
   document.getElementById('copy_to_console_electron').title = translate_str('%{COPY_TO_CONSOLE_BTN_TEXT}')
   new ClipboardJS('#copy_to_console',{text:function(trigger){
+    let comment_func = Blockly.Block.prototype.getCommentText
+    Blockly.Block.prototype.getCommentText = ()=>null
     let txt = Blockly.Lua.workspaceToCode(Code.workspace)
+    Blockly.Block.prototype.getCommentText = comment_func
     txt = txt.replaceAll(/\n */g,'\n')
     txt = txt.replaceAll('\n',';')
     return 'l ' + txt
