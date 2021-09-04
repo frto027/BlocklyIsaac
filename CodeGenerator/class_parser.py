@@ -272,15 +272,15 @@ def parse_class(text, class_file_name):
                 # generate function
                 func_str = "function(block){return "
                 ret_str = ""
-                ORDER = 'ORDER_NONE' # len(xx)
+                ORDER = 'ORDER_NONE'
                 if operator_name in ['__div', '__mul']:
                     ORDER = 'ORDER_MULTIPLICATIVE'
                 elif operator_name in ['__add','__sub']:
                     ORDER = 'ORDER_ADDITIVE'
-                elif operator_name in ['__unm']:
+                elif operator_name in ['__unm', '__len']:
                     ORDER = 'ORDER_UNARY'
                 else:
-                    assert operator_name == '__len'
+                    assert False
                 OPERATORS_MARK = {
                     '__add':'+',
                     '__sub':'-',
@@ -293,8 +293,7 @@ def parse_class(text, class_file_name):
                     ret_str += f'"-"+Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.{ORDER})'
                 else:
                     assert operator_name == '__len'
-                    ret_str += f'"len("+Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.{ORDER})+")"'
-                    ORDER = 'ORDER_HIGH' # we will generate a function call
+                    ret_str += f'"#"+Blockly.Lua.valueToCode(block, "thisobj", Blockly.Lua.{ORDER})'
                 func_str += f'[{ret_str},Blockly.Lua.{ORDER}]'
                 func_str += '}'
                 functions[f'{class_name}::{GetFuncName(gp)}']=func_str
