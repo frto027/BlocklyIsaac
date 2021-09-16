@@ -231,7 +231,10 @@ var electron_inject_init = function(){};
         var copy_to_console_btn = document.getElementById('copy_to_console_electron')
         copy_to_console_btn.hidden = false
         Code.bindClick(copy_to_console_btn,function(){
+            let comment_func = Blockly.Block.prototype.getCommentText
+            Blockly.Block.prototype.getCommentText = ()=>null
             let txt = Blockly.Lua.workspaceToCode(Code.workspace)
+            Blockly.Block.prototype.getCommentText = comment_func
             txt = txt.replaceAll(/\n */g,'\n')
             txt = txt.replaceAll('\n',';')
             txt = 'l ' + txt
