@@ -487,6 +487,7 @@ function inject_init(){
     let hides = document.getElementsByClassName('normal_hide')
     for(let i=0;i<hides.length;i++){
       hides[i].hidden = true
+      hides[i].style.display='none'
     }
     document.getElementById('btn_panel').style.textAlign = 'left' 
   }
@@ -652,6 +653,17 @@ function inject_init(){
   var new_window_btn = document.getElementById('new_window_button')
   new_window_btn.title = translate_str('%{NEW_WINDOW_BTN_TEXT}')
   document.title = translate_str('%{WEB_PAGE_TITLE}')
+
+  var download_offline_btn = document.getElementById('download_offline')
+  Code.bindClick(download_offline_btn,function(){
+    if(window.location.href.indexOf('gitee.io') != -1){
+      //gitee release page
+      window.open('https://gitee.com/frto027/BlocklyIsaac/releases')
+    }else{
+      //github releasee page
+      window.open('https://github.com/frto027/BlocklyIsaac/releases')
+    }
+  })
 
   var copyright_btn = document.getElementById('copyright_btn')
   var copyright_span = document.getElementById('copyright_span')

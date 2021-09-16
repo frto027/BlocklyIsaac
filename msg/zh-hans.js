@@ -24,5 +24,6 @@ var MSG = {
   catArguments: "回调参数",
   catTools: "工具块",
   myMod:"我的mod",
-  catFlagCalc:"标记"
+  catFlagCalc:"标记",
+  downloadOfflineTooltip:"下载离线版本"
 };

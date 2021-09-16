@@ -24,5 +24,7 @@ var MSG = {
   catArguments: "Arguments",
   catTools:"Tools",
   myMod:"MyMod",
-  catFlagCalc:"flag"
+  catFlagCalc:"flag",
+  downloadOfflineTooltip:"download offline version"
+
 };

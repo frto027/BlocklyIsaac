@@ -545,6 +545,8 @@ Code.initLanguage = function() {
 
   document.getElementById('linkButton').title = MSG['linkTooltip'];
   document.getElementById('trashButton').title = MSG['trashTooltip'];
+
+  document.getElementById('download_offline').title = MSG['downloadOfflineTooltip']
 };
 
 

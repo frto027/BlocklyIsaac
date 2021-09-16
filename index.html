@@ -11,10 +11,10 @@
   <script src="blockly_compressed.js"></script>
   <script src="blocks_compressed.js"></script>
   <script src="lua_compressed.js"></script>
-  <script src="blockly_inject.js?version=1"></script>
+  <script src="blockly_inject.js?version=2"></script>
   <script src="game_blocks.js?version=1"></script>
-  <script src="code.js?version=1"></script>
-  <script src="electron/inject.js?version=1"></script>
+  <script src="code.js?version=2"></script>
+  <script src="electron/inject.js?version=2"></script>
 
 </head>
 <body style="user-select: none;">
@@ -79,6 +79,10 @@
               <!-- only visible at electron -->
               <button id="new_window_button" hidden>
                 <img src='media/open_in_new-24px.svg' >
+              </button>
+              <!-- only visible at web page -->
+              <button id="download_offline"> 
+                <img src="media/next_plan_black_24dp.svg" >
               </button>
               <button id="copyright_btn">
                 <img src='media/copyright-black-24dp.svg' > <span id='copyright_span' style="font-size: small;">copyright</span>

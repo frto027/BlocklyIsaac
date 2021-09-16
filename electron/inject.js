@@ -243,6 +243,9 @@ var electron_inject_init = function(){};
         let save_as_btn = document.getElementById('save_file_as')
         save_as_btn.hidden = false
 
+        //去掉“下载离线版本”的按钮
+        document.getElementById('download_offline').hidden = true
+
         //将所有的文件操作进行封装
         ToolButtonOperations.open = function(){
             if(Code.workspace.getAllBlocks(false).length > 0){
