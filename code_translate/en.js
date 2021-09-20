@@ -4,6 +4,7 @@ TMSG={
 "OK":"Ok",
 "CANCEL":"Cancel",
 "MODNAME":"Mod name",
+"OPEN_BIML_FILE_YES_OR_NO":"open biml project?",
 "DO":"Do",
 "FN_REF":"FnRef",
 "FN_REF_TOOLTIP":"",

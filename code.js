@@ -491,9 +491,10 @@ Code.init = function() {
 
   onresize();
   Blockly.svgResize(Code.workspace);
-
+  
+  LoadBimlUrlFile()
   // Lazy-load the syntax-highlighting.
-  window.setTimeout(Code.importPrettify, 1);
+  // window.setTimeout(Code.importPrettify, 1);
 };
 
 /**
