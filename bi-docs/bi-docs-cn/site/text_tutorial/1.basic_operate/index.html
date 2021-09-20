@@ -94,27 +94,37 @@
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#_2" class="nav-link">右键菜单功能</a>
+            <li class="nav-item" data-level="1"><a href="#biml" class="nav-link">biml工程文件</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#_3" class="nav-link">单行输入模式</a>
+            <li class="nav-item" data-level="1"><a href="#_2" class="nav-link">悬停提示</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#_4" class="nav-link">折叠块</a>
+            <li class="nav-item" data-level="1"><a href="#_3" class="nav-link">右键菜单功能</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#_5" class="nav-link">禁用块</a>
+            <li class="nav-item" data-level="1"><a href="#_4" class="nav-link">单行输入模式</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#_6" class="nav-link">注释</a>
+            <li class="nav-item" data-level="1"><a href="#_5" class="nav-link">折叠块</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#_6" class="nav-link">禁用块</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#_7" class="nav-link">注释</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -144,12 +154,23 @@
 </ul>
 </li>
 <li>工具箱，所有的<code>积木</code>都可以在这里找到</li>
-<li>缩放重置按钮，点击后，，所有的积木回到视野正中心。</li>
+<li>缩放重置按钮，点击后，所有的积木回到视野正中心。</li>
 <li>缩放按钮</li>
 <li>删除按钮，将不需要的<code>积木</code>拖拽到这里删除，也可以右键删除一个积木，或选中一个块后按键盘的<code>del</code>键</li>
 <li>工作区，在这里摆放积木</li>
 </ol>
-<h1 id="_2">右键菜单功能</h1>
+<h1 id="biml">biml工程文件</h1>
+<p>可以将已经搭建好的积木保存为<code>biml</code>工程文件。<code>biml</code>是<code>BlocklyIsaac XML</code>中的部分字母的缩写，是一种以文本方式保存的xml文件格式，保存了各个<code>积木</code>的定义及其连接方式等内容。</p>
+<h1 id="_2">悬停提示</h1>
+<p>将鼠标放在一个<code>积木</code>上保持不动，就会显示一个悬停提示。</p>
+<p><img alt="图 8" src="../images/1f50fbfdd3dbfb49ac170f736685da08e8d31d1340586c4e1b76ef639a13a707.png" />  </p>
+<p>对于以撒的游戏内逻辑积木，此提示目前包括：</p>
+<ul>
+<li>积木的来源，例如图上的积木就来自左侧的<code>关卡类</code>中。这在阅读别人的程序，想要快速找到<code>积木</code>来源的时候会有帮助。</li>
+<li>积木的名称，对应的是积木的功能。例如图上的积木就是一个<code>增加诅咒</code>的功能。</li>
+<li>积木的类型，对应有变量、函数等形式。不同类型的<code>积木</code>生成的<code>lua代码</code>是不一样的，一般无需关心这个类型。</li>
+</ul>
+<h1 id="_3">右键菜单功能</h1>
 <p>当我们右键一个<code>积木</code>的时候，会弹出一个菜单：</p>
 <p><img alt="图 2" src="../images/252e79e430f4e37bbd4f822c3f428d16814b8e9675477d89ee463b42517371fb.png" />  </p>
 <ol>
@@ -168,19 +189,19 @@
 </li>
 <li>其它，个别积木会有其它特殊的选项。</li>
 </ol>
-<h1 id="_3">单行输入模式</h1>
+<h1 id="_4">单行输入模式</h1>
 <p>右键菜单中的<code>单行输入</code>模式会让一个<code>积木</code>的所有输入嵌入进来，和原本的<code>外部输入</code>模式在功能上完全相同，但可以方便摆放。</p>
 <p>单行输入模式：</p>
 <p><img alt="图 3" src="../images/17bc4e02da200332a53fea4d5b7197d0b65921359c5689ece19fe9f2c6af45a6.png" />  </p>
 <p>外部输入模式：</p>
 <p><img alt="图 4" src="../images/f7d15b70c47e7cd4171b7c9fe511db7dba692a2e20ab335d99497271932ead16.png" />  </p>
-<h1 id="_4">折叠块</h1>
+<h1 id="_5">折叠块</h1>
 <p>右键菜单中的<code>折叠块</code>会让块缩小，来方便摆放：</p>
 <p><img alt="图 5" src="../images/4c570e5e1d121f520853041859cc5596ee833d0190c04fc260547c09577a34d8.png" />  </p>
-<h1 id="_5">禁用块</h1>
+<h1 id="_6">禁用块</h1>
 <p>禁用一个块之后，这个块的功能就会失效，就好像它被删除了一样。但可以通过右键再次启用：</p>
 <p><img alt="图 6" src="../images/abffcd99cd4af2a3a1e8e9930bd8e8c820469f866ccf0c5d005721e1bca29f62.png" />  </p>
-<h1 id="_6">注释</h1>
+<h1 id="_7">注释</h1>
 <p>右键一个块可以<code>添加注释</code>，这会在块的左上角标记一个问号，点击这个问号之后，会跳出一个文本框，文本框的内容可以随意编辑，并随着<code>biml工程文件</code>保存和加载。</p>
 <p><strong><code>注释</code>是一个重要的交流工具，你可以在一个<code>积木</code>上添加注释，告诉别人你在做什么。或者防止自己下次看到以后忘记自己做过什么。</strong></p>
 <p><img alt="图 7" src="../images/b8b5b7648adc8f3b41d0a099824f00d6b98157bd5f30a080941166009315ac32.png" />  </p></div>
