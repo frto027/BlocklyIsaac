@@ -263,7 +263,14 @@ def parse_class(text, class_file_name):
                 text['inputsInline']="false"
                 text['output']=f'"{GetRetType(gp)}"'
                 text['colour']=NameToColour(GetRetType(gp))
-                text['tooltip']=f'"{GetFuncName(gp)}"'
+                # text['tooltip']=f'"{GetFuncName(gp)}"'
+                text['tooltip'] = '"'
+                text['tooltip'] += f'{apply_translate("Block from ","tooltip text")}[{apply_translate(class_name,dup_hash,True)}]\\n'
+                text['tooltip'] += f'{apply_translate("Block name :","tooltip text")}{apply_translate(GetFuncName(gp),dup_hash)}'
+                text['tooltip'] += f'{apply_translate("Block is operator","tooltip text")}\\n'
+
+                text['tooltip'] += '"'
+
                 href_url = f'/{class_file_name}.html#{GetFuncName(gp).lower()}'
                 text['helpUrl']=f'()=>get_blk_help("{href_url}")'
                 if not class_name in toolbox:
@@ -331,7 +338,12 @@ def parse_class(text, class_file_name):
                 text['inputsInline']='false'
                 text['output']=f'"{var_type}"'
                 text['colour']=NameToColour(var_type)
-                text['tooltip']=f'"{GetVarName(gp)}"'
+                # text['tooltip']=f'"{GetVarName(gp)}"'
+                text['tooltip'] = '"'
+                text['tooltip'] += f'{apply_translate("Block from ","tooltip text")}[{apply_translate(class_name,dup_hash,True)}]\\n'
+                text['tooltip'] += f'{apply_translate("Block name :","tooltip text")}{apply_translate(GetVarName(gp),dup_hash)}\\n'
+                text['tooltip'] += f'{apply_translate("Block is variable","tooltip text")}\\n'
+                text['tooltip'] += '"'
                 href_url = f'/{class_file_name}.html#{GetVarName(gp).lower()}'
                 text['helpUrl']=f'()=>get_blk_help("{href_url}")'
                 if not class_name in toolbox:
@@ -521,7 +533,12 @@ def parse_class(text, class_file_name):
                 text['inputsInline']='false'
                 
                 text['colour']=NameToColour(ret_type)
-                text['tooltip']=f'"{GetFuncName(gp)}"'
+                # text['tooltip']=f'"{GetFuncName(gp)}"'
+                text['tooltip'] = '"'
+                text['tooltip'] += f'{apply_translate("Block from ","tooltip text")}[{apply_translate(class_name,dup_hash,True)}]\\n'
+                text['tooltip'] += f'{apply_translate("Block name :","tooltip text")}{apply_translate(GetFuncName(gp),dup_hash)}\\n'
+                text['tooltip'] += f'{apply_translate("Block is function","tooltip text")}\\n'
+                text['tooltip'] += '"'
                 href_url = f'/{class_file_name}.html#{GetFuncName(gp).lower()}'
                 text['helpUrl']=f'()=>get_blk_help("{href_url}")'
                 if not class_name in toolbox:
@@ -678,7 +695,8 @@ def parse_enums(md_text,enum_name):
     text['args0'] += ']'
     text['output'] = f'"{enum_name}"'
     # text['output'] = '"Number"'
-    text['tooltip']=f'"{enum_name}"'
+    # text['tooltip']=f'"{enum_name}"'
+    text['tooltip'] = f'"{apply_translate("This is an enum ","tooltip text")}[{apply_translate(enum_name,dup_hash,True)}]"'
     text['colour']='122'
     text['helpUrl']=f'()=>get_blk_help("{help_url}")'
     if not 'Enums' in toolbox:
@@ -804,7 +822,8 @@ def parse_mod_callback_enum(md_text):
     text['args0'] += ']'
     text['output'] = f'"{enum_name}"'
     # text['output'] = '"Number"'
-    text['tooltip']=f'"{enum_name}"'
+    # text['tooltip']=f'"{enum_name}"'
+    text['tooltip'] = f'"{apply_translate("This is an enum ","tooltip text")}[{apply_translate(enum_name,dup_hash,True)}]"'
     text['colour']='122'
     text['helpUrl']=f'()=>get_blk_help("{help_url}")'
     if not 'Enums' in toolbox:
