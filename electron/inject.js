@@ -249,6 +249,14 @@ var electron_inject_init = function(){};
         //去掉“下载离线版本”的按钮
         document.getElementById('download_offline').hidden = true
 
+        
+        document.getElementById('helpButton').hidden = true
+        let help_button_election = document.getElementById('helpButton_electron')
+        help_button_election.hidden = false
+        Code.bindClick(help_button_election,()=>{
+            shell.openExternal('http://frto027.gitee.io/blocklyisaac/bi-docs/bi-docs-cn/site')
+        })
+
         //将所有的文件操作进行封装
         ToolButtonOperations.open = function(){
             if(Code.workspace.getAllBlocks(false).length > 0){

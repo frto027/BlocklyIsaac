@@ -33,6 +33,7 @@ bundleElectronApp(
     {
         dir:'.',
         out:'out',
-        icon:'favicon.ico'
+        icon:'favicon.ico',
+        ignore: "bi-docs"
     }
 )

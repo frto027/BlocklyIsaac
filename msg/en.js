@@ -25,6 +25,4 @@ var MSG = {
   catTools:"Tools",
   myMod:"MyMod",
   catFlagCalc:"flag",
-  downloadOfflineTooltip:"download offline version",
-  helpButtonTooltip:"open tutorial"
 };

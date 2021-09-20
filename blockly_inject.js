@@ -655,6 +655,7 @@ function inject_init(){
   document.title = translate_str('%{WEB_PAGE_TITLE}')
 
   var download_offline_btn = document.getElementById('download_offline')
+  download_offline_btn.title = translate_str('%{DOWNLOAD_OFFLINE_TOOLTIP}')
   Code.bindClick(download_offline_btn,function(){
     if(window.location.href.indexOf('gitee.io') != -1){
       //gitee release page
@@ -664,7 +665,10 @@ function inject_init(){
       window.open('https://github.com/frto027/BlocklyIsaac/releases')
     }
   })
+
   var help_btn = document.getElementById('helpButton')
+  help_btn.title = translate_str('%{HELP_BUTTON_TOOLTIP}')
+  document.getElementById('helpButton_electron').title = translate_str('%{HELP_BUTTON_TOOLTIP}')
   Code.bindClick(help_btn,function(){
     window.open('bi-docs/bi-docs-cn/site/')
   })

@@ -4,7 +4,7 @@
 
 比如[点我打开](../../../index.html?lang=zh-hans&biml_url=bi-docs/bi-docs-cn/site/bimls/HurtBigger_DieSpawn.biml)。
 
-但是，你还可以用另外一种方式来实现：
+但是，我们使用了`api.js`文件来做支持，因此一般用另外一种方式来实现：
 
 <span b-url="bi-docs/bi-docs-cn/site/bimls/HurtBigger_DieSpawn.biml" />
 

@@ -4,6 +4,8 @@ TMSG={
 "OK":"确定",
 "CANCEL":"取消",
 "OPEN_BIML_FILE_YES_OR_NO":"是否打开外部传入的biml工程？",
+"DOWNLOAD_OFFLINE_TOOLTIP":"下载离线版本",
+"HELP_BUTTON_TOOLTIP":"打开教程文档",
 "__TXT_TARGET":"目标",
 "__TYPE_GAME":"游戏类",
 "__TXT_GAME":"取游戏对象",

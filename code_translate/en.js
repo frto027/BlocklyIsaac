@@ -4,6 +4,8 @@ TMSG={
 "OK":"Ok",
 "CANCEL":"Cancel",
 "MODNAME":"Mod name",
+"DOWNLOAD_OFFLINE_TOOLTIP":"download offline version",
+"HELP_BUTTON_TOOLTIP":"open tutorial",
 "OPEN_BIML_FILE_YES_OR_NO":"open biml project?",
 "DO":"Do",
 "FN_REF":"FnRef",
