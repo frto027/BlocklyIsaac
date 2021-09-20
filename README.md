@@ -61,7 +61,17 @@ You will be redirected to IsaacDocs webpage if you right-click blocks and press 
 
 # How to build
 
-the project is already built, you can click `index.html` to run directly.
+The project is already built, you can click `index.html` to run directly.
+
+> You can open `index.html` directly, but the document won't work correctly. Run with the following instructions.
+>
+> ```
+> python -m http.server 8000
+> ```
+>
+> Then access `http://127.0.0.1:8000`.
+
+
 
 However, if you want to build it yourself, you can run the folowing command with `python 3`.
 
@@ -79,7 +89,7 @@ python ./CodeGenerator/class_parser.py
 You can build the docs file by the following step.
 
 ```
-python -m pip install mkdocs
+python -m pip install mkdocs mkdocs[i18n]
 cd bi-docs
 mkdocs build
 cd ..

@@ -4,14 +4,16 @@
 [![follow-github](https://img.shields.io/badge/github-star-brightgreen?style=social&logo=GitHub)](https://github.com/frto027/BlocklyIsaac)  
 此文档简介`以撒的积木`系统的基本用法。
 
-[以撒的积木](../../../index.html?lang=zh-hans)是一个基于[Google Blockly](https://developers.google.com/blockly)开发的图形化脚本编辑工具。它允许用户以“搭积木”的方式来生成游戏的mod，而无需具备任何的lua编程经验，可以降低游戏的编程门槛。
+[以撒的积木](../../../index.html?lang=zh-hans)是一个基于[Google Blockly](https://developers.google.com/blockly)开发的图形化脚本编辑工具。它允许用户以“搭积木”的方式来生成游戏的mod。在达到lua编程的几乎全部能力的情况下，不要求具备任何的lua编程经验，降低了游戏的编程门槛。
 
 此工程为开源工程，已经发布在[gitee](https://gitee.com/frto027/BlocklyIsaac)和
 [github](https://github.com/frto027/BlocklyIsaac)上，如果发现bug，欢迎进行反馈。
 
 # 文字教程
 
-正在搭框架了（你现在看到的这个页面就是）。
+- [基础操作](text_tutorial/1.basic_operate.md)
+
+其它的正在写了
 
 # 视频教程
 
@@ -43,4 +45,4 @@
 
 # Other languages
 
-Currently, the document is Chinese only. If you want to write with other language, please contact me or send a pull request at [github](https://github.com/frto027/BlocklyIsaac)
+Currently, the document is Chinese only. If you want to write with other language, please contact me or send a pull request at [github](https://github.com/frto027/BlocklyIsaac).

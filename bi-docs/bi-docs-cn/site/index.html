@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,6 +37,15 @@
                                 <a href="." class="nav-link">主页</a>
                             </li>
                             <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">文字教程 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="text_tutorial/1.basic_operate/" class="dropdown-item">基本操作</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">文档编写 <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
@@ -52,19 +61,14 @@
                         </ul>
 
                     <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
                             <li class="nav-item">
                                 <a rel="prev" class="nav-link disabled">
-                                    <i class="fa fa-arrow-left"></i> Previous
+                                    <i class="fa fa-arrow-left"></i> 上一张
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="edit_docs/" class="nav-link">
-                                    Next <i class="fa fa-arrow-right"></i>
+                                <a rel="next" href="text_tutorial/1.basic_operate/" class="nav-link">
+                                    下一张 <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
                     </ul>
@@ -76,7 +80,7 @@
             <div class="row">
                     <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
     <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="目录">
             <span class="fa fa-angle-down"></span>
         </button>
     </div>
@@ -126,11 +130,14 @@
 <p><a href="https://gitee.com/frto027/BlocklyIsaac"><img alt="follow-github" src="https://img.shields.io/badge/gitee-star-brightgreen?style=social&amp;logo=Gitee" /></a>
 <a href="https://github.com/frto027/BlocklyIsaac"><img alt="follow-github" src="https://img.shields.io/badge/github-star-brightgreen?style=social&amp;logo=GitHub" /></a><br />
 此文档简介<code>以撒的积木</code>系统的基本用法。</p>
-<p><a href="../../../index.html?lang=zh-hans">以撒的积木</a>是一个基于<a href="https://developers.google.com/blockly">Google Blockly</a>开发的图形化脚本编辑工具。它允许用户以“搭积木”的方式来生成游戏的mod，而无需具备任何的lua编程经验，可以降低游戏的编程门槛。</p>
+<p><a href="../../../index.html?lang=zh-hans">以撒的积木</a>是一个基于<a href="https://developers.google.com/blockly">Google Blockly</a>开发的图形化脚本编辑工具。它允许用户以“搭积木”的方式来生成游戏的mod。在达到lua编程的几乎全部能力的情况下，不要求具备任何的lua编程经验，降低了游戏的编程门槛。</p>
 <p>此工程为开源工程，已经发布在<a href="https://gitee.com/frto027/BlocklyIsaac">gitee</a>和
 <a href="https://github.com/frto027/BlocklyIsaac">github</a>上，如果发现bug，欢迎进行反馈。</p>
 <h1 id="_2">文字教程</h1>
-<p>正在搭框架了（你现在看到的这个页面就是）。</p>
+<ul>
+<li><a href="text_tutorial/1.basic_operate/">基础操作</a></li>
+</ul>
+<p>其它的正在写了</p>
 <h1 id="_3">视频教程</h1>
 <p>这是一些可供参考的视频教程</p>
 <h2 id="_4">以撒的积木碎片</h2>
@@ -152,13 +159,13 @@
 <li><a href="api/">工程文件使用方式</a></li>
 </ul>
 <h1 id="other-languages">Other languages</h1>
-<p>Currently, the document is Chinese only. If you want to write with other language, please contact me or send a pull request at <a href="https://github.com/frto027/BlocklyIsaac">github</a></p></div>
+<p>Currently, the document is Chinese only. If you want to write with other language, please contact me or send a pull request at <a href="https://github.com/frto027/BlocklyIsaac">github</a>.</p></div>
             </div>
         </div>
 
         <footer class="col-md-12">
             <hr>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+            <p>用<a href="https://www.mkdocs.org/">MkDocs</a>建立的文档。</p>
         </footer>
         <script>
             var base_url = ".",
@@ -166,59 +173,38 @@
         </script>
         <script src="js/base.js" defer></script>
         <script src="api.js" defer></script>
-        <script src="search/main.js" defer></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            </div>
-            <div class="modal-body">
-                <p>From here you can search these documents. Enter your search terms below.</p>
-                <form>
-                    <div class="form-group">
-                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+        <div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="keyboardModalLabel">键盘热键</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
             </div>
             <div class="modal-body">
               <table class="table">
                 <thead>
                   <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
+                    <th style="width: 20%;">键</th>
+                    <th>动作</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
+                    <td>打开这个帮助</td>
                   </tr>
                   <tr>
                     <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
+                    <td>下一页面</td>
                   </tr>
                   <tr>
                     <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
+                    <td>上一页面</td>
                   </tr>
                   <tr>
                     <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
+                    <td>搜索</td>
                   </tr>
                 </tbody>
               </table>
@@ -234,5 +220,5 @@
 
 <!--
 MkDocs version : 1.2.2
-Build Date UTC : 2021-09-20 10:29:27.778160+00:00
+Build Date UTC : 2021-09-20 14:29:01.370546+00:00
 -->
