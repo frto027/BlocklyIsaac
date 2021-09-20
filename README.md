@@ -1,4 +1,3 @@
-
 # 使用Blockly图形化编程创建游戏《以撒的结合》mod
 
 这个工程允许你使用Google Blockly图形化编程语言来创建游戏的mod。你可以在[点击此处](http://frto027.gitee.io/blocklyisaac/?lang=zh-hans)进行试用。
@@ -34,10 +33,6 @@ api中充斥着大量的缩写、略写、重复单词。为提高翻译效率�
 
 如果右键枚举变量`Mod回调`，还能看到一份翻译过的回调图。
 
-# `Help` button and IsaacDocs
-
-You will be redirected to IsaacDocs webpage if you right-click blocks and press the `Help` button.  
-
 # BlocklyIsaac
 Create script for game The Binding of Isaac without lua.
 
@@ -60,20 +55,23 @@ Isaac.AddCallback(MyMode,ModCallbacks.MC_USE_ITEM,function(__arg_0,__arg_1,__arg
 end ,CollectibleType.COLLECTIBLE_D20)
 ```
 
+# `Help` button and IsaacDocs
+
+You will be redirected to IsaacDocs webpage if you right-click blocks and press the `Help` button.  
+
 # How to build
 
 the project is already built, you can click `index.html` to run directly.
 
 However, if you want to build it yourself, you can run the folowing command with `python 3`.
 
-> Please make sure that the git submodule `IsaacDoc` has been initialized before building. The API and translation files are automatically generated based on the doxygen documentation in that project.
+> Please make sure that the git submodule `IsaacDoc` has been initialized before building. The API and translation files are automatically generated based on the markdown documentation in that project.
 
 ```
 git clone https://github.com/frto027/BlocklyIsaac.git
 cd BlocklyIsaac
 git submodule init
 git submodule update
-python -m pip install bs4
 
 python ./CodeGenerator/class_parser.py
 ```
