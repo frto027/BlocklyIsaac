@@ -664,7 +664,10 @@ function inject_init(){
       window.open('https://github.com/frto027/BlocklyIsaac/releases')
     }
   })
-
+  var help_btn = document.getElementById('helpButton')
+  Code.bindClick(help_btn,function(){
+    window.open('bi-docs/bi-docs-cn/site/')
+  })
   var copyright_btn = document.getElementById('copyright_btn')
   var copyright_span = document.getElementById('copyright_span')
   copyright_span.innerText = translate_str('%{COPYRIGHT}')

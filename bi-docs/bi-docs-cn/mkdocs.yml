@@ -1,0 +1,8 @@
+site_name: 《以撒的积木》文档
+extra_javascript:
+  - api.js
+nav:
+  - 主页: 'index.md'
+  - 文档编写:
+    - 编辑文档: 'edit_docs.md'
+    - 文档内的接口使用: 'api.md'

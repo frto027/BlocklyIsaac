@@ -548,6 +548,8 @@ Code.initLanguage = function() {
   document.getElementById('trashButton').title = MSG['trashTooltip'];
 
   document.getElementById('download_offline').title = MSG['downloadOfflineTooltip']
+  document.getElementById('helpButton').title = MSG['helpButtonTooltip']
+
 };
 
 
@@ -568,11 +570,11 @@ Code.discard = function() {
 };
 
 // Load the Code demo's language strings.
-document.write('<script src="msg/' + Code.LANG + '.js"></script>\n');
+document.write('<script src="msg/' + Code.LANG + '.js?version='+translate_version+'"></script>\n');
 // Load Blockly's language strings.
-document.write('<script src="msg/js/' + Code.LANG + '.js"></script>\n');
+document.write('<script src="msg/js/' + Code.LANG + '.js?version='+translate_version+'"></script>\n');
 // Trnaslate code
-document.write('<script src="code_translate/' + Code.LANG + '.js"></script>\n');
+document.write('<script src="code_translate/' + Code.LANG + '.js?version='+translate_version+'"></script>\n');
 
 window.addEventListener('load', Code.init);
 
