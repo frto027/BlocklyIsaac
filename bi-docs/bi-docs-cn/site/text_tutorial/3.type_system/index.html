@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>三 类型系统 - 《以撒的积木》文档</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u4e09 \u7c7b\u578b\u7cfb\u7edf";
+    var mkdocs_page_input_path = "text_tutorial\\3.type_system.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> 《以撒的积木》文档</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">主页</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">文字教程</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../1.basic_operate/">一 基本操作</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../2.block_basic_rule/">二 积木搭建规则</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">三 类型系统</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../4.block_logic/">四 逻辑积木</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">《以撒的积木》文档</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">文档</a> &raquo;</li>
+    
+      
+        
+          <li>文字教程 &raquo;</li>
+        
+      
+    
+    <li>三 类型系统</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1">类型系统</h1>
+<p>类型用方框表示，用来指示一个参数的含义。每一个积木产生的信息都有对应的类型。如果一个积木产生的值类型和一个输入的类型不匹配，那么就不能够正常连接起来。</p>
+<p>内置的一些类型有：</p>
+<ul>
+<li><code>整数型</code>、<code>实数型</code>，二者不做特殊区分。表示这个参数是一个数字。比如游戏走过的总时间、当前的血量、炸弹数量等。</li>
+<li><code>字符串</code>，表示一串文字。比如道具名字、道具描述、游戏种子名字、或者一条控制台指令的内容等。</li>
+<li><code>逻辑型</code>，表示对错、真假等数据。比如是否拥有某个道具、当前房间是否在Boss房间、是否可以飞行等。</li>
+<li><code>复合数据</code>，游戏的lua文档没有详细记录的东西。编辑器不知道该如何处理它。一般这种值在不同情况下有不同的处理方法。有些需要等待编辑器后续更新才能使用，也有一些可能会使得游戏崩溃。</li>
+</ul>
+<p>此外，工具箱中涉及到游戏逻辑的每一个项目多数都对应一个类型，是按照操作对象进行划分的：</p>
+<p><img alt="图 1" src="../images/a4ae35442cf338359ab6c8f054435e5b0a3522621c618828670c7b237625c9f2.png" />  </p>
+<p>另外，还有一种类型为<code>空值</code>的类型需要留意。</p>
+<h1 id="_2">枚举型值</h1>
+<p>枚举型值是一类特殊的值，一般表示从多个值之间进行一个选择。</p>
+<p>比如有一个<code>主动道具槽位</code>类型的枚举型值，它可以表示角色主动道具的位置：</p>
+<p><img alt="图 2" src="../images/77c3a704a122af4d1040c6a9e4ef92f02b509a30d7d8c41a2b641e08142e26c7.png" />  </p>
+<p>在<code>清零主动道具充能</code>的积木上，就用到了这个<code>枚举型值</code>作为输入，以指定清零哪里的道具：</p>
+<p><img alt="图 3" src="../images/589f1a704ebbf66b70353a7618a03b2e37fef520819644f11c04da907e724cda.png" />  </p>
+<h1 id="_3">类型匹配</h1>
+<p>输入和输出类型需要匹配。</p>
+<p>下图中，<code>1</code>表示<code>逃离目标</code>的操作对象需要是一个<code>路线查找器</code>类型，而<code>2</code>表示积木<code>3</code>得到的是一个<code>路线查找器</code>。<code>1</code>和<code>2</code>一致，所以才能够拼接起来：</p>
+<p><img alt="图 4" src="../images/8132c884b1ab93a82c9ef3758a9e9d2cd879a2737c277aa8ddc4001b20897cb9.png" />  </p>
+<h1 id="_4">类型继承</h1>
+<p>先看一个例子。<code>取角色</code>的积木可以得到一个<code>角色实体</code>，对角色实体，可以<code>增加黑心</code>：</p>
+<p><img alt="图 5" src="../images/8d6416c6588dde3686ecc74767447b9da461cc13d88f48948cc7599aaeb889d2.png" />  </p>
+<h2 id="_5">向下转型操作</h2>
+<p><code>炸弹实体</code>、<code>角色实体</code>、<code>效果实体</code>、<code>跟班实体</code>、<code>刀实体</code>、<code>激光实体</code>、<code>NPC实体</code>、<code>拾取物实体</code>、<code>子弹实体</code>、<code>眼泪实体</code>都是<code>实体类</code>，所有对<code>实体类</code>的操作，都可以对这些类型进行。</p>
+<p><code>实体类</code>中，我们还可以让一个<code>实体类</code>死亡，这里的逻辑是，<code>炸弹实体</code>、<code>角色实体</code>、<code>效果实体</code>、<code>跟班实体</code>、<code>刀实体</code>、<code>激光实体</code>、<code>NPC实体</code>、<code>拾取物实体</code>、<code>子弹实体</code>、<code>眼泪实体</code>都可以死亡，因此可以按照以下方式拼接：</p>
+<p><img alt="图 6" src="../images/dc6a99d60c4f3972fe79af7470b6b8cdddd2d46c578e5b0269d74e60e96946c3.png" />  </p>
+<p>但是，反过来就不行了，如果我们用<code>生成</code>指令生成一个实体，它无论如何都不能进行增加黑心。因为<code>实体类</code>不是<code>玩家实体</code>，所以这里是拼不上去的：</p>
+<p><img alt="图 7" src="../images/22588f09248636e0c6bc5a4166489ff45340637916aa226942c8c87f24c4e5bc.png" />  </p>
+<h2 id="_6">向上转型操作</h2>
+<p>有时候，我们想要生成一个底座道具，然后设置它的价格（<code>生成</code>块类似控制台指令<code>spawn 5.100.118</code>）：</p>
+<p><img alt="图 8" src="../images/c48c4f383e8187674298f1a84f41e4981bf6184b19316ef00cf4617eb22c2c5a.png" />  </p>
+<p>由于<code>生成</code>积木块能够生成游戏中的任意实体，它不知道自己生成的到底是一个<code>可拾取物</code>还是一个<code>NPC实体</code>(也就是敌人)，也有可能是<code>炸弹实体</code>等，所以它笼统地给出一个<code>实体类</code>。</p>
+<p>但在这里，我们很确定生成的就是道具底座，所以使用一个<code>到拾取物</code>来连接两个积木（也就是<code>向上转型</code>）：</p>
+<p><img alt="图 9" src="../images/0a8c718f4e1dc37a118df2525aa902c62a9d38b4eb09a76e23e829fa36db0f2b.png" />  </p>
+<p><span b-url='bi-docs/bi-docs-cn/docs/text_tutorial/biml/3.gen_price_item.biml' /></p>
+<p>由于道具价格受到其它的自动更新机制影响，我们暂时没办法设置为15之外的值，这一点先不用关心。</p>
+<p><code>实体类</code>中为我们提供了各种类型的转换积木：</p>
+<p><img alt="图 10" src="../images/facfdabfcdd89fafc56061460f541162b667fce29fa78ac023467ec24cd8aafc.png" />  </p>
+<p>如果要使用这些积木，需要在逻辑上确保操作对象是正确的类型，否则会产生一个<code>空值</code>。</p>
+<p>对<code>空值</code>进行操作可能会导致脚本执行错误。这一类错误并不会破坏游戏的mod系统，也没有什么严重的后果，但会让当前正在执行的mod程序逻辑中断。如果你的代码是在其它位置（而非控制台上，比如在角色受伤后）执行的，游戏可能会禁止掉你的mod，或者导致后续其它mod的逻辑无法执行等。</p>
+<h2 id="_7">继承关系</h2>
+<p>以撒的mod系统继承关系非常简洁，共有两类继承关系：</p>
+<p><code>炸弹实体</code>、<code>角色实体</code>、<code>效果实体</code>、<code>跟班实体</code>、<code>刀实体</code>、<code>激光实体</code>、<code>NPC实体</code>、<code>拾取物实体</code>、<code>子弹实体</code>、<code>眼泪实体</code>都是<code>实体类</code>。</p>
+<p><code>地形实体_门</code>、<code>地形实体_沟壑</code>、<code>地形实体_大便</code>、<code>地形实体_按钮</code>、<code>地形实体_石头</code>、<code>地形实体_尖刺</code>、<code>地形实体_爆桶</code>都是<code>地形实体</code>。</p>
+<h1 id="_8">空值</h1>
+<p>在<code>逻辑</code>中有一个积木可以产生空值：</p>
+<p><img alt="图 11" src="../images/1cfb652c4ad588bcd647eaea32da7ac637de9e52ebfb82f4154838a4caeb8cc7.png" />  </p>
+<p>空值可以出现在几乎任何地方，对空值进行操作可能会出现问题，这需要视情况而定。</p>
+<p>比如，在前面的<code>生成</code>操作中，<code>生成者</code>就可以是<code>空值</code>：</p>
+<p><img alt="图 12" src="../images/b95a76d84508414b961c159f1694d0261a9309b1814129692bab284a45401521.png" />  </p>
+<p>但是我们不可以给<code>空值</code>增加一颗黑心，这会导致语法错误：</p>
+<p><img alt="图 13" src="../images/e846d86756e74327de6c98d17551c2e0abf6f13329abe3886e02d6c113019dfa.png" />  </p>
+<p>在其它情况下，<code>空值</code>可能会进入到具体的游戏内部逻辑，多数情况下游戏可能会正确处理，少数情况下也可能会导致崩溃。</p>
+<p>什么时候使用<code>空值</code>需要根据具体积木的游戏内部实现逻辑来确定。</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../4.block_logic/" class="btn btn-neutral float-right" title="四 逻辑积木">下一张 <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../2.block_basic_rule/" class="btn btn-neutral" title="二 积木搭建规则"><span class="icon icon-circle-arrow-left"></span> 上一张</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  用<a href="https://www.mkdocs.org/">MkDocs</a>构建，使用<a href="https://readthedocs.org">Read the Docs</a>提供的<a href="https://github.com/snide/sphinx_rtd_theme">theme</a>。
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../2.block_basic_rule/" style="color: #fcfcfc">&laquo; 上一张</a></span>
+    
+    
+      <span><a href="../4.block_logic/" style="color: #fcfcfc">下一张 &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../api.js?v=1" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

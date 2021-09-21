@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>四 逻辑积木 - 《以撒的积木》文档</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u56db \u903b\u8f91\u79ef\u6728";
+    var mkdocs_page_input_path = "text_tutorial\\4.block_logic.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> 《以撒的积木》文档</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">主页</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">文字教程</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../1.basic_operate/">一 基本操作</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../2.block_basic_rule/">二 积木搭建规则</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../3.type_system/">三 类型系统</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">四 逻辑积木</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_2">逻辑型</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">如果积木</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">比较积木</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_5">逻辑运算积木</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_6">非积木</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_7">真假积木</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_8">空值积木</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_9">断言积木</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">《以撒的积木》文档</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">文档</a> &raquo;</li>
+    
+      
+        
+          <li>文字教程 &raquo;</li>
+        
+      
+    
+    <li>四 逻辑积木</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1">逻辑积木</h1>
+<p>我们来介绍<code>逻辑</code>相关的积木：</p>
+<p><img alt="图 14" src="../images/b07d1536dc3ecd8cbd604edb86a3fc344c4d66714e978b410f88cf4334bfe38e.png" />  </p>
+<h2 id="_2">逻辑型</h2>
+<p>逻辑型只有两个值：<code>真</code>和<code>假</code>。</p>
+<h2 id="_3"><code>如果</code>积木</h2>
+<p><code>如果</code>积木右侧有两个凹槽，第一个凹槽多数情况下放置的是<code>逻辑型</code>的值，如果是<code>真</code>，就会执行<code>执行</code>里面的积木。不论真假，都会继续执行下面的积木。</p>
+<p>例如，下面的程序表示，如果角色是满红心的，就播放开心动画。不论角色是否满红心，都增加一颗炸弹：</p>
+<p><img alt="图 15" src="../images/1743f5861e96f0ee9bceecf6721f6c6c927b3a97960d18b57c7de565b1d0a896.png" />  </p>
+<p><span b-url='bi-docs/bi-docs-cn/docs/text_tutorial/biml/4.happy_if_full_heart_add_bomb.biml' /></p>
+<p><code>如果</code>积木还可以设置其它的形式。点击左上角的设置按钮，你可以设置多个条件和逻辑：</p>
+<p><img alt="图 16" src="../images/a30e57e53bf227d10e7d1ebd6c69c1bd37230aa3ec97e58a91a3b0b946b2877a.png" />  </p>
+<p>比如我们给前面的逻辑增加一个悲伤动画。如果角色满红心，就播放开心动画，否则播放悲伤动画。不论是否满红心，都增加一颗炸弹：</p>
+<p><img alt="图 17" src="../images/fc0334947af353595e9377c64e397d08425be1757a6f0f98624cb9745078a67d.png" />  </p>
+<p><span b-url='bi-docs/bi-docs-cn/docs/text_tutorial/biml/4.happy_if_full_else_sad_but_add_bomb.biml' /></p>
+<h2 id="_4"><code>比较</code>积木</h2>
+<p><code>比较</code>积木可以比较两个数字，得到的是逻辑型：</p>
+<p><img alt="图 18" src="../images/3206c6e151c42ddb2cba3d302f01d32a5ff3e3fcd37ca860c0709328ca238cf2.png" />  </p>
+<p>比如，下面的指令实现，当角色的<code>炸弹数量</code>大于<code>5</code>，就播放开心动画：</p>
+<p><img alt="图 19" src="../images/966d961bef45b5f2dad0df18321b199a0044fa8b6dbe293fe34faf23f36ed6cd.png" />  </p>
+<p><span b-url='bi-docs/bi-docs-cn/docs/text_tutorial/biml/4.bigger_then_5_bomb_happy.biml' /></p>
+<h2 id="_5"><code>逻辑运算</code>积木</h2>
+<p>逻辑运算积木的两个输入通常是<code>逻辑型</code>。</p>
+<p><code>并且</code>表示左右同时为<code>真</code>，才能得到<code>真</code>。<code>或</code>表示左右有一个为<code>真</code>，就能得到<code>真</code>。</p>
+<p>例如，下面的程序需要<code>炸弹数量</code>和<code>金币数量</code>都大于5，才会播放开心动画：</p>
+<p><img alt="图 20" src="../images/147655f2810b1ad4441676bbe8e5f595ffdd7fa57c45012d76a42533ef693250.png" />  </p>
+<p><span b-url='bi-docs/bi-docs-cn/docs/text_tutorial/biml/4.bomb_and_coin_happy.biml' /></p>
+<p>而下面的程序只要有任意一个大于5，就会播放开心动画：</p>
+<p><img alt="图 21" src="../images/bb4699525962a31b1de2151861021fd03f9602191fa533406def4b363b39b28b.png" />  </p>
+<p><span b-url='bi-docs/bi-docs-cn/docs/text_tutorial/biml/4.bomb_or_coin_happy.biml' /></p>
+<h2 id="_6"><code>非</code>积木</h2>
+<p><code>非</code>翻转一个逻辑值，<code>非真</code>为<code>假</code>，<code>非假</code>为<code>真</code>。</p>
+<p>例如，如果不满红心，就播放悲伤动画：</p>
+<p><img alt="图 22" src="../images/8708337ac5e88a7e8db1a86430a427a06e21b0a985dfd6ffef900a20f1eee703.png" />  </p>
+<p><span b-url='bi-docs/bi-docs-cn/docs/text_tutorial/biml/4.sad_if_not_full_heart.biml' /></p>
+<h2 id="_7"><code>真假</code>积木</h2>
+<p>这个积木直接产生一个<code>真</code>或者<code>假</code>:</p>
+<p><img alt="图 23" src="../images/397b9eae5e4645e2cb77d440e63fbf17d7e6b0f6b960b9bc70004647c1eacf53.png" />  </p>
+<p>例如，这里一定会执行<code>播放悲伤动画</code>：</p>
+<p><img alt="图 24" src="../images/d2046e9c544aec5c2fcae27b2297c2253d3cf21f7fa9dc210c1d78ef3aed7014.png" />  </p>
+<p>再比如，<code>移除道具</code>的积木中，使用它来表示是否连带套装效果一起移除（此处为<code>影子积木</code>，因此可以替换为其它逻辑）：</p>
+<p><img alt="图 25" src="../images/b3bd6c16c9024f5e461b7f5d0242fc0881d7b3b8d948f009d5103f64dace1832.png" />  </p>
+<h2 id="_8"><code>空值</code>积木</h2>
+<p>它产生一个<code>空值</code>，<code>空值</code>在特定的逻辑中被用到，详见<a href="../3.type_system/#_8">类型系统#空值</a></p>
+<h2 id="_9"><code>断言</code>积木</h2>
+<p><code>断言</code>积木接受三个参数，第一个参数一般是<code>逻辑型</code>。第一个参数为<code>真</code>的时候，它输出第二个参数，否则输出第三个参数。</p>
+<p>例如，下面的程序实现，如果角色满红心，就增加单位为4的黑心（2颗），否则增加单位为1的黑心（半颗）：</p>
+<p><img alt="图 26" src="../images/1cc333728a94cb7b9d943742018166ad4d66027eb17c5e3867235c94f8085986.png" />  </p>
+<p><span b-url='bi-docs/bi-docs-cn/docs/text_tutorial/biml/4.add_black_heart_by_red.biml' /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../3.type_system/" class="btn btn-neutral" title="三 类型系统"><span class="icon icon-circle-arrow-left"></span> 上一张</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  用<a href="https://www.mkdocs.org/">MkDocs</a>构建，使用<a href="https://readthedocs.org">Read the Docs</a>提供的<a href="https://github.com/snide/sphinx_rtd_theme">theme</a>。
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../3.type_system/" style="color: #fcfcfc">&laquo; 上一张</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../api.js?v=1" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

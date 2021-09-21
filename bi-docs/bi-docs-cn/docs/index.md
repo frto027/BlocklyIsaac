@@ -11,8 +11,11 @@
 
 # 文字教程
 
-- [基本操作](text_tutorial/1.basic_operate.md)
-- [积木搭建规则](text_tutorial/2.block_basic_rule.md)
+- [一 基本操作](text_tutorial/1.basic_operate.md)
+- [二 积木搭建规则](text_tutorial/2.block_basic_rule.md)
+- [三 类型系统](text_tutorial/3.type_system.md)
+- [四 逻辑积木](text_tutorial/4.block_logic.md)
+
 
 
 其它的正在写了
