@@ -125,7 +125,7 @@
 <p><code>炸弹实体</code>、<code>角色实体</code>、<code>效果实体</code>、<code>跟班实体</code>、<code>刀实体</code>、<code>激光实体</code>、<code>NPC实体</code>、<code>拾取物实体</code>、<code>子弹实体</code>、<code>眼泪实体</code>都是<code>实体类</code>，所有对<code>实体类</code>的操作，都可以对这些类型进行。</p>
 <p><code>实体类</code>中，我们还可以让一个<code>实体类</code>死亡，这里的逻辑是，<code>炸弹实体</code>、<code>角色实体</code>、<code>效果实体</code>、<code>跟班实体</code>、<code>刀实体</code>、<code>激光实体</code>、<code>NPC实体</code>、<code>拾取物实体</code>、<code>子弹实体</code>、<code>眼泪实体</code>都可以死亡，因此可以按照以下方式拼接：</p>
 <p><img alt="图 6" src="../images/dc6a99d60c4f3972fe79af7470b6b8cdddd2d46c578e5b0269d74e60e96946c3.png" />  </p>
-<p>但是，反过来就不行了，如果我们用<code>生成</code>指令生成一个实体，它无论如何都不能进行增加黑心。因为<code>实体类</code>不是<code>玩家实体</code>，所以这里是拼不上去的：</p>
+<p>但是，反过来就不行了，如果我们用<code>生成</code>指令生成一个实体，它无论如何都不能进行增加黑心。因为<code>实体类</code>不是<code>角色实体</code>，所以这里是拼不上去的：</p>
 <p><img alt="图 7" src="../images/22588f09248636e0c6bc5a4166489ff45340637916aa226942c8c87f24c4e5bc.png" />  </p>
 <h2 id="_6">向上转型操作</h2>
 <p>有时候，我们想要生成一个底座道具，然后设置它的价格（<code>生成</code>块类似控制台指令<code>spawn 5.100.118</code>）：</p>
