@@ -15,9 +15,9 @@ for(let span of document.getElementsByTagName('span')){
     if(url == undefined)
         continue
     
-    let open_btn = document.createElement('button')
-    open_btn.className = 'btn btn-sm btn-success'
-    open_btn.innerText = "打开工程"
+    let open_btn = document.createElement('a')
+    // open_btn.className = 'btn btn-sm btn-success'
+    open_btn.innerText = "#打开编辑器"
     open_btn.addEventListener('click',()=>{
         window.open(blockly_isaac_workspace_url + 'index.html?lang=zh-hans&biml_url=' + encodeURIComponent(url))
     })
@@ -26,8 +26,8 @@ for(let span of document.getElementsByTagName('span')){
     span.append(' ')
 
     let a = document.createElement('a')
-    a.className = 'btn btn-sm btn-primary'
-    a.innerText = "下载工程"
+    // a.className = 'btn btn-sm btn-primary'
+    a.innerText = "#保存工程文件"
     a.href= blockly_isaac_workspace_url + url
     span.appendChild(a)
 }

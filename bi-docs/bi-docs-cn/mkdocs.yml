@@ -3,12 +3,10 @@ extra_javascript:
   - api.js
 plugins: []
 theme:
-  name: mkdocs
+  name: readthedocs
   locale: zh
 nav:
   - 主页: 'index.md'
   - 文字教程:
     - 基本操作: 'text_tutorial/1.basic_operate.md'
-  - 文档编写:
-    - 编辑文档: 'edit_docs.md'
-    - 文档内的接口使用: 'api.md'
+    - 积木搭建规则: 'text_tutorial/2.block_basic_rule.md'

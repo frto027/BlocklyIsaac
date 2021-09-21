@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>积木搭建规则 - 《以撒的积木》文档</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u79ef\u6728\u642d\u5efa\u89c4\u5219";
+    var mkdocs_page_input_path = "text_tutorial\\2.block_basic_rule.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> 《以撒的积木》文档</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">主页</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">文字教程</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../1.basic_operate/">基本操作</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">积木搭建规则</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_2">填充正确的积木输入</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">影子积木</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">积木的执行顺序</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_5">延迟执行的误区</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">《以撒的积木》文档</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">文档</a> &raquo;</li>
+    
+      
+        
+          <li>文字教程 &raquo;</li>
+        
+      
+    
+    <li>积木搭建规则</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1">积木搭建规则</h1>
+<p>此文介绍基本的积木搭建规则。</p>
+<p>工具箱中提供了各类积木，可以实现各种功能。</p>
+<h2 id="_2">填充正确的积木输入</h2>
+<p>比如我们在<code>游戏类</code>中，拿出一个<code>增置像素化</code>的积木：</p>
+<p><img alt="图 1" src="../images/3b7d059ab4f540298cff136a0f5268608d72c3d94ad8d0e58d9d1c6599fe7e78.png" />  </p>
+<p>其中，<code>1</code>、<code>2</code>、<code>3</code>可以用来连接其它积木，<code>4</code>是一个浅色的<code>影子积木</code>。
+如果要让一个积木正常工作，需要让积木上的每一个<code>3</code>这样的输入凹槽都填充正确的值。</p>
+<p>像下面这样的积木，它缺少了<code>操作对象</code>和<code>来源</code>两个参数，是不能直接执行的：</p>
+<p><img alt="图 2" src="../images/f7b68578573222b1a223cf9142485fef112bf76a27036ecb85cedfe397e89b44.png" />  </p>
+<p>如果想要执行这个积木，需要正确填充两个缺少的参数。这需要其它的逻辑配合实现，比如<code>距离角色最近的Gaper</code>、<code>与子弹发生碰撞的实体</code>、<code>受到xxx伤害的实体</code>等。这些逻辑会在之后的教程中介绍。</p>
+<h2 id="_3">影子积木</h2>
+<p>在更新新版本之后，很多的积木输入上附带了浅色的<code>影子积木</code>，作为默认值使用，可以方便积木的搭建。比如此图中的<code>4</code>就是一个影子积木，下面的<code>持续时间</code>的输入数字0也是一个影子积木：</p>
+<p><img alt="图 1" src="../images/3b7d059ab4f540298cff136a0f5268608d72c3d94ad8d0e58d9d1c6599fe7e78.png" />  </p>
+<p>我们可以把<code>影子积木</code>替换为任意一个自己想要的值，比如下面的这段程序中，像素化的时间就和角色的炸弹数量挂钩：</p>
+<p><img alt="图 3" src="../images/1a52fcbad22606139d574be594e6b686a40cc50619696a8f2d8d31c9758d04b7.png" />  </p>
+<p><span b-url='bi-docs/bi-docs-cn/docs/text_tutorial/biml/2.pixel_by_bomb.biml' /></p>
+<p>你可以在游戏控制台中输入<code>spawn 5.40.1</code>生成炸弹。然后点击前面的<code>#打开编辑器</code>按钮快速打开这个工程，再点击<img alt="图 4" src="../images/d035074970072f146d61c92af5402831815a21ffdfaf15949bb89ff2fa81bf55.png" />复制到游戏控制台按钮，在游戏内打开控制台，按<code>ctrl+v</code>粘贴执行指令，按<code>回车键</code>执行。</p>
+<p>在这个教程中，如果想要保存工程文件，请右键<code>#保存工程文件</code>，并选择<code>链接另存为</code>或类似选项。</p>
+<p>可以观察到，这条指令执行后，角色在具有1颗炸弹和4颗炸弹时，游戏像素化的时间是有明显差别的。它将炸弹数量乘15，然后作为持续时间。换句话说，角色每拥有一颗炸弹，都会获得15帧的像素化效果。</p>
+<h2 id="_4">积木的执行顺序</h2>
+<p>此图中的<code>1</code>、<code>2</code>两个位置连接其它积木，所有的积木是从上向下顺序执行的。</p>
+<p><img alt="图 1" src="../images/3b7d059ab4f540298cff136a0f5268608d72c3d94ad8d0e58d9d1c6599fe7e78.png" />  </p>
+<p>比如，我们可以在刚刚的指令结束之后，增加<code>-100</code>个炸弹，也就是扣除<code>100</code>个炸弹：</p>
+<p><img alt="图 5" src="../images/e2be6ee8dede8c05f44df908bd0c9461bf66e7018cfe8ed7d3721e13268765b4.png" />  </p>
+<p><span b-url='bi-docs/bi-docs-cn/docs/text_tutorial/biml/2.pixel_by_bomb_remove_bomb.biml' /></p>
+<p>执行上面的程序，可以发现在像素化之后，角色的炸弹数量清零了。因为是先计算持续时间，然后才扣除炸弹数量。</p>
+<p>但是如果将两个积木上下反过来拼接，则永远都不会有像素化效果，因为像素化指令看到的是已经扣除过的炸弹数量：</p>
+<p><img alt="图 6" src="../images/b19ceb6aa6a12f3009440852630354c4186b17ce01f00126fd63dbc115c69ac0.png" />  </p>
+<p><span b-url='bi-docs/bi-docs-cn/docs/text_tutorial/biml/2.remove_bomb_pixel_by_bomb.biml' /></p>
+<h3 id="_5">延迟执行的误区</h3>
+<p>积木不存在延迟执行，也不可能有<em>从上向下连接</em>的<code>等待xxx秒</code>的积木。实际上，从刚刚的程序就可以看出来：</p>
+<p><img alt="图 5" src="../images/e2be6ee8dede8c05f44df908bd0c9461bf66e7018cfe8ed7d3721e13268765b4.png" />  </p>
+<p><span b-url='bi-docs/bi-docs-cn/docs/text_tutorial/biml/2.pixel_by_bomb_remove_bomb.biml' /></p>
+<p>你可能会认为，这个程序的炸弹扣除操作应该发生在像素化结束之后。但实际上，在像素化开始的时候，炸弹就已经扣除了。</p>
+<p>这是因为，<strong>程序的执行都是瞬间完成的</strong>。我们的程序不会连续执行2秒钟。从控制台输入的指令，会<strong>立即执行完毕</strong>,然后回到游戏正常的渲染逻辑中。<code>增置像素化</code>在游戏内部做的，是给一个<code>像素化</code>的内部状态做一个标记，然后马上就去做下一个<code>增加炸弹</code>的操作了，后续的像素化操作是通过游戏其它内部逻辑实现的。当然，我们可以通过其它的手段实现<code>两秒钟后执行另一个积木程序</code>，来达到类似延迟的效果，之后的教程会介绍。</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../1.basic_operate/" class="btn btn-neutral" title="基本操作"><span class="icon icon-circle-arrow-left"></span> 上一张</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  用<a href="https://www.mkdocs.org/">MkDocs</a>构建，使用<a href="https://readthedocs.org">Read the Docs</a>提供的<a href="https://github.com/snide/sphinx_rtd_theme">theme</a>。
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../1.basic_operate/" style="color: #fcfcfc">&laquo; 上一张</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../api.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
