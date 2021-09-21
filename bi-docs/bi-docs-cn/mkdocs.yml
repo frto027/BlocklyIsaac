@@ -1,6 +1,6 @@
 site_name: 《以撒的积木》文档
 extra_javascript:
-  - api.js
+  - api.js?v=1
 plugins: []
 theme:
   name: readthedocs
