@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>五 游戏流程与回调积木 - 《以撒的积木》文档</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u4e94 \u6e38\u620f\u6d41\u7a0b\u4e0e\u56de\u8c03\u79ef\u6728";
+    var mkdocs_page_input_path = "text_tutorial\\5.callback_block.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> 《以撒的积木》文档</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">主页</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">文字教程</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../1.basic_operate/">一 基本操作</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../2.block_basic_rule/">二 积木搭建规则</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../3.type_system/">三 类型系统</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../4.block_logic/">四 逻辑积木</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">五 游戏流程与回调积木</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">《以撒的积木》文档</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">文档</a> &raquo;</li>
+    
+      
+        
+          <li>文字教程 &raquo;</li>
+        
+      
+    
+    <li>五 游戏流程与回调积木</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1">游戏流程与<code>回调</code>积木</h1>
+<p>回调积木用来告知游戏在特定的时刻执行某一段程序。</p>
+<p>在大多数情况下，游戏的核心逻辑以<a href="https://baike.baidu.com/item/%E5%8D%95%E7%BA%BF%E7%A8%8B/6972534?fr=aladdin">单线程</a>的方式在运作。这也就是说，游戏在同一时刻只会做一件事情。
+如果感兴趣的话，我们可以通过这张<a href="../../../../../media/callbacks/Callbacks_zh-hans.svg">回调图</a>来了解游戏的一个大致运行流程（该图片译自<a href="https://moddingofisaac.com/docs/rep/images/infographics/Isaac%20Callbacks.svg">IsaacDoc</a>文档）。</p>
+<h1 id="_2">注册一个<code>回调</code></h1>
+<p>我们可以通过<code>注册回调</code>的方式来告知游戏在某一时刻执行一段程序，同时还可以得到一些在这一时刻的相关游戏信息，以及向游戏提供一些信息来决定游戏的行为。</p>
+<p><code>工具块</code>中，提供了两个预先搭建好的积木，用来帮助我们注册回调：</p>
+<p><img alt="图 1" src="../images/8a61d03c69ed9d2f46a4510ec7e3890c128dbed2687966f204509d937822758b.png" />  </p>
+<h2 id="mod">注册一个mod</h2>
+<p>工具块中的<code>注册Mod</code>积木告知游戏我们当前的mod名字。只有先放置这个积木，才能够去注册回调函数，完成后续操作。</p>
+<p><img alt="图 2" src="../images/4a192e363fe0d10281a36d59f51b352d39759f161adf468fd01274b5c9851d85.png" />  </p>
+<p>它有两个参数：</p>
+<ul>
+<li><code>mod名</code>告知游戏我们的mod名字是什么。为了避免bug，尽量不要用中文名字。</li>
+<li><code>应用程序接口版本号</code>写1就可以，可不用关心细节。它指的是游戏的mod系统接口的版本号，这个参数是用来做兼容支持的。换句话说，这里的数字表示我们的mod是写给哪一个版本的游戏的，目前只有1，不要填写其它数字。我原本以为忏悔的mod会把这个数字改成2的，这样游戏就能通过这个数字来区分mod适用的游戏版本，但官方并没有这样做，这就表示，官方认为<code>忏悔</code>的mod和<code>胎衣+</code>的mod在行为上没有不同，即游戏不会去主动兼容mod（而是反过来，mod需要去判断游戏的版本来兼容游戏）。</li>
+</ul>
+<p>不论后续有多少个回调参数，一个mod<strong>只应该出现一个<code>注册Mod</code>的积木，且这个积木只应该被执行一次</strong>。出现多个<code>注册Mod</code>或许也没有问题，但这不符合编程规范，有概率出现意想不到的Bug，不要这样做。</p>
+<p>我们可以看到，它将一个<code>Mod引用</code>放到了一个叫做<code>我的mod</code>的<code>变量</code>上。关于<code>变量</code>的使用会在之后做介绍。</p>
+<p>此外<code>Mod引用</code>还承担了mod数据存储的功能，这部分目前还没有做测试，相关使用方式会在后续过程中完善。</p>
+<h2 id="_3">注册一个回调</h2>
+<p>我们可以在注册mod之后来设置回调函数。也就是使用<code>置回调函数</code>积木：</p>
+<p><img alt="图 3" src="../images/5d9bdec09f1c191aba744114153ac9c8ef06e271ba8a52541085bfbae87dc997.png" />  </p>
+<p>这个积木需要三个或者四个参数。</p>
+<ul>
+<li><code>操作对象</code>，就是我们之前注册的那一个mod，默认已经写好了，这里不用关心。</li>
+<li><code>回调ID</code>，就是我们要在什么时候执行程序</li>
+<li><code>回调函数</code>，就是要执行的那一个程序</li>
+<li><code>第四个参数</code>，这个参数的类型和名字会随着<code>回调ID</code>来变化，含义也不一样</li>
+</ul>
+<h2 id="_4">注册多个回调</h2>
+<p>可以通过多次摆放<code>置回调函数</code>积木来注册多个回调，这也是大多数mod做的事情。</p>
+<p><img alt="图 4" src="../images/157d05506d11ad66607252fa8755d1e09d0089ad30df16ac2637594ea2a62b35.png" />  </p>
+<p><em>请测试你的回调是否能够正常工作，比如因为游戏设计上的BUG，有些回调每个mod只能设置一次，有些回调一个mod设置了，另一个mod就无法再设置</em></p>
+<h2 id="_5">回调参数</h2>
+<p>回调参数表示游戏在执行这个回调的时候，为我们提供的一些附加信息，当我们选中一个<code>置回调函数</code>的积木的时候，左侧的工具箱里就会出现对应的回调参数：</p>
+<p><img alt="图 5" src="../images/f52afda083655461669200b23c7d808fcfb1d93cd54d937fb9081aa544df3700.png" />  </p>
+<p>比如，上面的<code>NPC实体</code>就表示触发<code>回调_NPC_更新</code>的那一个<code>NPC实体</code>。</p>
+<h2 id="_6"><code>返回</code>积木</h2>
+<p>我们可以使用<code>返回</code>积木来告知游戏一些特殊信息：</p>
+<p><img alt="图 6" src="../images/fa005a31134e1eefddba34b5676fe5b159f53d04a9a49ac45dbcca5ef1183469.png" />  </p>
+<p>比如，<code>取得卡牌</code>的回调不但能让我们在游戏获取一张卡牌的时候执行一段程序，还可以改变游戏取得的卡牌的结果。下面的程序会将所有的<code>取得卡牌</code>的结果替换为<code>卡牌_FOOL</code>，也就是<code>The Fool</code>卡牌：</p>
+<p><img alt="图 7" src="../images/efc249c98e99155e8e38d37f335c4cd43d847b5308004838aa4c25b4f2666f91.png" />  </p>
+<p><span b-url='bi-docs/bi-docs-cn/docs/text_tutorial/biml/5.return_sample.biml' /></p>
+<p>执行后，可以看到，游戏中只会生成<code>The Fool</code>卡牌（输入控制台指令<code>spawn 5.300</code>试试看吧）。</p>
+<p>此外，<code>返回</code>积木会让当前正在执行的mod逻辑终止（就像它的形状那样，它的后面不能跟任何的积木）。</p>
+<p>有些不太和谐的是，<code>返回</code>终止掉的是整个<code>函引</code>积木的执行，所以下面的程序在第一层的时候并不会给角色增加黑心——因为一旦触发了<code>如果</code>的条件，导致<code>返回</code>被执行，那么整个<code>函引</code>都会直接中断，后续的<code>增加黑心</code>也就不会正常执行了：</p>
+<p><img alt="图 8" src="../images/ced3c8ee08ce98b5174fa88ac568d329e96d101bcfa2d3187dcb7dd0facd00f5.png" />  </p>
+<p><span b-url='bi-docs/bi-docs-cn/docs/text_tutorial/biml/5.return_sample_stop.biml' /></p>
+<p>上面的程序的效果是：在第一层，将所有的卡牌替换为<code>The Fool</code>，否则（在其它层），每生成一张卡牌，就给角色增加一颗黑心。</p>
+<h1 id="_7">回调列表</h1>
+<p>下面详细介绍每一种回调的使用方式。</p>
+<p>（等我慢慢更新）</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../4.block_logic/" class="btn btn-neutral" title="四 逻辑积木"><span class="icon icon-circle-arrow-left"></span> 上一张</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  用<a href="https://www.mkdocs.org/">MkDocs</a>构建，使用<a href="https://readthedocs.org">Read the Docs</a>提供的<a href="https://github.com/snide/sphinx_rtd_theme">theme</a>。
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../4.block_logic/" style="color: #fcfcfc">&laquo; 上一张</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../api.js?v=1" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
