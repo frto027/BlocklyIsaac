@@ -100,8 +100,11 @@
               
                 <h1 id="_1">游戏流程与<code>回调</code>积木</h1>
 <p>回调积木用来告知游戏在特定的时刻执行某一段程序。</p>
+<div class="admonition 游戏的运行机制">
+<p class="admonition-title">游戏的运行机制</p>
 <p>在大多数情况下，游戏的核心逻辑以<a href="https://baike.baidu.com/item/%E5%8D%95%E7%BA%BF%E7%A8%8B/6972534?fr=aladdin">单线程</a>的方式在运作。这也就是说，游戏在同一时刻只会做一件事情。
 如果感兴趣的话，我们可以通过这张<a href="../../../../../media/callbacks/Callbacks_zh-hans.svg">回调图</a>来了解游戏的一个大致运行流程（该图片译自<a href="https://moddingofisaac.com/docs/rep/images/infographics/Isaac%20Callbacks.svg">IsaacDoc</a>文档）。</p>
+</div>
 <h1 id="_2">注册一个<code>回调</code></h1>
 <p>我们可以通过<code>注册回调</code>的方式来告知游戏在某一时刻执行一段程序，同时还可以得到一些在这一时刻的相关游戏信息，以及向游戏提供一些信息来决定游戏的行为。</p>
 <p><code>工具块</code>中，提供了两个预先搭建好的积木，用来帮助我们注册回调：</p>
@@ -112,8 +115,12 @@
 <p>它有两个参数：</p>
 <ul>
 <li><code>mod名</code>告知游戏我们的mod名字是什么。为了避免bug，尽量不要用中文名字。</li>
-<li><code>应用程序接口版本号</code>写1就可以，可不用关心细节。它指的是游戏的mod系统接口的版本号，这个参数是用来做兼容支持的。换句话说，这里的数字表示我们的mod是写给哪一个版本的游戏的，目前只有1，不要填写其它数字。我原本以为忏悔的mod会把这个数字改成2的，这样游戏就能通过这个数字来区分mod适用的游戏版本，但官方并没有这样做，这就表示，官方认为<code>忏悔</code>的mod和<code>胎衣+</code>的mod在行为上没有不同，即游戏不会去主动兼容mod（而是反过来，mod需要去判断游戏的版本来兼容游戏）。</li>
+<li><code>应用程序接口版本号</code>写1就可以，可不用关心细节。</li>
 </ul>
+<div class="admonition 应用程序接口版本号">
+<p class="admonition-title">应用程序接口版本号</p>
+<p><code>应用程序接口版本号</code>指的是游戏的mod系统接口的版本号，这个参数是用来做兼容支持的。换句话说，这里的数字表示我们的mod是写给哪一个版本的游戏的，目前只有1，不要填写其它数字。我原本以为忏悔的mod会把这个数字改成2的，这样游戏就能通过这个数字来区分mod适用的游戏版本，但官方并没有这样做，这就表示，官方认为<code>忏悔</code>的mod和<code>胎衣+</code>的mod在行为上没有不同，即游戏不会去主动兼容mod（而是反过来，mod需要去判断游戏的版本来兼容游戏）。</p>
+</div>
 <p>不论后续有多少个回调参数，一个mod<strong>只应该出现一个<code>注册Mod</code>的积木，且这个积木只应该被执行一次</strong>。出现多个<code>注册Mod</code>或许也没有问题，但这不符合编程规范，有概率出现意想不到的Bug，不要这样做。</p>
 <p>我们可以看到，它将一个<code>Mod引用</code>放到了一个叫做<code>我的mod</code>的<code>变量</code>上。关于<code>变量</code>的使用会在之后做介绍。</p>
 <p>此外<code>Mod引用</code>还承担了mod数据存储的功能，这部分目前还没有做测试，相关使用方式会在后续过程中完善。</p>
@@ -143,13 +150,148 @@
 <p><span b-url='bi-docs/bi-docs-cn/docs/text_tutorial/biml/5.return_sample.biml' /></p>
 <p>执行后，可以看到，游戏中只会生成<code>The Fool</code>卡牌（输入控制台指令<code>spawn 5.300</code>试试看吧）。</p>
 <p>此外，<code>返回</code>积木会让当前正在执行的mod逻辑终止（就像它的形状那样，它的后面不能跟任何的积木）。</p>
-<p>有些不太和谐的是，<code>返回</code>终止掉的是整个<code>函引</code>积木的执行，所以下面的程序在第一层的时候并不会给角色增加黑心——因为一旦触发了<code>如果</code>的条件，导致<code>返回</code>被执行，那么整个<code>函引</code>都会直接中断，后续的<code>增加黑心</code>也就不会正常执行了：</p>
+<div class="admonition info">
+<p class="admonition-title">“返回”积木终止掉的是整个“函引”积木</p>
+<p><code>返回</code>终止掉的是整个<code>函引</code>积木的执行，所以下面的程序在第一层的时候并不会给角色增加黑心——因为一旦触发了<code>如果</code>的条件，导致<code>返回</code>被执行，那么整个<code>函引</code>都会直接中断，后续的<code>增加黑心</code>也就不会正常执行了：</p>
 <p><img alt="图 8" src="../images/ced3c8ee08ce98b5174fa88ac568d329e96d101bcfa2d3187dcb7dd0facd00f5.png" />  </p>
 <p><span b-url='bi-docs/bi-docs-cn/docs/text_tutorial/biml/5.return_sample_stop.biml' /></p>
 <p>上面的程序的效果是：在第一层，将所有的卡牌替换为<code>The Fool</code>，否则（在其它层），每生成一张卡牌，就给角色增加一颗黑心。</p>
+</div>
 <h1 id="_7">回调列表</h1>
 <p>下面详细介绍每一种回调的使用方式。</p>
-<p>（等我慢慢更新）</p>
+<p>（先照搬IsaacDoc，重要得到例子之后会补充的）</p>
+<h2 id="_npc_">回调_NPC_更新</h2>
+<p>在任意NPC更新之后会触发。</p>
+<p>使用<code>返回</code>积木返回任意的值，都不会影响到后续的回调执行。</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>当NPC正在播放<code>Appear</code>动画的时候不会触发。例如，在生成<code>Gaper</code>时，会在第1帧和第31帧及以后的帧触发。</p>
+</div>
+<h2 id="_">回调_触发更新</h2>
+<p>在每次游戏更新的时候触发。</p>
+<p>使用<code>返回</code>积木返回任意的值，都不会影响到后续的回调执行。</p>
+<p>这个回调每秒触发30次，在游戏暂停时不会触发（比如弹出暂停菜单）。</p>
+<h2 id="__1">回调_触发渲染</h2>
+<p>在每次游戏渲染时触发（每秒60次）。</p>
+<p>使用<code>返回</code>积木返回任意的值，都不会影响到后续的回调执行。</p>
+<p>强烈建议只用来做渲染。不推荐使用它来做一些低频事件或者刷新数值。</p>
+<h2 id="__2">回调_使用道具</h2>
+<p>当使用自定义主动、失去充能后触发。</p>
+<p>道具的<code>随机数字生成器</code>可以用作事件种子。<br />
+使用<code>返回</code>积木返回一个<code>真</code>，就会播放“使用道具”动画，返回一个<code>假</code>，不会播放动画。<br />
+使用<code>返回</code>积木返回一个任意的值，都不会影响到后续的回调执行。</p>
+<p>如果返回一个复合数据，还可以指定更多的结果（暂不支持）。</p>
+<h2 id="__3">回调_触发角色效果更新</h2>
+<p>每一帧、每一个角色在计算完毕固定的道具效果后会触发。</p>
+<p>使用<code>返回</code>积木返回一个任意的值，都不会影响到后续的回调执行。</p>
+<h2 id="__4">回调_使用卡牌</h2>
+<p>当使用卡牌/符文时触发。</p>
+<p>使用<code>返回</code>积木返回一个任意的值，都不会影响到后续的回调执行。</p>
+<h2 id="__">回调_跟班_更新</h2>
+<p>每一帧、每一个跟班都会触发。</p>
+<p>使用<code>返回</code>积木返回一个任意的值，都不会影响到后续的回调执行。</p>
+<h2 id="__5">回调_跟班初始化</h2>
+<p>当一个<code>跟班</code>刚刚初始化时调用。</p>
+<p>使用<code>返回</code>积木返回一个任意的值，都不会影响到后续的回调执行。</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>被初始化的实体的数据是不完整的。只有<code>位置</code>、<code>速度</code>、<code>生产者种类</code>、<code>生产者变体</code>、<code>生产者实体</code>等是可用的。一些其他属性（比如<code>效果属性</code>或者<code>眼泪标记</code>）还没有设置。如果你想要修改这些值，请使用<code>回调_触发角色效果更新</code>然后在可用的第一帧检查这些属性。</p>
+</div>
+<h2 id="__6">回调_计算缓存</h2>
+<p>当某一角色的状态重新计算时触发，比如捡起一个道具、使用某个药丸或者手动触发某个<code>角色实体</code>的<code>计算道具</code>积木。</p>
+<p>使用<code>返回</code>积木返回一个任意的值，都不会影响到后续的回调执行。</p>
+<p>提示：使用此回调来根据自定义道具修改角色的状态、跟班、飞行、武器等。道具会通过<code>items.xml</code>中的<code>缓存值</code>来告知游戏它影响了哪些状态。这个回调需要遵循<code>缓存标记</code>正确设置角色的状态。其它道具对角色的状态影响会在此回调触发之前计算。</p>
+<h2 id="__7">回调_触发角色初始化</h2>
+<p>在初始化一个<code>角色实体</code>的时候触发。</p>
+<p>有一个可选的参数，可以用来指定<code>角色</code>或者<code>2P宝宝</code>（0表示正常<code>角色</code>，1表示<code>2P宝宝</code>）。</p>
+<p>使用<code>返回</code>积木返回一个任意的值，都不会影响到后续的回调执行。</p>
+<p>警告：被初始化的实体的数据是不完整的。只有<code>位置</code>、<code>速度</code>、<code>生产者种类</code>、<code>生产者变体</code>、<code>生产者实体</code>等是可用的。一些其他属性（比如<code>效果属性</code>或者<code>眼泪标记</code>）还没有设置。如果你想要修改这些值，请使用<code>回调_触发角色效果更新</code>然后在可用的第一帧检查这些属性。</p>
+<h2 id="__8">回调_使用药丸</h2>
+<p>当使用药丸时触发。</p>
+<p>使用<code>返回</code>积木返回一个任意的值，都不会影响到后续的回调执行。</p>
+<h2 id="__9">回调_实体受到伤害</h2>
+<p>当受到新的伤害前触发。</p>
+<p>如果实体拥有<code>DAMAGE_COUNTDOWN</code>标记，就会在特定的时间内忽略其它的拥有<code>DAMAGE_COUNTDOWN</code>标记的命中。</p>
+<p>如果此伤害需要结算，使用<code>返回</code>积木返回一个<code>真</code>，或者不使用返回积木。
+如果需要忽略此伤害，使用<code>返回</code>积木返回一个<code>假</code>。</p>
+<p>如果当前的实体是一个<code>角色实体</code>，那么<code>伤害量</code>就是角色即将受到的半血伤害。否则，<code>伤害量</code>表示伤害点数。</p>
+<div class="admonition error">
+<p class="admonition-title">Bug</p>
+<p>如果执行了<code>返回</code>积木，后续其它（mod的<code>回调_实体受到伤害</code>）的回调就不会触发</p>
+</div>
+<h2 id="__10">回调_触发诅咒计算</h2>
+<p>诅咒是一个标记。在当前关卡应用了诅咒之后触发。使用<code>返回</code>积木返回新的诅咒标记。使用<code>Isaac</code>中的<code>按名称取诅咒ID</code>来取得一个诅咒ID。</p>
+<p>如果使用<code>返回</code>积木返回一个数字，它会作为后续（其它mod的<code>回调_触发诅咒计算</code>）回调的<code>诅咒类型</code>来传播。</p>
+<div class="admonition error">
+<p class="admonition-title">Bug</p>
+<p>使用<code>返回</code>积木返回一个非数字的值，会导致游戏崩溃。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>当有多个mod的时候，最后一个触发的回调会胜出，覆盖掉前面的回调产生的诅咒值。</p>
+</div>
+<h2 id="__11">回调_输入行为</h2>
+<p>当游戏或者游戏实体想要得到一个输入的时候触发。</p>
+<p>如果当前的读取操作并不是来源于一个实体的话，<code>实体类</code>是<code>空值</code>。<br />
+<code>输入钩子</code>可以用来判断当前的回调是通过<code>输入函数</code>中的<code>是否动作被触发</code>、<code>是否动作被按下</code>还是<code>取动作键值</code>中的哪一个触发的。<br />
+如果你不想要覆盖游戏的输入值，就不要使用<code>返回</code>积木。<br />
+如果是<code>是否动作被触发</code>或者<code>是否动作被按下</code>，就使用<code>返回</code>积木返回一个<code>逻辑型</code>的值（<code>真</code>或者<code>假</code>）。如果是<code>取动作键值</code>，就返回一个<code>实数型</code>的值，范围在<code>0.0</code>到<code>1.0</code>之间。</p>
+<p>使用<code>返回</code>积木返回一个任意的值，都不会影响到后续的回调执行。</p>
+<h2 id="__12">回调_关卡生成器</h2>
+<div class="admonition error">
+<p class="admonition-title">Bug</p>
+<p>此回调目前不能正常工作，且永远不会触发。</p>
+</div>
+<p>（这是游戏的Bug，<code>以撒的积木</code>工程不背这个锅）</p>
+<h2 id="__13">回调_触发游戏开始</h2>
+<p>当开始游戏时触发，<code>是继续游戏</code>的参数为<code>真</code>表示是从"continue"继续游戏，为<code>假</code>表示开始一局新的游戏。</p>
+<p>此回调会在<code>回调_触发新房间</code>和<code>回调_触发新关卡</code>之后调用。</p>
+<p>使用<code>返回</code>积木返回一个任意的值，都不会影响到后续的回调执行。</p>
+<h2 id="__14">回调_触发游戏结束</h2>
+<p>当<code>游戏结束</code>画面出现、或者开始播放结局的时候触发。<code>是否游戏结束</code>为<code>真</code>表示角色死亡游戏结束，为<code>假</code>表示游戏胜利触发结局。</p>
+<p>使用<code>返回</code>积木返回一个任意的值，都不会影响到后续的回调执行。</p>
+<h2 id="__15">回调_即将游戏结束</h2>
+<p>当退出一轮游戏的时候触发。参数<code>需要保存</code>为<code>真</code>表示游戏会创建一个可以继续的存档，为<code>假</code>则表示游戏不会创建存档。当触发游戏结局时会触发两次此回调。</p>
+<p>使用<code>返回</code>积木返回一个任意的值，都不会影响到后续的回调执行。</p>
+<h2 id="__16">回调_触发新关卡</h2>
+<p>当传送到新的关卡或者层后触发。<br />
+在<code>回调_触发新房间</code><strong>之后</strong>触发。</p>
+<p>使用<code>返回</code>积木返回一个任意的值，都不会影响到后续的回调执行。</p>
+<h2 id="__17">回调_触发新房间</h2>
+<p>进入任意房间后触发。</p>
+<p>使用<code>返回</code>积木返回一个任意的值，都不会影响到后续的回调执行。</p>
+<h2 id="__18">回调_取得卡牌</h2>
+<p>用来处理“卡牌池”。<br />
+由于所有卡牌的生成概率并非相等，请使用<code>随机数字生成器</code>来做出随机选择。<br />
+可以使用三个<code>逻辑型</code>的参数来过滤选择的结果。<br />
+如果需要替换掉生成的卡牌，请使用<code>返回</code>积木连接一个数字，并填写需要替换的卡牌ID。或者连接<code>枚举型值</code> <code>卡牌_枚举</code>。</p>
+<p><code>返回</code>积木并不会改变后续回调的<code>卡牌_枚举</code>参数。</p>
+<div class="admonition error">
+<p class="admonition-title">Bug</p>
+<p>使用<code>返回</code>积木返回一个非数字的值会导致游戏崩溃。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>最后一个触发的回调会胜出，并覆盖其它回调返回的值。</p>
+</div>
+<h2 id="_shader">回调_取得shader参数</h2>
+<p>返回一个包含自定义shader参数的<code>复合数据</code>。</p>
+<p>当返回一个<code>复合数据</code>时，会跳过其它的回调。</p>
+<h2 id="__19">回调_执行指令</h2>
+<p>当执行一条控制台指令的时候触发。</p>
+<p>参数<code>指令</code>是控制台指令的第一个空格前的字符输入。
+参数<code>参数</code>是指令的其它部分。</p>
+<div class="admonition important">
+<p class="admonition-title">重要</p>
+<p>游戏自带的控制台指令（比如<code>spawn</code>和<code>debug</code>）<strong>不会</strong>触发这个回调。</p>
+</div>
+<p>使用<code>返回</code>积木返回一个<code>字符串</code>，会将它打印到控制台上。<br />
+使用<code>返回</code>积木返回一个任意的值，都不会影响到后续的回调执行。</p>
+<div class="admonition error">
+<p class="admonition-title">Bug</p>
+<p>使用返回积木会导致游戏崩溃。</p>
+</div>
+<p>（剩下的写不动了，等我慢慢更新）</p>
               
             </div>
           </div>

@@ -2,6 +2,8 @@ site_name: 《以撒的积木》文档
 extra_javascript:
   - api.js?v=1
 plugins: []
+markdown_extensions:
+  - admonition
 theme:
   name: readthedocs
   locale: zh
