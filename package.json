@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/frto027/BlocklyIsaac#readme",
   "devDependencies": {
-    "electron": "^10.4.7",
+    "electron": "^18.3.7",
     "electron-packager": "^15.3.0"
   },
   "dependencies": {
